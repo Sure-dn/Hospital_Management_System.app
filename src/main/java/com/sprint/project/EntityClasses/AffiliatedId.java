@@ -3,12 +3,19 @@ package com.sprint.project.EntityClasses;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 
 @Embeddable
 public class AffiliatedId implements Serializable {
 	
+	 @NotNull
+	 @Column(name = "Physician")
 	 private Integer physician;
+	 
+	 @NotNull
+	 @Column(name = "Department")
 	 private Integer department;
 	 
 	 public AffiliatedId() {}
