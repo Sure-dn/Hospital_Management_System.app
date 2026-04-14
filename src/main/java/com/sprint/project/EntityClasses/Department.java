@@ -9,19 +9,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Department")
 public class Department {
 	@Id
+	@NotNull
     @Column(name = "DepartmentID")
     private Integer DepartmentId;
 
-    @Column(name = "Name", nullable = false)
+	@NotBlank
+    @Column(name = "Name")
     private String Name;
     
     @ManyToOne
-    @JoinColumn(name = "Head", nullable = false)
+    @NotNull
+    @JoinColumn(name = "Head")
     private Physician Head;
     
     @OneToMany(mappedBy = "department")
