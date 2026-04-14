@@ -90,4 +90,5 @@ public class Appointment {
     public void setExaminationRoom(String examinationRoom) {
         this.examinationRoom = examinationRoom;
     }
+    //text file
 }
