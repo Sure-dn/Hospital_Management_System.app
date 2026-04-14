@@ -1,6 +1,7 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,21 +10,26 @@ import java.time.LocalDateTime;
 public class Undergoes {
 
     @Id
+    @NotNull(message = "Patient cannot be null")
     @ManyToOne
     @JoinColumn(name = "Patient")
     private Patient patient;
 
     @Id
+    @NotNull(message = "Procedure cannot be null")
     @ManyToOne
     @JoinColumn(name = "Procedures")
     private Procedures procedures;
 
     @Id
+    @NotNull(message = "Stay cannot be null")
     @ManyToOne
     @JoinColumn(name = "Stay")
     private Stay stay;
 
     @Id
+    @NotNull(message = "Date of procedure is required")
+    @PastOrPresent(message = "Procedure date cannot be in future")
     @Column(name = "DateUndergoes")
     private LocalDateTime dateUndergoes;
 
@@ -35,10 +41,10 @@ public class Undergoes {
     @JoinColumn(name = "AssistingNurse")
     private Nurse assistingNurse;
 
-    // ✅ Default Constructor
+    // Default Constructor
     public Undergoes() {}
 
-    // ✅ Parameterized Constructor
+    // Parameterized Constructor
     public Undergoes(Patient patient, Procedures procedures, Stay stay,
                      LocalDateTime dateUndergoes, Physician physician,
                      Nurse assistingNurse) {
@@ -50,7 +56,7 @@ public class Undergoes {
         this.assistingNurse = assistingNurse;
     }
 
-    // ✅ Getters & Setters
+    // Getters and Setters
 
     public Patient getPatient() {
         return patient;

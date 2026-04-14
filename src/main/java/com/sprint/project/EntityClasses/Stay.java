@@ -1,35 +1,42 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
-
 
 @Entity
 @Table(name = "Stay")
 public class Stay {
 
     @Id
+    @NotNull(message = "Stay ID cannot be null")
+    @Positive(message = "Stay ID must be a positive number")
     @Column(name = "StayID")
     private Integer stayID;
 
+    @NotNull(message = "Patient cannot be null")
     @ManyToOne
     @JoinColumn(name = "Patient")
     private Patient patient;
 
+    @NotNull(message = "Room cannot be null")
     @ManyToOne
     @JoinColumn(name = "Room")
     private Room room;
 
+    @NotNull(message = "Stay start date cannot be null")
+    @PastOrPresent(message = "Stay start must be past or present")
     @Column(name = "StayStart")
     private LocalDateTime stayStart;
 
+    @FutureOrPresent(message = "Stay end must be present or future")
     @Column(name = "StayEnd")
     private LocalDateTime stayEnd;
 
-    // ✅ Default Constructor
+    // Default Constructor
     public Stay() {}
 
-    // ✅ Parameterized Constructor
+    // Parameterized Constructor
     public Stay(Integer stayID, Patient patient, Room room,
                 LocalDateTime stayStart, LocalDateTime stayEnd) {
         this.stayID = stayID;
@@ -39,7 +46,7 @@ public class Stay {
         this.stayEnd = stayEnd;
     }
 
-    // ✅ Getters and Setters
+    // Getters and Setters
 
     public Integer getStayID() {
         return stayID;
@@ -81,5 +88,3 @@ public class Stay {
         this.stayEnd = stayEnd;
     }
 }
-
-
