@@ -1,6 +1,9 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,11 +12,13 @@ public class Appointment {
 
     @Id
     @Column(name = "AppointmentID")
+    @NotNull
     private Integer appointmentId;
 
     // 🔗 Patient (FK → Patient.SSN)
     @ManyToOne
     @JoinColumn(name = "Patient", referencedColumnName = "SSN")
+    @NotNull
     private Patient patient;
 
     // 🔗 Nurse (FK → Nurse.EmployeeID)
@@ -24,15 +29,19 @@ public class Appointment {
     // 🔗 Physician (FK → Physician.EmployeeID)
     @ManyToOne
     @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID")
+    @NotNull
     private Physician physician;
 
     @Column(name = "Starto", nullable = false)
+    @NotNull
     private LocalDateTime start;
 
     @Column(name = "Endo", nullable = false)
+    @NotNull
     private LocalDateTime end;
 
     @Column(name = "ExaminationRoom", nullable = false)
+    @NotBlank
     private String examinationRoom;
 
     public Appointment() {}
