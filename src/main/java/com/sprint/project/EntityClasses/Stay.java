@@ -3,6 +3,7 @@ package com.sprint.project.EntityClasses;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
+import com.sprint.project.EntityClasses.Room;
 
 @Entity
 @Table(name = "Stay")
