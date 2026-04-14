@@ -1,5 +1,4 @@
 package com.sprint.project.EntityClasses;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -7,100 +6,92 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Appointment")
 public class Appointment {
 
     @Id
-    @Column(name = "AppointmentID")
-    @NotNull
     private Integer appointmentId;
 
-    // 🔗 Patient (FK → Patient.SSN)
-    @ManyToOne
-    @JoinColumn(name = "Patient", referencedColumnName = "SSN")
-    @NotNull
-    private Patient patient;
+    private Integer patient;      // FK → Patient(SSN)
+    private Integer prepNurse;    // FK → Nurse(EmployeeID)
+    private Integer physician;   // FK → Physician(EmployeeID)
 
-    // 🔗 Nurse (FK → Nurse.EmployeeID)
-    @ManyToOne
-    @JoinColumn(name = "PrepNurse", referencedColumnName = "EmployeeID")
-    private Nurse prepNurse;
+    private LocalDateTime starto;
+    private LocalDateTime endo;
 
-    // 🔗 Physician (FK → Physician.EmployeeID)
-    @ManyToOne
-    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID")
-    @NotNull
-    private Physician physician;
-
-    @Column(name = "Starto", nullable = false)
-    @NotNull
-    private LocalDateTime start;
-
-    @Column(name = "Endo", nullable = false)
-    @NotNull
-    private LocalDateTime end;
-
-    @Column(name = "ExaminationRoom", nullable = false)
-    @NotBlank
     private String examinationRoom;
 
-    public Appointment() {}
+    // Default Constructor
+    public Appointment() {
+    }
 
-	public Integer getAppointmentId() {
-		return appointmentId;
-	}
+    // Parameterized Constructor
+    public Appointment(Integer appointmentId, Integer patient, Integer prepNurse,
+                       Integer physician, LocalDateTime starto,
+                       LocalDateTime endo, String examinationRoom) {
+        this.appointmentId = appointmentId;
+        this.patient = patient;
+        this.prepNurse = prepNurse;
+        this.physician = physician;
+        this.starto = starto;
+        this.endo = endo;
+        this.examinationRoom = examinationRoom;
+    }
 
-	public void setAppointmentId(Integer appointmentId) {
-		this.appointmentId = appointmentId;
-	}
+    // Getters and Setters
+    public Integer getAppointmentId() {
+        return appointmentId;
+    }
 
-	public Patient getPatient() {
-		return patient;
-	}
+    public void setAppointmentId(Integer appointmentId) {
+        this.appointmentId = appointmentId;
+    }
 
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+    public Integer getPatient() {
+        return patient;
+    }
 
-	public Nurse getPrepNurse() {
-		return prepNurse;
-	}
+    public void setPatient(Integer patient) {
+        this.patient = patient;
+    }
 
-	public void setPrepNurse(Nurse prepNurse) {
-		this.prepNurse = prepNurse;
-	}
+    public Integer getPrepNurse() {
+        return prepNurse;
+    }
 
-	public Physician getPhysician() {
-		return physician;
-	}
+    public void setPrepNurse(Integer prepNurse) {
+        this.prepNurse = prepNurse;
+    }
 
-	public void setPhysician(Physician physician) {
-		this.physician = physician;
-	}
+    public Integer getPhysician() {
+        return physician;
+    }
 
-	public LocalDateTime getStart() {
-		return start;
-	}
+    public void setPhysician(Integer physician) {
+        this.physician = physician;
+    }
 
-	public void setStart(LocalDateTime start) {
-		this.start = start;
-	}
+    public LocalDateTime getStarto() {
+        return starto;
+    }
 
-	public LocalDateTime getEnd() {
-		return end;
-	}
+    public void setStarto(LocalDateTime starto) {
+        this.starto = starto;
+    }
 
-	public void setEnd(LocalDateTime end) {
-		this.end = end;
-	}
+    public LocalDateTime getEndo() {
+        return endo;
+    }
 
-	public String getExaminationRoom() {
-		return examinationRoom;
-	}
+    public void setEndo(LocalDateTime endo) {
+        this.endo = endo;
+    }
 
-	public void setExaminationRoom(String examinationRoom) {
-		this.examinationRoom = examinationRoom;
-	}
+    public String getExaminationRoom() {
+        return examinationRoom;
+    }
 
+    public void setExaminationRoom(String examinationRoom) {
+        this.examinationRoom = examinationRoom;
+    }
     
 }
