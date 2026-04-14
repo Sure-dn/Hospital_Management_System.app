@@ -1,3 +1,5 @@
+package com.sprint.project.EntityClasses;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.List;
