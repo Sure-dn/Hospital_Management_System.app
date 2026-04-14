@@ -1,6 +1,8 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Nurse")
@@ -8,18 +10,23 @@ public class Nurse {
 
     @Id
     @Column(name = "EmployeeID")
+    @NotNull
     private Integer employeeId;
 
     @Column(name = "Name", nullable = false)
+    @NotBlank
     private String name;
 
     @Column(name = "Position", nullable = false)
+    @NotBlank
     private String position;
 
     @Column(name = "Registered", nullable = false)
+    @NotNull
     private Boolean registered;
 
     @Column(name = "SSN", nullable = false)
+    @NotNull
     private Integer ssn;
 
     public Nurse() {}

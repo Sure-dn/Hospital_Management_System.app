@@ -1,6 +1,7 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -8,24 +9,32 @@ import java.time.LocalDateTime;
 @Table(name = "On_Call")
 public class OnCall {
 
-    @Id
+    @NotNull(message = "Nurse cannot be null")
     @ManyToOne
     @JoinColumn(name = "Nurse")
     private Nurse nurse;
 
     @Id
+    @NotNull(message = "Block floor is required")
+    @Positive(message = "Block floor must be positive")
     @Column(name = "BlockFloor")
     private Integer blockFloor;
 
     @Id
+    @NotNull(message = "Block code is required")
+    @Positive(message = "Block code must be positive")
     @Column(name = "BlockCode")
     private Integer blockCode;
 
     @Id
+    @NotNull(message = "OnCall start time is required")
+    @PastOrPresent(message = "Start time cannot be in future")
     @Column(name = "OnCallStart")
     private LocalDateTime onCallStart;
 
     @Id
+    @NotNull(message = "OnCall end time is required")
+    @FutureOrPresent(message = "End time must be present or future")
     @Column(name = "OnCallEnd")
     private LocalDateTime onCallEnd;
 
