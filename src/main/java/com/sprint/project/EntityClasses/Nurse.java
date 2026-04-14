@@ -1,51 +1,68 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "Nurse")
 public class Nurse {
 
     @Id
-    private Integer employeeID;
+    @Column(name = "EmployeeID")
+    private Integer employeeId;
 
-    @NotBlank
+    @Column(name = "Name", nullable = false)
     private String name;
 
-    @NotBlank
+    @Column(name = "Position", nullable = false)
     private String position;
 
-    @NotNull
+    @Column(name = "Registered", nullable = false)
     private Boolean registered;
 
-    @NotNull
+    @Column(name = "SSN", nullable = false)
     private Integer ssn;
 
-    // Constructors
     public Nurse() {}
 
-    public Nurse(Integer employeeID, String name, String position, Boolean registered, Integer ssn) {
-        this.employeeID = employeeID;
-        this.name = name;
-        this.position = position;
-        this.registered = registered;
-        this.ssn = ssn;
-    }
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
 
-    // Getters and Setters
-    public Integer getEmployeeID() { return employeeID; }
-    public void setEmployeeID(Integer employeeID) { this.employeeID = employeeID; }
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+	public String getName() {
+		return name;
+	}
 
-    public String getPosition() { return position; }
-    public void setPosition(String position) { this.position = position; }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Boolean getRegistered() { return registered; }
-    public void setRegistered(Boolean registered) { this.registered = registered; }
+	public String getPosition() {
+		return position;
+	}
 
-    public Integer getSsn() { return ssn; }
-    public void setSsn(Integer ssn) { this.ssn = ssn; }
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public Boolean getRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(Boolean registered) {
+		this.registered = registered;
+	}
+
+	public Integer getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(Integer ssn) {
+		this.ssn = ssn;
+	}
+
+    
 }
