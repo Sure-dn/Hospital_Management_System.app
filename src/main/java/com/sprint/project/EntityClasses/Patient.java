@@ -1,6 +1,9 @@
 package com.sprint.project.EntityClasses;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 63978cb3aee9f86847b360190a3d00d9ca08873b
 import jakarta.persistence.*;
 
 @Entity
@@ -65,4 +68,8 @@ public class Patient {
     public void setPhysician(Physician physician) {
         this.physician = physician;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 63978cb3aee9f86847b360190a3d00d9ca08873b
