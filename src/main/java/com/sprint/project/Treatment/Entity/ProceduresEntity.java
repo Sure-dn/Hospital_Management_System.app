@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "Procedures")
-public class Procedures {
+public class ProceduresEntity {
 
     @Id
     @NotNull
@@ -25,7 +25,7 @@ public class Procedures {
     @Column(name = "Cost", nullable = false, length = 50)
     private Double cost;
 
-    public Procedures() {}
+    public ProceduresEntity() {}
 
     // Getters and Setters
 

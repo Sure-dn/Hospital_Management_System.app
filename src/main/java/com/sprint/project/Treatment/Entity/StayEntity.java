@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Stay")
-public class Stay {
+public class StayEntity {
 
     @Id
     @NotNull(message = "Stay ID cannot be null")
@@ -38,9 +38,9 @@ public class Stay {
     @Column(name = "StayEnd")
     private LocalDateTime stayEnd;
 
-    public Stay() {}
+    public StayEntity() {}
 
-    public Stay(Integer stayId, Patient patient, Room room,
+    public StayEntity(Integer stayId, Patient patient, Room room,
                 LocalDateTime stayStart, LocalDateTime stayEnd) {
         this.stayId = stayId;
         this.patient = patient;
