@@ -1,29 +1,37 @@
 package com.sprint.project.EntityClasses;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.util.List;
 
 @Entity
 public class Patient {
 
     @Id
-    private int ssn;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long patientId;
 
+    @NotBlank(message = "Name cannot be empty")
     private String name;
-    private String address;
-    private String phone;
-    private int insuranceId;
 
-    @ManyToOne
-    @JoinColumn(name = "PCP")
-    private Physician physician;
+    @NotNull(message = "Age is required")
+    private Integer age;
 
-    public int getSsn() {
-        return ssn;
+    @NotBlank(message = "Disease cannot be empty")
+    private String disease;
+
+    // Relationship
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<Procedures> procedures;
+
+    // Getters and Setters
+
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setSsn(int ssn) {
-        this.ssn = ssn;
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public String getName() {
@@ -34,35 +42,27 @@ public class Patient {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getDisease() {
+        return disease;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDisease(String disease) {
+        this.disease = disease;
     }
 
-    public int getInsuranceId() {
-        return insuranceId;
+    public List<Procedures> getProcedures() {
+        return procedures;
     }
 
-    public void setInsuranceId(int insuranceId) {
-        this.insuranceId = insuranceId;
-    }
-
-    public Physician getPhysician() {
-        return physician;
-    }
-
-    public void setPhysician(Physician physician) {
-        this.physician = physician;
+    public void setProcedures(List<Procedures> procedures) {
+        this.procedures = procedures;
     }
 }

@@ -1,75 +1,64 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 
 @Entity
-@Table(name = "Nurse")
+@Table(name = "nurse")
 public class Nurse {
 
     @Id
-    @Column(name = "EmployeeID")
-    @NotNull
-    private Integer employeeId;
+    @NotNull(message = "Employee ID is required")
+    private Integer employeeID;
 
-    @Column(name = "Name", nullable = false)
-    @NotBlank
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, max = 50)
     private String name;
 
-    @Column(name = "Position", nullable = false)
-    @NotBlank
+    @NotBlank(message = "Gender is required")
+    private String gender;
+
+    @NotBlank(message = "Position is required")
     private String position;
-
-    @Column(name = "Registered", nullable = false)
-    @NotNull
-    private Boolean registered;
-
-    @Column(name = "SSN", nullable = false)
-    @NotNull
-    private Integer ssn;
 
     public Nurse() {}
 
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
+    public Nurse(Integer employeeID, String name, String gender, String position) {
+        this.employeeID = employeeID;
+        this.name = name;
+        this.gender = gender;
+        this.position = position;
+    }
 
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
+    public Integer getEmployeeID() {
+        return employeeID;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setEmployeeID(Integer employeeID) {
+        this.employeeID = employeeID;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPosition() {
-		return position;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
+    public String getGender() {
+        return gender;
+    }
 
-	public Boolean getRegistered() {
-		return registered;
-	}
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
-	public void setRegistered(Boolean registered) {
-		this.registered = registered;
-	}
+    public String getPosition() {
+        return position;
+    }
 
-	public Integer getSsn() {
-		return ssn;
-	}
-
-	public void setSsn(Integer ssn) {
-		this.ssn = ssn;
-	}
-
-    
+    public void setPosition(String position) {
+        this.position = position;
+    }
 }

@@ -1,58 +1,68 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
+@Table(name = "room")
 public class Room {
 
     @Id
-    @Column(name = "RoomNumber")
+    @NotNull(message = "Room number cannot be null")
+    @Positive(message = "Room number must be positive")
     private Integer roomNumber;
 
-    @Column(name = "RoomType", nullable = false)
-    private String roomType;
+    @NotBlank(message = "Room type cannot be empty")
+    @Size(min = 3, max = 20, message = "Type must be between 3 and 20 characters")
+    private String type;
 
-    @Column(name = "Unavailable", nullable = false)
-    private Boolean unavailable;
+    @NotNull(message = "Capacity is required")
+    @Min(value = 1, message = "Capacity must be at least 1")
+    @Max(value = 10, message = "Capacity cannot exceed 10")
+    private Integer capacity;
 
+    // 🔗 Relationship: Many Rooms → One Block (Composite Key)
     @ManyToOne
     @JoinColumns({
         @JoinColumn(name = "BlockFloor", referencedColumnName = "BlockFloor"),
         @JoinColumn(name = "BlockCode", referencedColumnName = "BlockCode")
     })
+    @NotNull(message = "Block is required")
     private Block block;
 
-	public Integer getRoomNumber() {
-		return roomNumber;
-	}
+    public Room() {}
 
-	public void setRoomNumber(Integer roomNumber) {
-		this.roomNumber = roomNumber;
-	}
+    // Getters and Setters
 
-	public String getRoomType() {
-		return roomType;
-	}
+    public Integer getRoomNumber() {
+        return roomNumber;
+    }
 
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
-	}
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
 
-	public Boolean getUnavailable() {
-		return unavailable;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setUnavailable(Boolean unavailable) {
-		this.unavailable = unavailable;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public Block getBlock() {
-		return block;
-	}
+    public Integer getCapacity() {
+        return capacity;
+    }
 
-	public void setBlock(Block block) {
-		this.block = block;
-	}
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
 
-    
+    public Block getBlock() {
+        return block;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
+    }
 }

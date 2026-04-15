@@ -1,8 +1,8 @@
 package com.sprint.project.EntityClasses;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
-import com.sprint.project.EntityClasses.Patient;
 
 @Entity
 @IdClass(PrescribesId.class)
@@ -11,20 +11,24 @@ public class Prescribes {
     @Id
     @ManyToOne
     @JoinColumn(name = "Physician")
+    @NotNull(message = "Physician is required")
     private Physician physician;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "Patient")
+    @NotNull(message = "Patient is required")
     private Patient patient;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "Medication")
+    @NotNull(message = "Medication is required")
     private Medication medication;
 
     @Id
     @Column(name = "Date")
+    @NotNull(message = "Date is required")
     private LocalDateTime date;
 
     @ManyToOne
@@ -32,55 +36,57 @@ public class Prescribes {
     private Appointment appointment;
 
     @Column(name = "Dose", nullable = false)
+    @NotBlank(message = "Dose cannot be empty")
+    @Size(min = 1, max = 50, message = "Dose must be between 1 and 50 characters")
     private String dose;
 
-	public Physician getPhysician() {
-		return physician;
-	}
+    // Getters and Setters
 
-	public void setPhysician(Physician physician) {
-		this.physician = physician;
-	}
+    public Physician getPhysician() {
+        return physician;
+    }
 
-	public Patient getPatient() {
-		return patient;
-	}
+    public void setPhysician(Physician physician) {
+        this.physician = physician;
+    }
 
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
+    public Patient getPatient() {
+        return patient;
+    }
 
-	public Medication getMedication() {
-		return medication;
-	}
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 
-	public void setMedication(Medication medication) {
-		this.medication = medication;
-	}
+    public Medication getMedication() {
+        return medication;
+    }
 
-	public LocalDateTime getDate() {
-		return date;
-	}
+    public void setMedication(Medication medication) {
+        this.medication = medication;
+    }
 
-	public void setDate(LocalDateTime date) {
-		this.date = date;
-	}
+    public LocalDateTime getDate() {
+        return date;
+    }
 
-	public Appointment getAppointment() {
-		return appointment;
-	}
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
-	public void setAppointment(Appointment appointment) {
-		this.appointment = appointment;
-	}
+    public Appointment getAppointment() {
+        return appointment;
+    }
 
-	public String getDose() {
-		return dose;
-	}
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
+    }
 
-	public void setDose(String dose) {
-		this.dose = dose;
-	}
+    public String getDose() {
+        return dose;
+    }
 
-    
+    public void setDose(String dose) {
+        this.dose = dose;
+    }
 }
