@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class UndergoesId implements Serializable {
 
     private static final long serialVersionUID = 1L;
