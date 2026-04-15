@@ -59,6 +59,8 @@ public class UndergoesId implements Serializable {
         this.dateUndergoes = dateUndergoes;
     }
 
+    // equals & hashCode (VERY IMPORTANT for composite key)
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,4 +77,3 @@ public class UndergoesId implements Serializable {
         return Objects.hash(patient, procedures, stay, dateUndergoes);
     }
 }
-
