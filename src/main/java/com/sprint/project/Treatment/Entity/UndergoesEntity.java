@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.Nurse;
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
@@ -50,8 +50,8 @@ public class UndergoesEntity {
 
     public UndergoesEntity() {}
 
-    public UndergoesEntity(Patient patient, ProceduresEntity procedures, StayEntity stay,
-                     LocalDateTime dateUndergoes, Physician physician,
+    public UndergoesEntity(PatientEntity patient, ProceduresEntity procedures, StayEntity stay,
+                     LocalDateTime dateUndergoes, PhysicianEntity physician,
                      NurseEntity assistingNurse) {
         this.patient = patient;
         this.procedures = procedures;
