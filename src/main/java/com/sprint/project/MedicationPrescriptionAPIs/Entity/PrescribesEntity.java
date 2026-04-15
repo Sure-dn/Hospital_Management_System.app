@@ -13,6 +13,10 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
+import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+
 @Entity
 @Table(name = "Prescribes")
 @IdClass(PrescribesId.class)
@@ -22,13 +26,13 @@ public class PrescribesEntity {
     @NotNull(message = "Physician is required")
     @ManyToOne
     @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID", nullable = false)
-    private Physician physician;
+    private PhysicianEntity physician;
 
     @Id
     @NotNull(message = "Patient is required")
     @ManyToOne
     @JoinColumn(name = "Patient", referencedColumnName = "SSN", nullable = false)
-    private Patient patient;
+    private PatientEntity patient;
 
     @Id
     @NotNull(message = "Medication is required")
@@ -43,7 +47,7 @@ public class PrescribesEntity {
 
     @ManyToOne
     @JoinColumn(name = "Appointment", referencedColumnName = "AppointmentID")
-    private Appointment appointment;
+    private AppointmentEntity appointment;
 
     @NotBlank(message = "Dose cannot be empty")
     @Size(min = 1, max = 50, message = "Dose must be between 1 and 50 characters")
@@ -54,19 +58,19 @@ public class PrescribesEntity {
 
     // Getters and Setters
 
-    public Physician getPhysician() {
+    public PhysicianEntity getPhysician() {
         return physician;
     }
 
-    public void setPhysician(Physician physician) {
+    public void setPhysician(PhysicianEntity physician) {
         this.physician = physician;
     }
 
-    public Patient getPatient() {
+    public PatientEntity getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientEntity patient) {
         this.patient = patient;
     }
 
@@ -86,11 +90,11 @@ public class PrescribesEntity {
         this.date = date;
     }
 
-    public Appointment getAppointment() {
+    public AppointmentEntity getAppointment() {
         return appointment;
     }
 
-    public void setAppointment(Appointment appointment) {
+    public void setAppointment(AppointmentEntity appointment) {
         this.appointment = appointment;
     }
 

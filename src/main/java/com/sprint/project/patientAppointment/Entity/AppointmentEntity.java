@@ -12,6 +12,9 @@
 
 	import java.time.LocalDateTime;
 
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.Nurse;
+import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+
 	@Entity
 	@Table(name = "Appointment")
 	public class AppointmentEntity {

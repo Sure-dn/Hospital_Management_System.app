@@ -12,6 +12,10 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.Nurse;
+import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+
 @Entity
 @Table(name = "Undergoes")
 public class UndergoesEntity {
@@ -20,7 +24,7 @@ public class UndergoesEntity {
     @NotNull(message = "Patient cannot be null")
     @ManyToOne
     @JoinColumn(name = "Patient", referencedColumnName = "SSN", nullable = false)
-    private Patient patient;
+    private PatientEntity patient;
 
     @NotNull(message = "Procedure cannot be null")
     @ManyToOne
@@ -38,17 +42,17 @@ public class UndergoesEntity {
 
     @ManyToOne
     @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID")
-    private Physician physician;
+    private PhysicianEntity physician;
 
     @ManyToOne
     @JoinColumn(name = "AssistingNurse", referencedColumnName = "EmployeeID")
-    private Nurse assistingNurse;
+    private NurseEntity assistingNurse;
 
     public UndergoesEntity() {}
 
     public UndergoesEntity(Patient patient, ProceduresEntity procedures, StayEntity stay,
                      LocalDateTime dateUndergoes, Physician physician,
-                     Nurse assistingNurse) {
+                     NurseEntity assistingNurse) {
         this.patient = patient;
         this.procedures = procedures;
         this.stay = stay;
@@ -59,11 +63,11 @@ public class UndergoesEntity {
 
     // Getters and Setters
 
-    public Patient getPatient() {
+    public PatientEntity getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientEntity patient) {
         this.patient = patient;
     }
 
@@ -91,19 +95,19 @@ public class UndergoesEntity {
         this.dateUndergoes = dateUndergoes;
     }
 
-    public Physician getPhysician() {
+    public PhysicianEntity getPhysician() {
         return physician;
     }
 
-    public void setPhysician(Physician physician) {
+    public void setPhysician(PhysicianEntity physician) {
         this.physician = physician;
     }
 
-    public Nurse getAssistingNurse() {
+    public NurseEntity getAssistingNurse() {
         return assistingNurse;
     }
 
-    public void setAssistingNurse(Nurse assistingNurse) {
+    public void setAssistingNurse(NurseEntity assistingNurse) {
         this.assistingNurse = assistingNurse;
     }
 }

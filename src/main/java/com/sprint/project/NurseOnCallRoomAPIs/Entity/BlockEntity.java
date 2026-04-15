@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "Block")
 @IdClass(BlockId.class)
-public class Block {
+public class BlockEntity {
 
     @Id
     @NotNull(message = "Block floor cannot be null")
@@ -30,9 +30,9 @@ public class Block {
     private Integer blockCode;
 
     @OneToMany(mappedBy = "block", cascade = CascadeType.ALL)
-    private List<Room> rooms;
+    private List<RoomEntity> rooms;
 
-    public Block() {}
+    public BlockEntity() {}
 
     // Getters and Setters
 
@@ -52,11 +52,11 @@ public class Block {
         this.blockCode = blockCode;
     }
 
-    public List<Room> getRooms() {
+    public List<RoomEntity> getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<Room> rooms) {
+    public void setRooms(List<RoomEntity> rooms) {
         this.rooms = rooms;
     }
 }

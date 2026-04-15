@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "On_Call")
 @IdClass(OnCallId.class)
-public class OnCall {
+public class OnCallEntity {
 
     @Id
     @NotNull(message = "Nurse cannot be null")
     @ManyToOne
     @JoinColumn(name = "Nurse", referencedColumnName = "EmployeeID", nullable = false)
-    private Nurse nurse;
+    private NurseEntity nurse;
 
     @Id
     @NotNull(message = "Block floor is required")
@@ -41,7 +41,7 @@ public class OnCall {
         @JoinColumn(name = "BlockFloor", referencedColumnName = "BlockFloor", insertable = false, updatable = false),
         @JoinColumn(name = "BlockCode",  referencedColumnName = "BlockCode",  insertable = false, updatable = false)
     })
-    private Block block;
+    private BlockEntity block;
 
     @Id
     @NotNull(message = "OnCall start time is required")
@@ -53,9 +53,9 @@ public class OnCall {
     @Column(name = "OnCallEnd", nullable = false)
     private LocalDateTime onCallEnd;
 
-    public OnCall() {}
+    public OnCallEntity() {}
 
-    public OnCall(Nurse nurse, Integer blockFloor, Integer blockCode,
+    public OnCallEntity(NurseEntity nurse, Integer blockFloor, Integer blockCode,
                   LocalDateTime onCallStart, LocalDateTime onCallEnd) {
         this.nurse = nurse;
         this.blockFloor = blockFloor;
@@ -66,11 +66,11 @@ public class OnCall {
 
     // Getters and Setters
 
-    public Nurse getNurse() {
+    public NurseEntity getNurse() {
         return nurse;
     }
 
-    public void setNurse(Nurse nurse) {
+    public void setNurse(NurseEntity nurse) {
         this.nurse = nurse;
     }
 
@@ -90,11 +90,11 @@ public class OnCall {
         this.blockCode = blockCode;
     }
 
-    public Block getBlock() {
+    public BlockEntity getBlock() {
         return block;
     }
 
-    public void setBlock(Block block) {
+    public void setBlock(BlockEntity block) {
         this.block = block;
     }
 
