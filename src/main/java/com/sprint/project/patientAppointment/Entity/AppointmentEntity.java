@@ -12,6 +12,9 @@
 
 	import java.time.LocalDateTime;
 
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.Nurse;
+import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+
 	@Entity
 	@Table(name = "Appointment")
 	public class AppointmentEntity {
@@ -33,7 +36,7 @@
 	    @NotNull
 	    @ManyToOne
 	    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID", nullable = false)
-	    private Physician physician;
+	    private PhysicianEntity physician;
 
 	    @NotNull
 	    @Column(name = "Start", nullable = false)
@@ -75,11 +78,11 @@
 	        this.prepNurse = prepNurse;
 	    }
 
-	    public Physician getPhysician() {
+	    public PhysicianEntity getPhysician() {
 	        return physician;
 	    }
 
-	    public void setPhysician(Physician physician) {
+	    public void setPhysician(PhysicianEntity physician) {
 	        this.physician = physician;
 	    }
 

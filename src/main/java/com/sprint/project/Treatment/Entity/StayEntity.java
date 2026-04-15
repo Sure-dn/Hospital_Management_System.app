@@ -11,6 +11,9 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.Room;
+import com.sprint.project.patientAppointment.Entity.PatientEntity;
+
 @Entity
 @Table(name = "Stay")
 public class StayEntity {
@@ -24,7 +27,7 @@ public class StayEntity {
     @NotNull(message = "Patient cannot be null")
     @ManyToOne
     @JoinColumn(name = "Patient", referencedColumnName = "SSN", nullable = false)
-    private Patient patient;
+    private PatientEntity patient;
 
     @NotNull(message = "Room cannot be null")
     @ManyToOne
@@ -40,7 +43,7 @@ public class StayEntity {
 
     public StayEntity() {}
 
-    public StayEntity(Integer stayId, Patient patient, Room room,
+    public StayEntity(Integer stayId, PatientEntity patient, Room room,
                 LocalDateTime stayStart, LocalDateTime stayEnd) {
         this.stayId = stayId;
         this.patient = patient;
@@ -59,11 +62,11 @@ public class StayEntity {
         this.stayId = stayId;
     }
 
-    public Patient getPatient() {
+    public PatientEntity getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientEntity patient) {
         this.patient = patient;
     }
 
