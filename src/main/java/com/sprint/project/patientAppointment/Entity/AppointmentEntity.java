@@ -12,7 +12,8 @@
 
 	import java.time.LocalDateTime;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.Nurse;
+
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
 	@Entity
@@ -31,7 +32,7 @@ import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
 	    @ManyToOne
 	    @JoinColumn(name = "PrepNurse", referencedColumnName = "EmployeeID")
-	    private Nurse prepNurse;
+	    private NurseEntity prepNurse;
 
 	    @NotNull
 	    @ManyToOne
@@ -70,11 +71,11 @@ import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 	        this.patient = patient;
 	    }
 
-	    public Nurse getPrepNurse() {
+	    public NurseEntity getPrepNurse() {
 	        return prepNurse;
 	    }
 
-	    public void setPrepNurse(Nurse prepNurse) {
+	    public void setPrepNurse(NurseEntity prepNurse) {
 	        this.prepNurse = prepNurse;
 	    }
 
