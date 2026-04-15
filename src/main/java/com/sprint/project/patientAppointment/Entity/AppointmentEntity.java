@@ -28,12 +28,12 @@
 
 	    @ManyToOne
 	    @JoinColumn(name = "PrepNurse", referencedColumnName = "EmployeeID")
-	    private Nurse prepNurse;
+	    private NurseEntity prepNurse;
 
 	    @NotNull
 	    @ManyToOne
 	    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID", nullable = false)
-	    private Physician physician;
+	    private PhysicianEntity physician;
 
 	    @NotNull
 	    @Column(name = "Start", nullable = false)
@@ -67,19 +67,19 @@
 	        this.patient = patient;
 	    }
 
-	    public Nurse getPrepNurse() {
+	    public NurseEntity getPrepNurse() {
 	        return prepNurse;
 	    }
 
-	    public void setPrepNurse(Nurse prepNurse) {
+	    public void setPrepNurse(NurseEntity prepNurse) {
 	        this.prepNurse = prepNurse;
 	    }
 
-	    public Physician getPhysician() {
+	    public PhysicianEntity getPhysician() {
 	        return physician;
 	    }
 
-	    public void setPhysician(Physician physician) {
+	    public void setPhysician(PhysicianEntity physician) {
 	        this.physician = physician;
 	    }
 
