@@ -46,13 +46,13 @@ public class UndergoesEntity {
 
     @ManyToOne
     @JoinColumn(name = "AssistingNurse", referencedColumnName = "EmployeeID")
-    private Nurse assistingNurse;
+    private NurseEntity assistingNurse;
 
     public UndergoesEntity() {}
 
-    public UndergoesEntity(PatientEntity patient, ProceduresEntity procedures, StayEntity stay,
-                     LocalDateTime dateUndergoes, PhysicianEntity physician,
-                     Nurse assistingNurse) {
+    public UndergoesEntity(Patient patient, ProceduresEntity procedures, StayEntity stay,
+                     LocalDateTime dateUndergoes, Physician physician,
+                     NurseEntity assistingNurse) {
         this.patient = patient;
         this.procedures = procedures;
         this.stay = stay;
@@ -103,11 +103,11 @@ public class UndergoesEntity {
         this.physician = physician;
     }
 
-    public Nurse getAssistingNurse() {
+    public NurseEntity getAssistingNurse() {
         return assistingNurse;
     }
 
-    public void setAssistingNurse(Nurse assistingNurse) {
+    public void setAssistingNurse(NurseEntity assistingNurse) {
         this.assistingNurse = assistingNurse;
     }
 }
