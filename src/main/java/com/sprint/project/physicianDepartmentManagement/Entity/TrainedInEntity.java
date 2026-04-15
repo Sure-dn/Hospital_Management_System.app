@@ -14,7 +14,7 @@ import com.sprint.project.Treatment.Entity.ProceduresEntity;
 @Entity
 @Table(name = "Trained_In")
 public class TrainedInEntity {
-	 @EmbeddedId
+	    @EmbeddedId
 	    private TrainedInId trainedInId;
 
 	    @NotNull(message = "Physician is required")

@@ -1,80 +1,54 @@
 package com.sprint.project.physicianDepartmentManagement.Entity;
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.util.Objects;
 
-import com.sprint.project.Treatment.Entity.ProceduresEntity;
+import jakarta.persistence.Embeddable;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-@Entity
-@Table(name = "Trained_In")
-public class TrainedInId {
-	@EmbeddedId
-    private TrainedInId trainedInId;
+@Embeddable
+public class TrainedInId implements Serializable {
+	private Integer physician;
+    private Integer treatment;
 
-    @NotNull(message = "Physician is required")
-    @ManyToOne
-    @MapsId("physician")
-    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID", nullable = false)
-    private PhysicianEntity physician;
-
-    @NotNull(message = "Treatment is required")
-    @ManyToOne
-    @MapsId("treatment")
-    @JoinColumn(name = "Treatment", referencedColumnName = "Code", nullable = false)
-    private ProceduresEntity treatment;
-
-    @NotNull(message = "Certification expiry date is required")
-    @Column(name = "CertificationExpiry", nullable = false)
-    private LocalDate certificationExpiry;
-
+    // Default Constructor
     public TrainedInId() {}
 
-    public TrainedInId(TrainedInId trainedInId, PhysicianEntity physician, ProceduresEntity treatment, LocalDate certificationExpiry) {
-        this.trainedInId = trainedInId;
+    // Parameterized Constructor
+    public TrainedInId(Integer physician, Integer treatment) {
         this.physician = physician;
         this.treatment = treatment;
-        this.certificationExpiry = certificationExpiry;
     }
 
     // Getters and Setters
-
-    public TrainedInId getTrainedInId() {
-        return trainedInId;
-    }
-
-    public void setTrainedInId(TrainedInId trainedInId) {
-        this.trainedInId = trainedInId;
-    }
-
-    public PhysicianEntity getPhysician() {
+    public Integer getPhysician() {
         return physician;
     }
 
-    public void setPhysician(PhysicianEntity physician) {
+    public void setPhysician(Integer physician) {
         this.physician = physician;
     }
 
-    public ProceduresEntity getTreatment() {
+    public Integer getTreatment() {
         return treatment;
     }
 
-    public void setTreatment(ProceduresEntity treatment) {
+    public void setTreatment(Integer treatment) {
         this.treatment = treatment;
     }
 
-    public LocalDate getCertificationExpiry() {
-        return certificationExpiry;
+   
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrainedInId that = (TrainedInId) o;
+        return Objects.equals(physician, that.physician) &&
+               Objects.equals(treatment, that.treatment);
     }
 
-    public void setCertificationExpiry(LocalDate certificationExpiry) {
-        this.certificationExpiry = certificationExpiry;
-    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(physician, treatment);
+    }
 
 }
