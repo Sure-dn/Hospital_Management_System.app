@@ -1,20 +1,54 @@
 package com.sprint.project.EntityClasses;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 @Entity
 public class Appointment {
 
     @Id
+<<<<<<< HEAD
     private Integer appointmentId;
 
     private Integer patient;      // FK → Patient(SSN)
     private Integer prepNurse;    // FK → Nurse(EmployeeID)
     private Integer physician;   // FK → Physician(EmployeeID)
+=======
+    @Column(name = "AppointmentID")
+    @NotNull
+    private Integer appointmentId;
+
+    // 🔗 Patient (FK → Patient.SSN)
+    @ManyToOne
+    @JoinColumn(name = "Patient", referencedColumnName = "SSN")
+    @NotNull
+    private Patient patient;
+>>>>>>> fcfc3b32b531fc8885a2274145318dae4df3a727
 
     private LocalDateTime starto;
     private LocalDateTime endo;
 
+<<<<<<< HEAD
+=======
+    // 🔗 Physician (FK → Physician.EmployeeID)
+    @ManyToOne
+    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID")
+    @NotNull
+    private Physician physician;
+
+    @Column(name = "Starto", nullable = false)
+    @NotNull
+    private LocalDateTime start;
+
+    @Column(name = "Endo", nullable = false)
+    @NotNull
+    private LocalDateTime end;
+
+    @Column(name = "ExaminationRoom", nullable = false)
+    @NotBlank
+>>>>>>> fcfc3b32b531fc8885a2274145318dae4df3a727
     private String examinationRoom;
 
     // Default Constructor
