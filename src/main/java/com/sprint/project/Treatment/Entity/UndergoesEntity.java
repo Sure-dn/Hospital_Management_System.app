@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Undergoes")
-public class Undergoes {
+public class UndergoesEntity {
 	@EmbeddedId
 	private UndergoesId undergoesId;
     @NotNull(message = "Patient cannot be null")
@@ -25,12 +25,12 @@ public class Undergoes {
     @NotNull(message = "Procedure cannot be null")
     @ManyToOne
     @JoinColumn(name = "Procedures", referencedColumnName = "Code", nullable = false)
-    private Procedures procedures;
+    private ProceduresEntity procedures;
 
     @NotNull(message = "Stay cannot be null")
     @ManyToOne
     @JoinColumn(name = "Stay", referencedColumnName = "StayID", nullable = false)
-    private Stay stay;
+    private StayEntity stay;
 
     @NotNull(message = "Date of procedure is required")
     @Column(name = "DateUndergoes", nullable = false)
@@ -44,9 +44,9 @@ public class Undergoes {
     @JoinColumn(name = "AssistingNurse", referencedColumnName = "EmployeeID")
     private Nurse assistingNurse;
 
-    public Undergoes() {}
+    public UndergoesEntity() {}
 
-    public Undergoes(Patient patient, Procedures procedures, Stay stay,
+    public UndergoesEntity(Patient patient, ProceduresEntity procedures, StayEntity stay,
                      LocalDateTime dateUndergoes, Physician physician,
                      Nurse assistingNurse) {
         this.patient = patient;
@@ -67,19 +67,19 @@ public class Undergoes {
         this.patient = patient;
     }
 
-    public Procedures getProcedures() {
+    public ProceduresEntity getProcedures() {
         return procedures;
     }
 
-    public void setProcedures(Procedures procedures) {
+    public void setProcedures(ProceduresEntity procedures) {
         this.procedures = procedures;
     }
 
-    public Stay getStay() {
+    public StayEntity getStay() {
         return stay;
     }
 
-    public void setStay(Stay stay) {
+    public void setStay(StayEntity stay) {
         this.stay = stay;
     }
 

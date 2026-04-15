@@ -4,7 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sprint.project.Treatment.Entity.Procedures;
+import com.sprint.project.Treatment.Entity.ProceduresEntity;
 import com.sprint.project.Treatment.Repository.ProceduresRepository;
 
 @Component
@@ -17,7 +17,7 @@ public class TestRunner implements CommandLineRunner {
     public void run(String... args) {
 
         //  CREATE
-        Procedures p = new Procedures();
+        ProceduresEntity p = new ProceduresEntity();
         p.setCode(100);
         p.setName("Test Procedure");
         p.setCost(500.0);
