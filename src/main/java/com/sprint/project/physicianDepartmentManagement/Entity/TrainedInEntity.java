@@ -9,6 +9,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+
+import com.sprint.project.Treatment.Entity.ProceduresEntity;
 @Entity
 @Table(name = "Trained_In")
 public class TrainedInEntity {
@@ -25,7 +27,7 @@ public class TrainedInEntity {
 	    @ManyToOne
 	    @MapsId("treatment")
 	    @JoinColumn(name = "Treatment", referencedColumnName = "Code", nullable = false)
-	    private Procedures treatment;
+	    private ProceduresEntity treatment;
 
 	    @NotNull(message = "Certification expiry date is required")
 	    @Column(name = "CertificationExpiry", nullable = false)
@@ -33,7 +35,7 @@ public class TrainedInEntity {
 
 	    public TrainedInEntity() {}
 
-	    public TrainedInEntity(TrainedInId trainedInId, PhysicianEntity physician, Procedures treatment, LocalDate certificationExpiry) {
+	    public TrainedInEntity(TrainedInId trainedInId, PhysicianEntity physician, ProceduresEntity treatment, LocalDate certificationExpiry) {
 	        this.trainedInId = trainedInId;
 	        this.physician = physician;
 	        this.treatment = treatment;
@@ -58,11 +60,11 @@ public class TrainedInEntity {
 	        this.physician = physician;
 	    }
 
-	    public Procedures getTreatment() {
+	    public ProceduresEntity getTreatment() {
 	        return treatment;
 	    }
 
-	    public void setTreatment(Procedures treatment) {
+	    public void setTreatment(ProceduresEntity treatment) {
 	        this.treatment = treatment;
 	    }
 
