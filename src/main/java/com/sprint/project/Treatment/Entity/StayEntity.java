@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.Room;
+import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 
 @Entity
@@ -43,7 +43,7 @@ public class StayEntity {
 
     public StayEntity() {}
 
-    public StayEntity(Integer stayId, Patient patient, RoomEntity room,
+    public StayEntity(Integer stayId, PatientEntity patient, RoomEntity room,
                 LocalDateTime stayStart, LocalDateTime stayEnd) {
         this.stayId = stayId;
         this.patient = patient;
