@@ -1,0 +1,93 @@
+package com.sprint.project.Treatment.Entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "Stay")
+public class Stay {
+
+    @Id
+    @NotNull(message = "Stay ID cannot be null")
+    @Positive(message = "Stay ID must be a positive number")
+    @Column(name = "StayID")
+    private Integer stayId;
+
+    @NotNull(message = "Patient cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "Patient", referencedColumnName = "SSN", nullable = false)
+    private Patient patient;
+
+    @NotNull(message = "Room cannot be null")
+    @ManyToOne
+    @JoinColumn(name = "Room", referencedColumnName = "RoomNumber", nullable = false)
+    private Room room;
+
+    @NotNull(message = "Stay start date cannot be null")
+    @Column(name = "StayStart", nullable = false)
+    private LocalDateTime stayStart;
+
+    @Column(name = "StayEnd")
+    private LocalDateTime stayEnd;
+
+    public Stay() {}
+
+    public Stay(Integer stayId, Patient patient, Room room,
+                LocalDateTime stayStart, LocalDateTime stayEnd) {
+        this.stayId = stayId;
+        this.patient = patient;
+        this.room = room;
+        this.stayStart = stayStart;
+        this.stayEnd = stayEnd;
+    }
+
+    // Getters and Setters
+
+    public Integer getStayId() {
+        return stayId;
+    }
+
+    public void setStayId(Integer stayId) {
+        this.stayId = stayId;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public LocalDateTime getStayStart() {
+        return stayStart;
+    }
+
+    public void setStayStart(LocalDateTime stayStart) {
+        this.stayStart = stayStart;
+    }
+
+    public LocalDateTime getStayEnd() {
+        return stayEnd;
+    }
+
+    public void setStayEnd(LocalDateTime stayEnd) {
+        this.stayEnd = stayEnd;
+    }
+}
