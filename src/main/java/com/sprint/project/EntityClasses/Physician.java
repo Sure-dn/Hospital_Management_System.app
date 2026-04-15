@@ -7,22 +7,28 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Physician")
 public class Physician {
 	
 	@Id
+	@NotNull
     @Column(name = "EmployeeID")
     private Integer EmployeeId;
 
-    @Column(name = "Name", nullable = false, length = 30)
+	@NotBlank
+    @Column(name = "Name", length = 30)
     private String Name;
-
-    @Column(name = "Position", nullable = false, length = 30)
+	
+    @NotBlank
+    @Column(name = "Position", length = 30)
     private String Position;
-
-    @Column(name = "SSN", nullable = false)
+    
+    @NotNull
+    @Column(name = "SSN")
     private Integer SSN;
     
     @OneToMany(mappedBy = "head")

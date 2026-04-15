@@ -7,23 +7,27 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Affiliated_With")
 public class Affiliated_With {
 	@EmbeddedId
     private AffiliatedId affiliatedid;
-
+	
+    @NotNull
     @ManyToOne
     @MapsId("physician")
     @JoinColumn(name = "Physician", nullable=false)
     private Physician physician;
-
+    
+    @NotNull
     @ManyToOne
     @MapsId("department")
     @JoinColumn(name = "Department",nullable=false)
     private Department department;
-
+    
+    @NotNull
     @Column(name = "PrimaryAffiliation", nullable = false)
     private Boolean primaryAffiliation;
 

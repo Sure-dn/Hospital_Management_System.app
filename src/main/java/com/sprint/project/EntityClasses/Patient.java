@@ -66,4 +66,3 @@ public class Patient {
         this.procedures = procedures;
     }
 }
-

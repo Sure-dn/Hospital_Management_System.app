@@ -5,10 +5,13 @@ import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 
+
 @Embeddable
 public class AffiliatedId implements Serializable {
 	
+	
 	 private Integer physician;
+	 
 	 private Integer department;
 	 
 	 public AffiliatedId() {}
