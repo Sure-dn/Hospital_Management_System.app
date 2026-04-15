@@ -9,7 +9,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Nurse")
-public class Nurse {
+public class NurseEntity {
 
     @Id
     @NotNull(message = "Employee ID is required")
@@ -33,9 +33,9 @@ public class Nurse {
     @Column(name = "SSN", unique = true, nullable = false)
     private Integer ssn;
 
-    public Nurse() {}
+    public NurseEntity() {}
 
-    public Nurse(Integer employeeId, String name, String position, Boolean registered, Integer ssn) {
+    public NurseEntity(Integer employeeId, String name, String position, Boolean registered, Integer ssn) {
         this.employeeId = employeeId;
         this.name = name;
         this.position = position;

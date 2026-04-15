@@ -16,7 +16,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "Room")
-public class Room {
+public class RoomEntity {
 
     @Id
     @NotNull(message = "Room number cannot be null")
@@ -39,9 +39,9 @@ public class Room {
         @JoinColumn(name = "BlockFloor", referencedColumnName = "BlockFloor"),
         @JoinColumn(name = "BlockCode", referencedColumnName = "BlockCode")
     })
-    private Block block;
+    private BlockEntity block;
 
-    public Room() {}
+    public RoomEntity() {}
 
     // Getters and Setters
 
@@ -69,11 +69,11 @@ public class Room {
         this.unavailable = unavailable;
     }
 
-    public Block getBlock() {
+    public BlockEntity getBlock() {
         return block;
     }
 
-    public void setBlock(Block block) {
+    public void setBlock(BlockEntity block) {
         this.block = block;
     }
 }

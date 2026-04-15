@@ -29,7 +29,7 @@ public class StayEntity {
     @NotNull(message = "Room cannot be null")
     @ManyToOne
     @JoinColumn(name = "Room", referencedColumnName = "RoomNumber", nullable = false)
-    private Room room;
+    private RoomEntity room;
 
     @NotNull(message = "Stay start date cannot be null")
     @Column(name = "StayStart", nullable = false)
@@ -40,7 +40,7 @@ public class StayEntity {
 
     public StayEntity() {}
 
-    public StayEntity(Integer stayId, Patient patient, Room room,
+    public StayEntity(Integer stayId, Patient patient, RoomEntity room,
                 LocalDateTime stayStart, LocalDateTime stayEnd) {
         this.stayId = stayId;
         this.patient = patient;
@@ -67,11 +67,11 @@ public class StayEntity {
         this.patient = patient;
     }
 
-    public Room getRoom() {
+    public RoomEntity getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(RoomEntity room) {
         this.room = room;
     }
 
