@@ -21,7 +21,8 @@ public class ProceduresEntity {
     @Column(name = "Name", nullable = false, length = 100)
     private String name;
 
-    @NotBlank(message = "Cost cannot be empty")
+    @NotNull(message = "Cost cannot be empty")
+    @Positive(message = "Cost must be positive")
     @Column(name = "Cost", nullable = false, length = 50)
     private Double cost;
 
