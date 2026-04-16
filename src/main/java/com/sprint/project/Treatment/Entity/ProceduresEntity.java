@@ -50,8 +50,14 @@ public class ProceduresEntity {
         return cost;
     }
 
-    public void setCost(double d) {
-        this.cost = d;
-    }
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+
+	@Override
+	public String toString() {
+		return "ProceduresEntity [code=" + code + ", name=" + name + ", cost=" + cost + "]";
+	}
+	
 }
 
