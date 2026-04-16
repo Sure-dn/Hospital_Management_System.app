@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Objects;
+
 import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
@@ -82,6 +84,25 @@ public class UndergoesEntity {
 	public String toString() {
 		return "UndergoesEntity [undergoesId=" + undergoesId + ", patient=" + patient + ", procedures=" + procedures
 				+ ", stay=" + stay + ", physician=" + physician + ", assistingNurse=" + assistingNurse + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(assistingNurse, patient, physician, procedures, stay, undergoesId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UndergoesEntity other = (UndergoesEntity) obj;
+		return Objects.equals(assistingNurse, other.assistingNurse) && Objects.equals(patient, other.patient)
+				&& Objects.equals(physician, other.physician) && Objects.equals(procedures, other.procedures)
+				&& Objects.equals(stay, other.stay) && Objects.equals(undergoesId, other.undergoesId);
 	}
     
     

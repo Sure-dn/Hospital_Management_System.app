@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
@@ -99,4 +100,24 @@ public class StayEntity {
 		return "StayEntity [stayId=" + stayId + ", patient=" + patient + ", room=" + room + ", stayStart=" + stayStart
 				+ ", stayEnd=" + stayEnd + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(patient, room, stayEnd, stayId, stayStart);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StayEntity other = (StayEntity) obj;
+		return Objects.equals(patient, other.patient) && Objects.equals(room, other.room)
+				&& Objects.equals(stayEnd, other.stayEnd) && Objects.equals(stayId, other.stayId)
+				&& Objects.equals(stayStart, other.stayStart);
+	}
+    
 }

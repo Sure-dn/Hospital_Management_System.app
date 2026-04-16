@@ -1,5 +1,7 @@
 package com.sprint.project.Treatment.Entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -57,6 +59,23 @@ public class ProceduresEntity {
 	@Override
 	public String toString() {
 		return "ProceduresEntity [code=" + code + ", name=" + name + ", cost=" + cost + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, cost, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProceduresEntity other = (ProceduresEntity) obj;
+		return Objects.equals(code, other.code) && Objects.equals(cost, other.cost) && Objects.equals(name, other.name);
 	}
 	
 }
