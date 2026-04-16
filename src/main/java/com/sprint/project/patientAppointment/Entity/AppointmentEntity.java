@@ -39,12 +39,12 @@ import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 	    private PhysicianEntity physician;
 
 	    @NotNull
-	    @Column(name = "Start", nullable = false)
-	    private LocalDateTime start;
+	    @Column(name = "Starttime", nullable = false)
+	    private LocalDateTime starttime;
 
 	    @NotNull
-	    @Column(name = "End", nullable = false)
-	    private LocalDateTime end;
+	    @Column(name = "Endtime", nullable = false)
+	    private LocalDateTime endtime;
 
 	    @NotBlank
 	    @Column(name = "ExaminationRoom", nullable = false, length = 10)
@@ -87,19 +87,19 @@ import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 	    }
 
 	    public LocalDateTime getStart() {
-	        return start;
+	        return starttime;
 	    }
 
 	    public void setStart(LocalDateTime start) {
-	        this.start = start;
+	        this.starttime = start;
 	    }
 
 	    public LocalDateTime getEnd() {
-	        return end;
+	        return endtime;
 	    }
 
 	    public void setEnd(LocalDateTime end) {
-	        this.end = end;
+	        this.endtime = end;
 	    }
 
 	    public String getExaminationRoom() {
