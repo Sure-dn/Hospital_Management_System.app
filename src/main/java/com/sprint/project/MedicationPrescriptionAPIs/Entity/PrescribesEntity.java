@@ -56,9 +56,15 @@ public class PrescribesEntity {
 
     public PrescribesEntity() {}
 
-    // Getters and Setters
+	@Override
+	public String toString() {
+		return "PrescribesEntity [physician=" + physician + ", patient=" + patient + ", medication=" + medication
+				+ ", date=" + date + ", appointment=" + appointment + ", dose=" + dose + "]";
+	}
+    
+	// Getters and Setters
 
-    public PhysicianEntity getPhysician() {
+	public PhysicianEntity getPhysician() {
         return physician;
     }
 

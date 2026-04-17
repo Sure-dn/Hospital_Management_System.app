@@ -21,10 +21,18 @@ public class PrescribesId implements Serializable {
         this.medication = medication;
         this.date = date;
     }
+    
+    @Override
+   	public String toString() {
+   		return "PrescribesId [physician=" + physician + ", patient=" + patient + ", medication=" + medication
+   				+ ", date=" + date + "]";
+   	}
 
     // Getters and Setters
 
-    public Integer getPhysician() {
+   
+
+	public Integer getPhysician() {
         return physician;
     }
 

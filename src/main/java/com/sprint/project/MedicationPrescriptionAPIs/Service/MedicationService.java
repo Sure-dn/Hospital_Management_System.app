@@ -1,4 +1,4 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Service.Interfaces;
+package com.sprint.project.MedicationPrescriptionAPIs.Service;
 
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
 import java.util.List;
