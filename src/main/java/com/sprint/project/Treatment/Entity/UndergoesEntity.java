@@ -77,4 +77,12 @@ public class UndergoesEntity {
 
     public NurseEntity getAssistingNurse() { return assistingNurse; }
     public void setAssistingNurse(NurseEntity assistingNurse) { this.assistingNurse = assistingNurse; }
+
+	@Override
+	public String toString() {
+		return "UndergoesEntity [undergoesId=" + undergoesId + ", patient=" + patient + ", procedures=" + procedures
+				+ ", stay=" + stay + ", physician=" + physician + ", assistingNurse=" + assistingNurse + "]";
+	}
+    
+    
 }

@@ -1,5 +1,6 @@
 package com.sprint.project.physicianDepartmentManagement.Entity;
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -86,6 +87,33 @@ public class PhysicianEntity {
 	    public void setAffiliations(List<AffiliatedWithEntity> affiliations) {
 	        this.affiliations = affiliations;
 	    }
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(affiliations, departments, employeeId, name, position, ssn);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			PhysicianEntity other = (PhysicianEntity) obj;
+			return Objects.equals(affiliations, other.affiliations) && Objects.equals(departments, other.departments)
+					&& Objects.equals(employeeId, other.employeeId) && Objects.equals(name, other.name)
+					&& Objects.equals(position, other.position) && Objects.equals(ssn, other.ssn);
+		}
+
+		@Override
+		public String toString() {
+			return "PhysicianEntity [employeeId=" + employeeId + ", name=" + name + ", position=" + position + ", ssn="
+					+ ssn + ", departments=" + departments + ", affiliations=" + affiliations + "]";
+		}
+		
+	    
 	
 
 }

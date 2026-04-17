@@ -74,7 +74,7 @@ public class StayEntity {
         return room;
     }
 
-    public void setRoom(RoomEntity room) {
+	public void setRoom(RoomEntity room) {
         this.room = room;
     }
 
@@ -93,4 +93,11 @@ public class StayEntity {
     public void setStayEnd(LocalDateTime stayEnd) {
         this.stayEnd = stayEnd;
     }
+    
+    @Override
+	public String toString() {
+		return "StayEntity [stayId=" + stayId + ", patient=" + patient + ", room=" + room + ", stayStart=" + stayStart
+				+ ", stayEnd=" + stayEnd + "]";
+	}
+    
 }
