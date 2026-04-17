@@ -19,5 +19,9 @@ public interface TrainedInRepository  extends JpaRepository<TrainedInEntity, Tra
            "AND t.certificationExpiry > :currentDate")
     List<TrainedInEntity> findValidTrainingsByPhysicianId(
             Integer employeeId, LocalDate currentDate);
+    //new custom query for expiredtraining
+    @Query("SELECT t FROM TrainedInEntity t " +
+            "WHERE t.certificationExpiry <= :currentDate")
+     List<TrainedInEntity> findExpiredTrainings(LocalDate currentDate);
 
 }

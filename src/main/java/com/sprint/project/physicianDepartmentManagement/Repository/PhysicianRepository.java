@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
 public interface PhysicianRepository extends JpaRepository<PhysicianEntity, Integer> {
-	 boolean existsBySsn(String ssn);
+	boolean existsBySsn(Integer ssn);
 
-	    boolean existsBySsnAndEmployeeIdNot(String ssn, Integer employeeId);
+    boolean existsBySsnAndEmployeeIdNot(Integer ssn, Integer employeeId);
 
 }

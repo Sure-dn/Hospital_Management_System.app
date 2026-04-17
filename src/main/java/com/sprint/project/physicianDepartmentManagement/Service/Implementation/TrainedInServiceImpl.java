@@ -2,72 +2,121 @@ package com.sprint.project.physicianDepartmentManagement.Service.Implementation;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.TrainedInEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.TrainedInId;
-import com.sprint.project.physicianDepartmentManagement.Exception.DuplicateResourceException;
-import com.sprint.project.physicianDepartmentManagement.Exception.InvalidOperationException;
-import com.sprint.project.physicianDepartmentManagement.Exception.ResourceNotFoundException;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
-import com.sprint.project.physicianDepartmentManagement.Repository.TrainedInRepository;
+import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.TrainedInRequestDto;
+import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.TrainedInResponseDto;
+import com.sprint.project.physicianDepartmentManagement.Entity.*;
+import com.sprint.project.physicianDepartmentManagement.Repository.*;
 import com.sprint.project.physicianDepartmentManagement.Service.TrainedInService;
+import com.sprint.project.Treatment.Entity.ProceduresEntity;
+import com.sprint.project.Treatment.Repository.ProceduresRepository;
+import com.sprint.project.exception.DuplicateResourceException;
+import com.sprint.project.exception.ResourceNotFoundException;
+import com.sprint.project.exception.ValidationException;
 
-@Service
-public class TrainedInServiceImpl implements TrainedInService {
+	@Service
+	public class TrainedInServiceImpl implements TrainedInService {
 
-    private final TrainedInRepository trainedInRepository;
-    private final PhysicianRepository physicianRepository;
+	    private final TrainedInRepository trainedInRepository;
+	    private final PhysicianRepository physicianRepository;
+	    private final ProceduresRepository proceduresRepository;
 
-    public TrainedInServiceImpl(TrainedInRepository trainedInRepository,
-                                 PhysicianRepository physicianRepository) {
-        this.trainedInRepository = trainedInRepository;
-        this.physicianRepository = physicianRepository;
-    }
+	    public TrainedInServiceImpl(TrainedInRepository trainedInRepository,
+	                                PhysicianRepository physicianRepository,
+	                                ProceduresRepository proceduresRepository) {
+	        this.trainedInRepository = trainedInRepository;
+	        this.physicianRepository = physicianRepository;
+	        this.proceduresRepository = proceduresRepository;
+	    }
 
-    @Override
-    public TrainedInEntity addTraining(Integer physicianId, TrainedInEntity training) {
-        // Validate physician exists
-        PhysicianEntity physician = physicianRepository.findById(physicianId)
-            .orElseThrow(() -> new ResourceNotFoundException("Physician", "EmployeeID", physicianId));
+	   
 
-        Integer treatmentCode = training.getTreatment().getCode();
-        TrainedInId trainedInId = new TrainedInId(physicianId, treatmentCode);
+	    @Override
+	    public List<TrainedInResponseDto> getAllTrainings() {
+	        return trainedInRepository.findAll()
+	                .stream()
+	                .map(this::mapToResponse)
+	                .collect(Collectors.toList());
+	    }
 
-        // Business Rule: No duplicate training record for same physician + procedure
-        if (trainedInRepository.existsById(trainedInId)) {
-            throw new DuplicateResourceException("Training",
-                "PhysicianID + TreatmentCode", physicianId + "+" + treatmentCode);
-        }
+	    @Override
+	    public TrainedInResponseDto getTrainingById(TrainedInId id) {
+	        TrainedInEntity entity = trainedInRepository.findById(id)
+	                .orElseThrow(() -> new ResourceNotFoundException("Training not found"));
 
-        // Business Rule: Certification expiry must be a future date
-        if (training.getCertificationExpiry() != null
-            && !training.getCertificationExpiry().isAfter(LocalDate.now())) {
-            throw new InvalidOperationException(
-                "CertificationExpiry must be a future date. Provided: " + training.getCertificationExpiry()
-            );
-        }
+	        return mapToResponse(entity);
+	    }
 
-        training.setTrainedInId(trainedInId);
-        training.setPhysician(physician);
-        return trainedInRepository.save(training);
-    }
+	    @Override
+	    public TrainedInResponseDto updateTraining(TrainedInId id, TrainedInRequestDto requestDTO) {
 
-    @Override
-    public List<TrainedInEntity> getTrainingsByPhysician(Integer physicianId) {
-        if (!physicianRepository.existsById(physicianId)) {
-            throw new ResourceNotFoundException("Physician", "EmployeeID", physicianId);
-        }
-        return trainedInRepository.findByPhysician_EmployeeId(physicianId);
-    }
+	        TrainedInEntity entity = trainedInRepository.findById(id)
+	                .orElseThrow(() -> new ResourceNotFoundException("Training not found"));
 
-    @Override
-    public List<TrainedInEntity> getValidTrainingsByPhysician(Integer physicianId) {
-        if (!physicianRepository.existsById(physicianId)) {
-            throw new ResourceNotFoundException("Physician", "EmployeeID", physicianId);
-        }
-        return trainedInRepository.findValidTrainingsByPhysicianId(physicianId, LocalDate.now());
-    }
-}
+	        if (requestDTO.getCertificationExpiry().isBefore(LocalDate.now())) {
+	            throw new ValidationException("Expiry must be future date");
+	        }
+
+	        entity.setCertificationExpiry(requestDTO.getCertificationExpiry());
+
+	        return mapToResponse(trainedInRepository.save(entity));
+	    }
+
+	    @Override
+	    public void deleteTraining(TrainedInId id) {
+
+	        if (!trainedInRepository.existsById(id)) {
+	            throw new ResourceNotFoundException("Training not found");
+	        }
+
+	        trainedInRepository.deleteById(id);
+	    }
+
+	    private TrainedInResponseDto mapToResponse(TrainedInEntity entity) {
+
+	        return new TrainedInResponseDto(
+	                entity.getPhysician().getEmployeeId(),
+	                entity.getPhysician().getName(),
+	                entity.getTreatment().getCode(),
+	                entity.getTreatment().getName(),
+	                entity.getCertificationExpiry(),
+	                entity.getCertificationExpiry().isAfter(LocalDate.now())
+	        );
+	    }
+
+
+
+		@Override
+		public TrainedInResponseDto createTraining(TrainedInRequestDto requestDTO) {
+			// TODO Auto-generated method stub
+			 Integer physicianId = requestDTO.getPhysicianId();
+		        Integer treatmentCode = requestDTO.getTreatmentCode();
+
+		        PhysicianEntity physician = physicianRepository.findById(physicianId)
+		                .orElseThrow(() -> new ResourceNotFoundException("Physician not found: " + physicianId));
+
+		        ProceduresEntity procedure = proceduresRepository.findById(treatmentCode)
+		                .orElseThrow(() -> new ResourceNotFoundException("Procedure not found: " + treatmentCode));
+
+		        TrainedInId id = new TrainedInId(physicianId, treatmentCode);
+
+		        if (trainedInRepository.existsById(id)) {
+		            throw new DuplicateResourceException("Training already exists");
+		        }
+
+		        if (requestDTO.getCertificationExpiry().isBefore(LocalDate.now())) {
+		            throw new ValidationException("Expiry must be future date");
+		        }
+
+		        TrainedInEntity entity = new TrainedInEntity();
+		        entity.setTrainedInId(id);
+		        entity.setPhysician(physician);
+		        entity.setTreatment(procedure);
+		        entity.setCertificationExpiry(requestDTO.getCertificationExpiry());
+
+		        return mapToResponse(trainedInRepository.save(entity));
+		}
+	}
