@@ -13,6 +13,17 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<PatientEntity, Integer> {
 
 	    Optional<PatientEntity> findBySsn(Integer ssn);
-
-public interface PatientRepository extends JpaRepository<PatientEntity, Integer> {
+	    boolean existsBySsn(Integer ssn);
+	    
+	    List<PatientEntity> findsByPcp(Integer pcpPhysicianId);
+	    
+	    List<PatientEntity> findsByNameContainingIgnoreCase(String name);
+	    
+	    @Query("SELECT p FROM PatientEntity p WHERE p.pcp= :physicianId")
+	    List<PatientEntity> findPatientsByPcp(@Param("physicianId") Integer physicianId);
+	    
+	    @Modifying
+	    @Query("UPDATE PatientEntity p SET p.pcp= :newPcpId WHERE p.ssn = :ssn")
+	    int updatePcp(@Param("ssn") Integer ssn, @Param("newPcpId") Integer newPcpId);
+}
 
