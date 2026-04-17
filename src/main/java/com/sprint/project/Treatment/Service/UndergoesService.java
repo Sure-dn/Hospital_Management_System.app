@@ -10,5 +10,5 @@ public interface UndergoesService {
 	public List<UndergoesEntity> getAllTreatments();
 	public List<UndergoesEntity> getTreatmentByPatient(Integer patientId);
 	public List<UndergoesEntity> getTreatmentByStay(Integer stayId);
-	void deleteTreatment(UndergoesId id);
+	UndergoesEntity deleteTreatment(UndergoesId id);
 }
