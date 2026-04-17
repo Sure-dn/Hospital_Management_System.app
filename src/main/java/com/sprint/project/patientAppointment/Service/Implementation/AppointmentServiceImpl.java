@@ -75,7 +75,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return entity;
     }
 
-    // ================= ENTITY → DTO =================
     private AppointmentResponseDTO toDTO(AppointmentEntity entity) {
 
         AppointmentResponseDTO dto = new AppointmentResponseDTO();
