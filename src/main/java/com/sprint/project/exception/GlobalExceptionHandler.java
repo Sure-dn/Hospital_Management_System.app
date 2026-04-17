@@ -27,4 +27,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Something went wrong: " + ex.getMessage(),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<String> handleInvalid(InvalidRequestException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 } 

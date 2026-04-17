@@ -1,24 +1,33 @@
 package com.sprint.project.patientAppointment.Service;
 
-import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.DTO.RequestDTO.AppointmentRequestDTO;
+import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponseDTO;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface AppointmentService {
 
-    AppointmentEntity createAppointment(AppointmentEntity appointment);
+	// CREATE
+    AppointmentResponseDTO createAppointment(AppointmentRequestDTO dto);
 
-    AppointmentEntity getAppointmentById(Integer id);
+    //  GET ONE
+    AppointmentResponseDTO getAppointmentById(Integer id);
 
-    List<AppointmentEntity> getAllAppointments();
+    // GET ALL
+    List<AppointmentResponseDTO> getAllAppointments();
 
-    AppointmentEntity updateAppointment(Integer id, AppointmentEntity appointment);
+    //  UPDATE
+    AppointmentResponseDTO updateAppointment(Integer id, AppointmentRequestDTO dto);
 
+    // DELETE
     void deleteAppointment(Integer id);
 
-    List<AppointmentEntity> getAppointmentsByPatient(Integer ssn);
+    //  GET BY PATIENT
+    List<AppointmentResponseDTO> getAppointmentsByPatient(Integer ssn);
 
-    List<AppointmentEntity> getAppointmentsByPhysician(Integer physicianId);
+    //  GET BY PHYSICIAN
+    List<AppointmentResponseDTO> getAppointmentsByPhysician(Integer physicianId);
 
-    List<AppointmentEntity> getAppointmentsByDate(LocalDate date);
+    // GET BY DATE
+    List<AppointmentResponseDTO> getAppointmentsByDate(LocalDate date);
 }
