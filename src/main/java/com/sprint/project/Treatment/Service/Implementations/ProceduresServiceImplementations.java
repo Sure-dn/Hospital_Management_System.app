@@ -58,4 +58,23 @@ public class ProceduresServiceImplementations implements ProceduresService{
 		
 		proceduresRepository.deleteById(code);
 	}
+	@Override
+	public List<ProceduresEntity> searchByName(String name) {
+	    return proceduresRepository.findByNameContainingIgnoreCase(name);
+	}
+
+	@Override
+	public List<ProceduresEntity> getByCostRange(Double min, Double max) {
+	    return proceduresRepository.findByCostBetween(min, max);
+	}
+
+	@Override
+	public List<ProceduresEntity> getExpensiveProcedures(Double cost) {
+	    return proceduresRepository.getExpensiveProcedures(cost);
+	}
+
+	@Override
+	public List<ProceduresEntity> sortByCost() {
+	    return proceduresRepository.findAllByOrderByCostAsc();
+	}
 }

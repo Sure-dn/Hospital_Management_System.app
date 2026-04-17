@@ -99,4 +99,5 @@ public class StayEntity {
 		return "StayEntity [stayId=" + stayId + ", patient=" + patient + ", room=" + room + ", stayStart=" + stayStart
 				+ ", stayEnd=" + stayEnd + "]";
 	}
+    
 }
