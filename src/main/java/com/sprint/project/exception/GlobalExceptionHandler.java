@@ -4,22 +4,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.sprint.project.Treatment.DTO.ResponseStructure;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
+	 @ExceptionHandler(ResourceNotFoundException.class)
+	    public ResponseEntity<?> handleNotFound(ResourceNotFoundException ex) {
+	        return ResponseEntity.status(404)
+	                .body(new ResponseStructure<>(false, ex.getMessage(), null));
+	    }
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<String> handleDuplicate(DuplicateResourceException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<String> handleBadRequest(BadRequestException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> handleBadRequest(BadRequestException ex) {
+        return ResponseEntity.status(400)
+                .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
     @ExceptionHandler(Exception.class)

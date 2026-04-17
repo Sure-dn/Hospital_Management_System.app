@@ -46,10 +46,10 @@ public class ProceduresController {
         return ResponseEntity.ok(new ResponseStructure<>(true, "Procedure added", response));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> getById(@PathVariable Integer id) {
+    @GetMapping("/{code}")
+    public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> getById(@PathVariable Integer code) {
 
-        ProceduresEntity p = proceduresService.getProcedureById(id);
+        ProceduresEntity p = proceduresService.getProcedureById(code);
 
         ProceduresResponseDTO response =
                 new ProceduresResponseDTO(p.getCode(), p.getName(), p.getCost());
@@ -65,9 +65,15 @@ public class ProceduresController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ResponseStructure<String>> delete(@PathVariable Integer id) {
-        proceduresService.deleteProcedure(id);
-        return ResponseEntity.ok(new ResponseStructure<>(true, "Deleted", null));
+    public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> delete(@PathVariable Integer id) {
+
+        ProceduresEntity deleted = proceduresService.deleteProcedure(id);
+
+        ProceduresResponseDTO response =
+                new ProceduresResponseDTO(deleted.getCode(), deleted.getName(), deleted.getCost());
+
+        return ResponseEntity.ok(
+                new ResponseStructure<>(true, "Deleted successfully", response));
     }
  // 🔍 Search by name
     @GetMapping("/search")

@@ -51,12 +51,10 @@ public class ProceduresServiceImplementations implements ProceduresService{
 		
 	}
 	
-	public void deleteProcedure(Integer code) {
-		if(!proceduresRepository.existsById(code)) {
-			throw new RuntimeException("Cannot delete, procedure not found");
-		}
-		
-		proceduresRepository.deleteById(code);
+	public ProceduresEntity deleteProcedure(Integer code) {
+	    ProceduresEntity existing = getProcedureById(code);
+	    proceduresRepository.delete(existing);
+	    return existing;
 	}
 	@Override
 	public List<ProceduresEntity> searchByName(String name) {

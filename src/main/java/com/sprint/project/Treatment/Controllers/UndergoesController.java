@@ -48,8 +48,11 @@ public class UndergoesController {
     }
 
     @DeleteMapping
-    public ResponseEntity<ResponseStructure<String>> delete(@RequestBody UndergoesId id) {
-        undergoesService.deleteTreatment(id);
-        return ResponseEntity.ok(new ResponseStructure<>(true, "Deleted", null));
+    public ResponseEntity<ResponseStructure<UndergoesEntity>> delete(@RequestBody UndergoesId id) {
+
+        UndergoesEntity deleted = undergoesService.deleteTreatment(id);
+
+        return ResponseEntity.ok(
+                new ResponseStructure<>(true, "Deleted", deleted));
     }
 }

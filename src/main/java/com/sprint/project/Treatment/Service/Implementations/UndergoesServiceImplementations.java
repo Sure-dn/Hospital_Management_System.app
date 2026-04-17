@@ -56,11 +56,13 @@ public class UndergoesServiceImplementations implements UndergoesService{
 	}
 	
 	@Override
-	public void deleteTreatment(UndergoesId id) {
-		if(!undergoesRepository.existsById(id)) {
-			throw new RuntimeException("Treatment not found");
-		}
-		
-		undergoesRepository.deleteById(id);
+	public UndergoesEntity deleteTreatment(UndergoesId id) {
+
+	    UndergoesEntity existing = undergoesRepository.findById(id)
+	            .orElseThrow(() -> new RuntimeException("Treatment not found"));
+
+	    undergoesRepository.delete(existing);
+
+	    return existing;
 	}
 }

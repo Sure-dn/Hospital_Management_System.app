@@ -2,14 +2,11 @@ package com.sprint.project.Treatment.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sprint.project.Treatment.DTO.ResponseStructure;
+import com.sprint.project.Treatment.DTO.StayRequestDTO;
+import com.sprint.project.Treatment.DTO.StayResponseDTO;
 import com.sprint.project.Treatment.Entity.StayEntity;
 import com.sprint.project.Treatment.Service.StayService;
 
@@ -21,23 +18,54 @@ public class StayController {
     private StayService stayService;
 
     @PostMapping
-    public ResponseEntity<ResponseStructure<StayEntity>> admit(@RequestBody StayEntity stay) {
+    public ResponseEntity<ResponseStructure<StayResponseDTO>> admit(
+            @RequestBody StayRequestDTO dto) {
+
+        StayEntity saved = stayService.admitPatient(dto);
+
+        StayResponseDTO response = new StayResponseDTO(
+                saved.getStayId(),
+                saved.getPatient().getSsn(),
+                saved.getRoom().getRoomNumber(),
+                saved.getStayStart(),
+                saved.getStayEnd()
+        );
+
         return ResponseEntity.ok(
-                new ResponseStructure<>(true, "Patient admitted",
-                        stayService.admitPatient(stay)));
+                new ResponseStructure<>(true, "Patient admitted", response));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseStructure<StayEntity>> get(@PathVariable Integer id) {
+    public ResponseEntity<ResponseStructure<StayResponseDTO>> get(@PathVariable Integer id) {
+
+        StayEntity stay = stayService.getStayById(id);
+
+        StayResponseDTO response = new StayResponseDTO(
+                stay.getStayId(),
+                stay.getPatient().getSsn(),
+                stay.getRoom().getRoomNumber(),
+                stay.getStayStart(),
+                stay.getStayEnd()
+        );
+
         return ResponseEntity.ok(
-                new ResponseStructure<>(true, "Success",
-                        stayService.getStayById(id)));
+                new ResponseStructure<>(true, "Success", response));
     }
 
     @PostMapping("/discharge/{id}")
-    public ResponseEntity<ResponseStructure<StayEntity>> discharge(@PathVariable Integer id) {
+    public ResponseEntity<ResponseStructure<StayResponseDTO>> discharge(@PathVariable Integer id) {
+
+        StayEntity stay = stayService.dischargePatient(id);
+
+        StayResponseDTO response = new StayResponseDTO(
+                stay.getStayId(),
+                stay.getPatient().getSsn(),
+                stay.getRoom().getRoomNumber(),
+                stay.getStayStart(),
+                stay.getStayEnd()
+        );
+
         return ResponseEntity.ok(
-                new ResponseStructure<>(true, "Discharged",
-                        stayService.dischargePatient(id)));
+                new ResponseStructure<>(true, "Discharged", response));
     }
 }
