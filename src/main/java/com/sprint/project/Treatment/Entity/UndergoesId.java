@@ -73,6 +73,12 @@ public class UndergoesId implements Serializable {
     }
 
     @Override
+	public String toString() {
+		return "UndergoesId [patient=" + patient + ", procedures=" + procedures + ", stay=" + stay + ", dateUndergoes="
+				+ dateUndergoes + "]";
+	}
+
+	@Override
     public int hashCode() {
         return Objects.hash(patient, procedures, stay, dateUndergoes);
     }

@@ -67,5 +67,6 @@ public class DepartmentEntity {
 	    public void setAffiliations(List<AffiliatedWithEntity> affiliations) {
 	        this.affiliations = affiliations;
 	    }
+	    
 
 }

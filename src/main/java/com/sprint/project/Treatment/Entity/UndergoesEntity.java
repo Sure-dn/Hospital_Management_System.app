@@ -46,13 +46,13 @@ public class UndergoesEntity {
 
     public UndergoesEntity(UndergoesId undergoesId,
                            PatientEntity patient,
-                           ProceduresEntity procedures,
+                           ProceduresEntity procedure,
                            StayEntity stay,
                            PhysicianEntity physician,
                            NurseEntity assistingNurse) {
         this.undergoesId = undergoesId;
         this.patient = patient;
-        this.procedures = procedures;
+        this.procedures = procedure;
         this.stay = stay;
         this.physician = physician;
         this.assistingNurse = assistingNurse;
@@ -77,4 +77,12 @@ public class UndergoesEntity {
 
     public NurseEntity getAssistingNurse() { return assistingNurse; }
     public void setAssistingNurse(NurseEntity assistingNurse) { this.assistingNurse = assistingNurse; }
+
+	@Override
+	public String toString() {
+		return "UndergoesEntity [undergoesId=" + undergoesId + ", patient=" + patient + ", procedures=" + procedures
+				+ ", stay=" + stay + ", physician=" + physician + ", assistingNurse=" + assistingNurse + "]";
+	}
+    
+    
 }
