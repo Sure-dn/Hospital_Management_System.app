@@ -75,6 +75,15 @@ public class TrainedInEntity {
 	    public void setCertificationExpiry(LocalDate certificationExpiry) {
 	        this.certificationExpiry = certificationExpiry;
 	    }
+
+		@Override
+		public String toString() {
+			return "TrainedInEntity [trainedInId=" + trainedInId + ", physician=" + physician + ", treatment="
+					+ treatment + ", certificationExpiry=" + certificationExpiry + "]";
+		}
+		
+		
+	    
 	
 
 }
