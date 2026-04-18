@@ -14,10 +14,12 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.BlockEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
-import com.sprint.project.Treatment.Entity.*;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
+import com.sprint.project.Treatment.Entity.ProceduresEntity;
+import com.sprint.project.Treatment.Entity.StayEntity;
+import com.sprint.project.Treatment.Entity.UndergoesEntity;
+import com.sprint.project.Treatment.Entity.UndergoesId;
 import com.sprint.project.Treatment.Repository.UndergoesRepository;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;

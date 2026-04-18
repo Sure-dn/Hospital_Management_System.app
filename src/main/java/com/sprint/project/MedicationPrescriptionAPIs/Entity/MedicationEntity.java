@@ -29,26 +29,20 @@ public class MedicationEntity {
     private String description;
 
     public MedicationEntity() {}
-    
-    
-    public MedicationEntity(@NotNull Integer code, @NotBlank String name, @NotBlank String brand,
-			                    @NotBlank String description) {
-		this.code = code;
-		this.name = name;
-		this.brand = brand;
-		this.description = description;
-	}
 
-	@Override
-	public String toString() {
-		return "MedicationEntity [code=" + code + ", name=" + name + ", brand=" + brand + ", description=" + description
-				+ "]";
-	}
+    @Override
+    public String toString() {
+        return "MedicationEntity{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+// Getters and Setters
 
-    
-    // Getters and Setters
+    public Integer getCode() {
 
-	public Integer getCode() {
         return code;
     }
 

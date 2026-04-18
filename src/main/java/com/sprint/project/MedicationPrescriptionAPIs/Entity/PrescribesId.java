@@ -28,7 +28,15 @@ public class PrescribesId implements Serializable {
    				+ ", date=" + date + "]";
    	}
 
-    // Getters and Setters
+    @Override
+    public String toString() {
+        return "PrescribesId{" +
+                "physician=" + physician +
+                ", patient=" + patient +
+                ", medication=" + medication +
+                ", date=" + date +
+                '}';
+    }
 
    
 

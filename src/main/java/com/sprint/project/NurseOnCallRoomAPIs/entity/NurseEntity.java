@@ -1,4 +1,4 @@
-package com.sprint.project.NurseOnCallRoomAPIs.Entity;
+package com.sprint.project.NurseOnCallRoomAPIs.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -35,6 +35,19 @@ public class NurseEntity {
 
     public NurseEntity() {}
 
+
+
+    @Override
+    public String toString() {
+        return "NurseEntity{" +
+                "employeeId=" + employeeId +
+                ", name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                ", registered=" + registered +
+                ", ssn=" + ssn +
+                '}';
+    }
+
     public NurseEntity(Integer employeeId, String name, String position, Boolean registered, Integer ssn) {
         this.employeeId = employeeId;
         this.name = name;
@@ -43,7 +56,8 @@ public class NurseEntity {
         this.ssn = ssn;
     }
 
-    // Getters and Setters
+
+// Getters and Setters
 
     public Integer getEmployeeId() {
         return employeeId;
