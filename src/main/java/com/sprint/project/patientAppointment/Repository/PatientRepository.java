@@ -15,9 +15,9 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Integer>
 	    Optional<PatientEntity> findBySsn(Integer ssn);
 	    boolean existsBySsn(Integer ssn);
 	    
-	    List<PatientEntity> findsByPcp(Integer pcpPhysicianId);
+	    List<PatientEntity> findByPcp(Integer pcpPhysicianId);
 	    
-	    List<PatientEntity> findsByNameContainingIgnoreCase(String name);
+	    List<PatientEntity> findByNameContainingIgnoreCase(String name);
 	    
 	    @Query("SELECT p FROM PatientEntity p WHERE p.pcp= :physicianId")
 	    List<PatientEntity> findPatientsByPcp(@Param("physicianId") Integer physicianId);

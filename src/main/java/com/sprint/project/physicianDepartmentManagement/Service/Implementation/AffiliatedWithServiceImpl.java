@@ -63,7 +63,7 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
         if (Boolean.TRUE.equals(requestDto.getPrimaryAffiliation())) {
 
             List<AffiliatedWithEntity> existing =
-                    affiliatedWithRepository.findByPhysicianEmployeeID(physicianId);
+                    affiliatedWithRepository.findByPhysicianEmployeeId(physicianId);
 
             boolean alreadyPrimary = existing.stream()
                     .anyMatch(AffiliatedWithEntity::getPrimaryAffiliation);
@@ -98,7 +98,7 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
         		);
         }
 
-        return affiliatedWithRepository.findByPhysicianEmployeeID(physicianId)
+        return affiliatedWithRepository.findByPhysicianEmployeeId(physicianId)
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());

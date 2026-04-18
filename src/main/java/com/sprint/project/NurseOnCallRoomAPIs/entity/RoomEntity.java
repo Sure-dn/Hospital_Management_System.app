@@ -9,7 +9,7 @@ public class RoomEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_number")   // ✅ IMPORTANT FIX
+    @Column(name = "RoomNumber")   // ✅ IMPORTANT FIX
     private Integer roomNumber;
 
     @NotBlank(message = "Room type cannot be blank")
