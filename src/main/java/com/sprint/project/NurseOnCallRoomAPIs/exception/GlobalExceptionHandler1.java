@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler1 {
 
     // ── 404 Not Found ──────────────────────────────────────────────────────────
     @ExceptionHandler(ResourceNotFoundException.class)
