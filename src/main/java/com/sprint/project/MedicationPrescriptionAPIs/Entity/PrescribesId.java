@@ -22,11 +22,7 @@ public class PrescribesId implements Serializable {
         this.date = date;
     }
     
-    @Override
-   	public String toString() {
-   		return "PrescribesId [physician=" + physician + ", patient=" + patient + ", medication=" + medication
-   				+ ", date=" + date + "]";
-   	}
+
 
     @Override
     public String toString() {
