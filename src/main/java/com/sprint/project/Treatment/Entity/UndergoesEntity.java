@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
+import com.sprint.project.Treatment.DTO.ProceduresRequestDTO;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
@@ -46,13 +47,13 @@ public class UndergoesEntity {
 
     public UndergoesEntity(UndergoesId undergoesId,
                            PatientEntity patient,
-                           ProceduresEntity procedures,
+                           ProceduresEntity procedure,
                            StayEntity stay,
                            PhysicianEntity physician,
                            NurseEntity assistingNurse) {
         this.undergoesId = undergoesId;
         this.patient = patient;
-        this.procedures = procedures;
+        this.procedures = procedure;
         this.stay = stay;
         this.physician = physician;
         this.assistingNurse = assistingNurse;

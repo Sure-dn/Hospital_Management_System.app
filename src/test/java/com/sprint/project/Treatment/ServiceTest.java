@@ -1,4 +1,5 @@
 package com.sprint.project.Treatment;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -13,6 +14,9 @@ import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.Repository.NurseRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.Repository.RoomRepository;
+import com.sprint.project.Treatment.DTO.ProceduresRequestDTO;
+import com.sprint.project.Treatment.DTO.StayRequestDTO;
+import com.sprint.project.Treatment.DTO.UndergoesRequestDTO;
 import com.sprint.project.Treatment.Entity.*;
 import com.sprint.project.Treatment.Repository.ProceduresRepository;
 import com.sprint.project.Treatment.Repository.StayRepository;
@@ -25,19 +29,26 @@ import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepo
 
 @SpringBootTest
 public class ServiceTest {
-	@Autowired
-	private PatientRepository patientRepository;
-	@Autowired
-	private RoomRepository roomRepository;
-	@Autowired
-	private ProceduresRepository proceduresRepository;
-	@Autowired
-	private StayRepository stayRepository;
-	@Autowired
-	private PhysicianRepository physicianRepository;
-	@Autowired
-	private NurseRepository nurseRepository;
-	@Autowired
+
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    @Autowired
+    private ProceduresRepository proceduresRepository;
+
+    @Autowired
+    private StayRepository stayRepository;
+
+    @Autowired
+    private PhysicianRepository physicianRepository;
+
+    @Autowired
+    private NurseRepository nurseRepository;
+
+    @Autowired
     private ProceduresService proceduresService;
 
     @Autowired
@@ -53,20 +64,21 @@ public class ServiceTest {
     @Test
     void testAddProcedure_Success() {
 
-        ProceduresEntity p = new ProceduresEntity();
-        p.setCode(9999);  // ✅ NEW UNIQUE VALUE
-        p.setName("Test Procedure");
-        p.setCost(500.0);
+        ProceduresRequestDTO p = new ProceduresRequestDTO();
+        p.setCode(111);
+        p.setName("Test Procedure today");
+        p.setCost(500111.0);
 
-        ProceduresEntity saved = proceduresService.addProcedure(p);
+        ProceduresRequestDTO saved = proceduresService.addProcedure(p);
 
         assertThat(saved).isNotNull();
     }
 
     @Test
     void testAddProcedure_Duplicate() {
-        ProceduresEntity p = new ProceduresEntity();
-        p.setCode(1); // already exists in DB
+
+        ProceduresRequestDTO p = new ProceduresRequestDTO();
+        p.setCode(1); // already exists
 
         assertThrows(DuplicateResourceException.class, () -> {
             proceduresService.addProcedure(p);
@@ -82,7 +94,7 @@ public class ServiceTest {
 
     @Test
     void testGetAllProcedures() {
-        List<ProceduresEntity> list = proceduresService.getAllProcedures();
+        List<ProceduresRequestDTO> list = proceduresService.getAllProcedures();
         assertThat(list).isNotEmpty();
     }
 
@@ -93,11 +105,9 @@ public class ServiceTest {
     @Test
     void testAdmitPatient_InvalidDate() {
 
-        StayEntity stay = new StayEntity();
+        StayRequestDTO stay = new StayRequestDTO();
         stay.setStayId(999);
-
-        // future date → invalid
-        stay.setStayStart(LocalDateTime.now().plusDays(1));
+        stay.setStayStart(LocalDateTime.now().plusDays(1)); // future date
 
         assertThrows(BadRequestException.class, () -> {
             stayService.admitPatient(stay);
@@ -124,10 +134,10 @@ public class ServiceTest {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No room found"));
 
-        StayEntity stay = new StayEntity();
+        StayRequestDTO stay = new StayRequestDTO();
         stay.setStayId(999);
-        stay.setPatient(patient);
-        stay.setRoom(room);
+        stay.setPatientId(patient.getSsn());
+        stay.setRoomId(room.getRoomNumber());
         stay.setStayStart(LocalDateTime.now());
 
         stayService.admitPatient(stay);
@@ -144,56 +154,45 @@ public class ServiceTest {
     @Test
     void testGetAllTreatments() {
 
-        // ✅ Get existing entities
         PatientEntity patient = patientRepository.findAll()
-                .stream().findFirst()
-                .orElseThrow();
+                .stream().findFirst().orElseThrow();
 
         ProceduresEntity procedure = proceduresRepository.findAll()
-                .stream().findFirst()
-                .orElseThrow();
+                .stream().findFirst().orElseThrow();
 
         StayEntity stay = stayRepository.findAll()
-                .stream().findFirst()
-                .orElseThrow();
+                .stream().findFirst().orElseThrow();
 
         PhysicianEntity physician = physicianRepository.findAll()
-                .stream().findFirst()
-                .orElseThrow();
+                .stream().findFirst().orElseThrow();
 
         NurseEntity nurse = nurseRepository.findAll()
-                .stream().findFirst()
-                .orElseThrow();
+                .stream().findFirst().orElseThrow();
 
-        // ✅ Create Undergoes
-        UndergoesId id = new UndergoesId(
-                patient.getSsn(),
-                procedure.getCode(),
-                stay.getStayId(),
-                LocalDateTime.now()
-        );
+        UndergoesRequestDTO dto = new UndergoesRequestDTO();
+        dto.setPatientId(patient.getSsn());
+        dto.setProcedureId(procedure.getCode());
+        dto.setStayId(stay.getStayId());
+        dto.setDateUndergoes(LocalDateTime.now());
+        dto.setPhysicianId(physician.getEmployeeId());
+        dto.setNurseId(nurse.getEmployeeId());
 
-        UndergoesEntity entity = new UndergoesEntity(
-                id, patient, procedure, stay, physician, nurse
-        );
+        undergoesService.assignTreatment(dto);
 
-        undergoesService.assignTreatment(entity); // insert
-
-        // ✅ Now test
-        List<UndergoesEntity> list = undergoesService.getAllTreatments();
+        List<UndergoesRequestDTO> list = undergoesService.getAllTreatments();
 
         assertThat(list).isNotEmpty();
     }
 
     @Test
     void testGetTreatmentsByPatient() {
-        List<UndergoesEntity> list = undergoesService.getTreatmentByPatient(100000001);
+        List<UndergoesRequestDTO> list = undergoesService.getTreatmentByPatient(100000001);
         assertThat(list).isNotNull();
     }
 
     @Test
     void testGetTreatmentsByStay() {
-        List<UndergoesEntity> list = undergoesService.getTreatmentByStay(3215);
+        List<UndergoesRequestDTO> list = undergoesService.getTreatmentByStay(3215);
         assertThat(list).isNotNull();
     }
 

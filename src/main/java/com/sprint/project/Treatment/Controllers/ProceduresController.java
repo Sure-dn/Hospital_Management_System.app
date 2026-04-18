@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sprint.project.Treatment.DTO.ProceduresRequestDTO;
 import com.sprint.project.Treatment.DTO.ProceduresResponseDTO;
 import com.sprint.project.Treatment.DTO.ResponseStructure;
-import com.sprint.project.Treatment.Entity.ProceduresEntity;
 import com.sprint.project.Treatment.Service.ProceduresService;
 
 import jakarta.validation.Valid;
@@ -33,12 +32,12 @@ public class ProceduresController {
     public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> addProcedure(
             @Valid @RequestBody ProceduresRequestDTO dto) {
 
-        ProceduresEntity entity = new ProceduresEntity();
+        ProceduresRequestDTO entity = new ProceduresRequestDTO();
         entity.setCode(dto.getCode());
         entity.setName(dto.getName());
         entity.setCost(dto.getCost());
 
-        ProceduresEntity saved = proceduresService.addProcedure(entity);
+        ProceduresRequestDTO saved = proceduresService.addProcedure(entity);
 
         ProceduresResponseDTO response =
                 new ProceduresResponseDTO(saved.getCode(), saved.getName(), saved.getCost());
@@ -49,7 +48,7 @@ public class ProceduresController {
     @GetMapping("/{code}")
     public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> getById(@PathVariable Integer code) {
 
-        ProceduresEntity p = proceduresService.getProcedureById(code);
+        ProceduresRequestDTO p = proceduresService.getProcedureById(code);
 
         ProceduresResponseDTO response =
                 new ProceduresResponseDTO(p.getCode(), p.getName(), p.getCost());
@@ -58,7 +57,7 @@ public class ProceduresController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseStructure<List<ProceduresEntity>>> getAll() {
+    public ResponseEntity<ResponseStructure<List<ProceduresRequestDTO>>> getAll() {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "All procedures",
                         proceduresService.getAllProcedures()));
@@ -67,7 +66,7 @@ public class ProceduresController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> delete(@PathVariable Integer id) {
 
-        ProceduresEntity deleted = proceduresService.deleteProcedure(id);
+        ProceduresRequestDTO deleted = proceduresService.deleteProcedure(id);
 
         ProceduresResponseDTO response =
                 new ProceduresResponseDTO(deleted.getCode(), deleted.getName(), deleted.getCost());
@@ -77,7 +76,7 @@ public class ProceduresController {
     }
  // 🔍 Search by name
     @GetMapping("/search")
-    public ResponseEntity<ResponseStructure<List<ProceduresEntity>>> search(@RequestParam String name) {
+    public ResponseEntity<ResponseStructure<List<ProceduresRequestDTO>>> search(@RequestParam String name) {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Search results",
                         proceduresService.searchByName(name)));
@@ -85,7 +84,7 @@ public class ProceduresController {
 
     // 💰 Cost range
     @GetMapping("/cost-range")
-    public ResponseEntity<ResponseStructure<List<ProceduresEntity>>> costRange(
+    public ResponseEntity<ResponseStructure<List<ProceduresRequestDTO>>> costRange(
             @RequestParam Double min,
             @RequestParam Double max) {
 
@@ -96,7 +95,7 @@ public class ProceduresController {
 
     // 💸 Expensive procedures
     @GetMapping("/expensive")
-    public ResponseEntity<ResponseStructure<List<ProceduresEntity>>> expensive(@RequestParam Double cost) {
+    public ResponseEntity<ResponseStructure<List<ProceduresRequestDTO>>> expensive(@RequestParam Double cost) {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Expensive procedures",
                         proceduresService.getExpensiveProcedures(cost)));
@@ -104,7 +103,7 @@ public class ProceduresController {
 
     // 📊 Sort
     @GetMapping("/sorted")
-    public ResponseEntity<ResponseStructure<List<ProceduresEntity>>> sort() {
+    public ResponseEntity<ResponseStructure<List<ProceduresRequestDTO>>> sort() {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Sorted by cost",
                         proceduresService.sortByCost()));
