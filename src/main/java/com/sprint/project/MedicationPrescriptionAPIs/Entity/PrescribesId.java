@@ -22,7 +22,15 @@ public class PrescribesId implements Serializable {
         this.date = date;
     }
 
-    // Getters and Setters
+    @Override
+    public String toString() {
+        return "PrescribesId{" +
+                "physician=" + physician +
+                ", patient=" + patient +
+                ", medication=" + medication +
+                ", date=" + date +
+                '}';
+    }
 
     public Integer getPhysician() {
         return physician;

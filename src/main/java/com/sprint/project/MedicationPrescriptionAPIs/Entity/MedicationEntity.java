@@ -30,9 +30,19 @@ public class MedicationEntity {
 
     public MedicationEntity() {}
 
-    // Getters and Setters
+    @Override
+    public String toString() {
+        return "MedicationEntity{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+// Getters and Setters
 
     public Integer getCode() {
+
         return code;
     }
 

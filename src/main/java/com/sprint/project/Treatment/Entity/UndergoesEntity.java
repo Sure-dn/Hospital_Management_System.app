@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 

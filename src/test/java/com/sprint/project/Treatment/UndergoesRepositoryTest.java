@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
 import com.sprint.project.Treatment.Entity.ProceduresEntity;
 import com.sprint.project.Treatment.Entity.StayEntity;
 import com.sprint.project.Treatment.Entity.UndergoesEntity;
