@@ -1,13 +1,15 @@
 package com.sprint.project.MedicationPrescriptionAPIs.Service.Implementations;
 
-
+import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
 import com.sprint.project.MedicationPrescriptionAPIs.Repository.MedicationRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.MedicationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MedicationServiceImpl implements MedicationService {
@@ -15,38 +17,71 @@ public class MedicationServiceImpl implements MedicationService {
     @Autowired
     private MedicationRepository medicationRepository;
 
+    // 🔁 DTO → ENTITY
+    private MedicationEntity mapToEntity(MedicationRequestDTO dto) {
+        MedicationEntity entity = new MedicationEntity();
+        entity.setCode(dto.getCode());
+        entity.setName(dto.getName());
+        entity.setBrand(dto.getBrand());
+        entity.setDescription(dto.getDescription());
+        return entity;
+    }
+
+    // 🔁 ENTITY → DTO
+    private MedicationRequestDTO mapToDTO(MedicationEntity entity) {
+        MedicationRequestDTO dto = new MedicationRequestDTO();
+        dto.setCode(entity.getCode());
+        dto.setName(entity.getName());
+        dto.setBrand(entity.getBrand());
+        dto.setDescription(entity.getDescription());
+        return dto;
+    }
+
     @Override
-    public MedicationEntity createMedication(MedicationEntity medication) {
-        if (medication.getName() == null || medication.getName().isBlank()) {
+    public MedicationRequestDTO createMedication(MedicationRequestDTO dto) {
+
+        if (dto.getName() == null || dto.getName().isBlank()) {
             throw new IllegalArgumentException("Medication name is required");
         }
-        return medicationRepository.save(medication);
+
+        MedicationEntity saved = medicationRepository.save(mapToEntity(dto));
+
+        return mapToDTO(saved);
     }
 
     @Override
-    public List<MedicationEntity> getAllMedications() {
-        return medicationRepository.findAll();
+    public List<MedicationRequestDTO> getAllMedications() {
+        return medicationRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public MedicationEntity getMedicationByCode(Integer code) {
-        return medicationRepository.findById(code)
-                .orElseThrow(() -> new IllegalArgumentException("Medication not found with code: " + code));
+    public MedicationRequestDTO getMedicationByCode(Integer code) {
+        MedicationEntity entity = medicationRepository.findById(code)
+                .orElseThrow(() -> new IllegalArgumentException("Medication not found"));
+
+        return mapToDTO(entity);
     }
 
     @Override
-    public MedicationEntity updateMedication(Integer code, MedicationEntity updated) {
-        MedicationEntity existing = getMedicationByCode(code);
-        existing.setName(updated.getName());
-        existing.setBrand(updated.getBrand());
-        existing.setDescription(updated.getDescription());
-        return medicationRepository.save(existing);
+    public MedicationRequestDTO updateMedication(Integer code, MedicationRequestDTO dto) {
+
+        MedicationEntity existing = medicationRepository.findById(code)
+                .orElseThrow(() -> new IllegalArgumentException("Medication not found"));
+
+        existing.setName(dto.getName());
+        existing.setBrand(dto.getBrand());
+        existing.setDescription(dto.getDescription());
+
+        return mapToDTO(medicationRepository.save(existing));
     }
 
     @Override
     public void deleteMedication(Integer code) {
         if (!medicationRepository.existsById(code)) {
-            throw new IllegalArgumentException("Medication not found with code: " + code);
+            throw new IllegalArgumentException("Medication not found");
         }
         medicationRepository.deleteById(code);
     }

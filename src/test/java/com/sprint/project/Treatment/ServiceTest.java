@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.Repository.NurseRepository;
-import com.sprint.project.NurseOnCallRoomAPIs.Repository.RoomRepository;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.repository.NurseRepository;
+import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
 import com.sprint.project.Treatment.DTO.ProceduresRequestDTO;
 import com.sprint.project.Treatment.DTO.StayRequestDTO;
 import com.sprint.project.Treatment.DTO.UndergoesRequestDTO;
