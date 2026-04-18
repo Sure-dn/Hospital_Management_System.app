@@ -37,7 +37,7 @@ public class PhysicianServiceImpl implements PhysicianService {
 	                .anyMatch(p -> p.getSsn().equals(dto.getSsn()));
 
 	        if (ssnExists) {
-	            throw new DuplicateResourceException("Physician is alrady existed"+dto.getSsn());
+	            throw new DuplicateResourceException("Physician is already existed"+dto.getSsn());
 	        }
 
 	        PhysicianEntity entity = mapToEntity(dto);

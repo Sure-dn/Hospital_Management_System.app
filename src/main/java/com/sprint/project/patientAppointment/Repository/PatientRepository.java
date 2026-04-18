@@ -13,6 +13,4 @@ import java.util.List;
 public interface PatientRepository extends JpaRepository<PatientEntity, Integer> {
 
 	    Optional<PatientEntity> findBySsn(Integer ssn);
-
-public interface PatientRepository extends JpaRepository<PatientEntity, Integer> {
-
+}

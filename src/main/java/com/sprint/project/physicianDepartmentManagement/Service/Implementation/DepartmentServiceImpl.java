@@ -3,6 +3,7 @@ package com.sprint.project.physicianDepartmentManagement.Service.Implementation;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.DepartmentRequestDto;
@@ -18,9 +19,10 @@ import com.sprint.project.physicianDepartmentManagement.Service.DepartmentServic
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-
-    private final DepartmentRepository departmentRepository;
-    private final PhysicianRepository physicianRepository;
+    @Autowired
+    private  DepartmentRepository departmentRepository;
+    @Autowired
+    private  PhysicianRepository physicianRepository;
 
     public DepartmentServiceImpl(DepartmentRepository departmentRepository,
                                  PhysicianRepository physicianRepository) {

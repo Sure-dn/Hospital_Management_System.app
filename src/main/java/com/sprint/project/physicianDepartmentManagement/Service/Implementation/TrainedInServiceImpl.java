@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.TrainedInRequestDto;
@@ -19,9 +20,13 @@ import com.sprint.project.exception.ValidationException;
 
 	@Service
 	public class TrainedInServiceImpl implements TrainedInService {
-
-	    private final TrainedInRepository trainedInRepository;
-	    private final PhysicianRepository physicianRepository;
+        @Autowired
+	    private  TrainedInRepository trainedInRepository;
+        
+        @Autowired
+	    private  PhysicianRepository physicianRepository;
+        
+        @Autowired
 	    private final ProceduresRepository proceduresRepository;
 
 	    public TrainedInServiceImpl(TrainedInRepository trainedInRepository,
@@ -118,5 +123,22 @@ import com.sprint.project.exception.ValidationException;
 		        entity.setCertificationExpiry(requestDTO.getCertificationExpiry());
 
 		        return mapToResponse(trainedInRepository.save(entity));
+		}
+		@Override
+		public List<TrainedInResponseDto> getTrainingsByPhysician(Integer employeeId) {
+
+		    return trainedInRepository.findByPhysician_EmployeeId(employeeId)
+		            .stream()
+		            .map(this::mapToResponse)
+		            .collect(Collectors.toList());
+		}
+
+		@Override
+		public List<TrainedInResponseDto> getValidTrainingsByPhysician(Integer employeeId) {
+
+		    return trainedInRepository.findValidTrainingsByPhysicianId(employeeId, LocalDate.now())
+		            .stream()
+		            .map(this::mapToResponse)
+		            .collect(Collectors.toList());
 		}
 	}

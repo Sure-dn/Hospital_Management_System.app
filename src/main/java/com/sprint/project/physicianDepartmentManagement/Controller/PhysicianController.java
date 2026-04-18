@@ -45,7 +45,7 @@ import jakarta.validation.Valid;
 	    }
 
 	    // ---------------- GET BY ID ----------------
-	    @GetMapping("/{employeeid}")
+	    @GetMapping("/{id}")
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> getPhysicianById(
 	            @PathVariable Integer id) {
 
@@ -55,7 +55,7 @@ import jakarta.validation.Valid;
 	    }
 
 	    // ---------------- UPDATE ----------------
-	    @PutMapping("/{employeeid}")
+	    @PutMapping("/{id}")
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> updatePhysician(
 	            @PathVariable Integer id,
 	            @Valid @RequestBody PhysicianRequestDto dto) {
@@ -66,7 +66,7 @@ import jakarta.validation.Valid;
 	    }
 
 	    // ---------------- DELETE ----------------
-	    @DeleteMapping("/{employeeid}")
+	    @DeleteMapping("/{id}")
 	    public ResponseEntity<ResponseStructure<String>> deletePhysician(
 	            @PathVariable Integer id) {
 

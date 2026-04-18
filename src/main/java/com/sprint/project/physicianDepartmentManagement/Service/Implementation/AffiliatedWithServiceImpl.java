@@ -4,6 +4,7 @@ import java.awt.dnd.InvalidDnDOperationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sprint.project.exception.DuplicateResourceException;
@@ -21,9 +22,13 @@ import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithSe
 
 @Service
 public class AffiliatedWithServiceImpl implements AffiliatedWithService {
-
-    private final AffiliatedWithRepository affiliatedWithRepository;
-    private final PhysicianRepository physicianRepository;
+    @Autowired
+    private AffiliatedWithRepository affiliatedWithRepository;
+    
+    @Autowired
+    private  PhysicianRepository physicianRepository;
+    
+    @Autowired
     private final DepartmentRepository departmentRepository;
 
     public AffiliatedWithServiceImpl(AffiliatedWithRepository affiliatedWithRepository,
@@ -63,7 +68,7 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
         if (Boolean.TRUE.equals(requestDto.getPrimaryAffiliation())) {
 
             List<AffiliatedWithEntity> existing =
-                    affiliatedWithRepository.findByPhysicianEmployeeID(physicianId);
+                    affiliatedWithRepository.findByPhysicianEmployeeId(physicianId);
 
             boolean alreadyPrimary = existing.stream()
                     .anyMatch(AffiliatedWithEntity::getPrimaryAffiliation);
@@ -98,7 +103,7 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
         		);
         }
 
-        return affiliatedWithRepository.findByPhysicianEmployeeID(physicianId)
+        return affiliatedWithRepository.findByPhysicianEmployeeId(physicianId)
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
