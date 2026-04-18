@@ -8,7 +8,6 @@ import jakarta.validation.constraints.*;
 public class RoomEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "RoomNumber")   // ✅ IMPORTANT FIX
     private Integer roomNumber;
 
