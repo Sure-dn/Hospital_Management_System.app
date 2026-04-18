@@ -25,5 +25,6 @@ public interface PatientRepository extends JpaRepository<PatientEntity, Integer>
 	    @Modifying
 	    @Query("UPDATE PatientEntity p SET p.pcp= :newPcpId WHERE p.ssn = :ssn")
 	    int updatePcp(@Param("ssn") Integer ssn, @Param("newPcpId") Integer newPcpId);
+		Optional<PatientEntity> findById(long l);
 }
 
