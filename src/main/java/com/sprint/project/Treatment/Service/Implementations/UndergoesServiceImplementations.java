@@ -18,8 +18,8 @@ import com.sprint.project.Treatment.Repository.ProceduresRepository;
 import com.sprint.project.Treatment.Repository.StayRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
-import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.Repository.NurseRepository;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.repository.NurseRepository;
 
 @Service
 public class UndergoesServiceImplementations implements UndergoesService {
@@ -63,7 +63,7 @@ public class UndergoesServiceImplementations implements UndergoesService {
     @Override
     public UndergoesRequestDTO assignTreatment(UndergoesRequestDTO dto) {
 
-        PatientEntity patient = patientRepository.findById(dto.getPatientId().longValue())
+        PatientEntity patient = patientRepository.findById(dto.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found"));
 
         ProceduresEntity procedure = proceduresRepository.findById(dto.getProcedureId())

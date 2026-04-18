@@ -13,7 +13,7 @@ import com.sprint.project.Treatment.Service.StayService;
 import com.sprint.project.exception.BadRequestException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
-import com.sprint.project.NurseOnCallRoomAPIs.Repository.RoomRepository;
+import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
 
 @Service
 public class StayServiceImplementations implements StayService {
@@ -39,7 +39,7 @@ public class StayServiceImplementations implements StayService {
         stay.setStayId(dto.getStayId());
 
         stay.setPatient(
-                patientRepository.findById(dto.getPatientId().longValue())
+                patientRepository.findById(dto.getPatientId())
                         .orElseThrow(() -> new ResourceNotFoundException("Patient not found"))
         );
 
