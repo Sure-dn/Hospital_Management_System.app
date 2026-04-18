@@ -22,7 +22,7 @@ public class PrescribesId implements Serializable {
         this.date = date;
     }
     
-   
+
 
     @Override
     public String toString() {
