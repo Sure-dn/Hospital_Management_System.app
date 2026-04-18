@@ -2,7 +2,6 @@ package com.sprint.project.MedicationPrescriptionAPIs.Controller;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.MedicationResponseDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.MedicationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,10 @@ public class MedicationController {
     public ResponseEntity<MedicationResponseDTO> createMedication(
             @Valid @RequestBody MedicationRequestDTO dto) {     // ← Fixed: now using RequestDTO
 
-        MedicationEntity entity = new MedicationEntity(
+        MedicationRequestDTO entity = new MedicationRequestDTO(
                 dto.getCode(), dto.getName(), dto.getBrand(), dto.getDescription());
 
-        MedicationEntity saved = medicationService.createMedication(entity);
+        MedicationRequestDTO saved = medicationService.createMedication(entity);
 
         MedicationResponseDTO response = new MedicationResponseDTO(
                 saved.getCode(), saved.getName(), saved.getBrand(), saved.getDescription());
@@ -46,7 +45,7 @@ public class MedicationController {
 
     @GetMapping("/{code}")
     public ResponseEntity<MedicationResponseDTO> getMedicationByCode(@PathVariable Integer code) {
-        MedicationEntity m = medicationService.getMedicationByCode(code);
+        MedicationRequestDTO m = medicationService.getMedicationByCode(code);
 
         MedicationResponseDTO dto = new MedicationResponseDTO(
                 m.getCode(), m.getName(), m.getBrand(), m.getDescription());
@@ -59,10 +58,10 @@ public class MedicationController {
             @PathVariable Integer code,
             @Valid @RequestBody MedicationRequestDTO dto) {
 
-        MedicationEntity updatedEntity = new MedicationEntity(
+        MedicationRequestDTO updatedEntity = new MedicationRequestDTO(
                 code, dto.getName(), dto.getBrand(), dto.getDescription());
 
-        MedicationEntity updated = medicationService.updateMedication(code, updatedEntity);
+        MedicationRequestDTO updated = medicationService.updateMedication(code, updatedEntity);
 
         MedicationResponseDTO response = new MedicationResponseDTO(
                 updated.getCode(), updated.getName(), updated.getBrand(), updated.getDescription());

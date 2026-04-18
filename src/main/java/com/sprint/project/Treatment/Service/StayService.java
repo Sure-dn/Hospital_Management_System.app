@@ -14,4 +14,6 @@ public interface StayService {
     List<StayEntity> getAllStays();
 
     StayEntity dischargePatient(Integer stayId);
+
+	String deleteStay(int id);
 }

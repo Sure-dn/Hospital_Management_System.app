@@ -1,12 +1,17 @@
 package com.sprint.project.MedicationPrescriptionAPIs.Service;
 
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
 import java.util.List;
 
 public interface MedicationService {
-    MedicationEntity createMedication(MedicationEntity medication);
-    List<MedicationEntity> getAllMedications();
-    MedicationEntity getMedicationByCode(Integer code);
-    MedicationEntity updateMedication(Integer code, MedicationEntity medication);
+
+    MedicationRequestDTO createMedication(MedicationRequestDTO dto);
+
+    List<MedicationRequestDTO> getAllMedications();
+
+    MedicationRequestDTO getMedicationByCode(Integer code);
+
+    MedicationRequestDTO updateMedication(Integer code, MedicationRequestDTO dto);
+
     void deleteMedication(Integer code);
 }

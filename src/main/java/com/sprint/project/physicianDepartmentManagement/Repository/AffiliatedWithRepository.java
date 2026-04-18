@@ -30,7 +30,7 @@ public interface AffiliatedWithRepository extends JpaRepository<AffiliatedWithEn
 	boolean existsByAffiliatedId(AffiliatedId id);
 
     // ✔ Get all affiliations of a physician
-    List<AffiliatedWithEntity> findByPhysicianEmployeeID(Integer physicianId);
+    List<AffiliatedWithEntity> findByPhysicianEmployeeId(Integer physicianId);
 
     // ✔ Get all affiliations of a department
     List<AffiliatedWithEntity> findByDepartmentDepartmentId(Integer departmentId);
