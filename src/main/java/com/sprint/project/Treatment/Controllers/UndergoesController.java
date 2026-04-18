@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sprint.project.Treatment.DTO.ResponseStructure;
-import com.sprint.project.Treatment.Entity.UndergoesEntity;
+import com.sprint.project.Treatment.DTO.UndergoesRequestDTO;
 import com.sprint.project.Treatment.Entity.UndergoesId;
 import com.sprint.project.Treatment.Service.UndergoesService;
 
@@ -25,32 +25,32 @@ public class UndergoesController {
     private UndergoesService undergoesService;
 
     @PostMapping
-    public ResponseEntity<ResponseStructure<UndergoesEntity>> assign(
-            @RequestBody UndergoesEntity entity) {
+    public ResponseEntity<ResponseStructure<UndergoesRequestDTO>> assign(
+            @RequestBody UndergoesRequestDTO undergoesRequestdto) {
 
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Treatment assigned",
-                        undergoesService.assignTreatment(entity)));
+                        undergoesService.assignTreatment(undergoesRequestdto)));
     }
 
     @GetMapping
-    public ResponseEntity<ResponseStructure<List<UndergoesEntity>>> getAll() {
+    public ResponseEntity<ResponseStructure<List<UndergoesRequestDTO>>> getAll() {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "All treatments",
                         undergoesService.getAllTreatments()));
     }
 
     @GetMapping("/patient/{id}")
-    public ResponseEntity<ResponseStructure<List<UndergoesEntity>>> getByPatient(@PathVariable Integer id) {
+    public ResponseEntity<ResponseStructure<List<UndergoesRequestDTO>>> getByPatient(@PathVariable Integer id) {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Patient treatments",
                         undergoesService.getTreatmentByPatient(id)));
     }
 
     @DeleteMapping
-    public ResponseEntity<ResponseStructure<UndergoesEntity>> delete(@RequestBody UndergoesId id) {
+    public ResponseEntity<ResponseStructure<UndergoesRequestDTO>> delete(@RequestBody UndergoesId id) {
 
-        UndergoesEntity deleted = undergoesService.deleteTreatment(id);
+        UndergoesRequestDTO deleted = undergoesService.deleteTreatment(id);
 
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Deleted", deleted));

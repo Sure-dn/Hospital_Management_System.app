@@ -2,16 +2,17 @@ package com.sprint.project.Treatment.Service;
 
 import java.util.List;
 
+import com.sprint.project.Treatment.DTO.ProceduresRequestDTO;
 import com.sprint.project.Treatment.Entity.ProceduresEntity;
 
 public interface ProceduresService {
-	ProceduresEntity addProcedure(ProceduresEntity procedure);
-	List<ProceduresEntity> getAllProcedures();
-	ProceduresEntity getProcedureById(Integer code);
-	ProceduresEntity updateProcedure(Integer code, ProceduresEntity procedure);
-	ProceduresEntity deleteProcedure(Integer code);
-	List<ProceduresEntity> searchByName(String name);
-	List<ProceduresEntity> getByCostRange(Double min, Double max);
-	List<ProceduresEntity> getExpensiveProcedures(Double cost);
-	List<ProceduresEntity> sortByCost();
+	ProceduresRequestDTO addProcedure(ProceduresRequestDTO p);
+	List<ProceduresRequestDTO> getAllProcedures();
+	ProceduresRequestDTO getProcedureById(Integer code);
+	ProceduresRequestDTO updateProcedure(Integer code, ProceduresRequestDTO procedure);
+	ProceduresRequestDTO deleteProcedure(Integer code);
+	List<ProceduresRequestDTO> searchByName(String name);
+	List<ProceduresRequestDTO> getByCostRange(Double min, Double max);
+	List<ProceduresRequestDTO> getExpensiveProcedures(Double cost);
+	List<ProceduresRequestDTO> sortByCost();
 }
