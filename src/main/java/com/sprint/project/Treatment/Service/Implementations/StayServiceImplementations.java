@@ -34,12 +34,16 @@ public class StayServiceImplementations implements StayService {
             throw new BadRequestException("Stay start cannot be in future");
         }
 
+        if (stayRepository.existsById(dto.getStayId())) {
+            throw new BadRequestException("Stay already exists");
+        }
+
         StayEntity stay = new StayEntity();
 
         stay.setStayId(dto.getStayId());
 
         stay.setPatient(
-                patientRepository.findById(dto.getPatientId().longValue())
+                patientRepository.findById(dto.getPatientId())
                         .orElseThrow(() -> new ResourceNotFoundException("Patient not found"))
         );
 
@@ -53,7 +57,6 @@ public class StayServiceImplementations implements StayService {
 
         return stayRepository.save(stay);
     }
-
     @Override
     public StayEntity getStayById(Integer stayId) {
         return stayRepository.findById(stayId)
@@ -70,5 +73,14 @@ public class StayServiceImplementations implements StayService {
         StayEntity stay = getStayById(stayId);
         stay.setStayEnd(LocalDateTime.now());
         return stayRepository.save(stay);
+    }
+    @Override
+    public String deleteStay(int id) {
+        StayEntity stay = stayRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Stay not found with id: " + id));
+
+        stayRepository.delete(stay);
+
+        return "Stay deleted successfully";
     }
 }

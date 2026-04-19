@@ -47,10 +47,10 @@ import jakarta.validation.Valid;
 	    // ---------------- GET BY ID ----------------
 	    @GetMapping("/{employeeid}")
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> getPhysicianById(
-	            @PathVariable Integer id) {
+	            @PathVariable Integer employeeid) {
 
 	        return ResponseEntity.ok(
-	                physicianService.getPhysicianById(id)
+	                physicianService.getPhysicianById(employeeid)
 	        );
 	    }
 
@@ -68,10 +68,10 @@ import jakarta.validation.Valid;
 	    // ---------------- DELETE ----------------
 	    @DeleteMapping("/{employeeid}")
 	    public ResponseEntity<ResponseStructure<String>> deletePhysician(
-	            @PathVariable Integer id) {
+	            @PathVariable Integer employeeid) {
 
 	        return ResponseEntity.ok(
-	                physicianService.deletePhysician(id)
+	                physicianService.deletePhysician(employeeid)
 	        );
 	    }
 	}

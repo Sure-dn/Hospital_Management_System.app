@@ -11,6 +11,7 @@ import com.sprint.project.Treatment.Entity.*;
 import com.sprint.project.Treatment.Repository.UndergoesRepository;
 import com.sprint.project.Treatment.Service.UndergoesService;
 import com.sprint.project.exception.BadRequestException;
+import com.sprint.project.exception.DuplicateResourceException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
@@ -63,7 +64,7 @@ public class UndergoesServiceImplementations implements UndergoesService {
     @Override
     public UndergoesRequestDTO assignTreatment(UndergoesRequestDTO dto) {
 
-        PatientEntity patient = patientRepository.findById(dto.getPatientId().longValue())
+        PatientEntity patient = patientRepository.findById(dto.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found"));
 
         ProceduresEntity procedure = proceduresRepository.findById(dto.getProcedureId())
@@ -96,7 +97,7 @@ public class UndergoesServiceImplementations implements UndergoesService {
         );
 
         if (undergoesRepository.existsById(id)) {
-            throw new BadRequestException("Treatment already exists");
+            throw new DuplicateResourceException("Treatment already exists");
         }
 
         UndergoesEntity entity = new UndergoesEntity(
