@@ -1,7 +1,7 @@
 package com.sprint.project.Treatment;
 
-import com.sprint.project.nurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.nurseOnCallRoomAPIs.repository.RoomRepository;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
 import com.sprint.project.Treatment.DTO.*;
 import com.sprint.project.Treatment.Entity.*;
 import com.sprint.project.Treatment.Repository.*;

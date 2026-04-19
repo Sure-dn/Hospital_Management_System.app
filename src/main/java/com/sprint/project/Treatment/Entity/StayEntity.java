@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
-import com.sprint.project.nurseOnCallRoomAPIs.entity.RoomEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 
 @Entity

@@ -19,8 +19,8 @@ import com.sprint.project.Treatment.Repository.ProceduresRepository;
 import com.sprint.project.Treatment.Repository.StayRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
-import com.sprint.project.nurseOnCallRoomAPIs.entity.NurseEntity;
-import com.sprint.project.nurseOnCallRoomAPIs.repository.NurseRepository;
+import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
+import com.sprint.project.NurseOnCallRoomAPIs.repository.NurseRepository;
 
 @Service
 public class UndergoesServiceImplementations implements UndergoesService {
