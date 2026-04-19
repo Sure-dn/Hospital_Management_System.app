@@ -4,13 +4,15 @@ import com.sprint.project.NurseOnCallRoomAPIs.dto.response.BlockResponseDTO;
 import com.sprint.project.NurseOnCallRoomAPIs.dto.response.RoomResponseDTO;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.BlockId;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.exception.ResourceNotFoundException;
+import com.sprint.project.NurseOnCallRoomAPIs.exception.OnCallNotFoundException;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.BlockRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.service.BlockService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ public class BlockServiceImpl implements BlockService {
         dto.setRoomNumber(e.getRoomNumber());
         dto.setType(e.getType());
         dto.setUnavailable(e.getUnavailable());
+
         if (e.getBlock() != null) {
             dto.setBlockFloor(e.getBlock().getBlockFloor());
             dto.setBlockCode(e.getBlock().getBlockCode());
@@ -47,9 +50,16 @@ public class BlockServiceImpl implements BlockService {
 
     @Override
     public List<RoomResponseDTO> getRoomsForBlock(Integer floor, Integer code) {
+
         blockRepository.findById(new BlockId(floor, code))
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Block not found with floor: " + floor + " and code: " + code));
-        return roomRepository.findRoomsByBlock(floor, code).stream().map(this::toRoomDTO).collect(Collectors.toList());
+                .orElseThrow(() -> new OnCallNotFoundException("Block not found"));
+
+        // 🔥 USE DERIVED QUERY (NOT @Query)
+        List<RoomEntity> rooms =
+                roomRepository.findByBlock_BlockFloorAndBlock_BlockCode(floor, code);
+
+        return rooms.stream()
+                .map(this::toRoomDTO)
+                .collect(Collectors.toList());
     }
 }

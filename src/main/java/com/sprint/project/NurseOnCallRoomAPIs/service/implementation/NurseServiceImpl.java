@@ -3,12 +3,14 @@ package com.sprint.project.NurseOnCallRoomAPIs.service.implementation;
 import com.sprint.project.NurseOnCallRoomAPIs.dto.request.NurseRequestDTO;
 import com.sprint.project.NurseOnCallRoomAPIs.dto.response.NurseResponseDTO;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.exception.DuplicateResourceException;
-import com.sprint.project.NurseOnCallRoomAPIs.exception.ResourceNotFoundException;
+import com.sprint.project.NurseOnCallRoomAPIs.exception.BlockDuplicateResourceException;
+import com.sprint.project.NurseOnCallRoomAPIs.exception.OnCallNotFoundException;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.NurseRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.service.NurseService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +43,7 @@ public class NurseServiceImpl implements NurseService {
     @Override
     public NurseResponseDTO createNurse(NurseRequestDTO request) {
         if (nurseRepository.existsById(request.getEmployeeId()))
-            throw new DuplicateResourceException("Nurse already exists with employeeId: " + request.getEmployeeId());
+            throw new BlockDuplicateResourceException("Nurse already exists");
         return toDTO(nurseRepository.save(toEntity(request)));
     }
 
@@ -53,16 +55,18 @@ public class NurseServiceImpl implements NurseService {
     @Override
     public NurseResponseDTO getNurseById(Integer employeeId) {
         return toDTO(nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Nurse", "employeeId", employeeId)));
+                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found")));
     }
 
     @Override
     public NurseResponseDTO updateNurse(Integer employeeId, NurseRequestDTO request) {
         NurseEntity existing = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Nurse", "employeeId", employeeId));
+                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+
         existing.setName(request.getName());
         existing.setPosition(request.getPosition());
         existing.setRegistered(request.getRegistered());
+
         return toDTO(nurseRepository.save(existing));
     }
 }

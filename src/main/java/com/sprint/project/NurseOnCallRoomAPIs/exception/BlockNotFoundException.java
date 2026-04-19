@@ -1,6 +1,6 @@
 package com.sprint.project.NurseOnCallRoomAPIs.exception;
 
-public class BlockNotFoundException extends ResourceNotFoundException {
+public class BlockNotFoundException extends OnCallNotFoundException {
 
     public BlockNotFoundException(Integer floor, Integer code) {
         super("Block", "floor/code", floor + "/" + code);

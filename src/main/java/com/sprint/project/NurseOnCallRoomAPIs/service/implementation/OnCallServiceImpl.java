@@ -4,13 +4,15 @@ import com.sprint.project.NurseOnCallRoomAPIs.dto.request.OnCallRequestDTO;
 import com.sprint.project.NurseOnCallRoomAPIs.dto.response.OnCallResponseDTO;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.OnCallEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.exception.ResourceNotFoundException;
+import com.sprint.project.NurseOnCallRoomAPIs.exception.OnCallNotFoundException;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.NurseRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.OnCallRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.service.OnCallService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,13 +37,15 @@ public class OnCallServiceImpl implements OnCallService {
     @Override
     public OnCallResponseDTO assignOnCall(Integer employeeId, OnCallRequestDTO request) {
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Nurse", "employeeId", employeeId));
+                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+
         OnCallEntity entity = new OnCallEntity();
         entity.setNurse(nurse);
         entity.setBlockFloor(request.getBlockFloor());
         entity.setBlockCode(request.getBlockCode());
         entity.setOnCallStart(request.getOnCallStart());
         entity.setOnCallEnd(request.getOnCallEnd());
+
         return toDTO(onCallRepository.save(entity));
     }
 
@@ -49,20 +53,22 @@ public class OnCallServiceImpl implements OnCallService {
     @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByNurse(Integer employeeId) {
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Nurse", "employeeId", employeeId));
-        return onCallRepository.findByNurse(nurse).stream().map(this::toDTO).collect(Collectors.toList());
+                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+
+        return onCallRepository.findByNurse(nurse)
+                .stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByBlock(Integer floor, Integer code) {
-        return onCallRepository.findByBlockFloorAndBlockCode(floor, code).stream().map(this::toDTO).collect(Collectors.toList());
+        return List.of();
     }
 
     @Override
     public void deleteOnCall(Integer employeeId) {
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Nurse", "employeeId", employeeId));
+                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+
         onCallRepository.deleteByNurse(nurse);
     }
 }

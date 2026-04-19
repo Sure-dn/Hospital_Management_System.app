@@ -8,7 +8,7 @@ import jakarta.validation.constraints.*;
 public class RoomEntity {
 
     @Id
-    @Column(name = "RoomNumber")   // ✅ IMPORTANT FIX
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roomNumber;
 
     @NotBlank(message = "Room type cannot be blank")
@@ -51,7 +51,7 @@ public class RoomEntity {
         return type;
     }
 
-    public void setType(String type) {
+    public void setRoomType(String type) {
         this.type = type;
     }
 
