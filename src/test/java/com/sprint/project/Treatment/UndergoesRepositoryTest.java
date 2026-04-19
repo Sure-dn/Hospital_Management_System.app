@@ -20,7 +20,7 @@ import com.sprint.project.NurseOnCallRoomAPIs.Entity.RoomEntity;
 import com.sprint.project.Treatment.Entity.*;
 import com.sprint.project.Treatment.Repository.UndergoesRepository;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
 
 @DataJpaTest
 @EntityScan(basePackages = "com.sprint.project")

@@ -3,7 +3,8 @@ package com.sprint.project.patientAppointment;
 import com.sprint.project.NurseOnCallRoomAPIs.Entity.NurseEntity;
 import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

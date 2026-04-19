@@ -2,9 +2,9 @@ package com.sprint.project.physicianDepartmentManagement.Service;
 
 import java.util.List;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.PhysicianRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.ResponseStructure;
+import com.sprint.project.physicianDepartmentManagement.Dto.requestdto.PhysicianRequestDto;
+import com.sprint.project.physicianDepartmentManagement.Dto.responseDto.PhysicianResponseDto;
+import com.sprint.project.physicianDepartmentManagement.Dto.responseDto.ResponseStructure;
 
 
 public interface PhysicianService {

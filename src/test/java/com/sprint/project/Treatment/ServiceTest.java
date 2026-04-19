@@ -20,8 +20,8 @@ import com.sprint.project.Treatment.Service.*;
 import com.sprint.project.exception.*;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 
 @SpringBootTest
 public class ServiceTest {

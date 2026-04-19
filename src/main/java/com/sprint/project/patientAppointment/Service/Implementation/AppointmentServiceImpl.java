@@ -12,8 +12,8 @@ import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.exception.InvalidRequestException;
 import com.sprint.project.patientAppointment.Repository.*;
 import com.sprint.project.patientAppointment.Service.AppointmentService;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

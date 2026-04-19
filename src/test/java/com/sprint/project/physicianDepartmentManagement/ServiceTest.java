@@ -11,25 +11,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.sprint.project.exception.*;
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.*;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.*;
-import com.sprint.project.physicianDepartmentManagement.Entity.TrainedInId;
-import com.sprint.project.physicianDepartmentManagement.Service.*;
+import com.sprint.project.physicianDepartmentManagement.Dto.requestdto.*;
+import com.sprint.project.physicianDepartmentManagement.Dto.responseDto.*;
+import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithService;
+import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
+import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService;
+import com.sprint.project.physicianDepartmentManagement.Service.TrainedInService;
+import com.sprint.project.physicianDepartmentManagement.entity.TrainedInId;
+
 
 @SpringBootTest
 public class ServiceTest {
 
-    @Autowired private PhysicianService physicianService;
-    @Autowired private DepartmentService departmentService;
-    @Autowired private AffiliatedWithService affiliatedWithService;
-    @Autowired private TrainedInService trainedInService;
+    @Autowired 
+    private PhysicianService physicianService;
+    
+    @Autowired 
+    private DepartmentService departmentService;
+    
+    @Autowired 
+    private AffiliatedWithService affiliatedWithService;
+    
+    @Autowired 
+    private TrainedInService trainedInService;
 
-    // ======================================================
-    // 🟢 PHYSICIAN
-    // ======================================================
+    
+    //  PHYSICIAN
+    
 
     @Test
-    void TC01_createPhysician_success() {
+    void createPhysician_success() {
 
         PhysicianRequestDto dto = new PhysicianRequestDto();
         dto.setEmployeeId(100001);
@@ -41,13 +52,13 @@ public class ServiceTest {
     }
 
     @Test
-    void TC02_getPhysician_notFound() {
+    void getPhysician_notFound() {
         assertThrows(ResourceNotFoundException.class, () ->
                 physicianService.getPhysicianById(999999));
     }
 
     @Test
-    void TC03_duplicatePhysician() {
+    void duplicatePhysician() {
 
         PhysicianRequestDto dto = new PhysicianRequestDto();
         dto.setEmployeeId(200001);
@@ -61,12 +72,12 @@ public class ServiceTest {
                 physicianService.createPhysician(dto));
     }
 
-    // ======================================================
-    // 🟢 DEPARTMENT
-    // ======================================================
+    
+    //  DEPARTMENT
+    
 
     @Test
-    void TC04_createDepartment_success() {
+    void createDepartment_success() {
 
         PhysicianRequestDto phy = new PhysicianRequestDto();
         phy.setEmployeeId(300001);
@@ -85,22 +96,22 @@ public class ServiceTest {
     }
 
     @Test
-    void TC05_getAllDepartments() {
+    void getAllDepartments() {
         assertThat(departmentService.getAllDepartments()).isNotNull();
     }
 
     @Test
-    void TC06_department_notFound() {
+    void department_notFound() {
         assertThrows(ResourceNotFoundException.class, () ->
                 departmentService.getDepartmentById(999999));
     }
 
-    // ======================================================
-    // 🟢 AFFILIATION
-    // ======================================================
+    
+    //AFFILIATION
+ 
 
     @Test
-    void TC07_createAffiliation_success() {
+    void createAffiliation_success() {
 
         PhysicianRequestDto phy = new PhysicianRequestDto();
         phy.setEmployeeId(500001);
@@ -123,7 +134,7 @@ public class ServiceTest {
     }
 
     @Test
-    void TC08_duplicateAffiliation() {
+    void duplicateAffiliation() {
 
         PhysicianRequestDto phy = new PhysicianRequestDto();
         phy.setEmployeeId(500002);
@@ -149,33 +160,28 @@ public class ServiceTest {
     }
 
     @Test
-    void TC09_getAffiliationByPhysician() {
+    void getAffiliationByPhysician() {
 
         assertThrows(ResourceNotFoundException.class, () ->
                 affiliatedWithService.getAffiliationsByPhysician(999999));
     }
 
-    // ======================================================
-    // 🟢 TRAINED IN (FIXED - MISSING PART ADDED)
-    // ======================================================
-
     
+    // TRAINED IN 
 
-   
-
-    @Test
-    void TC13_getAllTrainings() {
+     @Test
+    void getAllTrainings() {
         assertThat(trainedInService.getAllTrainings()).isNotNull();
     }
 
     @Test
-    void TC14_training_notFound() {
+    void training_notFound() {
         assertThrows(ResourceNotFoundException.class, () ->
                 trainedInService.getTrainingById(new TrainedInId(9999, 9999)));
     }
 
     @Test
-    void TC15_deleteTraining_notFound() {
+    void deleteTraining_notFound() {
         assertThrows(ResourceNotFoundException.class, () ->
                 trainedInService.deleteTraining(new TrainedInId(9999, 9999)));
     }

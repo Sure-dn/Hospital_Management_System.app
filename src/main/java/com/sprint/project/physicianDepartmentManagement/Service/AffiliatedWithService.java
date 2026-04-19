@@ -2,8 +2,8 @@ package com.sprint.project.physicianDepartmentManagement.Service;
 
 import java.util.List;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.AffiliatedWithRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.AffiliatedWithResponseDto;
+import com.sprint.project.physicianDepartmentManagement.Dto.requestdto.AffiliatedWithRequestDto;
+import com.sprint.project.physicianDepartmentManagement.Dto.responseDto.AffiliatedWithResponseDto;
 
 
 public interface AffiliatedWithService {
