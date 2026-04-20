@@ -8,8 +8,8 @@ import com.sprint.project.patientAppointment.entity.*;
 import com.sprint.project.patientAppointment.exception.*;
 import com.sprint.project.patientAppointment.repository.*;
 import com.sprint.project.patientAppointment.Service.AppointmentService;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,7 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         validateTime(dto.getStarttime(), dto.getEndtime());
 
         // OPTIONAL: Overlap check
-        if (repo.existsOverlappingAppointmentForPhysician(
+        if (repo.existsOverlappingAppointment(
                 dto.getPhysicianId(),
                 dto.getStarttime(),
                 dto.getEndtime())) {
