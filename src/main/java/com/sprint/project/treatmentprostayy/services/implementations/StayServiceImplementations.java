@@ -16,8 +16,8 @@ import com.sprint.project.treatmentprostayy.exception.StayAlreadyExistsException
 import com.sprint.project.treatmentprostayy.exception.StayNotFoundException;
 import com.sprint.project.treatmentprostayy.repositories.StayRepository;
 import com.sprint.project.treatmentprostayy.services.StayService;
-import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
-
+import com.sprint.project.nurseoncallroom.repository.RoomRepository;
+import com.sprint.project.nurseoncallroom.repository.RoomRepository;
 @Service
 public class StayServiceImplementations implements StayService {
 
