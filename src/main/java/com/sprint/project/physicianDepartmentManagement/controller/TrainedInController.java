@@ -1,4 +1,4 @@
-package com.sprint.project.physicianDepartmentManagement.controller;
+package com.sprint.project.physicianDepartmentManagement.Controller;
 
 public class TrainedInController {
 
