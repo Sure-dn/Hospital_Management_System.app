@@ -7,9 +7,9 @@
 	import org.springframework.http.ResponseEntity;
 	import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.requestdto.TrainedInRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.responseDto.TrainedInResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Service.implementation.TrainedInServiceImpl;
+import com.sprint.project.physicianDepartmentManagement.service.implementation.TrainedInServiceImpl;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.TrainedInRequestDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responseDto.TrainedInResponseDto;
 
 
 	@RestController

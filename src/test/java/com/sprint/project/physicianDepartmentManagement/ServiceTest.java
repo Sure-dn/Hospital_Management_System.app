@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.sprint.project.exception.*;
-import com.sprint.project.physicianDepartmentManagement.Dto.requestdto.*;
-import com.sprint.project.physicianDepartmentManagement.Dto.responseDto.*;
-import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithService;
-import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
-import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService;
-import com.sprint.project.physicianDepartmentManagement.Service.TrainedInService;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.*;
+import com.sprint.project.physicianDepartmentManagement.dto.responseDto.*;
+import com.sprint.project.physicianDepartmentManagement.service.AffiliatedWithService;
+import com.sprint.project.physicianDepartmentManagement.service.DepartmentService;
+import com.sprint.project.physicianDepartmentManagement.service.PhysicianService;
+import com.sprint.project.physicianDepartmentManagement.service.TrainedInService;
 import com.sprint.project.physicianDepartmentManagement.entity.TrainedInId;
 
 

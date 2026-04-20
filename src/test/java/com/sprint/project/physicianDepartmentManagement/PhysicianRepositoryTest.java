@@ -4,17 +4,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 
-@DataJpaTest
+@SpringBootTest
+@Transactional
 class PhysicianRepositoryTest {
-
 
     @Autowired
     private PhysicianRepository physicianRepository;
@@ -23,21 +23,21 @@ class PhysicianRepositoryTest {
     void testCreatePhysician() {
 
         PhysicianEntity p = new PhysicianEntity();
-        p.setEmployeeId(1001);
+        p.setEmployeeId(1);
         p.setName("John");
         p.setPosition("Cardiologist");
         p.setSsn(1111);
 
         PhysicianEntity saved = physicianRepository.save(p);
 
-        assertThat(saved.getEmployeeId()).isNotNull();
+        assertThat(saved.getEmployeeId()).isEqualTo(1);
     }
 
     @Test
     void testReadPhysician() {
 
         PhysicianEntity p = new PhysicianEntity();
-        p.setEmployeeId(1002);
+        p.setEmployeeId(2);
         p.setName("John");
         p.setPosition("Cardiologist");
         p.setSsn(1112);
@@ -45,7 +45,7 @@ class PhysicianRepositoryTest {
         physicianRepository.save(p);
 
         Optional<PhysicianEntity> found =
-                physicianRepository.findById(1002);
+                physicianRepository.findById(2);
 
         assertThat(found).isPresent();
     }
@@ -54,7 +54,7 @@ class PhysicianRepositoryTest {
     void testUpdatePhysician() {
 
         PhysicianEntity p = new PhysicianEntity();
-        p.setEmployeeId(1003);
+        p.setEmployeeId(3);
         p.setName("John");
         p.setPosition("Cardiologist");
         p.setSsn(1113);
@@ -64,7 +64,7 @@ class PhysicianRepositoryTest {
         saved.setPosition("Neurologist");
         physicianRepository.save(saved);
 
-        assertThat(physicianRepository.findById(1003)
+        assertThat(physicianRepository.findById(3)
                 .get()
                 .getPosition())
                 .isEqualTo("Neurologist");
@@ -74,15 +74,15 @@ class PhysicianRepositoryTest {
     void testDeletePhysician() {
 
         PhysicianEntity p = new PhysicianEntity();
-        p.setEmployeeId(1004);
+        p.setEmployeeId(4);
         p.setName("John");
         p.setPosition("Cardiologist");
         p.setSsn(1114);
 
         physicianRepository.save(p);
 
-        physicianRepository.deleteById(1004);
+        physicianRepository.deleteById(4);
 
-        assertThat(physicianRepository.findById(1004)).isEmpty();
+        assertThat(physicianRepository.findById(4)).isEmpty();
     }
 }
