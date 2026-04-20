@@ -18,7 +18,7 @@ import com.sprint.project.nurseoncallroom.entity.BlockEntity;
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
 import com.sprint.project.nurseoncallroom.entity.RoomEntity;
 import com.sprint.project.patientAppointment.entity.PatientEntity;
-import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
 import com.sprint.project.treatmentprostayy.entities.StayEntity;
 import com.sprint.project.treatmentprostayy.entities.UndergoesEntity;
