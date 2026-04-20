@@ -9,12 +9,12 @@ package com.sprint.project.MedicationPrescriptionAPIs;   // ←←← CHANGE THI
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.PrescriptionRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
-import com.sprint.project.MedicationPrescriptionAPIs.Repository.MedicationRepository;
-import com.sprint.project.MedicationPrescriptionAPIs.Repository.PrescribesRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.Implementations.MedicationServiceImpl;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.Implementations.PrescriptionServiceImpl;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.MedicationEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.PrescribesEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.repository.MedicationRepository;
+import com.sprint.project.MedicationPrescriptionAPIs.repository.PrescribesRepository;
 import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.AppointmentRepository;

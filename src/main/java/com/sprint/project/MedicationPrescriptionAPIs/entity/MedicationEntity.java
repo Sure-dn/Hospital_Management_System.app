@@ -1,4 +1,4 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Entity;
+package com.sprint.project.MedicationPrescriptionAPIs.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

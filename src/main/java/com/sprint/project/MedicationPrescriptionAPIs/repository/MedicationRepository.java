@@ -1,9 +1,10 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Repository;
+package com.sprint.project.MedicationPrescriptionAPIs.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
+
+import com.sprint.project.MedicationPrescriptionAPIs.entity.MedicationEntity;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.sprint.project.MedicationPrescriptionAPIs.Service.Implementations;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
-import com.sprint.project.MedicationPrescriptionAPIs.Repository.MedicationRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.MedicationService;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.MedicationEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.repository.MedicationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

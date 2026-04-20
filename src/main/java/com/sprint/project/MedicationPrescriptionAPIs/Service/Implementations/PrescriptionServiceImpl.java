@@ -1,18 +1,17 @@
 package com.sprint.project.MedicationPrescriptionAPIs.Service.Implementations;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.PrescriptionRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
-import com.sprint.project.MedicationPrescriptionAPIs.Repository.PrescribesRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.PrescribesService;
-
+import com.sprint.project.MedicationPrescriptionAPIs.entity.MedicationEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.PrescribesEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.repository.MedicationRepository;
+import com.sprint.project.MedicationPrescriptionAPIs.repository.PrescribesRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
 import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.Repository.AppointmentRepository;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
-import com.sprint.project.MedicationPrescriptionAPIs.Repository.MedicationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

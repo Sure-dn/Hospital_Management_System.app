@@ -1,4 +1,4 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Controller;
+package com.sprint.project.MedicationPrescriptionAPIs.controller;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.MedicationResponseDTO;

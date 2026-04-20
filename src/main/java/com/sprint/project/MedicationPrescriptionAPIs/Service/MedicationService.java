@@ -1,7 +1,8 @@
 package com.sprint.project.MedicationPrescriptionAPIs.Service;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.MedicationEntity;
+
 import java.util.List;
 
 public interface MedicationService {

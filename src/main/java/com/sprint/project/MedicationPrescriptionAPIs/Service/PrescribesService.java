@@ -2,7 +2,7 @@ package com.sprint.project.MedicationPrescriptionAPIs.Service;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.PrescriptionRequestDTO;
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.PrescriptionResponseDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.PrescribesEntity;
 
 import jakarta.validation.Valid;
 

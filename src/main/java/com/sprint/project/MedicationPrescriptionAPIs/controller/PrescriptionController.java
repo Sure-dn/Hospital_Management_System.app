@@ -1,9 +1,10 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Controller;
+package com.sprint.project.MedicationPrescriptionAPIs.controller;
 
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.PrescriptionRequestDTO;
 import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.PrescriptionResponseDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.PrescribesService;
+import com.sprint.project.MedicationPrescriptionAPIs.entity.PrescribesEntity;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
