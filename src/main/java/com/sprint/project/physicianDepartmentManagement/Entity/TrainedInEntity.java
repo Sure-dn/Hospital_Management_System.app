@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-import com.sprint.project.Treatment.Entity.ProceduresEntity;
+import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
 @Entity
 @Table(name = "Trained_In")
 public class TrainedInEntity {

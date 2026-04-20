@@ -13,7 +13,7 @@
 	import java.time.LocalDateTime;
 
 
-import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
+import com.sprint.project.nurseoncallroom.entity.NurseEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
 	@Entity
