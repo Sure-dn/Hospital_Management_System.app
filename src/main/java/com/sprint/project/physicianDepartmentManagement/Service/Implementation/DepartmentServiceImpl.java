@@ -2,55 +2,54 @@ package com.sprint.project.physicianDepartmentManagement.Service.Implementation;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.DepartmentRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.DepartmentResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Entity.DepartmentEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.exception.DuplicateResourceException;
-import com.sprint.project.exception.ResourceNotFoundException;
-import com.sprint.project.physicianDepartmentManagement.Repository.DepartmentRepository;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.DepartmentEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.exception.DepartmentNotFoundExcpetion;
+import com.sprint.project.physicianDepartmentManagement.exception.DuplicateDepartmentException;
+import com.sprint.project.physicianDepartmentManagement.exception.PhysicianNotFoundException;
+import com.sprint.project.physicianDepartmentManagement.repository.DepartmentRepository;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private final DepartmentRepository departmentRepository;
-    private final PhysicianRepository physicianRepository;
+	@Autowired
+    private DepartmentRepository departmentRepository;
 
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository,
-                                 PhysicianRepository physicianRepository) {
-        this.departmentRepository = departmentRepository;
-        this.physicianRepository = physicianRepository;
-    }
+    @Autowired
+    private PhysicianRepository physicianRepository;
 
-    // ✅ CREATE
+    
+    // CREATE
+    
     @Override
     public DepartmentResponseDto createDepartment(DepartmentRequestDto requestDto) {
 
         if (departmentRepository.existsById(requestDto.getDepartmentId())) {
-            throw new DuplicateResourceException("Department already exists" +requestDto.getDepartmentId());
+            throw new DuplicateDepartmentException(
+                    "Department already exists: " + requestDto.getDepartmentId());
         }
 
         PhysicianEntity head = physicianRepository.findById(requestDto.getHeadEmployeeId())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Physician is not found"+ requestDto.getHeadEmployeeId()));
+                .orElseThrow(() -> new DepartmentNotFoundExcpetion(
+                        "Physician not found: " + requestDto.getHeadEmployeeId()));
 
-        DepartmentEntity department = new DepartmentEntity();
-        department.setDepartmentId(requestDto.getDepartmentId());
-        department.setName(requestDto.getName());
-        department.setHead(head);
+        DepartmentEntity department = mapToEntity(requestDto, head);
 
         DepartmentEntity saved = departmentRepository.save(department);
 
         return mapToResponseDto(saved);
     }
 
-    // ✅ GET ALL
+    
+    // GET ALL
+    
     @Override
     public List<DepartmentResponseDto> getAllDepartments() {
         return departmentRepository.findAll()
@@ -59,28 +58,34 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ GET BY ID
+    
+    // GET BY ID
+   
     @Override
     public DepartmentResponseDto getDepartmentById(Integer departmentId) {
+
         DepartmentEntity department = departmentRepository.findById(departmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Department is not found" + departmentId));
+                .orElseThrow(() ->
+                        new DepartmentNotFoundExcpetion("Department not found: " + departmentId));
 
         return mapToResponseDto(department);
     }
 
-    // ✅ UPDATE
+    
+    // UPDATE
+    
     @Override
     public DepartmentResponseDto updateDepartment(Integer departmentId, DepartmentRequestDto requestDto) {
 
         DepartmentEntity existing = departmentRepository.findById(departmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Department is not found"+ departmentId));
-
-        existing.setName(requestDto.getName());
+                .orElseThrow(() ->
+                        new DepartmentNotFoundExcpetion("Department not found: " + departmentId));
 
         PhysicianEntity head = physicianRepository.findById(requestDto.getHeadEmployeeId())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Physician is not found"+requestDto.getHeadEmployeeId()));
+                .orElseThrow(() -> new PhysicianNotFoundException(
+                        "Physician not found: " + requestDto.getHeadEmployeeId()));
 
+        existing.setName(requestDto.getName());
         existing.setHead(head);
 
         DepartmentEntity updated = departmentRepository.save(existing);
@@ -88,19 +93,30 @@ public class DepartmentServiceImpl implements DepartmentService {
         return mapToResponseDto(updated);
     }
 
-    // ✅ GET HEAD
+    
+    // GET HEAD
+    
     @Override
     public PhysicianResponseDto getDepartmentHead(Integer departmentId) {
 
         DepartmentEntity department = departmentRepository.findById(departmentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Department is not found"+departmentId));
+                .orElseThrow(() ->
+                        new DepartmentNotFoundExcpetion("Department not found: " + departmentId));
 
         return mapToPhysicianDto(department.getHead());
     }
 
-    // ===============================
-    // 🔁 MAPPER METHODS (IMPORTANT)
-    // ===============================
+    
+    //  MAPPER METHODS (Helper Mehods)
+    
+
+    private DepartmentEntity mapToEntity(DepartmentRequestDto dto, PhysicianEntity head) {
+        DepartmentEntity entity = new DepartmentEntity();
+        entity.setDepartmentId(dto.getDepartmentId());
+        entity.setName(dto.getName());
+        entity.setHead(head);
+        return entity;
+    }
 
     private DepartmentResponseDto mapToResponseDto(DepartmentEntity entity) {
         DepartmentResponseDto dto = new DepartmentResponseDto();
@@ -113,7 +129,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     private PhysicianResponseDto mapToPhysicianDto(PhysicianEntity entity) {
         PhysicianResponseDto dto = new PhysicianResponseDto();
         dto.setEmployeeId(entity.getEmployeeId());
-        dto.setName(entity.getName()); // adjust based on your fields
+        dto.setName(entity.getName());
+        dto.setPosition(entity.getPosition());
+        dto.setSsn(entity.getSsn());
         return dto;
     }
 }

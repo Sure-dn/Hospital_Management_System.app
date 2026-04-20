@@ -1,9 +1,14 @@
 package com.sprint.project.medicationprescription;
 
+
 import com.sprint.project.medicationprescription.entity.MedicationEntity;
 import com.sprint.project.medicationprescription.entity.PrescribesEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.medicationprescription.entity.MedicationEntity;
+import com.sprint.project.medicationprescription.entity.PrescribesEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
