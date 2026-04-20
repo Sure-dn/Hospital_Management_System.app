@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.DepartmentRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.DepartmentResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.service.DepartmentService;
+import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
 
 import java.util.*;
 
@@ -27,7 +27,7 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    // ✅ CREATE
+    //  CREATE
     @PostMapping
     public ResponseEntity<DepartmentResponseDto> createDepartment(
             @Valid @RequestBody DepartmentRequestDto requestDto) {
@@ -36,19 +36,19 @@ public class DepartmentController {
         return ResponseEntity.ok(response);
     }
 
-    // ✅ GET ALL
+    //  GET ALL
     @GetMapping
     public ResponseEntity<List<DepartmentResponseDto>> getAllDepartments() {
         return ResponseEntity.ok(departmentService.getAllDepartments());
     }
 
-    // ✅ GET BY ID
+    //  GET BY ID
     @GetMapping("/{departmentid}")
     public ResponseEntity<DepartmentResponseDto> getDepartmentById(@PathVariable Integer id) {
         return ResponseEntity.ok(departmentService.getDepartmentById(id));
     }
 
-    // ✅ UPDATE
+    //  UPDATE
     @PutMapping("/{departmentid}")
     public ResponseEntity<DepartmentResponseDto> updateDepartment(
             @PathVariable Integer id,
@@ -57,7 +57,7 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentService.updateDepartment(id, requestDto));
     }
 
-    // ✅ GET HEAD OF DEPARTMENT
+    //  GET HEAD OF DEPARTMENT
     @GetMapping("/{departmentid}/head")
     public ResponseEntity<PhysicianResponseDto> getDepartmentHead(@PathVariable Integer id) {
         return ResponseEntity.ok(departmentService.getDepartmentHead(id));

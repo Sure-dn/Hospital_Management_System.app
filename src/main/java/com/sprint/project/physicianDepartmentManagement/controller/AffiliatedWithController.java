@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.AffiliatedWithRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.AffiliatedWithResponseDto;
-import com.sprint.project.physicianDepartmentManagement.service.AffiliatedWithService;
+import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithService;
 
 @RestController
 @RequestMapping("/api/affiliations")
@@ -24,7 +24,7 @@ public class AffiliatedWithController {
 	        this.affiliatedWithService = affiliatedWithService;
 	    }
 
-	    // ================= CREATE AFFILIATION =================
+	    //  CREATE AFFILIATION 
 	    @PostMapping("/physician/{physicianId}")
 	    public ResponseEntity<AffiliatedWithResponseDto> createAffiliation(
 	            @PathVariable Integer physicianId,
@@ -36,7 +36,7 @@ public class AffiliatedWithController {
 	        return new ResponseEntity<>(response, HttpStatus.CREATED);
 	    }
 
-	    // ================= GET BY PHYSICIAN =================
+	    // GET BY PHYSICIAN 
 	    @GetMapping("/physician/{physicianId}")
 	    public ResponseEntity<List<AffiliatedWithResponseDto>> getByPhysician(
 	            @PathVariable Integer physicianId) {
@@ -47,7 +47,7 @@ public class AffiliatedWithController {
 	        return ResponseEntity.ok(response);
 	    }
 
-	    // ================= GET BY DEPARTMENT =================
+	    //  GET BY DEPARTMENT 
 	    @GetMapping("/department/{departmentId}")
 	    public ResponseEntity<List<AffiliatedWithResponseDto>> getByDepartment(
 	            @PathVariable Integer departmentId) {

@@ -18,5 +18,11 @@ public interface TrainedInService {
     TrainedInResponseDto updateTraining(TrainedInId id, TrainedInRequestDto requestDTO);
 
     void deleteTraining(TrainedInId id);
+    
+    
+    List<TrainedInResponseDto> getTrainingsByPhysician(Integer employeeId);
+
+    List<TrainedInResponseDto> getValidTrainingsByPhysician(Integer employeeId);
+
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.PhysicianRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.ResponseStructure;
-import com.sprint.project.physicianDepartmentManagement.service.PhysicianService;
+import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService;
 
 import jakarta.validation.Valid;
 
@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 	    @Autowired
 	    private PhysicianService physicianService;
 
-	    // ---------------- CREATE ----------------
+	    // CREATE 
 	    @PostMapping
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> createPhysician(
 	            @Valid @RequestBody PhysicianRequestDto dto) {
@@ -34,7 +34,7 @@ import jakarta.validation.Valid;
 	        );
 	    }
 
-	    // ---------------- GET ALL ----------------
+	    // GET ALL 
 	    @GetMapping
 	    public ResponseEntity<ResponseStructure<List<PhysicianResponseDto>>> getAllPhysicians() {
 
@@ -43,7 +43,7 @@ import jakarta.validation.Valid;
 	        );
 	    }
 
-	    // ---------------- GET BY ID ----------------
+	    //  GET BY ID 
 	    @GetMapping("/{employeeid}")
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> getPhysicianById(
 	            @PathVariable Integer employeeid) {
@@ -53,7 +53,7 @@ import jakarta.validation.Valid;
 	        );
 	    }
 
-	    // ---------------- UPDATE ----------------
+	    // UPDATE 
 	    @PutMapping("/{employeeid}")
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> updatePhysician(
 	            @PathVariable Integer id,
@@ -64,7 +64,7 @@ import jakarta.validation.Valid;
 	        );
 	    }
 
-	    // ---------------- DELETE ----------------
+	    //  DELETE 
 	    @DeleteMapping("/{employeeid}")
 	    public ResponseEntity<ResponseStructure<String>> deletePhysician(
 	            @PathVariable Integer employeeid) {
