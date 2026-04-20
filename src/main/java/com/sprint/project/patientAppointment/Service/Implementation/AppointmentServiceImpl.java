@@ -102,7 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         validateTime(dto.getStarttime(), dto.getEndtime());
 
         // OPTIONAL: Overlap check
-        if (repo.existsOverlappingAppointmentForPhysician(
+        if (repo.existsOverlappingAppointment(
                 dto.getPhysicianId(),
                 dto.getStarttime(),
                 dto.getEndtime())) {
