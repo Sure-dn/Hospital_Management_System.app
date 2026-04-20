@@ -2,13 +2,13 @@ package com.sprint.project.Treatment;
 
 import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
-import com.sprint.project.treatmentprostay.DTO.*;
-import com.sprint.project.treatmentprostay.entity.*;
-import com.sprint.project.treatmentprostay.repository.*;
-import com.sprint.project.treatmentprostay.service.*;
 import com.sprint.project.exception.*;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.treatmentprostayy.DTO.*;
+import com.sprint.project.treatmentprostayy.entities.*;
+import com.sprint.project.treatmentprostayy.repositories.*;
+import com.sprint.project.treatmentprostayy.services.*;
 
 import jakarta.transaction.Transactional;
 

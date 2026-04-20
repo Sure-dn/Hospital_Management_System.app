@@ -17,13 +17,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import com.sprint.project.NurseOnCallRoomAPIs.entity.BlockEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.treatmentprostay.entity.ProceduresEntity;
-import com.sprint.project.treatmentprostay.entity.StayEntity;
-import com.sprint.project.treatmentprostay.entity.UndergoesEntity;
-import com.sprint.project.treatmentprostay.entity.UndergoesId;
-import com.sprint.project.treatmentprostay.repository.UndergoesRepository;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
+import com.sprint.project.treatmentprostayy.entities.StayEntity;
+import com.sprint.project.treatmentprostayy.entities.UndergoesEntity;
+import com.sprint.project.treatmentprostayy.entities.UndergoesId;
+import com.sprint.project.treatmentprostayy.repositories.UndergoesRepository;
 
 @DataJpaTest
 @EntityScan(basePackages = "com.sprint.project")
