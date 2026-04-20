@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.DepartmentRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.DepartmentResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Entity.DepartmentEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.exception.DuplicateResourceException;
 import com.sprint.project.exception.ResourceNotFoundException;
-import com.sprint.project.physicianDepartmentManagement.Repository.DepartmentRepository;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.DepartmentEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.DepartmentRepository;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
 
 @Service

@@ -10,13 +10,13 @@ import com.sprint.project.exception.DuplicateResourceException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.AffiliatedWithRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.AffiliatedWithResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Entity.AffiliatedId;
-import com.sprint.project.physicianDepartmentManagement.Entity.AffiliatedWithEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.DepartmentEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Repository.AffiliatedWithRepository;
-import com.sprint.project.physicianDepartmentManagement.Repository.DepartmentRepository;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.AffiliatedId;
+import com.sprint.project.physicianDepartmentManagement.entity.AffiliatedWithEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.DepartmentEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.AffiliatedWithRepository;
+import com.sprint.project.physicianDepartmentManagement.repository.DepartmentRepository;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithService;
 
 @Service

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.TrainedInRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.TrainedInResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Entity.TrainedInId;
+import com.sprint.project.physicianDepartmentManagement.entity.TrainedInId;
 
 
 public interface TrainedInService {

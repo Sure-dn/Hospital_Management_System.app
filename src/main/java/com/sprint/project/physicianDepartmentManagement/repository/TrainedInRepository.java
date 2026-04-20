@@ -1,4 +1,4 @@
-package com.sprint.project.physicianDepartmentManagement.Repository;
+package com.sprint.project.physicianDepartmentManagement.repository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sprint.project.physicianDepartmentManagement.Entity.TrainedInEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.TrainedInId;
+import com.sprint.project.physicianDepartmentManagement.entity.TrainedInEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.TrainedInId;
 
 public interface TrainedInRepository  extends JpaRepository<TrainedInEntity, TrainedInId>  {
 	 // Fetch all trainings for a physician

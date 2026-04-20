@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.TrainedInRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.TrainedInResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Entity.*;
-import com.sprint.project.physicianDepartmentManagement.Repository.*;
+import com.sprint.project.physicianDepartmentManagement.entity.*;
+import com.sprint.project.physicianDepartmentManagement.repository.*;
 import com.sprint.project.physicianDepartmentManagement.Service.TrainedInService;
 import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
 import com.sprint.project.treatmentprostayy.repositories.ProceduresRepository;

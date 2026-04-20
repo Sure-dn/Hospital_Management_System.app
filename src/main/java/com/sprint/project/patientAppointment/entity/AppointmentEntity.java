@@ -14,7 +14,7 @@
 
 
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
 
 	@Entity
 	@Table(name = "Appointment")

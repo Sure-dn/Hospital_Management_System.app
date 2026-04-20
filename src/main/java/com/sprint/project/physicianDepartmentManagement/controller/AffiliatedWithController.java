@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.AffiliatedWithRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.AffiliatedWithResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithService;
+import com.sprint.project.physicianDepartmentManagement.service.AffiliatedWithService;
 
 @RestController
 @RequestMapping("/api/affiliations")

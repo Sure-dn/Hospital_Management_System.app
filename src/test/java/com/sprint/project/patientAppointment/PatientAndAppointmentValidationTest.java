@@ -14,8 +14,8 @@ import com.sprint.project.patientAppointment.entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.patientAppointment.repository.AppointmentRepository;
 import com.sprint.project.patientAppointment.repository.PatientRepository;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.exception.*;
 
 import org.junit.jupiter.api.BeforeEach;
