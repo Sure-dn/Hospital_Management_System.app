@@ -1,7 +1,7 @@
 package com.sprint.project.patientAppointment.Service.Implementation;
 
-import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.repository.NurseRepository;
+import com.sprint.project.nurseoncallroom.entity.NurseEntity;
+import com.sprint.project.nurseoncallroom.repository.NurseRepository;
 import com.sprint.project.patientAppointment.DTO.RequestDTO.AppointmentRequestDTO;
 import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponseDTO;
 import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
