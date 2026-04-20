@@ -1,4 +1,4 @@
-package com.sprint.project.physicianDepartmentManagement.Entity;
+package com.sprint.project.physicianDepartmentManagement.entity;
 import java.util.List;
 
 import jakarta.persistence.Column;

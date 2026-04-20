@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.DepartmentRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.DepartmentResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
+import com.sprint.project.physicianDepartmentManagement.service.DepartmentService;
+
 import java.util.*;
 
 import jakarta.validation.Valid;

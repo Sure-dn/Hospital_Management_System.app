@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.PhysicianRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.ResponseStructure;
-import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService;
-
+import com.sprint.project.physicianDepartmentManagement.service.PhysicianService;
 
 import jakarta.validation.Valid;
 

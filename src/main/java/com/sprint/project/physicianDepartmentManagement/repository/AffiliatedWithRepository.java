@@ -1,12 +1,12 @@
-package com.sprint.project.physicianDepartmentManagement.Repository;
+package com.sprint.project.physicianDepartmentManagement.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sprint.project.physicianDepartmentManagement.Entity.AffiliatedId;
-import com.sprint.project.physicianDepartmentManagement.Entity.AffiliatedWithEntity;
+import com.sprint.project.physicianDepartmentManagement.entity.AffiliatedId;
+import com.sprint.project.physicianDepartmentManagement.entity.AffiliatedWithEntity;
 
 
 public interface AffiliatedWithRepository extends JpaRepository<AffiliatedWithEntity, AffiliatedId> {
