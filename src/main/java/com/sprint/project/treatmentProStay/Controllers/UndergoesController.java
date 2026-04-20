@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.Controllers;
+package com.sprint.project.treatmentprostay.controllers;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.project.treatmentProStay.DTO.ResponseStructure;
-import com.sprint.project.treatmentProStay.DTO.UndergoesRequestDTO;
-import com.sprint.project.treatmentProStay.Entity.UndergoesId;
-import com.sprint.project.treatmentProStay.Service.UndergoesService;
+import com.sprint.project.treatmentprostay.DTO.ResponseStructure;
+import com.sprint.project.treatmentprostay.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostay.entity.UndergoesId;
+import com.sprint.project.treatmentprostay.service.UndergoesService;
 
 @RestController
 @RequestMapping("/api/treatments")

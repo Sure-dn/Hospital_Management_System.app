@@ -1,11 +1,11 @@
-package com.sprint.project.treatmentProStay.Repository;
+package com.sprint.project.treatmentprostay.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sprint.project.treatmentProStay.Entity.ProceduresEntity;
+import com.sprint.project.treatmentprostay.entity.ProceduresEntity;
 
 public interface ProceduresRepository extends JpaRepository<ProceduresEntity, Integer> {
 	// 1. Find by exact name
