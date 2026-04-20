@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.exception;
+package com.sprint.project.treatmentprostay.exception;
 
 public class InvalidStayException extends RuntimeException {
     public InvalidStayException(String message) {

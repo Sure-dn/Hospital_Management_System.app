@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.DTO;
+package com.sprint.project.treatmentprostay.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

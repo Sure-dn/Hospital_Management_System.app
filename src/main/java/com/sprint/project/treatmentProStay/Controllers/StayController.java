@@ -1,14 +1,14 @@
-package com.sprint.project.treatmentProStay.Controllers;
+package com.sprint.project.treatmentprostay.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.treatmentProStay.DTO.ResponseStructure;
-import com.sprint.project.treatmentProStay.DTO.StayRequestDTO;
-import com.sprint.project.treatmentProStay.DTO.StayResponseDTO;
-import com.sprint.project.treatmentProStay.Entity.StayEntity;
-import com.sprint.project.treatmentProStay.Service.StayService;
+import com.sprint.project.treatmentprostay.DTO.ResponseStructure;
+import com.sprint.project.treatmentprostay.DTO.StayRequestDTO;
+import com.sprint.project.treatmentprostay.DTO.StayResponseDTO;
+import com.sprint.project.treatmentprostay.entity.StayEntity;
+import com.sprint.project.treatmentprostay.service.StayService;
 
 @RestController
 @RequestMapping("/api/stays")

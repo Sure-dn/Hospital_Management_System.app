@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.Service.Implementations;
+package com.sprint.project.treatmentprostay.service.implementations;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sprint.project.treatmentProStay.DTO.StayRequestDTO;
-import com.sprint.project.treatmentProStay.Entity.StayEntity;
-import com.sprint.project.treatmentProStay.Repository.StayRepository;
-import com.sprint.project.treatmentProStay.Service.StayService;
-import com.sprint.project.treatmentProStay.exception.InvalidStayException;
-import com.sprint.project.treatmentProStay.exception.StayAlreadyExistsException;
-import com.sprint.project.treatmentProStay.exception.StayNotFoundException;
+import com.sprint.project.treatmentprostay.DTO.StayRequestDTO;
+import com.sprint.project.treatmentprostay.entity.StayEntity;
+import com.sprint.project.treatmentprostay.repository.StayRepository;
+import com.sprint.project.treatmentprostay.service.StayService;
+import com.sprint.project.treatmentprostay.exception.InvalidStayException;
+import com.sprint.project.treatmentprostay.exception.StayAlreadyExistsException;
+import com.sprint.project.treatmentprostay.exception.StayNotFoundException;
 import com.sprint.project.exception.BadRequestException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;

@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.exception;
+package com.sprint.project.treatmentprostay.exception;
 
 public class ProcedureAlreadyExistsException extends RuntimeException {
     public ProcedureAlreadyExistsException(String message) {
