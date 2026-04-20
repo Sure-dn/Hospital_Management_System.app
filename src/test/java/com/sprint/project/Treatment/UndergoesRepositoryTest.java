@@ -13,23 +13,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-<<<<<<< HEAD
 
-import com.sprint.project.NurseOnCallRoomAPIs.entity.BlockEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.Treatment.Entity.ProceduresEntity;
-import com.sprint.project.Treatment.Entity.StayEntity;
-import com.sprint.project.Treatment.Entity.UndergoesEntity;
-import com.sprint.project.Treatment.Entity.UndergoesId;
-import com.sprint.project.Treatment.Repository.UndergoesRepository;
-import com.sprint.project.patientAppointment.entity.PatientEntity;
-=======
 import com.sprint.project.nurseoncallroom.entity.BlockEntity;
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
 import com.sprint.project.nurseoncallroom.entity.RoomEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
->>>>>>> b329601ac3d40f584a2fb2e7bb5126deead074fe
+import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
 import com.sprint.project.treatmentprostayy.entities.StayEntity;
