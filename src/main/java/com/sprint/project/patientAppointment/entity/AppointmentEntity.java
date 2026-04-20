@@ -1,5 +1,5 @@
 
-	package com.sprint.project.patientAppointment.Entity;
+	package com.sprint.project.patientAppointment.entity;
 
 	import jakarta.persistence.Column;
 	import jakarta.persistence.Entity;

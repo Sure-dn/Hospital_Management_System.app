@@ -12,7 +12,7 @@ import com.sprint.project.Treatment.Repository.StayRepository;
 import com.sprint.project.Treatment.Service.StayService;
 import com.sprint.project.exception.BadRequestException;
 import com.sprint.project.exception.ResourceNotFoundException;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
 
 @Service

@@ -2,7 +2,7 @@ package com.sprint.project.MedicationPrescriptionAPIs;
 
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;

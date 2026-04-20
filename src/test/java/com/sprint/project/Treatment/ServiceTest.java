@@ -7,8 +7,8 @@ import com.sprint.project.Treatment.Entity.*;
 import com.sprint.project.Treatment.Repository.*;
 import com.sprint.project.Treatment.Service.*;
 import com.sprint.project.exception.*;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 
 import jakarta.transaction.Transactional;
 

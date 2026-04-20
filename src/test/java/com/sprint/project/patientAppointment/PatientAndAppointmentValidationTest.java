@@ -9,11 +9,11 @@ import java.util.Optional;
 
 import com.sprint.project.patientAppointment.DTO.RequestDTO.AppointmentRequestDTO;
 import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponseDTO;
-import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.patientAppointment.Repository.AppointmentRepository;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
 import com.sprint.project.patientAppointment.Service.Implementation.AppointmentServiceImpl;
+import com.sprint.project.patientAppointment.entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.patientAppointment.repository.AppointmentRepository;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
 import com.sprint.project.exception.*;
@@ -64,7 +64,7 @@ class PatientAndAppointmentValidationTest {
         physician.setName("Dr. John");
     }
 
-    // ================= POSITIVE =================
+    // POSITIVE 
 
     @Test
     void TC_P_01_createAppointment_validData_success() {
@@ -118,7 +118,7 @@ class PatientAndAppointmentValidationTest {
         assertDoesNotThrow(() -> service.deleteAppointment(1));
     }
 
-    // ================= NEGATIVE =================
+    //  NEGATIVE 
 
     @Test
     void TC_N_01_createAppointment_duplicateId_shouldThrow() {
@@ -177,7 +177,7 @@ class PatientAndAppointmentValidationTest {
         assertThrows(ResourceNotFoundException.class, () -> service.getAppointmentsByPatient(101));
     }
 
-    // ================= EDGE =================
+    //  EDGE 
 
     @Test
     void TC_E_01_createAppointment_startEqualsEnd_shouldThrow() {
@@ -204,7 +204,7 @@ class PatientAndAppointmentValidationTest {
         assertThrows(BadRequestException.class, () -> service.createAppointment(dto));
     }
 
-    // ================= HELPER =================
+    //HELPER 
 
     private AppointmentEntity mockEntity() {
 

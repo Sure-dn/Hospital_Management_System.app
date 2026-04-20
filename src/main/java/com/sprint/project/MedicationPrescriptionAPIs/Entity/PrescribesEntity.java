@@ -13,8 +13,8 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
-import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.patientAppointment.entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
 @Entity

@@ -7,10 +7,10 @@ import com.sprint.project.MedicationPrescriptionAPIs.Service.PrescribesService;
 
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
-import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
-import com.sprint.project.patientAppointment.Repository.AppointmentRepository;
+import com.sprint.project.patientAppointment.entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.patientAppointment.repository.AppointmentRepository;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
 import com.sprint.project.MedicationPrescriptionAPIs.Repository.MedicationRepository;
 

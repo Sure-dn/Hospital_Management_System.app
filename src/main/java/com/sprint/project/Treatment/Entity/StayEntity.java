@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
 
 @Entity
 @Table(name = "Stay")
