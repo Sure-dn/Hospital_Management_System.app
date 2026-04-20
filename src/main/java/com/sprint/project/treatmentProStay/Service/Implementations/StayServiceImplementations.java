@@ -16,7 +16,7 @@ import com.sprint.project.treatmentProStay.exception.StayNotFoundException;
 import com.sprint.project.exception.BadRequestException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
-import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
+import com.sprint.project.nurseoncallroom.repository.RoomRepository;
 
 @Service
 public class StayServiceImplementations implements StayService {
