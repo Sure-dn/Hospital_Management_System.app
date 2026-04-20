@@ -1,4 +1,4 @@
-package com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO;
+package com.sprint.project.medicationprescription.dto.requestdto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

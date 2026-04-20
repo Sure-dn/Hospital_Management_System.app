@@ -1,10 +1,7 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Service;
+package com.sprint.project.medicationprescription.service;
 
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.PrescriptionRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.PrescriptionResponseDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
-
-import jakarta.validation.Valid;
+import com.sprint.project.medicationprescription.dto.requestdto.PrescriptionRequestDTO;
+import com.sprint.project.medicationprescription.entity.PrescribesEntity;
 
 import java.time.LocalDateTime;
 import java.util.List;

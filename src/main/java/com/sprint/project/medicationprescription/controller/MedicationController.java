@@ -1,8 +1,8 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Controller;
+package com.sprint.project.medicationprescription.controller;
 
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.MedicationResponseDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Service.MedicationService;
+import com.sprint.project.medicationprescription.dto.requestdto.MedicationRequestDTO;
+import com.sprint.project.medicationprescription.dto.responsedto.MedicationResponseDTO;
+import com.sprint.project.medicationprescription.service.MedicationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

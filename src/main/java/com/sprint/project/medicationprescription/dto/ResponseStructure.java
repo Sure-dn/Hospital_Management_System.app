@@ -1,4 +1,4 @@
-package com.sprint.project.MedicationPrescriptionAPIs.DTO;
+package com.sprint.project.medicationprescription.dto;
 
 import java.time.LocalDateTime;
 
