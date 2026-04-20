@@ -17,11 +17,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import com.sprint.project.NurseOnCallRoomAPIs.entity.BlockEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.treatmentProStay.Entity.ProceduresEntity;
-import com.sprint.project.treatmentProStay.Entity.StayEntity;
-import com.sprint.project.treatmentProStay.Entity.UndergoesEntity;
-import com.sprint.project.treatmentProStay.Entity.UndergoesId;
-import com.sprint.project.treatmentProStay.Repository.UndergoesRepository;
+import com.sprint.project.treatmentprostay.entity.ProceduresEntity;
+import com.sprint.project.treatmentprostay.entity.StayEntity;
+import com.sprint.project.treatmentprostay.entity.UndergoesEntity;
+import com.sprint.project.treatmentprostay.entity.UndergoesId;
+import com.sprint.project.treatmentprostay.repository.UndergoesRepository;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 

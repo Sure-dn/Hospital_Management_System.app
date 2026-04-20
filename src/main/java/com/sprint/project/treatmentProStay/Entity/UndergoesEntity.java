@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.Entity;
+package com.sprint.project.treatmentprostay.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;

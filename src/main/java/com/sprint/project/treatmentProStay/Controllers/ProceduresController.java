@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.Controllers;
+package com.sprint.project.treatmentprostay.controllers;
 
 
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.project.treatmentProStay.DTO.ProceduresRequestDTO;
-import com.sprint.project.treatmentProStay.DTO.ProceduresResponseDTO;
-import com.sprint.project.treatmentProStay.DTO.ResponseStructure;
-import com.sprint.project.treatmentProStay.Service.ProceduresService;
+import com.sprint.project.treatmentprostay.DTO.ProceduresRequestDTO;
+import com.sprint.project.treatmentprostay.DTO.ProceduresResponseDTO;
+import com.sprint.project.treatmentprostay.DTO.ResponseStructure;
+import com.sprint.project.treatmentprostay.service.ProceduresService;
 
 import jakarta.validation.Valid;
 

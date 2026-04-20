@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.Service.Implementations;
+package com.sprint.project.treatmentprostay.service.implementations;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sprint.project.treatmentProStay.DTO.ProceduresRequestDTO;
-import com.sprint.project.treatmentProStay.Entity.ProceduresEntity;
-import com.sprint.project.treatmentProStay.Repository.ProceduresRepository;
-import com.sprint.project.treatmentProStay.Service.ProceduresService;
-import com.sprint.project.treatmentProStay.exception.InvalidProcedureException;
-import com.sprint.project.treatmentProStay.exception.ProcedureAlreadyExistsException;
-import com.sprint.project.treatmentProStay.exception.ProcedureNotFoundException;
+import com.sprint.project.treatmentprostay.DTO.ProceduresRequestDTO;
+import com.sprint.project.treatmentprostay.entity.ProceduresEntity;
+import com.sprint.project.treatmentprostay.repository.ProceduresRepository;
+import com.sprint.project.treatmentprostay.service.ProceduresService;
+import com.sprint.project.treatmentprostay.exception.InvalidProcedureException;
+import com.sprint.project.treatmentprostay.exception.ProcedureAlreadyExistsException;
+import com.sprint.project.treatmentprostay.exception.ProcedureNotFoundException;
 
 @Service
 public class ProceduresServiceImplementations implements ProceduresService {

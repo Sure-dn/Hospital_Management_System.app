@@ -1,9 +1,9 @@
-package com.sprint.project.treatmentProStay.Service;
+package com.sprint.project.treatmentprostay.service;
 
 import java.util.List;
 
-import com.sprint.project.treatmentProStay.DTO.UndergoesRequestDTO;
-import com.sprint.project.treatmentProStay.Entity.UndergoesId;
+import com.sprint.project.treatmentprostay.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostay.entity.UndergoesId;
 
 public interface UndergoesService {
 	UndergoesRequestDTO assignTreatment(UndergoesRequestDTO dto);

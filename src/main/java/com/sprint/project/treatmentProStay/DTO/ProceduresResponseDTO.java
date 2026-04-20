@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.DTO;
+package com.sprint.project.treatmentprostay.DTO;
 public class ProceduresResponseDTO {
 
     private Integer code;

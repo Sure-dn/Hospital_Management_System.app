@@ -1,4 +1,4 @@
-package com.sprint.project.treatmentProStay.Service.Implementations;
+package com.sprint.project.treatmentprostay.service.implementations;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,18 +6,18 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sprint.project.treatmentProStay.DTO.UndergoesRequestDTO;
-import com.sprint.project.treatmentProStay.Entity.*;
-import com.sprint.project.treatmentProStay.Repository.UndergoesRepository;
-import com.sprint.project.treatmentProStay.Service.UndergoesService;
-import com.sprint.project.treatmentProStay.exception.InvalidTreatmentException;
-import com.sprint.project.treatmentProStay.exception.TreatmentAlreadyExistsException;
-import com.sprint.project.treatmentProStay.exception.TreatmentNotFoundException;
+import com.sprint.project.treatmentprostay.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostay.entity.*;
+import com.sprint.project.treatmentprostay.repository.UndergoesRepository;
+import com.sprint.project.treatmentprostay.service.UndergoesService;
+import com.sprint.project.treatmentprostay.exception.InvalidTreatmentException;
+import com.sprint.project.treatmentprostay.exception.TreatmentAlreadyExistsException;
+import com.sprint.project.treatmentprostay.exception.TreatmentNotFoundException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
-import com.sprint.project.treatmentProStay.Repository.ProceduresRepository;
-import com.sprint.project.treatmentProStay.Repository.StayRepository;
+import com.sprint.project.treatmentprostay.repository.ProceduresRepository;
+import com.sprint.project.treatmentprostay.repository.StayRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
 import com.sprint.project.NurseOnCallRoomAPIs.entity.NurseEntity;

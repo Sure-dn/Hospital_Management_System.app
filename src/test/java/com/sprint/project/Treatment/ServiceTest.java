@@ -2,10 +2,10 @@ package com.sprint.project.Treatment;
 
 import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
 import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
-import com.sprint.project.treatmentProStay.DTO.*;
-import com.sprint.project.treatmentProStay.Entity.*;
-import com.sprint.project.treatmentProStay.Repository.*;
-import com.sprint.project.treatmentProStay.Service.*;
+import com.sprint.project.treatmentprostay.DTO.*;
+import com.sprint.project.treatmentprostay.entity.*;
+import com.sprint.project.treatmentprostay.repository.*;
+import com.sprint.project.treatmentprostay.service.*;
 import com.sprint.project.exception.*;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;

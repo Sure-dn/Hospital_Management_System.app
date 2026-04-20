@@ -1,9 +1,9 @@
-package com.sprint.project.treatmentProStay.Service;
+package com.sprint.project.treatmentprostay.service;
 
 import java.util.List;
 
-import com.sprint.project.treatmentProStay.DTO.StayRequestDTO;
-import com.sprint.project.treatmentProStay.Entity.StayEntity;
+import com.sprint.project.treatmentprostay.DTO.StayRequestDTO;
+import com.sprint.project.treatmentprostay.entity.StayEntity;
 
 public interface StayService {
 
