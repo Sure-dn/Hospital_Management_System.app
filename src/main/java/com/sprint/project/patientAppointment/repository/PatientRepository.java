@@ -1,4 +1,4 @@
-package com.sprint.project.patientAppointment.Repository;
+package com.sprint.project.patientAppointment.repository;
 
 import java.util.Optional;
 
@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+
 import java.util.List;
 
 public interface PatientRepository extends JpaRepository<PatientEntity, Integer> {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sprint.project.exception.BadRequestException;
 import com.sprint.project.exception.ResourceNotFoundException;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.treatmentprostayy.DTO.StayRequestDTO;
 import com.sprint.project.treatmentprostayy.entities.StayEntity;
 import com.sprint.project.treatmentprostayy.exception.InvalidStayException;

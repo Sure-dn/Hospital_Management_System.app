@@ -2,29 +2,27 @@ package com.sprint.project.patientAppointment.Service.Implementation;
 
 import com.sprint.project.patientAppointment.DTO.RequestDTO.PatientRequestDTO;
 import com.sprint.project.patientAppointment.DTO.ResponseDTO.PatientResponseDTO;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.exception.BadRequestException;
-import com.sprint.project.exception.DuplicateResourceException;
-import com.sprint.project.exception.ResourceNotFoundException;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.patientAppointment.exception.PatientAlreadyExistsException;
+import com.sprint.project.patientAppointment.exception.PatientNotFoundException;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.patientAppointment.Service.PatientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository repo;
 
-    
-    private PatientEntity toEntity(PatientRequestDTO dto) {
+    //  MAPPER 
+
+    private PatientEntity mapToEntity(PatientRequestDTO dto) {
         PatientEntity entity = new PatientEntity();
         entity.setSsn(dto.getSsn());
         entity.setName(dto.getName());
@@ -35,7 +33,7 @@ public class PatientServiceImpl implements PatientService {
         return entity;
     }
 
-    private PatientResponseDTO toResponseDTO(PatientEntity entity) {
+    private PatientResponseDTO mapToResponse(PatientEntity entity) {
         PatientResponseDTO dto = new PatientResponseDTO();
         dto.setSsn(entity.getSsn());
         dto.setName(entity.getName());
@@ -48,82 +46,84 @@ public class PatientServiceImpl implements PatientService {
 
     //  CREATE 
     @Override
-    public PatientResponseDTO createPatient(PatientRequestDTO requestDTO) {
+    public PatientResponseDTO createPatient(PatientRequestDTO dto) {
 
-        if (requestDTO.getSsn() == null || requestDTO.getSsn() <= 0) {
-            throw new BadRequestException("Invalid SSN");
+        if (dto == null || dto.getSsn() == null || dto.getSsn() <= 0) {
+            throw new PatientAlreadyExistsException("Invalid Patient Data");
         }
 
-        if (repo.existsById(requestDTO.getSsn())) {
-            throw new DuplicateResourceException(
-                    "Patient already exists with SSN: " + requestDTO.getSsn());
+        if (repo.existsById(dto.getSsn())) {
+            throw new PatientAlreadyExistsException(
+                    "Patient already exists with SSN: " + dto.getSsn());
         }
 
-        PatientEntity saved = repo.save(toEntity(requestDTO));
-        return toResponseDTO(saved);
+        PatientEntity saved = repo.save(mapToEntity(dto));
+        return mapToResponse(saved);
     }
 
-    // GET BY ID 
+    //  GET BY ID 
     @Override
     public PatientResponseDTO getPatientById(Integer ssn) {
 
         PatientEntity entity = repo.findById(ssn)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Patient not found with SSN: " + ssn));
+                        new PatientNotFoundException("Patient not found with SSN: " + ssn));
 
-        return toResponseDTO(entity);
+        return mapToResponse(entity);
     }
 
-    // GET ALL 
+    //GET ALL 
     @Override
     public List<PatientResponseDTO> getAllPatients() {
 
         return repo.findAll()
                 .stream()
-                .map(this::toResponseDTO)
+                .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
-    //  UPDATE 
+    // UPDATE 
     @Override
-    public PatientResponseDTO updatePatient(Integer ssn, PatientRequestDTO requestDTO) {
+    public PatientResponseDTO updatePatient(Integer ssn, PatientRequestDTO dto) {
 
         PatientEntity existing = repo.findById(ssn)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Patient not found with SSN: " + ssn));
+                        new PatientNotFoundException("Patient not found with SSN: " + ssn));
 
-        if (!ssn.equals(requestDTO.getSsn())) {
-            throw new BadRequestException("SSN mismatch between path and body");
+        // Optional strict validation
+        if (!ssn.equals(dto.getSsn())) {
+            throw new PatientNotFoundException("SSN mismatch between path and body");
         }
 
-        existing.setName(requestDTO.getName());
-        existing.setAddress(requestDTO.getAddress());
-        existing.setPhone(requestDTO.getPhone());
-        existing.setInsuranceId(requestDTO.getInsuranceId());
-        existing.setPcp(requestDTO.getPcp());
+        existing.setName(dto.getName());
+        existing.setAddress(dto.getAddress());
+        existing.setPhone(dto.getPhone());
+        existing.setInsuranceId(dto.getInsuranceId());
+        existing.setPcp(dto.getPcp());
 
-        return toResponseDTO(repo.save(existing));
+        return mapToResponse(repo.save(existing));
     }
 
     //  DELETE 
     @Override
     public void deletePatient(Integer ssn) {
 
-        PatientEntity existing = repo.findById(ssn)
+        PatientEntity entity = repo.findById(ssn)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Patient not found with SSN: " + ssn));
+                        new PatientNotFoundException("Patient not found with SSN: " + ssn));
 
-        repo.delete(existing);
+        repo.delete(entity);
     }
 
-    //  GET PCP 
+    // GET PCP 
     @Override
     public Integer getPCP(Integer ssn) {
 
-        return repo.findById(ssn)
+        PatientEntity entity = repo.findById(ssn)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Patient not found with SSN: " + ssn))
-                .getPcp();
+                        new PatientNotFoundException("Patient not found with SSN: " + ssn));
+
+        return entity.getPcp();
     }
 
     //  UPDATE PCP 
@@ -131,17 +131,15 @@ public class PatientServiceImpl implements PatientService {
     public PatientResponseDTO updatePCP(Integer ssn, Integer physicianId) {
 
         if (physicianId == null || physicianId <= 0) {
-            throw new BadRequestException("Invalid Physician ID");
+            throw new PatientNotFoundException("Invalid Physician ID");
         }
 
-        PatientEntity patient = repo.findById(ssn)
+        PatientEntity entity = repo.findById(ssn)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Patient not found with SSN: " + ssn));
+                        new PatientNotFoundException("Patient not found with SSN: " + ssn));
 
-        patient.setPcp(physicianId);
+        entity.setPcp(physicianId);
 
-        return toResponseDTO(repo.save(patient));
+        return mapToResponse(repo.save(entity));
     }
 }
-
-

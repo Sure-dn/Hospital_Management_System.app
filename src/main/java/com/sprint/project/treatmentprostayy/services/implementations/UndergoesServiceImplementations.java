@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sprint.project.exception.ResourceNotFoundException;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
 import com.sprint.project.treatmentprostayy.DTO.UndergoesRequestDTO;

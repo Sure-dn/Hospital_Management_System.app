@@ -5,7 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
 
 @Entity

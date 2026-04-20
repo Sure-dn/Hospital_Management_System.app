@@ -1,8 +1,9 @@
-package com.sprint.project.patientAppointment.Controller;
+package com.sprint.project.patientAppointment.controller;
 
 import com.sprint.project.patientAppointment.DTO.RequestDTO.PatientRequestDTO;
 import com.sprint.project.patientAppointment.DTO.ResponseDTO.PatientResponseDTO;
 import com.sprint.project.patientAppointment.Service.PatientService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    // POST /api/patients 
+     
     // Create a new patient.
     
     @PostMapping

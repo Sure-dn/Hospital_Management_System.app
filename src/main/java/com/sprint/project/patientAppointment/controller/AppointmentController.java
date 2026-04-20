@@ -1,8 +1,9 @@
-package com.sprint.project.patientAppointment.Controller;
+package com.sprint.project.patientAppointment.controller;
 
 import com.sprint.project.patientAppointment.DTO.RequestDTO.AppointmentRequestDTO;
 import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponseDTO;
 import com.sprint.project.patientAppointment.Service.AppointmentService;
+
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,8 +23,7 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
-    // ── POST /api/appointments ─────────────────────────────────────────────────
-    /**
+     /**
      * Create a new appointment.
      * Validates time window and checks physician scheduling conflicts.
      */
@@ -34,7 +34,6 @@ public class AppointmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    // ── GET /api/appointments ──────────────────────────────────────────────────
     /**
      * Retrieve all appointments, optionally filtered by date.
      * Usage: GET /api/appointments
@@ -50,9 +49,7 @@ public class AppointmentController {
         }
         return ResponseEntity.ok(appointmentService.getAllAppointments());
     }
-
-    // ── GET /api/appointments/{appointmentId} ──────────────────────────────────
-    /**
+     /**
      * Retrieve a single appointment by its ID.
      */
     @GetMapping("/api/appointments/{appointmentId}")
@@ -61,8 +58,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointmentById(appointmentId));
     }
 
-    // ── PUT /api/appointments/{appointmentId} ──────────────────────────────────
-    /**
+     /**
      * Update an existing appointment.
      * Re-validates time window and physician conflict.
      */
@@ -73,7 +69,6 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.updateAppointment(appointmentId, dto));
     }
 
-    // ── DELETE /api/appointments/{appointmentId} ───────────────────────────────
     /**
      * Delete an appointment by ID.
      */
@@ -83,8 +78,7 @@ public class AppointmentController {
         return ResponseEntity.noContent().build();
     }
 
-    // ── GET /api/patients/{ssn}/appointments ───────────────────────────────────
-    /**
+     /**
      * Get all appointments for a specific patient (by SSN).
      */
     @GetMapping("/api/patients/{ssn}/appointments")
@@ -93,8 +87,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.getAppointmentsByPatient(ssn));
     }
 
-    // ── GET /api/physicians/{employeeId}/appointments ──────────────────────────
-    /**
+     /**
      * Get all appointments assigned to a specific physician.
      */
     @GetMapping("/api/physicians/{employeeId}/appointments")

@@ -1,4 +1,4 @@
-package com.sprint.project.patientAppointment.Repository;
+package com.sprint.project.patientAppointment.repository;
 
 import java.util.Optional;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.entity.AppointmentEntity;
 
 public interface AppointmentRepository extends JpaRepository<AppointmentEntity, Integer> {
 
@@ -17,7 +17,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
 
     List<AppointmentEntity> findByPatient_Ssn(Integer ssn);
 
-    List<AppointmentEntity> findByPhysician_EmployeeId(Integer id);
+    List<AppointmentEntity> findByPhysician_EmployeeId(Integer physicianid);
 
     // DATE QUERY
     @Query("SELECT a FROM AppointmentEntity a WHERE FUNCTION('DATE', a.starttime) = :date")
@@ -35,11 +35,14 @@ public interface AppointmentRepository extends JpaRepository<AppointmentEntity, 
            "FROM AppointmentEntity a " +
            "WHERE a.physician.employeeId = :physicianId " +
            "AND (a.starttime < :endTime AND a.endtime > :startTime)")
+    
+    
+    
     boolean existsOverlappingAppointmentForPhysician(
             @Param("physicianId") Integer physicianId,
             @Param("startTime") LocalDateTime startTime,
             @Param("endTime") LocalDateTime endTime
     );
 
-    boolean existsByAppointmentId(Integer appointmentId);
+    boolean existsByAppointmentId(Integer physicianId, LocalDateTime start,LocalDateTime end);
 }
