@@ -1,225 +1,221 @@
 package com.sprint.project.patientAppointment;
 
-import com.sprint.project.nurseoncallroom.entity.NurseEntity;
-import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
-import com.sprint.project.patientAppointment.Entity.PatientEntity;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.sprint.project.patientAppointment.DTO.RequestDTO.AppointmentRequestDTO;
+import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponseDTO;
+import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
+import com.sprint.project.patientAppointment.Entity.PatientEntity;
+import com.sprint.project.patientAppointment.Repository.AppointmentRepository;
+import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.patientAppointment.Service.Implementation.AppointmentServiceImpl;
+import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.exception.*;
 
-/**
- * Unit tests for PatientEntity and AppointmentEntity validations.
- */
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
 class PatientAndAppointmentValidationTest {
 
-    private static Validator validator;
+    @Mock
+    private AppointmentRepository appointmentRepo;
 
-    @BeforeAll
-    static void setUpValidator() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+    @Mock
+    private PatientRepository patientRepo;
+
+    @Mock
+    private PhysicianRepository physicianRepo;
+
+    @InjectMocks
+    private AppointmentServiceImpl service;
+
+    private AppointmentRequestDTO dto;
+    private PatientEntity patient;
+    private PhysicianEntity physician;
+
+    @BeforeEach
+    void setUp() {
+
+        dto = new AppointmentRequestDTO();
+        dto.setAppointmentId(1);
+        dto.setPatientSsn(101);
+        dto.setPhysicianId(201);
+        dto.setStarttime(LocalDateTime.now().plusDays(1));
+        dto.setEndtime(LocalDateTime.now().plusDays(1).plusHours(1));
+        dto.setExaminationRoom("Room-1");
+
+        patient = new PatientEntity();
+        patient.setSsn(101);
+        patient.setName("Patient A");
+
+        physician = new PhysicianEntity();
+        physician.setEmployeeId(201);
+        physician.setName("Dr. John");
     }
 
-    // ========================
-    // PatientEntity Tests
-    // ========================
+    // ================= POSITIVE =================
 
-    private PatientEntity validPatient() {
-        PatientEntity p = new PatientEntity();
-        p.setSsn(100200300);
-        p.setName("Alice Brown");
-        p.setAddress("456 Oak Avenue, Springfield");
-        p.setPhone("555-9876");
-        p.setInsuranceId(300);
-        p.setPcp(5);
-        return p;
+    @Test
+    void TC_P_01_createAppointment_validData_success() {
+
+        when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
+        when(physicianRepo.findById(201)).thenReturn(Optional.of(physician));
+        when(appointmentRepo.existsById(1)).thenReturn(false);
+        when(appointmentRepo.save(any())).thenAnswer(i -> i.getArgument(0));
+
+        AppointmentResponseDTO result = service.createAppointment(dto);
+
+        assertNotNull(result);
+        assertEquals(1, result.getAppointmentId());
     }
 
     @Test
-    @DisplayName("Valid PatientEntity should have no violations")
-    void validPatient_noViolations() {
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(validPatient());
-        assertTrue(violations.isEmpty());
+    void TC_P_02_getAppointmentById_validId_success() {
+
+        when(appointmentRepo.findById(1)).thenReturn(Optional.of(mockEntity()));
+
+        AppointmentResponseDTO result = service.getAppointmentById(1);
+
+        assertNotNull(result);
+        assertEquals(1, result.getAppointmentId());
     }
 
     @Test
-    @DisplayName("Null SSN should fail @NotNull")
-    void nullPatientSsn_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setSsn(null);
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("ssn")));
+    void TC_P_03_getAllAppointments_success() {
+
+        when(appointmentRepo.findAll()).thenReturn(Arrays.asList(mockEntity()));
+
+        assertEquals(1, service.getAllAppointments().size());
     }
 
     @Test
-    @DisplayName("Blank patient name should fail @NotBlank")
-    void blankPatientName_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setName("");
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("name")));
+    void TC_P_04_updateAppointment_validData_success() {
+
+        when(appointmentRepo.findById(1)).thenReturn(Optional.of(mockEntity()));
+        when(appointmentRepo.save(any())).thenAnswer(i -> i.getArgument(0));
+
+        AppointmentResponseDTO result = service.updateAppointment(1, dto);
+
+        assertNotNull(result);
     }
 
     @Test
-    @DisplayName("Null patient name should fail @NotBlank")
-    void nullPatientName_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setName(null);
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
+    void TC_P_05_deleteAppointment_validId_success() {
+
+        when(appointmentRepo.findById(1)).thenReturn(Optional.of(mockEntity()));
+
+        assertDoesNotThrow(() -> service.deleteAppointment(1));
+    }
+
+    // ================= NEGATIVE =================
+
+    @Test
+    void TC_N_01_createAppointment_duplicateId_shouldThrow() {
+
+        when(appointmentRepo.existsById(1)).thenReturn(true);
+
+        assertThrows(DuplicateResourceException.class, () -> service.createAppointment(dto));
     }
 
     @Test
-    @DisplayName("Blank address should fail @NotBlank")
-    void blankAddress_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setAddress("   ");
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("address")));
+    void TC_N_02_createAppointment_nullId_shouldThrow() {
+
+        dto.setAppointmentId(null);
+
+        assertThrows(BadRequestException.class, () -> service.createAppointment(dto));
     }
 
     @Test
-    @DisplayName("Blank phone should fail @NotBlank")
-    void blankPhone_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setPhone("");
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("phone")));
+    void TC_N_03_createAppointment_patientNotFound_shouldThrow() {
+
+        when(patientRepo.findById(101)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.createAppointment(dto));
     }
 
     @Test
-    @DisplayName("Null insuranceId should fail @NotNull")
-    void nullInsuranceId_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setInsuranceId(null);
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("insuranceId")));
+    void TC_N_04_createAppointment_physicianNotFound_shouldThrow() {
+
+        when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
+        when(physicianRepo.findById(201)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.createAppointment(dto));
     }
 
     @Test
-    @DisplayName("Null pcp should fail @NotNull")
-    void nullPcp_shouldViolate() {
-        PatientEntity p = validPatient();
-        p.setPcp(null);
-        Set<ConstraintViolation<PatientEntity>> violations = validator.validate(p);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("pcp")));
-    }
+    void TC_N_05_getAppointmentById_invalidId_shouldThrow() {
 
-    // ========================
-    // AppointmentEntity Tests
-    // ========================
+        when(appointmentRepo.findById(1)).thenReturn(Optional.empty());
 
-    private AppointmentEntity validAppointment() {
-        PatientEntity patient = validPatient();
-
-        PhysicianEntity physician = new PhysicianEntity();
-        physician.setEmployeeId(10);
-        physician.setName("Dr. Jones");
-        physician.setPosition("Surgeon");
-        physician.setSsn(444555666);
-
-        NurseEntity nurse = new NurseEntity(201, "Nurse Betty", "Senior Nurse", true, 777888999);
-
-        AppointmentEntity appt = new AppointmentEntity();
-        appt.setAppointmentId(5001);
-        appt.setPatient(patient);
-        appt.setPhysician(physician);
-        appt.setPrepNurse(nurse);
-        appt.setStart(LocalDateTime.of(2025, 6, 15, 9, 0));
-        appt.setEnd(LocalDateTime.of(2025, 6, 15, 10, 0));
-        appt.setExaminationRoom("A3");
-        return appt;
+        assertThrows(ResourceNotFoundException.class, () -> service.getAppointmentById(1));
     }
 
     @Test
-    @DisplayName("Valid AppointmentEntity should have no violations")
-    void validAppointment_noViolations() {
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(validAppointment());
-        assertTrue(violations.isEmpty());
+    void TC_N_06_deleteAppointment_notFound_shouldThrow() {
+
+        when(appointmentRepo.findById(1)).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.deleteAppointment(1));
     }
 
     @Test
-    @DisplayName("Null appointmentId should fail @NotNull")
-    void nullAppointmentId_shouldViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setAppointmentId(null);
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("appointmentId")));
+    void TC_N_07_getAppointmentsByPatient_notFound_shouldThrow() {
+
+        when(patientRepo.existsById(101)).thenReturn(false);
+
+        assertThrows(ResourceNotFoundException.class, () -> service.getAppointmentsByPatient(101));
+    }
+
+    // ================= EDGE =================
+
+    @Test
+    void TC_E_01_createAppointment_startEqualsEnd_shouldThrow() {
+
+        dto.setEndtime(dto.getStarttime());
+
+        assertThrows(InvalidRequestException.class, () -> service.createAppointment(dto));
     }
 
     @Test
-    @DisplayName("Null patient should fail @NotNull")
-    void nullPatientInAppointment_shouldViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setPatient(null);
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("patient")));
+    void TC_E_02_createAppointment_pastTime_shouldThrow() {
+
+        dto.setStarttime(LocalDateTime.now().minusDays(1));
+        dto.setEndtime(LocalDateTime.now());
+
+        assertThrows(InvalidRequestException.class, () -> service.createAppointment(dto));
     }
 
     @Test
-    @DisplayName("Null physician should fail @NotNull")
-    void nullPhysicianInAppointment_shouldViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setPhysician(null);
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("physician")));
+    void TC_E_03_createAppointment_nullTime_shouldThrow() {
+
+        dto.setStarttime(null);
+
+        assertThrows(BadRequestException.class, () -> service.createAppointment(dto));
     }
 
-    @Test
-    @DisplayName("Null starttime should fail @NotNull")
-    void nullStarttime_shouldViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setStart(null);
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("starttime")));
-    }
+    // ================= HELPER =================
 
-    @Test
-    @DisplayName("Null endtime should fail @NotNull")
-    void nullEndtime_shouldViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setEnd(null);
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("endtime")));
-    }
+    private AppointmentEntity mockEntity() {
 
-    @Test
-    @DisplayName("Blank examinationRoom should fail @NotBlank")
-    void blankExaminationRoom_shouldViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setExaminationRoom("  ");
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("examinationRoom")));
-    }
+        AppointmentEntity e = new AppointmentEntity();
+        e.setAppointmentId(1);
+        e.setPatient(patient);
+        e.setPhysician(physician);
+        e.setStart(LocalDateTime.now().plusDays(1));
+        e.setEnd(LocalDateTime.now().plusDays(1).plusHours(1));
+        e.setExaminationRoom("Room-1");
 
-    @Test
-    @DisplayName("PrepNurse is optional - null should not cause violation")
-    void nullPrepNurse_shouldNotViolate() {
-        AppointmentEntity appt = validAppointment();
-        appt.setPrepNurse(null);  // PrepNurse is not annotated @NotNull
-        Set<ConstraintViolation<AppointmentEntity>> violations = validator.validate(appt);
-        assertTrue(violations.isEmpty(), "PrepNurse is optional and null should be allowed");
+        return e;
     }
 }
