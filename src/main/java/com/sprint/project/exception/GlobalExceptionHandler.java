@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.Treatment.DTO.ResponseStructure;
+import com.sprint.project.treatmentprostay.DTO.ResponseStructure;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

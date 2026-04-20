@@ -1,11 +1,11 @@
 package com.sprint.project.Treatment;
 
-import com.sprint.project.NurseOnCallRoomAPIs.entity.RoomEntity;
-import com.sprint.project.NurseOnCallRoomAPIs.repository.RoomRepository;
-import com.sprint.project.Treatment.DTO.*;
-import com.sprint.project.Treatment.Entity.*;
-import com.sprint.project.Treatment.Repository.*;
-import com.sprint.project.Treatment.Service.*;
+import com.sprint.project.nurseoncallroom.entity.RoomEntity;
+import com.sprint.project.nurseoncallroom.repository.RoomRepository;
+import com.sprint.project.treatmentProStay.DTO.*;
+import com.sprint.project.treatmentProStay.Entity.*;
+import com.sprint.project.treatmentProStay.Repository.*;
+import com.sprint.project.treatmentProStay.Service.*;
 import com.sprint.project.exception.*;
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -54,7 +53,7 @@ public class ServiceTest {
     private RoomEntity createRoom(int id) {
         RoomEntity r = new RoomEntity();
         r.setRoomNumber(id);
-        r.setType("GENERAL");        // ✅ REQUIRED
+        r.setRoomType("GENERAL");        // ✅ REQUIRED
         r.setUnavailable(false);
         return roomRepository.save(r);
     }
