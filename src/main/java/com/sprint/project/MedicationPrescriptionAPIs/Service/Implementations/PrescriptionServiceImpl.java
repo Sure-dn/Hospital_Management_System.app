@@ -4,10 +4,11 @@ import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.Prescription
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.PrescribesEntity;
 import com.sprint.project.MedicationPrescriptionAPIs.Repository.PrescribesRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Service.PrescribesService;
-import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
+
 import com.sprint.project.patientAppointment.Entity.PatientEntity;
 import com.sprint.project.patientAppointment.Repository.PatientRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.patientAppointment.Entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.Repository.AppointmentRepository;
 import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
