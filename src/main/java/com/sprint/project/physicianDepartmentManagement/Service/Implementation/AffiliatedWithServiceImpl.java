@@ -1,19 +1,21 @@
 package com.sprint.project.physicianDepartmentManagement.Service.Implementation;
 
-import java.awt.dnd.InvalidDnDOperationException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sprint.project.exception.DuplicateResourceException;
-import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.AffiliatedWithRequestDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.AffiliatedWithResponseDto;
 import com.sprint.project.physicianDepartmentManagement.entity.AffiliatedId;
 import com.sprint.project.physicianDepartmentManagement.entity.AffiliatedWithEntity;
 import com.sprint.project.physicianDepartmentManagement.entity.DepartmentEntity;
 import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.exception.DepartmentNotFoundExcpetion;
+import com.sprint.project.physicianDepartmentManagement.exception.DuplicateAffiliationException;
+import com.sprint.project.physicianDepartmentManagement.exception.PhysicianNotFoundException;
+import com.sprint.project.physicianDepartmentManagement.exception.PrimaryAffiliationException;
 import com.sprint.project.physicianDepartmentManagement.repository.AffiliatedWithRepository;
 import com.sprint.project.physicianDepartmentManagement.repository.DepartmentRepository;
 import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
@@ -22,9 +24,14 @@ import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithSe
 @Service
 public class AffiliatedWithServiceImpl implements AffiliatedWithService {
 
-    private final AffiliatedWithRepository affiliatedWithRepository;
-    private final PhysicianRepository physicianRepository;
-    private final DepartmentRepository departmentRepository;
+	@Autowired
+    private AffiliatedWithRepository affiliatedWithRepository;
+
+    @Autowired
+    private PhysicianRepository physicianRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     public AffiliatedWithServiceImpl(AffiliatedWithRepository affiliatedWithRepository,
                                      PhysicianRepository physicianRepository,
@@ -34,32 +41,27 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
         this.departmentRepository = departmentRepository;
     }
 
-    // ================= CREATE AFFILIATION =================
+    // CREATE AFFILIATION 
     @Override
     public AffiliatedWithResponseDto createAffiliation(Integer physicianId,
                                                         AffiliatedWithRequestDto requestDto) {
 
-        // 1. Validate physician
         PhysicianEntity physician = physicianRepository.findById(physicianId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException(  "Physician not found with EmployeeID: " + physicianId));
+                        new PhysicianNotFoundException("Physician not found: " + physicianId));
 
-        // 2. Validate department
         DepartmentEntity department = departmentRepository.findById(requestDto.getDepartmentId())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException( "Department not found with ID: " + requestDto.getDepartmentId()));
+                        new DepartmentNotFoundExcpetion("Department not found: " + requestDto.getDepartmentId()));
 
-        // 3. Create composite key
         AffiliatedId id = new AffiliatedId(physicianId, requestDto.getDepartmentId());
 
-        // 4. Check duplicate affiliation
         if (affiliatedWithRepository.existsByAffiliatedId(id)) {
-            throw new DuplicateResourceException( "Affiliation already exists for Physician " + physicianId +
-                    " and Department " + requestDto.getDepartmentId()
-                    );
+            throw new DuplicateAffiliationException(
+                    "Affiliation already exists for Physician " + physicianId +
+                    " and Department " + requestDto.getDepartmentId());
         }
 
-        // 5. Business rule: only ONE primary affiliation per physician
         if (Boolean.TRUE.equals(requestDto.getPrimaryAffiliation())) {
 
             List<AffiliatedWithEntity> existing =
@@ -69,33 +71,25 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
                     .anyMatch(AffiliatedWithEntity::getPrimaryAffiliation);
 
             if (alreadyPrimary) {
-                throw new InvalidDnDOperationException(
-                        "Physician " + physicianId +
-                        " already has a primary affiliation");
+                throw new PrimaryAffiliationException(
+                        "Physician " + physicianId + " already has a primary affiliation");
             }
         }
 
-        // 6. Create entity
-        AffiliatedWithEntity entity = new AffiliatedWithEntity();
-        entity.setAffiliatedId(id);
-        entity.setPhysician(physician);
-        entity.setDepartment(department);
-        entity.setPrimaryAffiliation(requestDto.getPrimaryAffiliation());
+        //  USING MAPPER (ENTITY CREATION)
+        AffiliatedWithEntity entity = mapToEntity(id, physician, department, requestDto);
 
-        // 7. Save
         AffiliatedWithEntity saved = affiliatedWithRepository.save(entity);
 
         return mapToResponse(saved);
     }
 
-    // ================= GET BY PHYSICIAN =================
+    //  GET BY PHYSICIAN 
     @Override
     public List<AffiliatedWithResponseDto> getAffiliationsByPhysician(Integer physicianId) {
 
         if (!physicianRepository.existsById(physicianId)) {
-        	throw new ResourceNotFoundException(
-        		    "Physician not found with EmployeeID: " + physicianId
-        		);
+            throw new PhysicianNotFoundException("Physician not found: " + physicianId);
         }
 
         return affiliatedWithRepository.findByPhysicianEmployeeId(physicianId)
@@ -104,14 +98,12 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
                 .collect(Collectors.toList());
     }
 
-    // ================= GET BY DEPARTMENT =================
+    // GET BY DEPARTMENT 
     @Override
     public List<AffiliatedWithResponseDto> getPhysiciansByDepartment(Integer departmentId) {
 
         if (!departmentRepository.existsById(departmentId)) {
-        	throw new ResourceNotFoundException(
-        		    "Department not found with DepartmentID: " + departmentId
-        		);
+            throw new DepartmentNotFoundExcpetion("Department not found: " + departmentId);
         }
 
         return affiliatedWithRepository.findByDepartmentDepartmentId(departmentId)
@@ -120,14 +112,28 @@ public class AffiliatedWithServiceImpl implements AffiliatedWithService {
                 .collect(Collectors.toList());
     }
 
-    // ================= MAPPER =================
+    //  MAP TO ENTITY 
+    private AffiliatedWithEntity mapToEntity(AffiliatedId id,
+                                            PhysicianEntity physician,
+                                            DepartmentEntity department,
+                                            AffiliatedWithRequestDto dto) {
+
+        AffiliatedWithEntity entity = new AffiliatedWithEntity();
+        entity.setAffiliatedId(id);
+        entity.setPhysician(physician);
+        entity.setDepartment(department);
+        entity.setPrimaryAffiliation(dto.getPrimaryAffiliation());
+        return entity;
+    }
+
+    //  MAP TO DTO 
     private AffiliatedWithResponseDto mapToResponse(AffiliatedWithEntity entity) {
 
         return new AffiliatedWithResponseDto(
                 entity.getPhysician().getEmployeeId(),
-                entity.getPhysician().getName(), // adjust if field name differs
+                entity.getPhysician().getName(),
                 entity.getDepartment().getDepartmentId(),
-                entity.getDepartment().getName(), // adjust if needed
+                entity.getDepartment().getName(),
                 entity.getPrimaryAffiliation()
         );
     }

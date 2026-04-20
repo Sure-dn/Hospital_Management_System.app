@@ -11,6 +11,9 @@ import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.Physician
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
 import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.ResponseStructure;
 import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.exception.DuplicatePhysicianException;
+import com.sprint.project.physicianDepartmentManagement.exception.PhysicianDeletionException;
+import com.sprint.project.physicianDepartmentManagement.exception.PhysicianNotFoundException;
 import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService;
 import com.sprint.project.exception.DuplicateResourceException;
@@ -30,14 +33,14 @@ public class PhysicianServiceImpl implements PhysicianService {
 	    public ResponseStructure<PhysicianResponseDto> createPhysician(PhysicianRequestDto dto) {
 
 	        if (physicianRepository.existsById(dto.getEmployeeId())) {
-	            throw new DuplicateResourceException("Physician is already existed"+ dto.getEmployeeId());
+	            throw new DuplicatePhysicianException("Physician is already existed"+ dto.getEmployeeId());
 	        }
 
 	        boolean ssnExists = physicianRepository.findAll().stream()
 	                .anyMatch(p -> p.getSsn().equals(dto.getSsn()));
 
 	        if (ssnExists) {
-	            throw new DuplicateResourceException("Physician is alrady existed"+dto.getSsn());
+	            throw new DuplicatePhysicianException("Physician is alrady existed"+dto.getSsn());
 	        }
 
 	        PhysicianEntity entity = mapToEntity(dto);
@@ -66,7 +69,7 @@ public class PhysicianServiceImpl implements PhysicianService {
 
 	        PhysicianEntity entity = physicianRepository.findById(employeeId)
 	                .orElseThrow(() ->
-	                        new ResourceNotFoundException("Physician is not found"+employeeId));
+	                        new PhysicianNotFoundException("Physician is not found"+employeeId));
 
 	        return new ResponseStructure<>(200, "Physician found", mapToResponse(entity));
 	    }
@@ -77,14 +80,14 @@ public class PhysicianServiceImpl implements PhysicianService {
 
 	        PhysicianEntity existing = physicianRepository.findById(employeeId)
 	                .orElseThrow(() ->
-	                        new ResourceNotFoundException("Physician is not found"+employeeId));
+	                        new PhysicianNotFoundException("Physician is not found"+employeeId));
 
 	        boolean ssnConflict = physicianRepository.findAll().stream()
 	                .anyMatch(p -> p.getSsn().equals(dto.getSsn())
 	                        && !p.getEmployeeId().equals(employeeId));
 
 	        if (ssnConflict) {
-	            throw new DuplicateResourceException("Physician is already existed"+dto.getSsn());
+	            throw new DuplicatePhysicianException("Physician is already existed"+dto.getSsn());
 	        }
 
 	        existing.setName(dto.getName());
@@ -102,10 +105,10 @@ public class PhysicianServiceImpl implements PhysicianService {
 
 	        PhysicianEntity physician = physicianRepository.findById(employeeId)
 	                .orElseThrow(() ->
-	                        new ResourceNotFoundException("Physician is not found"+employeeId));
+	                        new PhysicianNotFoundException("Physician is not found"+employeeId));
 
 	        if (physician.getDepartments() != null && !physician.getDepartments().isEmpty()) {
-	            throw new InvalidDnDOperationException(
+	            throw new PhysicianDeletionException(
 	                    "Cannot delete Physician with EmployeeID " + employeeId +
 	                            " because they are head of department.");
 	        }
