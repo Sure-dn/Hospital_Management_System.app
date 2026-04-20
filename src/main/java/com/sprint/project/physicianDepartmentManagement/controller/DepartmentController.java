@@ -1,4 +1,4 @@
-package com.sprint.project.physicianDepartmentManagement.Controller;
+package com.sprint.project.physicianDepartmentManagement.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
