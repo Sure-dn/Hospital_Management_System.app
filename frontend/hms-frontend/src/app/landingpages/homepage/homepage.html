@@ -1,1 +1,17 @@
-<p>homepage works!</p>
+<div class="container">
+  <h2 class="title">// SELECT YOUR PROFILE TO LOGIN</h2>
+
+  <div class="card-grid">
+    <div class="card" *ngFor="let m of members" (click)="goToLogin(m)">
+
+      <div class="avatar">
+        {{ m.name.charAt(0) }}
+      </div>
+
+      <h3>{{ m.name }}</h3>
+      <p>{{ m.role }}</p>
+
+      <span class="badge">⚡ Click to Login</span>
+    </div>
+  </div>
+</div>
