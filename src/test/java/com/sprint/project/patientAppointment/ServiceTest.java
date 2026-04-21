@@ -72,8 +72,7 @@ class ServiceTest {
     void TC_P_01_createAppointment_success() {
 
         when(repo.existsById(1)).thenReturn(false);
-        when(repo.existsOverlappingAppointmentForPhysician(any(), any(), any())).thenReturn(false);
-        when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
+        when(repo.existsOverlappingAppointmentForPhysician(any(), any(), any())).thenReturn(false);when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
         when(physicianRepo.findById(201)).thenReturn(Optional.of(physician));
         when(repo.save(any())).thenAnswer(i -> i.getArgument(0));
 
