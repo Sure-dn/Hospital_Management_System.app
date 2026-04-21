@@ -55,4 +55,12 @@ public class UndergoesController {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Deleted", deleted));
     }
+
+    // GET treatments by stay
+    @GetMapping("/stay/{id}")
+    public ResponseEntity<ResponseStructure<List<UndergoesRequestDTO>>> getByStay(@PathVariable Integer id) {
+        return ResponseEntity.ok(
+                new ResponseStructure<>(true, "Stay treatments",
+                        undergoesService.getTreatmentByStay(id)));
+    }
 }
