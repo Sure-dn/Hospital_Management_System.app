@@ -1,4 +1,4 @@
-package com.sprint.project.Treatment;
+package com.sprint.project.treatment;
 
 
 import com.sprint.project.nurseoncallroom.entity.RoomEntity;
