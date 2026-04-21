@@ -12,11 +12,11 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
 
   members = [
-    { name: 'Sureka', role: 'Patient & Appointment' },
-    { name: 'Jai', role: 'Physician & Department' },
-    { name: 'Iniya', role: 'Nursing & Rooms' },
-    { name: 'Ashmitha', role: 'Medication & Prescription' },
-    { name: 'John', role: 'Stay, Procedures & Treatments' }
+    { name: 'Sureka', role: 'Nursing & Rooms' },
+    { name: 'Jai', role: 'Procedures & Treatments' },
+    { name: 'Iniya', role: 'Patient & Appointment' },
+    { name: 'Ashmitha', role: 'Physician & Department' },
+    { name: 'John', role: 'Medication & Prescription  ' }
   ];
 
   constructor(private router: Router) {}
