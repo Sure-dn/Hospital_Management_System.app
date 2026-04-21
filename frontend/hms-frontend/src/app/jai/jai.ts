@@ -11,7 +11,8 @@ export class JaiComponent {
 
   constructor(private router: Router) {}
 
-  openEndpoint(path: string) {
-    this.router.navigate([path]);
-  }
+ openEndpoint(path: string) {
+  console.log("Navigating to:", path);
+  this.router.navigate([path]);
+ }
 }
