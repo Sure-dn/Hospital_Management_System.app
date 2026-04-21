@@ -34,19 +34,8 @@ public class AppointmentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    /**
-     * Retrieve all appointments, optionally filtered by date.
-     * Usage: GET /api/appointments
-     *        GET /api/appointments?date=2025-06-15
-     */
     @GetMapping("/api/appointments")
-    public ResponseEntity<List<AppointmentResponseDTO>> getAllAppointments(
-            @RequestParam(required = false)
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-
-        if (date != null) {
-            return ResponseEntity.ok(appointmentService.getAppointmentsByDate(date));
-        }
+    public ResponseEntity<List<AppointmentResponseDTO>> getAllAppointments() {
         return ResponseEntity.ok(appointmentService.getAllAppointments());
     }
      /**
@@ -94,5 +83,13 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByPhysician(
             @PathVariable Integer employeeId) {
         return ResponseEntity.ok(appointmentService.getAppointmentsByPhysician(employeeId));
+    }
+    
+    @GetMapping("/api/appointments/by-date")
+    public ResponseEntity<List<AppointmentResponseDTO>> getAppointmentsByDate(
+            @RequestParam
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+        return ResponseEntity.ok(appointmentService.getAppointmentsByDate(date));
     }
 }
