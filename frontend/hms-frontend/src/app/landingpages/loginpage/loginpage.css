@@ -1,0 +1,42 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0b1220;
+}
+
+.login-box {
+  background: #111a2e;
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  width: 300px;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.back-btn {
+  background: gray;
+  margin-top: 10px;
+}
