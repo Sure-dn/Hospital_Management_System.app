@@ -12,8 +12,8 @@ import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponse
 import com.sprint.project.patientAppointment.Service.Implementation.AppointmentServiceImpl;
 import com.sprint.project.patientAppointment.entity.*;
 import com.sprint.project.patientAppointment.repository.*;
-import com.sprint.project.physicianDepartmentManagement.Entity.PhysicianEntity;
-import com.sprint.project.physicianDepartmentManagement.Repository.PhysicianRepository;
+import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
+import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
 import com.sprint.project.nurseoncallroom.repository.NurseRepository;
 import com.sprint.project.patientAppointment.exception.*;
 
