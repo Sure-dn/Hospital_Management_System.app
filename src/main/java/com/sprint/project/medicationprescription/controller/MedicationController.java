@@ -1,12 +1,13 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Controller;
+package com.sprint.project.medicationprescription.controller;
 
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO.MedicationResponseDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Service.MedicationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.sprint.project.medicationprescription.DTO.RequestDTO.MedicationRequestDTO;
+import com.sprint.project.medicationprescription.DTO.ResponseDTO.MedicationResponseDTO;
+import com.sprint.project.medicationprescription.Service.MedicationService;
 
 import java.util.List;
 import java.util.stream.Collectors;

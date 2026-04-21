@@ -1,12 +1,12 @@
-package com.sprint.project.MedicationPrescriptionAPIs.Service.Implementations;
-
-import com.sprint.project.MedicationPrescriptionAPIs.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.MedicationPrescriptionAPIs.Entity.MedicationEntity;
-import com.sprint.project.MedicationPrescriptionAPIs.Repository.MedicationRepository;
-import com.sprint.project.MedicationPrescriptionAPIs.Service.MedicationService;
+package com.sprint.project.medicationprescription.Service.Implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.sprint.project.medicationprescription.DTO.RequestDTO.MedicationRequestDTO;
+import com.sprint.project.medicationprescription.Service.MedicationService;
+import com.sprint.project.medicationprescription.entity.MedicationEntity;
+import com.sprint.project.medicationprescription.repository.MedicationRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.sprint.project.MedicationPrescriptionAPIs.DTO.ResponseDTO;
+package com.sprint.project.medicationprescription.DTO.ResponseDTO;
 
 public class MedicationResponseDTO {
     private Integer code;
