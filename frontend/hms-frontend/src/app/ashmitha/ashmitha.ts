@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ashmitha',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './ashmitha.html',
   styleUrl: './ashmitha.css',
 })
-export class Ashmitha {}
+export class Ashmitha {
+  constructor(private router: Router) {}
+
+  openEndpoint(path: string) {
+    this.router.navigate([path]);
+  }
+}

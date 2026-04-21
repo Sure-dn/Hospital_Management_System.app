@@ -44,23 +44,23 @@ public class DepartmentController {
 
     //  GET BY ID
     @GetMapping("/{departmentid}")
-    public ResponseEntity<DepartmentResponseDto> getDepartmentById(@PathVariable Integer id) {
-        return ResponseEntity.ok(departmentService.getDepartmentById(id));
+    public ResponseEntity<DepartmentResponseDto> getDepartmentById(@PathVariable Integer departmentid) {
+        return ResponseEntity.ok(departmentService.getDepartmentById(departmentid));
     }
 
     //  UPDATE
     @PutMapping("/{departmentid}")
     public ResponseEntity<DepartmentResponseDto> updateDepartment(
-            @PathVariable Integer id,
+            @PathVariable Integer departmentid,
             @Valid @RequestBody DepartmentRequestDto requestDto) {
 
-        return ResponseEntity.ok(departmentService.updateDepartment(id, requestDto));
+        return ResponseEntity.ok(departmentService.updateDepartment(departmentid, requestDto));
     }
 
     //  GET HEAD OF DEPARTMENT
     @GetMapping("/{departmentid}/head")
-    public ResponseEntity<PhysicianResponseDto> getDepartmentHead(@PathVariable Integer id) {
-        return ResponseEntity.ok(departmentService.getDepartmentHead(id));
+    public ResponseEntity<PhysicianResponseDto> getDepartmentHead(@PathVariable Integer departmentid) {
+        return ResponseEntity.ok(departmentService.getDepartmentHead(departmentid));
     }
 
 }
