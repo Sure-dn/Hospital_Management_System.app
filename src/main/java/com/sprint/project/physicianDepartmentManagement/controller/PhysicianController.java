@@ -56,11 +56,11 @@ import jakarta.validation.Valid;
 	    // UPDATE 
 	    @PutMapping("/{employeeid}")
 	    public ResponseEntity<ResponseStructure<PhysicianResponseDto>> updatePhysician(
-	            @PathVariable Integer id,
+	            @PathVariable Integer employeeid,
 	            @Valid @RequestBody PhysicianRequestDto dto) {
 
 	        return ResponseEntity.ok(
-	                physicianService.updatePhysician(id, dto)
+	                physicianService.updatePhysician(employeeid, dto)
 	        );
 	    }
 

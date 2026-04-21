@@ -1,1 +1,66 @@
-<p>ashmitha works!</p>
+<div class="container">
+
+  <h1 class="main-title">Hospital Management Application</h1>
+  <h2 class="user-title">Ashmitha - Physician, Department, Affiliation & Training</h2>
+
+  <!-- PHYSICIAN -->
+  <div class="section">
+    <div class="section-header">
+      <span>👨‍⚕️ Physician APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/physicians</span></div>
+      <div class="api-card get">GET <span>/api/physicians</span></div>
+      <div class="api-card get">GET <span>/api/physicians/(employeeid)</span></div>
+      <div class="api-card put">PUT <span>/api/physicians/(employeeid)</span></div>
+      <div class="api-card delete">DELETE <span>/api/physicians/(employeeid)</span></div>
+    </div>
+  </div>
+
+  <!-- DEPARTMENT -->
+  <div class="section">
+    <div class="section-header">
+      <span>🏢 Department APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/departments</span></div>
+      <div class="api-card get">GET <span>/api/departments</span></div>
+      <div class="api-card get">GET <span>/api/departments/(departmentid)</span></div>
+      <div class="api-card put">PUT <span>/api/departments/(departmentid)</span></div>
+      <div class="api-card get">GET <span>/api/departments/(departmentid)/head</span></div>
+    </div>
+  </div>
+
+  <!-- AFFILIATION -->
+  <div class="section">
+    <div class="section-header">
+      <span>🔗 Physician Department Affiliation</span>
+      <span class="count">3 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/affiliations/physician/(physicianId)</span></div>
+      <div class="api-card get">GET <span>/api/affiliatons/physician/(physicianId)</span></div>
+      <div class="api-card get">GET <span>/api/affiliations/department/(departmentId)</span></div>
+    </div>
+  </div>
+
+  <!-- TRAINING -->
+  <div class="section">
+    <div class="section-header">
+      <span>📘 Physician Training / Certification</span>
+      <span class="count">3 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/physicians/(employeeId)/trainings</span></div>
+      <div class="api-card get">GET <span>/api/physicians/(employeeId)/trainings</span></div>
+      <div class="api-card get">GET <span>/api/physicians/(employeeId)/trainings/valid</span></div>
+    </div>
+  </div>
+
+</div>

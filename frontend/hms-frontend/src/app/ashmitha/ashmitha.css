@@ -1,0 +1,88 @@
+.container {
+  background: #0b1220;
+  min-height: 100vh;
+  padding: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.main-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.user-title {
+  text-align: center;
+  color: #9fb3d1;
+  margin-bottom: 30px;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #dbeafe;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.count {
+  background: #111a2e;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.api-card {
+  background: #111a2e;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  border-left: 5px solid transparent;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.api-card span {
+  display: block;
+  color: #9ca3af;
+  font-size: 13px;
+  font-weight: normal;
+  margin-top: 5px;
+  word-break: break-word;
+}
+
+.api-card.post {
+  border-left-color: #22c55e;
+}
+
+.api-card.get {
+  border-left-color: #3b82f6;
+}
+
+.api-card.put {
+  border-left-color: #f59e0b;
+}
+
+.api-card.delete {
+  border-left-color: #ef4444;
+}
+
+.api-card:hover {
+  transform: scale(1.05);
+  background: #1f2c4d;
+}
