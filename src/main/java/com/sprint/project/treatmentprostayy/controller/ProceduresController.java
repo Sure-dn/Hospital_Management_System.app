@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sprint.project.treatmentprostayy.DTO.ProceduresRequestDTO;
 import com.sprint.project.treatmentprostayy.DTO.ProceduresResponseDTO;
 import com.sprint.project.treatmentprostayy.DTO.ResponseStructure;
+import com.sprint.project.treatmentprostayy.DTO.UndergoesRequestDTO;
 import com.sprint.project.treatmentprostayy.services.ProceduresService;
+import com.sprint.project.treatmentprostayy.services.UndergoesService;
 
 import jakarta.validation.Valid;
 
@@ -27,6 +30,9 @@ public class ProceduresController {
 
     @Autowired
     private ProceduresService proceduresService;
+    
+    @Autowired
+    private UndergoesService undergoesService;
 
     @PostMapping
     public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> addProcedure(
@@ -107,5 +113,31 @@ public class ProceduresController {
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Sorted by cost",
                         proceduresService.sortByCost()));
+    }
+ // GET patients by procedure code
+    @GetMapping("/{code}/patients")
+    public ResponseEntity<ResponseStructure<List<UndergoesRequestDTO>>> getPatientsByProcedure(
+            @PathVariable Integer code) {
+
+        List<UndergoesRequestDTO> list = undergoesService.getAllTreatments()
+                .stream()
+                .filter(u -> u.getProcedureId().equals(code))
+                .toList();
+
+        return ResponseEntity.ok(
+                new ResponseStructure<>(true, "Patients for procedure", list));
+    }
+    @PutMapping("/{code}")
+    public ResponseEntity<ResponseStructure<ProceduresResponseDTO>> update(
+            @PathVariable Integer code,
+            @RequestBody ProceduresRequestDTO dto) {
+
+        ProceduresRequestDTO updated = proceduresService.updateProcedure(code, dto);
+
+        ProceduresResponseDTO response =
+                new ProceduresResponseDTO(updated.getCode(), updated.getName(), updated.getCost());
+
+        return ResponseEntity.ok(
+                new ResponseStructure<>(true, "Updated successfully", response));
     }
 }

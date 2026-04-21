@@ -1,5 +1,7 @@
 package com.sprint.project.treatmentprostayy.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,5 +69,17 @@ public class StayController {
 
         return ResponseEntity.ok(
                 new ResponseStructure<>(true, "Discharged", response));
+    }
+ // GET stays by patient
+    @GetMapping("/patient/{ssn}")
+    public ResponseEntity<ResponseStructure<List<StayEntity>>> getByPatient(@PathVariable Integer ssn) {
+
+        List<StayEntity> stays = stayService.getAllStays()
+                .stream()
+                .filter(s -> s.getPatient().getSsn().equals(ssn))
+                .toList();
+
+        return ResponseEntity.ok(
+                new ResponseStructure<>(true, "Patient stays", stays));
     }
 }
