@@ -7,14 +7,14 @@ package com.sprint.project.medicationprescription;   // ←←← CHANGE THIS LI
 //
 // Just match the folder path exactly (Eclipse is strict about this).
 
-import com.sprint.project.medicationprescription.dto.requestdto.MedicationRequestDTO;
-import com.sprint.project.medicationprescription.dto.requestdto.PrescriptionRequestDTO;
-import com.sprint.project.medicationprescription.service.Implementations.MedicationServiceImpl;
-import com.sprint.project.medicationprescription.service.Implementations.PrescriptionServiceImpl;
+import com.sprint.project.medicationprescription.DTO.RequestDTO.MedicationRequestDTO;
+import com.sprint.project.medicationprescription.DTO.RequestDTO.PrescriptionRequestDTO;
 import com.sprint.project.medicationprescription.entity.MedicationEntity;
 import com.sprint.project.medicationprescription.entity.PrescribesEntity;
 import com.sprint.project.medicationprescription.repository.MedicationRepository;
 import com.sprint.project.medicationprescription.repository.PrescribesRepository;
+import com.sprint.project.medicationprescription.Service.Implementations.MedicationServiceImpl;
+import com.sprint.project.medicationprescription.Service.Implementations.PrescriptionServiceImpl;
 import com.sprint.project.patientAppointment.entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.patientAppointment.repository.AppointmentRepository;

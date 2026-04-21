@@ -72,7 +72,8 @@ class ServiceTest {
     void TC_P_01_createAppointment_success() {
 
         when(repo.existsById(1)).thenReturn(false);
-        when(repo.existsOverlappingAppointmentForPhysician(any(), any(), any())).thenReturn(false);when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
+        when(repo.existsOverlappingAppointment(any(), any(), any())).thenReturn(false);
+        when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
         when(physicianRepo.findById(201)).thenReturn(Optional.of(physician));
         when(repo.save(any())).thenAnswer(i -> i.getArgument(0));
 
@@ -139,7 +140,7 @@ class ServiceTest {
     void TC_N_03_patientNotFound_shouldThrow() {
 
         when(repo.existsById(1)).thenReturn(false);
-        when(repo.existsOverlappingAppointmentForPhysician(any(), any(), any())).thenReturn(false);
+        when(repo.existsOverlappingAppointment(any(), any(), any())).thenReturn(false);
         when(patientRepo.findById(101)).thenReturn(Optional.empty());
 
         assertThrows(PatientNotFoundException.class,
@@ -150,7 +151,7 @@ class ServiceTest {
     void TC_N_04_physicianNotFound_shouldThrow() {
 
         when(repo.existsById(1)).thenReturn(false);
-        when(repo.existsOverlappingAppointmentForPhysician(any(), any(), any())).thenReturn(false);
+        when(repo.existsOverlappingAppointment(any(), any(), any())).thenReturn(false);
         when(patientRepo.findById(101)).thenReturn(Optional.of(patient));
         when(physicianRepo.findById(201)).thenReturn(Optional.empty());
 
