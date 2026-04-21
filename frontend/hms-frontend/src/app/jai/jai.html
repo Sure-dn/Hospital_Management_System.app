@@ -1,1 +1,63 @@
-<p>jai works!</p>
+<div class="container">
+
+  <h1 class="main-title">Hospital Management Application</h1>
+  <h2 class="user-title">Jayasurya - Stay, Procedures & Treatment</h2>
+
+  <!-- PROCEDURES -->
+  <div class="section">
+    <div class="section-header">
+      <span>🧪 Procedure Master APIs</span>
+      <span class="count">4 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/procedures</span></div>
+      <div class="api-card get">GET <span>/api/procedures</span></div>
+      <div class="api-card get">GET <span>/api/procedures/(code)</span></div>
+      <div class="api-card put">PUT <span>/api/procedures/(code)</span></div>
+    </div>
+  </div>
+
+  <!-- STAY -->
+  <div class="section">
+    <div class="section-header">
+      <span>🏥 Patient Stay APIs</span>
+      <span class="count">3 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/stays</span></div>
+      <div class="api-card get">GET <span>/api/stays/(stayId)</span></div>
+      <div class="api-card get">GET <span>/api/patients/(ssn)/stays</span></div>
+    </div>
+  </div>
+
+  <!-- TREATMENT -->
+  <div class="section">
+    <div class="section-header">
+      <span>💉 Treatment / Undergoes APIs</span>
+      <span class="count">4 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post">POST <span>/api/treatments</span></div>
+      <div class="api-card get">GET <span>/api/treatments</span></div>
+      <div class="api-card get">GET <span>/api/patients/(ssn)/treatments</span></div>
+      <div class="api-card get">GET <span>/api/stays/(stayId)/treatments</span></div>
+    </div>
+  </div>
+
+  <!-- REPORT -->
+  <div class="section">
+    <div class="section-header">
+      <span>📊 Compliance-Driven Reports</span>
+      <span class="count">2 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card get">GET <span>/api/physicians/(employeeId)/procedures</span></div>
+      <div class="api-card get">GET <span>/api/procedures/(code)/patients</span></div>
+    </div>
+  </div>
+
+</div>

@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-jai',
-  imports: [],
+  standalone: true,
   templateUrl: './jai.html',
-  styleUrl: './jai.css',
+  styleUrls: ['./jai.css'],
 })
-export class Jai {}
+export class JaiComponent {
+
+  constructor(private router: Router) {}
+
+  openEndpoint(path: string) {
+    this.router.navigate([path]);
+  }
+}
