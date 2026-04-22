@@ -1,0 +1,6 @@
+<h2>Prescriptions by Patient</h2>
+
+<input [(ngModel)]="ssn" placeholder="Enter SSN">
+<button (click)="load()">Fetch</button>
+
+<pre>{{ data | json }}</pre>

@@ -1,0 +1,6 @@
+<h2>Prescriptions by Medication</h2>
+
+<input [(ngModel)]="code" placeholder="Enter Medication Code">
+<button (click)="load()">Fetch</button>
+
+<pre>{{ data | json }}</pre>
