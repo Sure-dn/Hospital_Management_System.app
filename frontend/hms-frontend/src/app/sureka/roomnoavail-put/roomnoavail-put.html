@@ -1,0 +1,13 @@
+<p>roomnoavail-put works!</p>
+<h2>Update Room Availability</h2>
+
+<input type="number" [(ngModel)]="roomNumber" placeholder="Room Number"><br>
+
+<select [(ngModel)]="unavailable">
+  <option [value]="true">Unavailable</option>
+  <option [value]="false">Available</option>
+</select><br><br>
+
+<button (click)="update()">Update</button>
+
+<pre>{{ data | json }}</pre>
