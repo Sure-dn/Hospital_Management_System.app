@@ -1,0 +1,12 @@
+<p>employeeid-put works!</p>
+<h2>Update Nurse</h2>
+
+<input type="number" [(ngModel)]="id" placeholder="Employee ID"><br>
+
+<input [(ngModel)]="nurse.name" placeholder="Name"><br>
+<input [(ngModel)]="nurse.position" placeholder="Position"><br>
+<input type="number" [(ngModel)]="nurse.ssn" placeholder="SSN"><br>
+
+<button (click)="update()">Update</button>
+
+<pre>{{ data | json }}</pre>

@@ -1,0 +1,9 @@
+<p>floorcode-get works!</p>
+<h2>Get On-Call by Block</h2>
+
+<input type="number" [(ngModel)]="floor" placeholder="Floor"><br>
+<input type="number" [(ngModel)]="code" placeholder="Code"><br><br>
+
+<button (click)="getByBlock()">Get</button>
+
+<pre>{{ data | json }}</pre>
