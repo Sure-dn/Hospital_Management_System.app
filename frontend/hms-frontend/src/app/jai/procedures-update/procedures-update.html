@@ -1,1 +1,23 @@
-<p>procedures-update works!</p>
+<div class="container">
+
+  <h2>Update Procedure</h2>
+
+  <div class="form">
+
+    <input [(ngModel)]="procedure.code" placeholder="Enter Code (Existing)">
+
+    <input [(ngModel)]="procedure.name" placeholder="New Name">
+
+    <input [(ngModel)]="procedure.cost" placeholder="New Cost">
+
+    <button (click)="update()">Update</button>
+
+  </div>
+
+  <!-- SUCCESS -->
+  <p class="success" *ngIf="message">{{ message }}</p>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</div>

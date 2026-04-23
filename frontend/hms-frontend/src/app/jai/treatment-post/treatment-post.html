@@ -1,1 +1,29 @@
-<p>treatment-post works!</p>
+<div class="container">
+
+  <h2>Add Treatment (Undergoes)</h2>
+
+  <div class="form">
+
+    <input [(ngModel)]="treatment.patientId" placeholder="Patient ID">
+
+    <input [(ngModel)]="treatment.procedureId" placeholder="Procedure ID">
+
+    <input [(ngModel)]="treatment.stayId" placeholder="Stay ID">
+
+    <input type="date" [(ngModel)]="treatment.dateUndergoes">
+
+    <input [(ngModel)]="treatment.physicianId" placeholder="Physician ID">
+
+    <input [(ngModel)]="treatment.nurseId" placeholder="Nurse ID">
+
+    <button (click)="submit()">Submit</button>
+
+  </div>
+
+  <!-- SUCCESS -->
+  <p class="success" *ngIf="message">{{ message }}</p>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</div>

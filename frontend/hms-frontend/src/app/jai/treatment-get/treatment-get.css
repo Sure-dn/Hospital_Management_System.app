@@ -1,0 +1,40 @@
+.container {
+  padding: 20px;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #334155;
+}
+
+th {
+  background: #1e293b;
+}
+
+.error {
+  color: red;
+}
