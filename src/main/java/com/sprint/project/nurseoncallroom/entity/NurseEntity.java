@@ -1,8 +1,5 @@
 package com.sprint.project.nurseoncallroom.entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,7 +10,8 @@ public class NurseEntity {
 
     @Id
     @NotNull(message = "Employee ID is required")
-    @Column(name = "EmployeeID")
+    @Column(name = "EmployeeId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
 
     @NotBlank(message = "Name is required")

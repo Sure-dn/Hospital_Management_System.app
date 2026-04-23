@@ -20,7 +20,9 @@ public interface OnCallRepository extends JpaRepository<OnCallEntity, OnCallId> 
     List<OnCallEntity> findByNurse(NurseEntity nurse);
 
     // All shifts on a given block
-    List<OnCallEntity> findByBlockFloorAndBlockCode(Integer floor, Integer code);
+    @Query("SELECT o FROM OnCallEntity o WHERE o.blockFloor = :floor AND o.blockCode = :code")
+    List<OnCallEntity> findByBlockFloorAndBlockCode(@Param("floor") Integer floor,
+                                                    @Param("code") Integer code);
 
     // All shifts within time window
     @Query("""
