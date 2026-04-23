@@ -1,0 +1,6 @@
+<h2>Delete Medication</h2>
+
+<input [(ngModel)]="code" placeholder="Enter Code">
+<button (click)="delete()">Delete</button>
+
+<p *ngIf="message">{{ message }}</p>

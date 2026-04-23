@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-procedures-post',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
-  templateUrl: './procedures-post.html'
+  imports: [FormsModule],
+  templateUrl: './procedures-post.html',
+  styleUrl: './procedures-post.css'
 })
 export class ProceduresPostComponent {
 
@@ -22,13 +22,13 @@ export class ProceduresPostComponent {
   submit() {
     this.http.post('http://localhost:9090/api/procedures', this.procedure)
       .subscribe({
-        next: (res) => {
-          alert('✅ Procedure Added Successfully');
-          console.log(res);
+        next: () => {
+          alert("Saved Successfully ✅");
+          this.procedure = { code: '', name: '', cost: '' };
         },
         error: (err) => {
-          alert('❌ Error while saving');
           console.error(err);
+          alert("Error while saving ❌");
         }
       });
   }

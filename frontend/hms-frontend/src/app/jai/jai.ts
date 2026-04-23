@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-jai',
@@ -9,10 +10,13 @@ import { Router } from '@angular/router';
 })
 export class JaiComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
  openEndpoint(path: string) {
   console.log("Navigating to:", path);
   this.router.navigate([path]);
  }
+ logout() {
+    this.auth.logout();
+  }
 }
