@@ -1,8 +1,11 @@
 <div class="container">
 
-  <h2>All Treatments</h2>
+  <h2>Stay Treatments</h2>
 
-  <button (click)="load()">Load Treatments</button>
+  <div class="input-box">
+    <input [(ngModel)]="stayId" placeholder="Enter Stay ID">
+    <button (click)="load()">Fetch</button>
+  </div>
 
   <!-- ERROR -->
   <p class="error" *ngIf="error">{{ error }}</p>
@@ -13,7 +16,6 @@
       <tr>
         <th>Patient ID</th>
         <th>Procedure ID</th>
-        <th>Stay ID</th>
         <th>Date</th>
         <th>Physician ID</th>
         <th>Nurse ID</th>
@@ -24,7 +26,6 @@
       <tr *ngFor="let t of treatments">
         <td>{{ t.patientId }}</td>
         <td>{{ t.procedureId }}</td>
-        <td>{{ t.stayId }}</td>
         <td>{{ t.dateUndergoes }}</td>
         <td>{{ t.physicianId }}</td>
         <td>{{ t.nurseId }}</td>

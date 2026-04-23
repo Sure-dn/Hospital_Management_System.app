@@ -1,1 +1,27 @@
-<p>stay-post works!</p>
+<div class="container">
+
+  <h2>Add Stay</h2>
+
+  <div class="form">
+
+    <input [(ngModel)]="stay.stayId" placeholder="Stay ID">
+
+    <input [(ngModel)]="stay.patientId" placeholder="Patient ID">
+
+    <input [(ngModel)]="stay.roomId" placeholder="Room ID">
+
+    <input type="date" [(ngModel)]="stay.stayStart">
+
+    <input type="date" [(ngModel)]="stay.stayEnd">
+
+    <button (click)="submit()">Submit</button>
+
+  </div>
+
+  <!-- SUCCESS -->
+  <p class="success" *ngIf="message">{{ message }}</p>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+</div>

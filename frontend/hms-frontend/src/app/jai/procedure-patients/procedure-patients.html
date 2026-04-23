@@ -1,1 +1,35 @@
-<p>procedure-patients works!</p>
+<div class="container">
+
+  <h2>Patients by Procedure</h2>
+
+  <div class="input-box">
+    <input [(ngModel)]="code" placeholder="Enter Procedure Code">
+    <button (click)="load()">Fetch</button>
+  </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- TABLE -->
+  <table *ngIf="data.length > 0">
+    <thead>
+      <tr>
+        <th>Patient ID</th>
+        <th>Name</th>
+        <th>SSN</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of data">
+        <td>{{ p.id || p.patientId }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.ssn }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EMPTY -->
+  <p *ngIf="data.length === 0 && !error">No data found</p>
+
+</div>

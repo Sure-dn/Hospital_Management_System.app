@@ -1,0 +1,16 @@
+<div class="container">
+
+  <h2>Get Procedure By Code</h2>
+
+  <input [(ngModel)]="code" placeholder="Enter Procedure Code">
+
+  <button (click)="fetch()">Fetch</button>
+
+  <!-- Result -->
+  <div class="result" *ngIf="procedure">
+    <p><b>Code:</b> {{ procedure.code }}</p>
+    <p><b>Name:</b> {{ procedure.name }}</p>
+    <p><b>Cost:</b> {{ procedure.cost }}</p>
+  </div>
+
+</div>

@@ -10,19 +10,23 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(data: any) {
-    return this.http.post<any>(this.api, data);
+    return this.http.post(this.api, data, { responseType: 'text' });
   }
 
-  setSession(role: string) {
-    localStorage.setItem('role', role);
+  setSession(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem('role') !== null;
+    return !!this.getToken();
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    localStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }

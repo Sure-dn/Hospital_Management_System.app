@@ -1,5 +1,25 @@
-<h2>All Procedures</h2>
+<div class="container">
 
-<button (click)="load()">Load Data</button>
+  <h2>All Procedures</h2>
 
-<pre>{{ data | json }}</pre>
+  <button class="load-btn" (click)="load()">Load Data</button>
+
+  <table *ngIf="procedures.length > 0">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of procedures">
+        <td>{{ p.code }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.cost }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

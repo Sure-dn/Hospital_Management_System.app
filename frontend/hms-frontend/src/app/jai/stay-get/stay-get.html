@@ -1,6 +1,27 @@
-<h2>Get Stay</h2>
+<div class="container">
+  <h2>🏥 Get Stay Details</h2>
 
-<input [(ngModel)]="id" placeholder="Enter Stay ID">
-<button (click)="load()">Fetch</button>
+  <div class="form">
+    <input 
+      type="number"
+      [(ngModel)]="stayId" 
+      placeholder="Enter Stay ID"
+    />
 
-<pre>{{ data | json }}</pre>
+    <button (click)="fetch()">Fetch</button>
+  </div>
+
+  <!-- RESULT -->
+  <div *ngIf="data" class="result">
+    <h3>Stay Details</h3>
+
+    <p><strong>Stay ID:</strong> {{ data.stayId }}</p>
+    <p><strong>Patient ID:</strong> {{ data.patientId }}</p>
+    <p><strong>Room ID:</strong> {{ data.roomId }}</p>
+    <p><strong>Start Date:</strong> {{ data.stayStart }}</p>
+    <p><strong>End Date:</strong> {{ data.stayEnd }}</p>
+  </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

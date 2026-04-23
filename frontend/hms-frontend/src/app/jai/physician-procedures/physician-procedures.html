@@ -1,6 +1,32 @@
-<h2>Physician Procedures</h2>
+<div class="container">
+  <h2>🧑‍⚕️ Physician Procedures</h2>
 
-<input [(ngModel)]="id" placeholder="Enter Physician ID">
-<button (click)="load()">Fetch</button>
+  <div class="form">
+    <input 
+      type="number"
+      [(ngModel)]="physicianId" 
+      placeholder="Enter Physician ID"
+    />
 
-<pre>{{ data | json }}</pre>
+    <button (click)="fetch()">Fetch</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div *ngIf="procedures && procedures.length > 0" class="result">
+    <h3>Procedures List</h3>
+
+    <div class="card" *ngFor="let p of procedures">
+      <p><strong>Procedure Code:</strong> {{ p.code }}</p>
+      <p><strong>Name:</strong> {{ p.name }}</p>
+      <p><strong>Cost:</strong> ₹ {{ p.cost }}</p>
+    </div>
+  </div>
+
+  <!-- NO DATA -->
+  <p class="error" *ngIf="hasSearched && procedures.length === 0">
+    ⚠️ No procedures found
+  </p>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>
