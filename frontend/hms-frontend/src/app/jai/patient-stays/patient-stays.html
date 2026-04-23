@@ -1,1 +1,37 @@
-<p>patient-stays works!</p>
+<div class="container">
+
+  <h2>Patient Stays</h2>
+
+  <div class="input-box">
+    <input [(ngModel)]="ssn" placeholder="Enter Patient SSN">
+    <button (click)="load()">Fetch</button>
+  </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- TABLE -->
+  <table *ngIf="stays.length > 0">
+    <thead>
+      <tr>
+        <th>Stay ID</th>
+        <th>Room ID</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let s of stays">
+        <td>{{ s.stayId }}</td>
+        <td>{{ s.roomId }}</td>
+        <td>{{ s.stayStart }}</td>
+        <td>{{ s.stayEnd }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EMPTY -->
+  <p *ngIf="stays.length === 0 && !error">No stays found</p>
+
+</div>

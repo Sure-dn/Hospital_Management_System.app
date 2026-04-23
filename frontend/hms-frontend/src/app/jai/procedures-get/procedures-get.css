@@ -1,2 +1,52 @@
-h2 { color: white; }
-button { padding: 10px; margin: 10px 0; }
+.container {
+  background: #0b1220;
+  min-height: 100vh;
+  padding: 30px;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+/* Button */
+.load-btn {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #3b82f6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.load-btn:hover {
+  background: #2563eb;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111a2e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background: #1f2c4d;
+}
+
+tr:nth-child(even) {
+  background: #1a2540;
+}
+
+tr:hover {
+  background: #2a3a66;
+}

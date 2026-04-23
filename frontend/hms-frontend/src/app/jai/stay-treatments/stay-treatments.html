@@ -1,0 +1,41 @@
+<div class="container">
+
+  <h2>Stay Treatments</h2>
+
+  <div class="input-box">
+    <input [(ngModel)]="stayId" placeholder="Enter Stay ID">
+    <button (click)="load()">Fetch</button>
+  </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- TABLE -->
+  <table *ngIf="treatments.length > 0">
+    <thead>
+      <tr>
+        <th>Patient ID</th>
+        <th>Procedure ID</th>
+        <th>Date</th>
+        <th>Physician ID</th>
+        <th>Nurse ID</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let t of treatments">
+        <td>{{ t.patientId }}</td>
+        <td>{{ t.procedureId }}</td>
+        <td>{{ t.dateUndergoes }}</td>
+        <td>{{ t.physicianId }}</td>
+        <td>{{ t.nurseId }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EMPTY -->
+  <p *ngIf="treatments.length === 0 && !error">
+    No treatments found
+  </p>
+
+</div>

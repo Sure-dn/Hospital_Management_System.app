@@ -1,0 +1,12 @@
+<h2>Create Prescription</h2>
+
+<input [(ngModel)]="data.physicianId" placeholder="Physician ID">
+<input [(ngModel)]="data.patientSsn" placeholder="Patient SSN">
+<input [(ngModel)]="data.medicationCode" placeholder="Medication Code">
+<input [(ngModel)]="data.date" placeholder="Date (YYYY-MM-DDTHH:mm:ss)">
+<input [(ngModel)]="data.appointmentId" placeholder="Appointment ID">
+<input [(ngModel)]="data.dose" placeholder="Dose">
+
+<button (click)="create()">Create</button>
+
+<pre>{{ response | json }}</pre>

@@ -1,1 +1,69 @@
-<p>john works!</p>
+
+<div class="container">
+  <h1 class="main-title">Hospital Management Application</h1>
+  <h2 class="user-title">Medication & Prescription Module</h2>
+
+  <!-- MEDICATION APIs -->
+  <div class="section">
+    <div class="section-header">
+      <span>💊 Medication APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('/medications-post')">
+        POST <span>/api/medications</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('/medications-get')">
+        GET <span>/api/medications</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('/medications-get-by-code')">
+        GET <span>/api/medications/(code)</span>
+      </div>
+      <div class="api-card put" (click)="openEndpoint('/medications-put')">
+        PUT <span>/api/medications/(code)</span>
+      </div>
+      <div class="api-card delete" (click)="openEndpoint('/medications-delete')">
+        DELETE <span>/api/medications/(code)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRESCRIPTION APIs -->
+  <div class="section">
+    <div class="section-header">
+      <span>📋 Prescription APIs</span>
+      <span class="count">4 endpoints</span>
+    </div>
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('/prescriptions-post')">
+        POST <span>/api/prescriptions</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('/prescriptions-get')">
+        GET <span>/api/prescriptions</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('/prescriptions-get-patient')">
+        GET <span>/api/prescriptions/patient/(ssn)</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('/prescriptions-get-physician')">
+        GET <span>/api/prescriptions/physician/(employeeId)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVANCED QUERIES -->
+  <div class="section">
+    <div class="section-header">
+      <span>🔎 Advanced Queries (Audit Friendly)</span>
+      <span class="count">2 endpoints</span>
+    </div>
+    <div class="grid">
+      <div class="api-card get" (click)="openEndpoint('/prescriptions-get-date-range')">
+        GET <span>/api/prescriptions?from=DATE&to=DATE</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('/prescriptions-get-medication')">
+        GET <span>/api/prescriptions/medication/(code)</span>
+      </div>
+    </div>
+  </div>
+
+  
