@@ -6,62 +6,138 @@ import { authGuard } from './services/auth.guard';
 import { JaiComponent } from './jai/jai';
 import { Iniya } from './iniya/iniya';
 import { Ashmitha } from './ashmitha/ashmitha';
-import { JohnComponent } from './john/john';
+import { John } from './john/john';
 import { ProceduresGetComponent } from './jai/procedures-get/procedures-get';
 import { ProceduresPostComponent } from './jai/procedures-post/procedures-post';
 import { StayGetComponent } from './jai/stay-get/stay-get';
 import { PatientTreatmentsComponent } from './jai/patient-treatments/patient-treatments';
 import { PhysicianProceduresComponent } from './jai/physician-procedures/physician-procedures';
-import { CreateNurseComponent } from './sureka/nurse-post/nurse-post';
-import { GetAllNursesComponent } from './sureka/nurse-get/nurse-get';
-import { GetNurseByIdComponent } from './sureka/employeeid-get/employeeid-get';
-import { UpdateNurseComponent } from './sureka/employeeid-put/employeeid-put';
-
-import { OnCallPostComponent } from './sureka/oncall-post/oncall-post';
-
-import { OnCallGetComponent } from './sureka/oncall-get/oncall-get';
-
-import { OnCallFloorComponent } from './sureka/floorcode-get/floorcode-get';
-
-import { OnCallDeleteComponent } from './sureka/oncall-delete/oncall-delete';
-
-import { BlocksGetComponent } from './sureka/blocks-get/blocks-get';
-
-import { BlockRoomsComponent } from './sureka/floorcoderoom-get/floorcoderoom-get';
-
-import { RoomsGetComponent } from './sureka/rooms-get/rooms-get';
-
-import { RoomGetComponent } from './sureka/roomno-get/roomno-get';
-
-import { RoomUpdateComponent } from './sureka/roomnoavail-put/roomnoavail-put';
+import { ProcedurePatientsComponent } from './jai/procedure-patients/procedure-patients';
+import { StayPostComponent } from './jai/stay-post/stay-post';
+import { ProceduresUpdateComponent } from './jai/procedures-update/procedures-update';
+import { PatientStaysComponent } from './jai/patient-stays/patient-stays';
+import { TreatmentPostComponent } from './jai/treatment-post/treatment-post';
+import { TreatmentGetComponent } from './jai/treatment-get/treatment-get';
+import { StayTreatmentsComponent } from './jai/stay-treatments/stay-treatments';
+import { ProceduresCodeComponent } from './jai/procedures-code/procedures-code';
 
 
 export const routes: Routes = [
-{ path: '', component: HomeComponent },
-{ path: 'login', component: Loginpage },
 
-// protected pages
-{ path: 'sureka', component: Sureka, canActivate: [authGuard] },
-{ path: 'jai', component: JaiComponent, canActivate: [authGuard] },
-{ path: 'iniya', component: Iniya, canActivate: [authGuard] },
-{ path: 'ashmitha', component: Ashmitha, canActivate: [authGuard] },
-{ path: 'john', component: JohnComponent, canActivate: [authGuard] },
-{ path: 'procedures-get', component: ProceduresGetComponent, canActivate: [authGuard] },
-{ path: 'procedures-post', component: ProceduresPostComponent, },
-{ path: 'stay-get', component: StayGetComponent },
-{ path: 'patient-treatments', component: PatientTreatmentsComponent },
-{ path: 'physician-procedures', component: PhysicianProceduresComponent },
-{ path:'nurse-post',component:CreateNurseComponent},
-{ path:'nurse-get-all',component:GetAllNursesComponent},
-{ path: 'nurse-get',component:GetNurseByIdComponent},
-{path:'nurse-update',component:UpdateNurseComponent},
-{path:'oncall-post',component:OnCallPostComponent},
-{path:'oncall-get',component:OnCallGetComponent},
-{path:'oncall-floor',component:OnCallFloorComponent},
-{path:'oncall-delete',component:OnCallDeleteComponent},
-{path:'blocks',component:BlocksGetComponent},
-{path:'block-rooms',component:BlockRoomsComponent},
-{path:'rooms',component:RoomsGetComponent},
-{path:'room-get',component:RoomGetComponent},
-{path:'room-update',component:RoomUpdateComponent}
+  // 🌐 PUBLIC
+  { path: '', component: HomeComponent },
+  { path: 'login', component: Loginpage },
+
+  // 🔐 JAI MODULE (ALL YOUR ENDPOINTS)
+  {
+    path: 'jai',
+    component: JaiComponent,
+    canActivate: [authGuard],
+    data: { user: 'Jai' },
+
+    children: [
+
+  // 🔥 DEFAULT DASHBOARD
+  {
+    path: '',
+    loadComponent: () =>
+      import('./jai/dashboard/dashboard')
+        .then(m => m.DashboardComponent)
+  },
+
+  // ===== PROCEDURES =====
+  {
+    path: 'procedures-post',
+    loadComponent: () =>
+      import('./jai/procedures-post/procedures-post')
+        .then(m => m.ProceduresPostComponent)
+  },
+  {
+    path: 'procedures-get',
+    loadComponent: () =>
+      import('./jai/procedures-get/procedures-get')
+        .then(m => m.ProceduresGetComponent)
+  },
+  {
+    path: 'procedures-code',
+    loadComponent: () =>
+      import('./jai/procedures-code/procedures-code')
+        .then(m => m.ProceduresCodeComponent)
+  },
+  {
+    path: 'procedures-update',
+    loadComponent: () =>
+      import('./jai/procedures-update/procedures-update')
+        .then(m => m.ProceduresUpdateComponent)
+  },
+
+  // ===== STAY =====
+  {
+    path: 'stay-get',
+    loadComponent: () =>
+      import('./jai/stay-get/stay-get')
+        .then(m => m.StayGetComponent)
+  },
+  {
+    path: 'stay-post',
+    loadComponent: () =>
+      import('./jai/stay-post/stay-post')
+        .then(m => m.StayPostComponent)
+  },
+  {
+    path: 'patient-stays',
+    loadComponent: () =>
+      import('./jai/patient-stays/patient-stays')
+        .then(m => m.PatientStaysComponent)
+  },
+
+  // ===== TREATMENT =====
+  {
+    path: 'treatment-get',
+    loadComponent: () =>
+      import('./jai/treatment-get/treatment-get')
+        .then(m => m.TreatmentGetComponent)
+  },
+  {
+    path: 'treatment-post',
+    loadComponent: () =>
+      import('./jai/treatment-post/treatment-post')
+        .then(m => m.TreatmentPostComponent)
+  },
+  {
+    path: 'stay-treatments',
+    loadComponent: () =>
+      import('./jai/stay-treatments/stay-treatments')
+        .then(m => m.StayTreatmentsComponent)
+  },
+  {
+    path: 'patient-treatments',
+    loadComponent: () =>
+      import('./jai/patient-treatments/patient-treatments')
+        .then(m => m.PatientTreatmentsComponent)
+  },
+
+  // ===== REPORT =====
+  {
+    path: 'procedure-patients',
+    loadComponent: () =>
+      import('./jai/procedure-patients/procedure-patients')
+        .then(m => m.ProcedurePatientsComponent)
+  },
+  {
+    path: 'physician-procedures',
+    loadComponent: () =>
+      import('./jai/physician-procedures/physician-procedures')
+        .then(m => m.PhysicianProceduresComponent)
+  }
+
+  ]
+  },
+
+  // 🔐 TEAMMATES DASHBOARDS
+  { path: 'sureka', component: Sureka, canActivate: [authGuard], data: { user: 'Sureka' } },
+  { path: 'iniya', component: Iniya, canActivate: [authGuard], data: { user: 'Iniya' } },
+  { path: 'ashmitha', component: Ashmitha, canActivate: [authGuard], data: { user: 'Ashmitha' } },
+  { path: 'john', component: John, canActivate: [authGuard], data: { user: 'John' } }
+
 ];

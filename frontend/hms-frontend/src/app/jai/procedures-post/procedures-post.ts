@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-procedures-post',
-  standalone: true,
   imports: [FormsModule],
   templateUrl: './procedures-post.html',
   styleUrl: './procedures-post.css'
