@@ -37,28 +37,101 @@ export const routes: Routes = [
 
     children: [
 
-      // PROCEDURES
-      { path: 'procedures-get', component: ProceduresGetComponent },
-      { path: 'procedures-post', component: ProceduresPostComponent },
-      { path: 'procedures-code', component: ProceduresCodeComponent },
-      { path: 'procedures-update', component: ProceduresUpdateComponent },
+  // 🔥 DEFAULT DASHBOARD
+  {
+    path: '',
+    loadComponent: () =>
+      import('./jai/dashboard/dashboard')
+        .then(m => m.DashboardComponent)
+  },
 
-      // STAY
-      { path: 'stay-get', component: StayGetComponent },
-      { path: 'stay-post', component: StayPostComponent },
-      { path: 'patient-stays', component: PatientStaysComponent },
+  // ===== PROCEDURES =====
+  {
+    path: 'procedures-post',
+    loadComponent: () =>
+      import('./jai/procedures-post/procedures-post')
+        .then(m => m.ProceduresPostComponent)
+  },
+  {
+    path: 'procedures-get',
+    loadComponent: () =>
+      import('./jai/procedures-get/procedures-get')
+        .then(m => m.ProceduresGetComponent)
+  },
+  {
+    path: 'procedures-code',
+    loadComponent: () =>
+      import('./jai/procedures-code/procedures-code')
+        .then(m => m.ProceduresCodeComponent)
+  },
+  {
+    path: 'procedures-update',
+    loadComponent: () =>
+      import('./jai/procedures-update/procedures-update')
+        .then(m => m.ProceduresUpdateComponent)
+  },
 
-      // TREATMENT
-      { path: 'treatment-get', component: TreatmentGetComponent },
-      { path: 'treatment-post', component: TreatmentPostComponent },
-      { path: 'stay-treatments', component: StayTreatmentsComponent },
-      { path: 'patient-treatments', component: PatientTreatmentsComponent },
+  // ===== STAY =====
+  {
+    path: 'stay-get',
+    loadComponent: () =>
+      import('./jai/stay-get/stay-get')
+        .then(m => m.StayGetComponent)
+  },
+  {
+    path: 'stay-post',
+    loadComponent: () =>
+      import('./jai/stay-post/stay-post')
+        .then(m => m.StayPostComponent)
+  },
+  {
+    path: 'patient-stays',
+    loadComponent: () =>
+      import('./jai/patient-stays/patient-stays')
+        .then(m => m.PatientStaysComponent)
+  },
 
-      // REPORT
-      { path: 'procedure-patients', component: ProcedurePatientsComponent },
-      { path: 'physician-procedures', component: PhysicianProceduresComponent }
+  // ===== TREATMENT =====
+  {
+    path: 'treatment-get',
+    loadComponent: () =>
+      import('./jai/treatment-get/treatment-get')
+        .then(m => m.TreatmentGetComponent)
+  },
+  {
+    path: 'treatment-post',
+    loadComponent: () =>
+      import('./jai/treatment-post/treatment-post')
+        .then(m => m.TreatmentPostComponent)
+  },
+  {
+    path: 'stay-treatments',
+    loadComponent: () =>
+      import('./jai/stay-treatments/stay-treatments')
+        .then(m => m.StayTreatmentsComponent)
+  },
+  {
+    path: 'patient-treatments',
+    loadComponent: () =>
+      import('./jai/patient-treatments/patient-treatments')
+        .then(m => m.PatientTreatmentsComponent)
+  },
 
-    ]
+  // ===== REPORT =====
+  {
+    path: 'procedure-patients',
+    loadComponent: () =>
+      import('./jai/procedure-patients/procedure-patients')
+        .then(m => m.ProcedurePatientsComponent)
+  },
+  {
+    path: 'physician-procedures',
+    loadComponent: () =>
+      import('./jai/physician-procedures/physician-procedures')
+        .then(m => m.PhysicianProceduresComponent)
+  }
+
+  ]
   },
 
   // 🔐 TEAMMATES DASHBOARDS
