@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sprint.project.exception.BadRequestException;
 import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.treatmentprostayy.DTO.StayRequestDTO;
@@ -16,7 +15,6 @@ import com.sprint.project.treatmentprostayy.exception.StayAlreadyExistsException
 import com.sprint.project.treatmentprostayy.exception.StayNotFoundException;
 import com.sprint.project.treatmentprostayy.repositories.StayRepository;
 import com.sprint.project.treatmentprostayy.services.StayService;
-import com.sprint.project.nurseoncallroom.repository.RoomRepository;
 import com.sprint.project.nurseoncallroom.repository.RoomRepository;
 @Service
 public class StayServiceImplementations implements StayService {
