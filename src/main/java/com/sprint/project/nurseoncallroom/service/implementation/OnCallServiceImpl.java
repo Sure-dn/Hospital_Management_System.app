@@ -4,7 +4,8 @@ import com.sprint.project.nurseoncallroom.dto.request.OnCallRequestDTO;
 import com.sprint.project.nurseoncallroom.dto.response.OnCallResponseDTO;
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
 import com.sprint.project.nurseoncallroom.entity.OnCallEntity;
-import com.sprint.project.nurseoncallroom.exception.OnCallNotFoundException;
+
+import com.sprint.project.nurseoncallroom.exception.*;
 import com.sprint.project.nurseoncallroom.repository.NurseRepository;
 import com.sprint.project.nurseoncallroom.repository.OnCallRepository;
 import com.sprint.project.nurseoncallroom.service.OnCallService;
@@ -20,9 +21,13 @@ import java.util.stream.Collectors;
 @Transactional
 public class OnCallServiceImpl implements OnCallService {
 
-    @Autowired private OnCallRepository onCallRepository;
-    @Autowired private NurseRepository nurseRepository;
+    @Autowired
+    private OnCallRepository onCallRepository;
 
+    @Autowired
+    private NurseRepository nurseRepository;
+
+    // ✅ Convert Entity → DTO
     private OnCallResponseDTO toDTO(OnCallEntity e) {
         OnCallResponseDTO dto = new OnCallResponseDTO();
         dto.setNurseEmployeeId(e.getNurse().getEmployeeId());
@@ -34,10 +39,25 @@ public class OnCallServiceImpl implements OnCallService {
         return dto;
     }
 
+    // ✅ CREATE On-Call Shift
     @Override
     public OnCallResponseDTO assignOnCall(Integer employeeId, OnCallRequestDTO request) {
+
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
+
+        // 🔥 SAME LOGIC, only exception changed
+        boolean isOverlapping = onCallRepository.existsOverlappingShift(
+                nurse,
+                request.getBlockFloor(),
+                request.getBlockCode(),
+                request.getOnCallStart(),
+                request.getOnCallEnd()
+        );
+
+        if (isOverlapping) {
+            throw new OnCallScheduleConflictException();
+        }
 
         OnCallEntity entity = new OnCallEntity();
         entity.setNurse(nurse);
@@ -46,28 +66,53 @@ public class OnCallServiceImpl implements OnCallService {
         entity.setOnCallStart(request.getOnCallStart());
         entity.setOnCallEnd(request.getOnCallEnd());
 
-        return toDTO(onCallRepository.save(entity));
+        OnCallEntity saved = onCallRepository.save(entity);
+
+        return toDTO(saved);
     }
 
+    // ✅ GET On-Call by Nurse
     @Override
     @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByNurse(Integer employeeId) {
+
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
-        return onCallRepository.findByNurse(nurse)
-                .stream().map(this::toDTO).collect(Collectors.toList());
+        List<OnCallEntity> list = onCallRepository.findByNurse(nurse);
+
+        if (list.isEmpty()) {
+            throw new OnCallScheduleConflictException();
+        }
+
+        return list.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
+    // ✅ GET On-Call by Block
     @Override
+    @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByBlock(Integer floor, Integer code) {
-        return List.of();
+
+        List<OnCallEntity> list = onCallRepository
+                .findByBlockFloorAndBlockCode(floor, code);
+
+        if (list.isEmpty()) {
+            throw new OnCallScheduleConflictException();
+        }
+
+        return list.stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
+    // ✅ DELETE On-Call by Nurse
     @Override
     public void deleteOnCall(Integer employeeId) {
+
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
         onCallRepository.deleteByNurse(nurse);
     }

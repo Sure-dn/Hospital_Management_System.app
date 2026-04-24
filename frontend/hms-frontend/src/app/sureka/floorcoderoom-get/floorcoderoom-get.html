@@ -1,0 +1,9 @@
+<p>floorcoderoom-get works!</p>
+<h2>Get Rooms by Block</h2>
+
+<input type="number" [(ngModel)]="floor" placeholder="Floor"><br>
+<input type="number" [(ngModel)]="code" placeholder="Code"><br><br>
+
+<button (click)="getRooms()">Get Rooms</button>
+
+<pre>{{ data | json }}</pre>

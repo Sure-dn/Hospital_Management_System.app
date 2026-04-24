@@ -1,8 +1,6 @@
 package com.sprint.project.nurseoncallroom.entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,41 +10,28 @@ import jakarta.validation.constraints.Size;
 public class NurseEntity {
 
     @Id
-    @NotNull(message = "Employee ID is required")
-    @Column(name = "EmployeeID")
+
+    @Column(name = "employee_id", nullable=false) // ✅ MATCH DB
     private Integer employeeId;
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 50)
-    @Column(name = "Name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotBlank(message = "Position is required")
-    @Column(name = "Position", nullable = false, length = 50)
+    @Column(name = "position", nullable = false)
     private String position;
 
     @NotNull(message = "Registered status is required")
-    @Column(name = "Registered", nullable = false)
+    @Column(name = "registered", nullable = false)
     private Boolean registered;
 
     @NotNull(message = "SSN is required")
-    @Column(name = "SSN", unique = true, nullable = false)
+    @Column(name = "ssn", unique = true, nullable = false)
     private Integer ssn;
 
     public NurseEntity() {}
-
-
-
-    @Override
-    public String toString() {
-        return "NurseEntity{" +
-                "employeeId=" + employeeId +
-                ", name='" + name + '\'' +
-                ", position='" + position + '\'' +
-                ", registered=" + registered +
-                ", ssn=" + ssn +
-                '}';
-    }
 
     public NurseEntity(Integer employeeId, String name, String position, Boolean registered, Integer ssn) {
         this.employeeId = employeeId;
@@ -56,47 +41,20 @@ public class NurseEntity {
         this.ssn = ssn;
     }
 
+    // Getters & Setters
 
-// Getters and Setters
+    public Integer getEmployeeId() { return employeeId; }
+    public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }
 
-    public Integer getEmployeeId() {
-        return employeeId;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId = employeeId;
-    }
+    public String getPosition() { return position; }
+    public void setPosition(String position) { this.position = position; }
 
-    public String getName() {
-        return name;
-    }
+    public Boolean getRegistered() { return registered; }
+    public void setRegistered(Boolean registered) { this.registered = registered; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public Boolean getRegistered() {
-        return registered;
-    }
-
-    public void setRegistered(Boolean registered) {
-        this.registered = registered;
-    }
-
-    public Integer getSsn() {
-        return ssn;
-    }
-
-    public void setSsn(Integer ssn) {
-        this.ssn = ssn;
-    }
+    public Integer getSsn() { return ssn; }
+    public void setSsn(Integer ssn) { this.ssn = ssn; }
 }
-
