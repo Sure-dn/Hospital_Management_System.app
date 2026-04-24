@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Get Physicians By Department</h2>
+
+  <label>Department ID</label>
+  <input type="number" [(ngModel)]="departmentId" placeholder="Enter Department ID" />
+
+  <button (click)="fetchPhysicians()">Fetch</button>
+
+  <div class="result" *ngIf="result">
+    <h3>Response</h3>
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>
