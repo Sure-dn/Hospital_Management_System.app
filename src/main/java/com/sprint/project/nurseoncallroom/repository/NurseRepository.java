@@ -19,7 +19,7 @@ public interface NurseRepository extends JpaRepository<NurseEntity, Integer> {
     List<NurseEntity> findByRegistered(Boolean registered);
 
     // Find by SSN (unique)
-    Optional<NurseEntity> findBySsn(Integer ssn);
+    boolean existsBySsn(Integer ssn);
 
     // Search by name (case-insensitive, partial match)
     @Query("SELECT n FROM NurseEntity n WHERE LOWER(n.name) LIKE LOWER(CONCAT('%', :keyword, '%'))")
@@ -29,4 +29,7 @@ public interface NurseRepository extends JpaRepository<NurseEntity, Integer> {
     @Query("SELECT n FROM NurseEntity n WHERE n.position = :position AND n.registered = :registered")
     List<NurseEntity> findByPositionAndRegistered(@Param("position") String position,
                                                   @Param("registered") Boolean registered);
+
+
+
 }

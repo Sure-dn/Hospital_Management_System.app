@@ -4,7 +4,8 @@ import com.sprint.project.nurseoncallroom.dto.request.OnCallRequestDTO;
 import com.sprint.project.nurseoncallroom.dto.response.OnCallResponseDTO;
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
 import com.sprint.project.nurseoncallroom.entity.OnCallEntity;
-import com.sprint.project.nurseoncallroom.exception.OnCallNotFoundException;
+
+import com.sprint.project.nurseoncallroom.exception.*;
 import com.sprint.project.nurseoncallroom.repository.NurseRepository;
 import com.sprint.project.nurseoncallroom.repository.OnCallRepository;
 import com.sprint.project.nurseoncallroom.service.OnCallService;
@@ -43,9 +44,9 @@ public class OnCallServiceImpl implements OnCallService {
     public OnCallResponseDTO assignOnCall(Integer employeeId, OnCallRequestDTO request) {
 
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found with ID: " + employeeId));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
-        // 🔥 Optional: Prevent overlapping shifts
+        // 🔥 SAME LOGIC, only exception changed
         boolean isOverlapping = onCallRepository.existsOverlappingShift(
                 nurse,
                 request.getBlockFloor(),
@@ -55,7 +56,7 @@ public class OnCallServiceImpl implements OnCallService {
         );
 
         if (isOverlapping) {
-            throw new RuntimeException("Overlapping on-call shift exists for this nurse");
+            throw new OnCallScheduleConflictException();
         }
 
         OnCallEntity entity = new OnCallEntity();
@@ -76,12 +77,12 @@ public class OnCallServiceImpl implements OnCallService {
     public List<OnCallResponseDTO> getOnCallByNurse(Integer employeeId) {
 
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found with ID: " + employeeId));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
         List<OnCallEntity> list = onCallRepository.findByNurse(nurse);
 
         if (list.isEmpty()) {
-            throw new OnCallNotFoundException("No on-call shifts found for nurse ID: " + employeeId);
+            throw new OnCallScheduleConflictException();
         }
 
         return list.stream()
@@ -89,7 +90,7 @@ public class OnCallServiceImpl implements OnCallService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ GET On-Call by Block (🔥 FIXED METHOD)
+    // ✅ GET On-Call by Block
     @Override
     @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByBlock(Integer floor, Integer code) {
@@ -98,9 +99,7 @@ public class OnCallServiceImpl implements OnCallService {
                 .findByBlockFloorAndBlockCode(floor, code);
 
         if (list.isEmpty()) {
-            throw new OnCallNotFoundException(
-                    "No on-call shifts found for block floor: " + floor + " and code: " + code
-            );
+            throw new OnCallScheduleConflictException();
         }
 
         return list.stream()
@@ -113,7 +112,7 @@ public class OnCallServiceImpl implements OnCallService {
     public void deleteOnCall(Integer employeeId) {
 
         NurseEntity nurse = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found with ID: " + employeeId));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
         onCallRepository.deleteByNurse(nurse);
     }

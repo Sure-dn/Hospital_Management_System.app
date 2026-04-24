@@ -2,7 +2,8 @@ package com.sprint.project.nurseoncallroom.service.implementation;
 
 import com.sprint.project.nurseoncallroom.dto.response.RoomResponseDTO;
 import com.sprint.project.nurseoncallroom.entity.RoomEntity;
-import com.sprint.project.nurseoncallroom.exception.OnCallNotFoundException;
+
+import com.sprint.project.nurseoncallroom.exception.*;
 import com.sprint.project.nurseoncallroom.repository.RoomRepository;
 import com.sprint.project.nurseoncallroom.service.RoomService;
 
@@ -36,6 +37,7 @@ public class RoomServiceImpl implements RoomService {
         return dto;
     }
 
+    // ✅ GET ALL ROOMS
     @Override
     @Transactional(readOnly = true)
     public List<RoomResponseDTO> getAllRooms() {
@@ -43,7 +45,7 @@ public class RoomServiceImpl implements RoomService {
         List<RoomEntity> rooms = roomRepository.findAll();
 
         if (rooms.isEmpty()) {
-            throw new OnCallNotFoundException("No rooms found");
+            throw new BlockCapacityFullException(0, 0); // changed
         }
 
         return rooms.stream()
@@ -51,21 +53,23 @@ public class RoomServiceImpl implements RoomService {
                 .collect(Collectors.toList());
     }
 
+    // ✅ GET ROOM BY NUMBER
     @Override
     @Transactional(readOnly = true)
     public RoomResponseDTO getRoomByNumber(Integer roomNumber) {
 
         RoomEntity room = roomRepository.findById(roomNumber)
-                .orElseThrow(() -> new OnCallNotFoundException("Room not found"));
+                .orElseThrow(() -> new NurseNotAvailableException(roomNumber)); // changed
 
         return toDTO(room);
     }
 
+    // ✅ UPDATE ROOM
     @Override
     public RoomResponseDTO updateRoomAvailability(Integer roomNumber, Boolean unavailable) {
 
         RoomEntity room = roomRepository.findById(roomNumber)
-                .orElseThrow(() -> new OnCallNotFoundException("Room not found"));
+                .orElseThrow(() -> new NurseNotAvailableException(roomNumber)); // changed
 
         if (!room.getUnavailable().equals(unavailable)) {
             room.setUnavailable(unavailable);
