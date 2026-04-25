@@ -14,6 +14,7 @@ import com.sprint.project.physicianDepartmentManagement.Service.Implementation.T
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/physicians")
 
 public class TrainedInController {

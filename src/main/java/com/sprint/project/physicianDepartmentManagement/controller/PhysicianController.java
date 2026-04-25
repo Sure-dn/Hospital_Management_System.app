@@ -16,6 +16,7 @@ import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService
 import jakarta.validation.Valid;
 
 	@RestController
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/api/physicians")
 	@Validated
 	public class PhysicianController {
