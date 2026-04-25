@@ -1,0 +1,13 @@
+<div class="page-box">
+  <h2>Create Physician</h2>
+
+  <form>
+    <input type="number" placeholder="Employee ID" [(ngModel)]="physician.employeeId" name="employeeId">
+    <input type="text" placeholder="Name" [(ngModel)]="physician.name" name="name">
+    <input type="text" placeholder="Position" [(ngModel)]="physician.position" name="position">
+    <input type="number" placeholder="SSN" [(ngModel)]="physician.ssn" name="ssn">
+
+    <button type="button" (click)="submit()">Submit</button>
+  </form>
+</div>
+

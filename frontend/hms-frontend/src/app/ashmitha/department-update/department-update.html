@@ -1,0 +1,9 @@
+<div class="page-box">
+  <h2>Update Department</h2>
+
+  <input type="number" placeholder="Department ID" [(ngModel)]="department.departmentId">
+  <input type="text" placeholder="Department Name" [(ngModel)]="department.name">
+  <input type="number" placeholder="Head Employee ID" [(ngModel)]="department.headEmployeeId">
+
+  <button (click)="updateDepartment()">Update</button>
+</div>
