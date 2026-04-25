@@ -35,11 +35,11 @@ public class UndergoesEntity {
     private StayEntity stay;
 
     @ManyToOne
-    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID")
+    @JoinColumn(name = "Physician", referencedColumnName = "employee_id")
     private PhysicianEntity physician;
 
     @ManyToOne
-    @JoinColumn(name = "AssistingNurse", referencedColumnName = "EmployeeID")
+    @JoinColumn(name = "AssistingNurse", referencedColumnName = "employee_id")
     private NurseEntity assistingNurse;
 
     public UndergoesEntity() {}
