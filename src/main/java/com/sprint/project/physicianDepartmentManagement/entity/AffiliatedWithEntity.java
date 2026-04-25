@@ -18,7 +18,8 @@ public class AffiliatedWithEntity {
     @NotNull
     @ManyToOne
     @MapsId("physician")
-    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID", nullable = false)
+    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID"
+, nullable = false)
     private PhysicianEntity physician;
 
     @NotNull

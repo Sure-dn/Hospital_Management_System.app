@@ -1,33 +1,30 @@
 package com.sprint.project.nurseoncallroom.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "Nurse")
 public class NurseEntity {
 
     @Id
-
-    @Column(name = "employee_id", nullable=false) // ✅ MATCH DB
+    @Column(name = "employee_id", nullable = false)
     private Integer employeeId;
 
-    @NotBlank(message = "Name is required")
+    @NotBlank
     @Size(min = 3, max = 50)
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotBlank(message = "Position is required")
+    @NotBlank
     @Column(name = "position", nullable = false)
     private String position;
 
-    @NotNull(message = "Registered status is required")
+    @NotNull
     @Column(name = "registered", nullable = false)
     private Boolean registered;
 
-    @NotNull(message = "SSN is required")
+    @NotNull
     @Column(name = "ssn", unique = true, nullable = false)
     private Integer ssn;
 
@@ -42,7 +39,6 @@ public class NurseEntity {
     }
 
     // Getters & Setters
-
     public Integer getEmployeeId() { return employeeId; }
     public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }
 

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class OnCallId implements Serializable {
 
-    private Integer nurse;   // must match entity field name
+    private Integer nurse; // this should represent employee_id
 
     private Integer blockFloor;
     private Integer blockCode;
@@ -20,6 +20,18 @@ public class OnCallId implements Serializable {
         this.blockCode = blockCode;
         this.onCallStart = onCallStart;
     }
+
+    public Integer getNurse() { return nurse; }
+    public void setNurse(Integer nurse) { this.nurse = nurse; }
+
+    public Integer getBlockFloor() { return blockFloor; }
+    public void setBlockFloor(Integer blockFloor) { this.blockFloor = blockFloor; }
+
+    public Integer getBlockCode() { return blockCode; }
+    public void setBlockCode(Integer blockCode) { this.blockCode = blockCode; }
+
+    public LocalDateTime getOnCallStart() { return onCallStart; }
+    public void setOnCallStart(LocalDateTime onCallStart) { this.onCallStart = onCallStart; }
 
     @Override
     public boolean equals(Object o) {

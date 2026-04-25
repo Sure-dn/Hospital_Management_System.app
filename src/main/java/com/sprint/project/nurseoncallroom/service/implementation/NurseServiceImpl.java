@@ -71,15 +71,17 @@ public class NurseServiceImpl implements NurseService {
 
     // ✅ UPDATE
     @Override
+
     public NurseResponseDTO updateNurse(Integer employeeId, NurseRequestDTO request) {
 
         NurseEntity existing = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new NurseNotAvailableException(employeeId)); // changed
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
         existing.setName(request.getName());
         existing.setPosition(request.getPosition());
         existing.setRegistered(request.getRegistered());
+        existing.setSsn(request.getSsn()); // 🔥 ADD THIS
 
         return toDTO(nurseRepository.save(existing));
     }
-}
+    }

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { NgIf, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-update-nurse',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule, NgIf, JsonPipe], // ✅ added NgIf
   templateUrl: './employeeid-put.html'
 })
 export class UpdateNurseComponent {
@@ -17,7 +17,7 @@ export class UpdateNurseComponent {
     name: '',
     position: '',
     registered: true,
-    ssn: ''
+    ssn: 0
   };
 
   data: any;
@@ -25,10 +25,33 @@ export class UpdateNurseComponent {
   constructor(private http: HttpClient) {}
 
   update() {
-    this.http.put(`http://localhost:9090/api/nurses/${this.id}`, this.nurse)
-      .subscribe({
-        next: res => this.data = res,
-        error: err => console.error(err)
-      });
+    console.log("ID 👉", this.id);
+    console.log("BODY 👉", this.nurse);
+
+    const token = localStorage.getItem('token');
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.put(
+      `http://localhost:9090/api/nurses/${this.id}`,
+      {
+        employeeId: this.id,   // 🔥 IMPORTANT FIX
+        ...this.nurse
+      },
+      { headers }
+    ).subscribe({
+      next: res => {
+        console.log("Response 👉", res);
+        this.data = res;
+        alert("✅ Nurse updated successfully!");
+      },
+      error: err => {
+        console.error(err);
+        alert(err.error?.message || "❌ Update failed!");
+      }
+    });
   }
 }
