@@ -6,20 +6,7 @@ import { authGuard } from './services/auth.guard';
 import { JaiComponent } from './jai/jai';
 import { Iniya } from './iniya/iniya';
 import { Ashmitha } from './ashmitha/ashmitha';
-import { John } from './john/john';
-import { ProceduresGetComponent } from './jai/procedures-get/procedures-get';
-import { ProceduresPostComponent } from './jai/procedures-post/procedures-post';
-import { StayGetComponent } from './jai/stay-get/stay-get';
-import { PatientTreatmentsComponent } from './jai/patient-treatments/patient-treatments';
-import { PhysicianProceduresComponent } from './jai/physician-procedures/physician-procedures';
-import { ProcedurePatientsComponent } from './jai/procedure-patients/procedure-patients';
-import { StayPostComponent } from './jai/stay-post/stay-post';
-import { ProceduresUpdateComponent } from './jai/procedures-update/procedures-update';
-import { PatientStaysComponent } from './jai/patient-stays/patient-stays';
-import { TreatmentPostComponent } from './jai/treatment-post/treatment-post';
-import { TreatmentGetComponent } from './jai/treatment-get/treatment-get';
-import { StayTreatmentsComponent } from './jai/stay-treatments/stay-treatments';
-import { ProceduresCodeComponent } from './jai/procedures-code/procedures-code';
+import { JohnComponent } from './john/john';
 
 
 export const routes: Routes = [
@@ -134,10 +121,10 @@ export const routes: Routes = [
   ]
   },
 
-  //JOHN MODULE
-  {
+  // JOHN MODULE
+{
   path: 'john',
-  component: John,
+  component: JohnComponent,
   canActivate: [authGuard],
   data: { user: 'John' },
 
@@ -167,19 +154,19 @@ export const routes: Routes = [
     {
       path: 'medications-get-by-code',
       loadComponent: () =>
-        import('./john/medications-get-by-code/medications-get-by-code')
+        import('./john/medicationscode-get/medicationscode-get')
           .then(m => m.GetMedicationComponent)
     },
     {
       path: 'medications-put',
       loadComponent: () =>
-        import('./john/medications-put/medications-put')
+        import('./john/medicationscode-put/medicationscode-put')
           .then(m => m.UpdateMedicationComponent)
     },
     {
       path: 'medications-delete',
       loadComponent: () =>
-        import('./john/medications-delete/medications-delete')
+        import('./john/medicationscode-delete/medicationscode-delete')
           .then(m => m.DeleteMedicationComponent)
     },
 
@@ -199,30 +186,30 @@ export const routes: Routes = [
     {
       path: 'prescriptions-get-date-range',
       loadComponent: () =>
-        import('./john/prescriptions-get-date-range/prescriptions-get-date-range')
+        import('./john/prescriptions-datefromto-get/prescriptions-datefromto-get')
           .then(m => m.GetByDateComponent)
     },
     {
       path: 'prescriptions-get-patient',
       loadComponent: () =>
-        import('./john/prescriptions-get-patient/prescriptions-get-patient')
+        import('./john/prescriptions-patientssn-get/prescriptions-patientssn-get')
           .then(m => m.GetByPatientComponent)
     },
     {
       path: 'prescriptions-get-physician',
       loadComponent: () =>
-        import('./john/prescriptions-get-physician/prescriptions-get-physician')
+        import('./john/prescriptions-physicianempid-get/prescriptions-physicianempid-get')
           .then(m => m.GetByPhysicianComponent)
     },
     {
       path: 'prescriptions-get-medication',
       loadComponent: () =>
-        import('./john/prescriptions-get-medication/prescriptions-get-medication')
+        import('./john/prescriptionscode-medication-get/prescriptionscode-medication-get')
           .then(m => m.GetByMedicationComponent)
     }
 
   ]
-  },
+},
 
   //ASHMITHA MODULE
   {
@@ -348,8 +335,8 @@ export const routes: Routes = [
   ]
   },
 
-  //SUREKA MODULE
-  {
+  // SUREKA MODULE
+{
   path: 'sureka',
   component: Sureka,
   canActivate: [authGuard],
@@ -373,21 +360,23 @@ export const routes: Routes = [
           .then(m => m.CreateNurseComponent)
     },
     {
-      path: 'nurse-get-all',
-      loadComponent: () =>
-        import('./sureka/nurse-get-all/nurse-get-all')
-          .then(m => m.GetAllNursesComponent)
-    },
-    {
       path: 'nurse-get',
       loadComponent: () =>
         import('./sureka/nurse-get/nurse-get')
+          .then(m => m.GetAllNursesComponent)
+    },
+
+    // ===== EMPLOYEE =====
+    {
+      path: 'employee-get',
+      loadComponent: () =>
+        import('./sureka/employeeid-get/employeeid-get')
           .then(m => m.GetNurseByIdComponent)
     },
     {
-      path: 'nurse-update',
+      path: 'employee-update',
       loadComponent: () =>
-        import('./sureka/nurse-update/nurse-update')
+        import('./sureka/employeeid-put/employeeid-put')
           .then(m => m.UpdateNurseComponent)
     },
 
@@ -405,12 +394,6 @@ export const routes: Routes = [
           .then(m => m.OnCallGetComponent)
     },
     {
-      path: 'oncall-floor',
-      loadComponent: () =>
-        import('./sureka/oncall-floor/oncall-floor')
-          .then(m => m.OnCallFloorComponent)
-    },
-    {
       path: 'oncall-delete',
       loadComponent: () =>
         import('./sureka/oncall-delete/oncall-delete')
@@ -419,35 +402,43 @@ export const routes: Routes = [
 
     // ===== BLOCKS =====
     {
-      path: 'blocks',
+      path: 'blocks-get',
       loadComponent: () =>
-        import('./sureka/blocks/blocks')
+        import('./sureka/blocks-get/blocks-get')
           .then(m => m.BlocksGetComponent)
     },
+
+    // ===== FLOOR / ROOM COMBO =====
     {
-      path: 'block-rooms',
+      path: 'floor-get',
       loadComponent: () =>
-        import('./sureka/block-rooms/block-rooms')
+        import('./sureka/floorcode-get/floorcode-get')
+          .then(m => m.OnCallFloorComponent)
+    },
+    {
+      path: 'floor-room-get',
+      loadComponent: () =>
+        import('./sureka/floorcoderoom-get/floorcoderoom-get')
           .then(m => m.BlockRoomsComponent)
     },
 
     // ===== ROOMS =====
     {
-      path: 'rooms',
+      path: 'rooms-get',
       loadComponent: () =>
-        import('./sureka/rooms/rooms')
+        import('./sureka/rooms-get/rooms-get')
           .then(m => m.RoomsGetComponent)
     },
     {
       path: 'room-get',
       loadComponent: () =>
-        import('./sureka/room-get/room-get')
+        import('./sureka/roomno-get/roomno-get')
           .then(m => m.RoomGetComponent)
     },
     {
       path: 'room-update',
       loadComponent: () =>
-        import('./sureka/room-update/room-update')
+        import('./sureka/roomnoavail-put/roomnoavail-put')
           .then(m => m.RoomUpdateComponent)
     }
 
