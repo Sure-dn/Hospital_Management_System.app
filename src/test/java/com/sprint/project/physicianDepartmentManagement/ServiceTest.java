@@ -88,9 +88,9 @@ class ServiceTest {
     @Test
     void TC02_getPhysician_notFound() {
 
-        assertThrows(ResourceNotFoundException.class, () -> {
-            physicianService.getPhysicianById(99999);
-        });
+    	assertThrows(com.sprint.project.physicianDepartmentManagement.exception.PhysicianNotFoundException.class, () -> {
+    	    physicianService.getPhysicianById(99999);
+    	});
     }
 
     @Test
@@ -98,7 +98,7 @@ class ServiceTest {
 
         createPhysician(20001);
 
-        assertThrows(DuplicateResourceException.class, () -> {
+        assertThrows(com.sprint.project.physicianDepartmentManagement.exception.DuplicatePhysicianException.class, () -> {
             createPhysician(20001);
         });
     }
@@ -127,9 +127,9 @@ class ServiceTest {
     @Test
     void TC06_department_notFound() {
 
-        assertThrows(ResourceNotFoundException.class, () -> {
-            departmentService.getDepartmentById(99999);
-        });
+    	assertThrows(com.sprint.project.physicianDepartmentManagement.exception.DepartmentNotFoundExcpetion.class, () -> {
+    	    departmentService.getDepartmentById(99999);
+    	});
     }
 
    
@@ -164,7 +164,7 @@ class ServiceTest {
 
         affiliatedWithService.createAffiliation(physId, dto);
 
-        assertThrows(DuplicateResourceException.class, () -> {
+        assertThrows(com.sprint.project.physicianDepartmentManagement.exception.DuplicateAffiliationException.class, () -> {
             affiliatedWithService.createAffiliation(physId, dto);
         });
     }
@@ -228,7 +228,7 @@ class ServiceTest {
 
         TrainedInId id = new TrainedInId(999, 999);
 
-        assertThrows(ResourceNotFoundException.class, () -> {
+        assertThrows(com.sprint.project.physicianDepartmentManagement.exception.TrainingNotFoundException.class, () -> {
             trainedInService.getTrainingById(id);
         });
     }
@@ -238,7 +238,7 @@ class ServiceTest {
 
         TrainedInId id = new TrainedInId(999, 999);
 
-        assertThrows(ResourceNotFoundException.class, () -> {
+        assertThrows(com.sprint.project.physicianDepartmentManagement.exception.TrainingNotFoundException.class, () -> {
             trainedInService.deleteTraining(id);
         });
     }

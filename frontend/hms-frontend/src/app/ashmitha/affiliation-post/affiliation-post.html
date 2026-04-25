@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Create Affiliation</h2>
+  
+
+  <label>Employee ID</label> <br>
+  <input type="number" [(ngModel)]="physicianId" placeholder="Enter Employee ID" /><br><br>
+
+  <label>Department ID</label><br>
+  <input type="number" [(ngModel)]="departmentId" placeholder="Enter Department ID" /><br><br>
+
+  <label class="checkbox-label"> 
+    <input type="checkbox" [(ngModel)]="primaryAffiliation" />
+    Primary Affiliation
+  </label> <br><br>
+
+  <button (click)="createAffiliation()">Submit</button>
+  
+
+  <div class="result" *ngIf="result">
+    <h3>Response</h3>
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>
