@@ -29,6 +29,8 @@ export class CreateNurseComponent {
   constructor(private http: HttpClient) {}
 
   create() {
+    console.log("Sending Data 👉", this.nurse);
+
     this.error = '';
     this.successMessage = '';
     this.data = null;
@@ -38,6 +40,11 @@ export class CreateNurseComponent {
     this.http.post<any>('http://localhost:9090/api/nurses', this.nurse)
       .subscribe({
         next: (res) => {
+          console.log("Response 👉", res);
+
+          // ✅ SUCCESS ALERT
+          alert("✅ Nurse added successfully to database!");
+
           this.data = res;
           this.successMessage = '✅ Nurse created successfully!';
           this.loading = false;
@@ -51,8 +58,13 @@ export class CreateNurseComponent {
             ssn: 0,
           };
         },
+
         error: (err) => {
           console.error(err);
+
+          // ❌ ERROR ALERT
+          alert("❌ Failed to create nurse!");
+
           this.error = err?.error?.message || '❌ Failed to create nurse';
           this.loading = false;
         }

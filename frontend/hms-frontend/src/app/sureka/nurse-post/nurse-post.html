@@ -1,22 +1,33 @@
 <div class="container">
   <h2>👩‍⚕️ Create Nurse</h2>
 
-  <div class="form">
-    
-<input type="number" [(ngModel)]="nurse.employeeId" placeholder="Employee ID">
+  <form class="form">
 
+    <!-- Employee ID -->
     <input 
+      type="number" 
+      [(ngModel)]="nurse.employeeId" 
+      name="employeeId"
+      placeholder="Employee ID"
+    />
+
+    <!-- Name -->
+    <input 
+      type="text"
       [(ngModel)]="nurse.name" 
       name="name"
       placeholder="Enter Name"
     />
 
+    <!-- Position -->
     <input 
+      type="text"
       [(ngModel)]="nurse.position" 
       name="position"
       placeholder="Enter Position"
     />
 
+    <!-- Registered -->
     <label>
       <input 
         type="checkbox" 
@@ -26,6 +37,7 @@
       Registered
     </label>
 
+    <!-- SSN -->
     <input 
       type="number" 
       [(ngModel)]="nurse.ssn" 
@@ -33,14 +45,17 @@
       placeholder="Enter SSN"
     />
 
-    <button (click)="create()">Create</button>
-  </div>
+    <!-- Button -->
+    <button type="button" (click)="create()">Create</button>
 
-  <!-- SUCCESS RESULT -->
+  </form>
+
+  <!-- SUCCESS -->
   <div *ngIf="data" class="result">
     <h3>✅ Nurse Created</h3>
 
     <div class="card">
+      <p><strong>ID:</strong> {{ data.employeeId }}</p>
       <p><strong>Name:</strong> {{ data.name }}</p>
       <p><strong>Position:</strong> {{ data.position }}</p>
       <p><strong>Registered:</strong> {{ data.registered }}</p>

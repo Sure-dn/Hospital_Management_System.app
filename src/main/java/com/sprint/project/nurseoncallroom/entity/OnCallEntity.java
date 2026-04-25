@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@IdClass(com.sprint.project.nurseoncallroom.entity.OnCallId.class)
+@IdClass(OnCallId.class)
 @Table(name = "on_call")
 public class OnCallEntity {
 
@@ -30,6 +30,7 @@ public class OnCallEntity {
 
     public OnCallEntity() {}
 
+    // Getters & Setters
     public NurseEntity getNurse() { return nurse; }
     public void setNurse(NurseEntity nurse) { this.nurse = nurse; }
 

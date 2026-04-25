@@ -10,23 +10,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BlockServiceImpl implements BlockService {
 
-    @Autowired private BlockRepository blockRepository;
-    @Autowired private RoomRepository roomRepository;
+    @Autowired
+    private BlockRepository blockRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    // 🔥 COMMON MAPPER METHOD
+    private RoomResponseDTO mapToRoomDTO(RoomEntity r) {
+
+        RoomResponseDTO dto = new RoomResponseDTO();
+
+        dto.setRoomNumber(r.getRoomNumber());
+        dto.setType(r.getType());
+        dto.setUnavailable(r.getUnavailable());
+
+        if (r.getBlock() != null) {
+            dto.setBlockFloor(r.getBlock().getBlockFloor());
+            dto.setBlockCode(r.getBlock().getBlockCode());
+            dto.setBlockName(r.getBlock().getName());
+        }
+
+        return dto;
+    }
 
     @Override
     public List<BlockResponseDTO> getAllBlocks() {
-        return blockRepository.findAll().stream().map(b -> {
-            BlockResponseDTO dto = new BlockResponseDTO();
-            dto.setBlockFloor(b.getBlockFloor());
-            dto.setBlockCode(b.getBlockCode());
-            dto.setName(b.getName());
-            return dto;
-        }).collect(Collectors.toList());
+
+        return blockRepository.findAll().stream()
+                .map(b -> new BlockResponseDTO(
+                        b.getBlockFloor(),
+                        b.getBlockCode(),
+                        b.getName()
+                ))
+                .toList();
     }
 
     @Override
@@ -42,12 +63,9 @@ public class BlockServiceImpl implements BlockService {
             throw new BlockCapacityFullException(floor, code);
         }
 
-        return rooms.stream().map(r -> {
-            RoomResponseDTO dto = new RoomResponseDTO();
-            dto.setRoomNumber(r.getRoomNumber());
-            dto.setType(r.getType());
-            dto.setUnavailable(r.getUnavailable());
-            return dto;
-        }).collect(Collectors.toList());
+        // 🔥 USE MAPPER METHOD
+        return rooms.stream()
+                .map(this::mapToRoomDTO)
+                .toList();
     }
 }

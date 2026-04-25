@@ -31,12 +31,14 @@ public class AppointmentEntity {
     private PatientEntity patient;
 
     @ManyToOne
-    @JoinColumn(name = "PrepNurse", referencedColumnName = "EmployeeID")
+    @JoinColumn(name = "PrepNurse", referencedColumnName = "EmployeeID"
+)
     private NurseEntity prepNurse;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID", nullable = false)
+    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID"
+, nullable = false)
     private PhysicianEntity physician;
 
     @NotNull
