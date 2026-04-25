@@ -1,0 +1,9 @@
+<div class="page-box">
+  <h2>Get Appointments by Patient SSN</h2>
+
+  <input type="number" [(ngModel)]="ssn" placeholder="Enter Patient SSN">
+
+  <button (click)="load()">Fetch</button>
+
+  <pre>{{ data | json }}</pre>
+</div>

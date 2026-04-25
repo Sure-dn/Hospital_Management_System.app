@@ -1,0 +1,9 @@
+<div class="page-box">
+  <h2>Get Appointment by ID</h2>
+
+  <input [(ngModel)]="id" placeholder="Appointment ID">
+
+  <button (click)="load()">Fetch</button>
+
+  <pre>{{data | json}}</pre>
+</div>

@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-iniya',
-  imports: [],
+  standalone: true,
   templateUrl: './iniya.html',
   styleUrl: './iniya.css',
+  imports: [RouterOutlet],
 })
-export class Iniya {}
+export class Iniya {
+  
+}

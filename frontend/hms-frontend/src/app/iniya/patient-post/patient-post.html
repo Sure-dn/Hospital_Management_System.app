@@ -1,0 +1,19 @@
+<div class="page-box">
+  <h2>Patient Details</h2>
+
+  <form>
+    <input type="number" placeholder="SSN" [(ngModel)]="patient.ssn" name="ssn">
+
+    <input type="text" placeholder="Name" [(ngModel)]="patient.name" name="name">
+
+    <input type="text" placeholder="Address" [(ngModel)]="patient.address" name="address">
+
+    <input type="text" placeholder="Phone" [(ngModel)]="patient.phone" name="phone">
+
+    <input type="number" placeholder="Insurance ID" [(ngModel)]="patient.insuranceId" name="insuranceId">
+
+    <input type="number" placeholder="PCP (Physician ID)" [(ngModel)]="patient.pcp" name="pcp">
+
+    <button type="button" (click)="submit()">Submit</button>
+  </form>
+</div>

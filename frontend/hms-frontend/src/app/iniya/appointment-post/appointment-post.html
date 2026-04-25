@@ -1,0 +1,16 @@
+<div class="page-box">
+  <h2>Create Appointment</h2>
+
+  <form>
+    <input [(ngModel)]="appointment.appointmentId" name="appointmentId" placeholder="Appointment ID">
+    <input [(ngModel)]="appointment.patientSsn" name="patientSsn" placeholder="Patient SSN">
+    <input [(ngModel)]="appointment.physicianId" name="physicianId" placeholder="Physician ID">
+    <input [(ngModel)]="appointment.examinationRoom" name="room" placeholder="Room">
+    <input [(ngModel)]="appointment.starttime" name="start" placeholder="Start Time (YYYY-MM-DDTHH:mm:ss)">
+    <input [(ngModel)]="appointment.endtime" name="end" placeholder="End Time">
+
+    <button type="button" (click)="submit()">Submit</button>
+  </form>
+
+  <pre>{{data | json}}</pre>
+</div>

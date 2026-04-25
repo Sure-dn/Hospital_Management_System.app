@@ -1,0 +1,11 @@
+<div class="page-box">
+  <h2>Update Patient PCP</h2>
+<form>
+  <input [(ngModel)]="ssn" placeholder="SSN">
+  <input [(ngModel)]="physicianId" placeholder="Physician ID">
+
+  <button (click)="update()">Update</button>
+
+  <pre>{{ data | json }}</pre>
+  </form>
+</div>

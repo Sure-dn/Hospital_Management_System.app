@@ -1,0 +1,30 @@
+.page-box {
+  margin-top: 30px;
+  background: #111a2e;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;  
+}
+
+input {
+  display: block;
+  width: 300px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+button {
+  width: 250px;
+  padding: 10px 20px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

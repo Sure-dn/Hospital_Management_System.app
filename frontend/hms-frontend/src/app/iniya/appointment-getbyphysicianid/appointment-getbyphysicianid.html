@@ -1,0 +1,9 @@
+<div class="page-box">
+  <h2>Get Appointments by Physician ID</h2>
+
+  <input type="number" [(ngModel)]="physicianId" placeholder="Enter Physician ID">
+
+  <button (click)="load()">Fetch</button>
+
+  <pre>{{ data | json }}</pre>
+</div>

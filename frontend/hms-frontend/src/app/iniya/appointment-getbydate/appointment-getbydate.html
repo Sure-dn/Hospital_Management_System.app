@@ -1,0 +1,9 @@
+<div class="page-box">
+  <h2>Get Appointments by Date</h2>
+
+  <input [(ngModel)]="date" placeholder="YYYY-MM-DD">
+
+  <button (click)="load()">Fetch</button>
+
+  <pre>{{ data | json }}</pre>
+</div>

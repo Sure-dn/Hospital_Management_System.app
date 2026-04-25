@@ -1,0 +1,14 @@
+<div class="page-box">
+  <h2>Update Appointment</h2>
+
+  <input [(ngModel)]="appointment.appointmentId" placeholder="Appointment ID">
+  <input [(ngModel)]="appointment.patientSsn" placeholder="Patient SSN">
+  <input [(ngModel)]="appointment.physicianId" placeholder="Physician ID">
+  <input [(ngModel)]="appointment.examinationRoom" placeholder="Room">
+  <input [(ngModel)]="appointment.starttime" placeholder="Start Time">
+  <input [(ngModel)]="appointment.endtime" placeholder="End Time">
+
+  <button (click)="update()">Update</button>
+
+  <pre>{{ data | json }}</pre>
+</div>
