@@ -15,7 +15,7 @@ import jakarta.validation.constraints.NotNull;
 public class PhysicianEntity {
 	 @Id
 	    @NotNull
-	    @Column(name = "EmployeeID")
+	    @Column(name = "employee_id")
 	    private Integer employeeId;
 
 	    @NotBlank

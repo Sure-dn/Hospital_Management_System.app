@@ -245,7 +245,7 @@ export const routes: Routes = [
       path: 'physician-getbyid',
       loadComponent: () =>
         import('./ashmitha/physician-getbyid/physician-getbyid')
-          .then(m => m.PhysicianGetbyId)
+          .then(m => m.PhysicianGetbyid)
     },
     {
       path: 'physician-update',
@@ -276,7 +276,7 @@ export const routes: Routes = [
     {
       path: 'department-getbyid',
       loadComponent: () =>
-        import('./ashmitha/department-getbyid/department-getbyid')
+        import('./ashmitha/department-getby-id/department-getby-id')
           .then(m => m.DepartmentGetbyID)
     },
     {
@@ -335,7 +335,7 @@ export const routes: Routes = [
   ]
   },
 
-  // SUREKA MODULE
+//   // SUREKA MODULE
 {
   path: 'sureka',
   component: Sureka,

@@ -25,7 +25,7 @@ public class PrescribesEntity {
     @Id
     @NotNull(message = "Physician is required")
     @ManyToOne
-    @JoinColumn(name = "Physician", referencedColumnName = "EmployeeID"
+    @JoinColumn(name = "Physician", referencedColumnName = "employee_id"
 , nullable = false)
     private PhysicianEntity physician;
 

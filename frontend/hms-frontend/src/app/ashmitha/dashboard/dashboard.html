@@ -1,0 +1,72 @@
+<div class="container">
+
+    <div class="top-bar">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <h1 class="main-title">Hospital Management Application</h1>
+  <h2 class="user-title">Ashmitha - Physician, Department, Affiliation & Training</h2>
+
+  <!-- PHYSICIAN -->
+  <div class="section">
+    <div class="section-header">
+      <span>👨‍⚕️ Physician APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('physician-post')">POST <span>/api/physicians</span></div>
+      <div class="api-card get" (click)="openEndpoint('physician-get')">GET <span>/api/physicians</span></div>
+      <div class="api-card get" (click)="openEndpoint('physician-getbyid')">GET <span>/api/physicians/(employeeid)</span></div>
+      <div class="api-card put" (click)="openEndpoint('physician-update')">PUT <span>/api/physicians/(employeeid)</span></div>
+      <div class="api-card delete" (click)="openEndpoint('physician-delete')">DELETE <span>/api/physicians/(employeeid)</span></div>
+    </div>
+  </div>
+
+  <!-- DEPARTMENT -->
+  <div class="section">
+    <div class="section-header">
+      <span>🏢 Department APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post"  (click)="openEndpoint('department-post')">POST <span>/api/departments</span></div>
+      <div class="api-card get" (click)="openEndpoint('department-getall')">GET <span>/api/departments</span></div>
+      <div class="api-card get" (click)="openEndpoint('department-getbyid')">GET <span>/api/departments/(departmentid)</span></div>
+      <div class="api-card put" (click)="openEndpoint('department-update')">PUT <span>/api/departments/(departmentid)</span></div>
+      <div class="api-card get" (click)="openEndpoint('department-gethead')">GET <span>/api/departments/(departmentid)/head</span></div>
+    </div>
+  </div>
+
+  <!-- AFFILIATION -->
+  <div class="section">
+    <div class="section-header">
+      <span>🔗 Physician Department Affiliation</span>
+      <span class="count">3 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('affiliation-post')">POST <span>/api/affiliations/physician/(physicianId)</span></div>
+      <div class="api-card get" (click)="openEndpoint('affiliation-getbyphysician')">GET <span>/api/affiliatons/physician/(physicianId)</span></div>
+      <div class="api-card get" (click)="openEndpoint('affiliation-getbydepartment')">GET <span>/api/affiliations/department/(departmentId)</span></div>
+    </div>
+  </div>
+
+  <!-- TRAINING -->
+  <div class="section">
+    <div class="section-header">
+      <span>📘 Physician Training / Certification</span>
+      <span class="count">3 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('training-post')">POST <span>/api/physicians/(employeeId)/trainings</span></div>
+      <div class="api-card get" (click)="openEndpoint('training-getall')">GET <span>/api/physicians/(employeeId)/trainings</span></div>
+      <div class="api-card get" (click)="openEndpoint('training-valid')">GET <span>/api/physicians/(employeeId)/trainings/valid</span></div>
+    </div>
+  </div>
+
+</div>
+
+

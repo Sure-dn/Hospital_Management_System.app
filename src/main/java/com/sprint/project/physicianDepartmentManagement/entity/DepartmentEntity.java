@@ -26,7 +26,7 @@ public class DepartmentEntity {
 
 	    @NotNull
 	    @ManyToOne
-	    @JoinColumn(name = "Head", referencedColumnName = "EmployeeID", nullable = false)
+	    @JoinColumn(name = "Head", referencedColumnName = "employee_id", nullable = false)
 	    private PhysicianEntity head;
 
 	    @OneToMany(mappedBy = "department")
