@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.project.treatmentprostayy.DTO.ProceduresRequestDTO;
-import com.sprint.project.treatmentprostayy.DTO.ProceduresResponseDTO;
-import com.sprint.project.treatmentprostayy.DTO.ResponseStructure;
-import com.sprint.project.treatmentprostayy.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.ProceduresRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.ProceduresResponseDTO;
+import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
+import com.sprint.project.treatmentprostayy.dto.UndergoesRequestDTO;
 import com.sprint.project.treatmentprostayy.services.ProceduresService;
 import com.sprint.project.treatmentprostayy.services.UndergoesService;
 

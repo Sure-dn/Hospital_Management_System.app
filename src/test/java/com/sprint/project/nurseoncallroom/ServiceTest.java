@@ -113,7 +113,7 @@ public class ServiceTest {
     @Test
     void tc02_createNurse_duplicate_throwsException() {
         nurseService.createNurse(nurseDTO(2));
-        assertThrows(BlockDuplicateResourceException.class,
+        assertThrows(BlockCapacityFullException.class,
                 () -> nurseService.createNurse(nurseDTO(2)));
     }
 
@@ -125,7 +125,7 @@ public class ServiceTest {
 
     @Test
     void tc04_getNurseById_notFound() {
-        assertThrows(OnCallNotFoundException.class,
+        assertThrows(OnCallScheduleConflictException.class,
                 () -> nurseService.getNurseById(999));
     }
 
@@ -162,7 +162,7 @@ public class ServiceTest {
 
     @Test
     void tc08_getRoomsForBlock_notFound() {
-        assertThrows(OnCallNotFoundException.class,
+        assertThrows(OnCallScheduleConflictException.class,
                 () -> blockService.getRoomsForBlock(9,9));
     }
 
@@ -192,7 +192,7 @@ public class ServiceTest {
 
     @Test
     void tc11_getRoomByNumber_notFound() {
-        assertThrows(OnCallNotFoundException.class,
+        assertThrows(OnCallScheduleConflictException.class,
                 () -> roomService.getRoomByNumber(9999));
     }
 
@@ -210,7 +210,7 @@ public class ServiceTest {
 
     @Test
     void tc13_assignOnCall_nurseNotFound() {
-        assertThrows(OnCallNotFoundException.class,
+        assertThrows(OnCallScheduleConflictException.class,
                 () -> onCallService.assignOnCall(999, onCallDTO(5,5,1)));
     }
 

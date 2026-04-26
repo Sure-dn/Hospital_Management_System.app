@@ -5,7 +5,7 @@ import com.sprint.project.nurseoncallroom.entity.RoomEntity;
 import com.sprint.project.nurseoncallroom.repository.RoomRepository;
 
 
-import com.sprint.project.treatmentprostayy.DTO.*;
+import com.sprint.project.treatmentprostayy.dto.*;
 import com.sprint.project.treatmentprostayy.entities.*;
 import com.sprint.project.treatmentprostayy.repositories.*;
 import com.sprint.project.treatmentprostayy.services.*;

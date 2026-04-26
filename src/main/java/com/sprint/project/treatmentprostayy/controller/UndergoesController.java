@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.project.treatmentprostayy.DTO.ResponseStructure;
-import com.sprint.project.treatmentprostayy.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
+import com.sprint.project.treatmentprostayy.dto.UndergoesRequestDTO;
 import com.sprint.project.treatmentprostayy.entities.UndergoesId;
 import com.sprint.project.treatmentprostayy.services.UndergoesService;
 

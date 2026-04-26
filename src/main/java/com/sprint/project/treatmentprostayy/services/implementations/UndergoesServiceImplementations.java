@@ -11,7 +11,7 @@ import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.patientAppointment.repository.PatientRepository;
 import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
 import com.sprint.project.physicianDepartmentManagement.repository.PhysicianRepository;
-import com.sprint.project.treatmentprostayy.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.UndergoesRequestDTO;
 import com.sprint.project.treatmentprostayy.entities.*;
 import com.sprint.project.treatmentprostayy.exception.InvalidTreatmentException;
 import com.sprint.project.treatmentprostayy.exception.TreatmentAlreadyExistsException;
@@ -44,7 +44,7 @@ public class UndergoesServiceImplementations implements UndergoesService {
     @Autowired
     private NurseRepository nurseRepository;
 
-    // 🔁 ENTITY → DTO
+    // 🔁 ENTITY → dto
     private UndergoesRequestDTO mapToDTO(UndergoesEntity entity) {
         UndergoesRequestDTO dto = new UndergoesRequestDTO();
 

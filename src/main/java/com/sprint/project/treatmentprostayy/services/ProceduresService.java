@@ -2,8 +2,7 @@ package com.sprint.project.treatmentprostayy.services;
 
 import java.util.List;
 
-import com.sprint.project.treatmentprostayy.DTO.ProceduresRequestDTO;
-import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
+import com.sprint.project.treatmentprostayy.dto.ProceduresRequestDTO;
 
 public interface ProceduresService {
 	ProceduresRequestDTO addProcedure(ProceduresRequestDTO p);

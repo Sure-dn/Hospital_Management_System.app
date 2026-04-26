@@ -2,7 +2,7 @@ package com.sprint.project.treatmentprostayy.services;
 
 import java.util.List;
 
-import com.sprint.project.treatmentprostayy.DTO.StayRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.StayRequestDTO;
 import com.sprint.project.treatmentprostayy.entities.StayEntity;
 
 public interface StayService {

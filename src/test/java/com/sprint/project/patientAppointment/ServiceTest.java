@@ -7,9 +7,9 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Optional;
 
-import com.sprint.project.patientAppointment.DTO.RequestDTO.AppointmentRequestDTO;
-import com.sprint.project.patientAppointment.DTO.ResponseDTO.AppointmentResponseDTO;
-import com.sprint.project.patientAppointment.Service.Implementation.AppointmentServiceImpl;
+import com.sprint.project.patientAppointment.dto.requestdto.AppointmentRequestDTO;
+import com.sprint.project.patientAppointment.dto.responsedto.AppointmentResponseDTO;
+import com.sprint.project.patientAppointment.service.Implementation.AppointmentServiceImpl;
 import com.sprint.project.patientAppointment.entity.*;
 import com.sprint.project.patientAppointment.repository.*;
 import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;

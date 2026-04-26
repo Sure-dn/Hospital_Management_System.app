@@ -27,7 +27,7 @@ public class OnCallServiceImpl implements OnCallService {
     @Autowired
     private NurseRepository nurseRepository;
 
-    // ✅ Convert Entity → DTO
+    // ✅ Convert Entity → dto
     private OnCallResponseDTO toDTO(OnCallEntity e) {
         OnCallResponseDTO dto = new OnCallResponseDTO();
         dto.setNurseEmployeeId(e.getNurse().getEmployeeId());

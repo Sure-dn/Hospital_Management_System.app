@@ -3,18 +3,18 @@ package com.sprint.project.medicationprescription;   // ←←← CHANGE THIS LI
 // NOTE FOR YOU (beginner-friendly):
 // If you saved the file inside a folder called "service/test", 
 // change the line above to:
-// package com.sprint.project.MedicationPrescriptionAPIs.Service.test;
+// package com.sprint.project.MedicationPrescriptionAPIs.service.test;
 //
 // Just match the folder path exactly (Eclipse is strict about this).
 
-import com.sprint.project.medicationprescription.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.medicationprescription.DTO.RequestDTO.PrescriptionRequestDTO;
+import com.sprint.project.medicationprescription.dto.requestdto.MedicationRequestDTO;
+import com.sprint.project.medicationprescription.dto.requestdto.PrescriptionRequestDTO;
 import com.sprint.project.medicationprescription.entity.MedicationEntity;
 import com.sprint.project.medicationprescription.entity.PrescribesEntity;
 import com.sprint.project.medicationprescription.repository.MedicationRepository;
 import com.sprint.project.medicationprescription.repository.PrescribesRepository;
-import com.sprint.project.medicationprescription.Service.Implementations.MedicationServiceImpl;
-import com.sprint.project.medicationprescription.Service.Implementations.PrescriptionServiceImpl;
+import com.sprint.project.medicationprescription.service.implementations.MedicationServiceImpl;
+import com.sprint.project.medicationprescription.service.implementations.PrescriptionServiceImpl;
 import com.sprint.project.patientAppointment.entity.AppointmentEntity;
 import com.sprint.project.patientAppointment.entity.PatientEntity;
 import com.sprint.project.patientAppointment.repository.AppointmentRepository;
