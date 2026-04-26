@@ -9,7 +9,7 @@ import { authInterceptor } from './services/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-   
+    
     provideRouter(routes),
 
     // ✅ FIX HERE

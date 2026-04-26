@@ -245,7 +245,7 @@ export const routes: Routes = [
       path: 'physician-getbyid',
       loadComponent: () =>
         import('./ashmitha/physician-getbyid/physician-getbyid')
-          .then(m => m.PhysicianGetbyid)
+          .then(m => m.PhysicianGetbyId)
     },
     {
       path: 'physician-update',
@@ -276,7 +276,7 @@ export const routes: Routes = [
     {
       path: 'department-getbyid',
       loadComponent: () =>
-        import('./ashmitha/department-getby-id/department-getby-id')
+        import('./ashmitha/department-getbyid/department-getbyid')
           .then(m => m.DepartmentGetbyID)
     },
     {

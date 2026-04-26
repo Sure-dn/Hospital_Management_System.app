@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class PrescribesId implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     private Integer physician;
     private Integer patient;
     private Integer medication;
@@ -21,52 +19,6 @@ public class PrescribesId implements Serializable {
         this.medication = medication;
         this.date = date;
     }
-    
-
-
-    @Override
-    public String toString() {
-        return "PrescribesId{" +
-                "physician=" + physician +
-                ", patient=" + patient +
-                ", medication=" + medication +
-                ", date=" + date +
-                '}';
-    }
-
-   
-
-	public Integer getPhysician() {
-        return physician;
-    }
-
-    public void setPhysician(Integer physician) {
-        this.physician = physician;
-    }
-
-    public Integer getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Integer patient) {
-        this.patient = patient;
-    }
-
-    public Integer getMedication() {
-        return medication;
-    }
-
-    public void setMedication(Integer medication) {
-        this.medication = medication;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -74,9 +26,9 @@ public class PrescribesId implements Serializable {
         if (!(o instanceof PrescribesId)) return false;
         PrescribesId that = (PrescribesId) o;
         return Objects.equals(physician, that.physician) &&
-               Objects.equals(patient, that.patient) &&
-               Objects.equals(medication, that.medication) &&
-               Objects.equals(date, that.date);
+                Objects.equals(patient, that.patient) &&
+                Objects.equals(medication, that.medication) &&
+                Objects.equals(date, that.date);
     }
 
     @Override

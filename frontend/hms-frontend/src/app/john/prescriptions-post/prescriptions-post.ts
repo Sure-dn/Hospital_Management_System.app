@@ -16,8 +16,40 @@ export class CreatePrescriptionComponent {
 
   constructor(private http: HttpClient) {}
 
-  create() {
-    this.http.post('http://localhost:9090/api/prescriptions', this.data)
-      .subscribe(res => this.response = res);
-  }
+ create() {
+
+  
+
+  const token = localStorage.getItem('token');
+
+const payload = {
+  physicianId: this.data.physicianId,
+  patientSsn: this.data.patientSsn,
+  medicationCode: this.data.medicationCode,
+  appointmentId: this.data.appointmentId,
+  date: this.data.date,   // ✅ FIXED
+  dose: this.data.dose
+};
+
+  this.http.post(
+    'http://localhost:9090/api/prescriptions',
+    payload,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+  ).subscribe({
+    next: () => alert("✅ Created"),
+    error: (err) => {
+      console.error(err);
+
+      if (err.status === 401) {
+        alert("🔐 Unauthorized! Login again");
+      } else {
+        alert("❌ Error: " + err.status);
+      }
+    }
+  });
 }
+ }

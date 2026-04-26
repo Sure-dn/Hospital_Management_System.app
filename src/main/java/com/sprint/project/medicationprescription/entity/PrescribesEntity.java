@@ -1,12 +1,6 @@
 package com.sprint.project.medicationprescription.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,34 +16,40 @@ import com.sprint.project.physicianDepartmentManagement.entity.PhysicianEntity;
 @IdClass(PrescribesId.class)
 public class PrescribesEntity {
 
+    // ===== PHYSICIAN =====
     @Id
-    @NotNull(message = "Physician is required")
     @ManyToOne
-    @JoinColumn(name = "Physician", referencedColumnName = "employee_id"
-, nullable = false)
+    @MapsId("physician") // 🔥 important
+    @JoinColumn(name = "Physician", referencedColumnName = "employee_id", nullable = false)
     private PhysicianEntity physician;
 
+    // ===== PATIENT =====
     @Id
-    @NotNull(message = "Patient is required")
     @ManyToOne
+    @MapsId("patient") // 🔥 important
     @JoinColumn(name = "Patient", referencedColumnName = "SSN", nullable = false)
     private PatientEntity patient;
 
+    // ===== MEDICATION =====
     @Id
-    @NotNull(message = "Medication is required")
     @ManyToOne
+    @MapsId("medication") // 🔥 important
     @JoinColumn(name = "Medication", referencedColumnName = "Code", nullable = false)
     private MedicationEntity medication;
 
+    // ===== DATE =====
     @Id
     @NotNull(message = "Date is required")
+    @MapsId("date") // 🔥 important
     @Column(name = "Date", nullable = false)
     private LocalDateTime date;
 
+    // ===== APPOINTMENT (OPTIONAL) =====
     @ManyToOne
     @JoinColumn(name = "Appointment", referencedColumnName = "AppointmentID")
     private AppointmentEntity appointment;
 
+    // ===== DOSE =====
     @NotBlank(message = "Dose cannot be empty")
     @Size(min = 1, max = 50, message = "Dose must be between 1 and 50 characters")
     @Column(name = "Dose", nullable = false, length = 50)
@@ -57,19 +57,7 @@ public class PrescribesEntity {
 
     public PrescribesEntity() {}
 
-    // Getters and Setters
-
-    @Override
-    public String toString() {
-        return "PrescribesEntity{" +
-                "physician=" + physician +
-                ", patient=" + patient +
-                ", medication=" + medication +
-                ", date=" + date +
-                ", appointment=" + appointment +
-                ", dose='" + dose + '\'' +
-                '}';
-    }
+    // ===== GETTERS & SETTERS =====
 
     public PhysicianEntity getPhysician() {
         return physician;
@@ -118,5 +106,17 @@ public class PrescribesEntity {
     public void setDose(String dose) {
         this.dose = dose;
     }
-}
 
+    // ===== DEBUG =====
+    @Override
+    public String toString() {
+        return "PrescribesEntity{" +
+                "physician=" + (physician != null ? physician.getEmployeeId() : null) +
+                ", patient=" + (patient != null ? patient.getSsn() : null) +
+                ", medication=" + (medication != null ? medication.getCode() : null) +
+                ", date=" + date +
+                ", appointment=" + (appointment != null ? appointment.getAppointmentId() : null) +
+                ", dose='" + dose + '\'' +
+                '}';
+    }
+}

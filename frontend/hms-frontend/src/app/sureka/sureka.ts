@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-sureka',
  standalone:true,
   templateUrl: './sureka.html',
   styleUrl: './sureka.css',
+  imports: [RouterOutlet],
 })
 export class Sureka {
-   constructor(private router: Router) {}
-
-  openEndpoint(path: string) {
-    this.router.navigate([path]);
-  }
+ 
 }
