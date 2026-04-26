@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe, NgIf } from '@angular/common';
+import { NgIf, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-appointment-post',
@@ -36,6 +36,7 @@ export class AppointmentPostComponent {
   create() {
     this.success = '';
     this.error = '';
+    this.response = null;
 
     const payload = {
       appointmentId: Number(this.appointmentId),
@@ -43,7 +44,7 @@ export class AppointmentPostComponent {
       prepNurseId: this.prepNurseId ? Number(this.prepNurseId) : null,
       physicianId: Number(this.physicianId),
 
-      // ✅ Already correct format
+      // ✅ correct for your backend DTO
       starttime: this.starttime + ':00',
       endtime: this.endtime + ':00',
 
@@ -61,7 +62,7 @@ export class AppointmentPostComponent {
         alert(this.success);
       },
       error: (err) => {
-        console.error(err);
+        console.error("FULL ERROR:", err);
         this.error = err.error?.message || '❌ Failed to create appointment';
         alert(this.error);
       }

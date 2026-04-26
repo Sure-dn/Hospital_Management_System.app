@@ -121,7 +121,7 @@ export const routes: Routes = [
   ]
   },
 
- // JOHN MODULE
+  //JOHN MODULE
 {
   path: 'john',
   component: JohnComponent,
@@ -212,7 +212,7 @@ export const routes: Routes = [
 },
 
   //ASHMITHA MODULE
-{
+  {
   path: 'ashmitha',
   component: Ashmitha,
   canActivate: [authGuard],
@@ -444,6 +444,7 @@ export const routes: Routes = [
 
   ]
 },
+//INIYA MODULE
 {
   path: 'iniya',
   component: Iniya,
@@ -556,5 +557,6 @@ export const routes: Routes = [
 
   ]
 }
+
 
 ];

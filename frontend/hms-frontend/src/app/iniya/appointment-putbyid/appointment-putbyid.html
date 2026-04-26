@@ -1,10 +1,10 @@
 <div class="container">
-  <h2>✏️ Update Appointment</h2>
+  <h2>Update Appointment</h2>
 
-  <input [(ngModel)]="appointmentId" placeholder="Appointment ID">
-  <input [(ngModel)]="patientSsn" placeholder="Patient SSN">
-  <input [(ngModel)]="prepNurseId" placeholder="Prep Nurse ID Optional">
-  <input [(ngModel)]="physicianId" placeholder="Physician ID">
+  <input type="number" [(ngModel)]="appointmentId" placeholder="Appointment ID">
+  <input type="number" [(ngModel)]="patientSsn" placeholder="Patient SSN">
+  <input type="number" [(ngModel)]="prepNurseId" placeholder="Prep Nurse ID">
+  <input type="number" [(ngModel)]="physicianId" placeholder="Physician ID">
 
   <label>Start Time</label>
   <input type="datetime-local" [(ngModel)]="starttime">
@@ -12,9 +12,9 @@
   <label>End Time</label>
   <input type="datetime-local" [(ngModel)]="endtime">
 
-  <input [(ngModel)]="examinationRoom" placeholder="Examination Room">
+  <input type="text" [(ngModel)]="examinationRoom" placeholder="Examination Room">
 
-  <button (click)="updateAppointment()">Update</button>
+  <button type="button" (click)="updateAppointment()">Update</button>
 
   <p class="success" *ngIf="success">{{ success }}</p>
   <p class="error" *ngIf="error">{{ error }}</p>

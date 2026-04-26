@@ -20,7 +20,6 @@ export class AppointmentPutComponent {
   endtime = '';
   examinationRoom = '';
 
-  data: any = null;
   success = '';
   error = '';
 
@@ -36,31 +35,32 @@ export class AppointmentPutComponent {
   updateAppointment() {
     this.success = '';
     this.error = '';
-    this.data = null;
 
     const payload = {
       appointmentId: Number(this.appointmentId),
       patientSsn: Number(this.patientSsn),
       prepNurseId: this.prepNurseId ? Number(this.prepNurseId) : null,
       physicianId: Number(this.physicianId),
-      starttime: this.starttime,
-      endtime: this.endtime,
+
+      // important fix
+      starttime: this.starttime + ':00',
+      endtime: this.endtime + ':00',
+
       examinationRoom: this.examinationRoom
     };
+
+    console.log('UPDATE PAYLOAD:', payload);
 
     this.http.put(`http://localhost:9090/api/appointments/${this.appointmentId}`, payload, {
       headers: this.getHeaders()
     }).subscribe({
-      next: (res: any) => {
-        this.data = res.data || res;
+      next: () => {
         this.success = '✅ Appointment updated successfully';
         alert(this.success);
       },
       error: (err) => {
-        console.error(err);
-        this.error = err.status === 401
-          ? '❌ Unauthorized'
-          : err.error?.message || '❌ Failed to update appointment';
+        console.error('FULL ERROR:', err);
+        this.error = err.error?.message || err.error || '❌ Failed to update appointment';
         alert(this.error);
       }
     });
