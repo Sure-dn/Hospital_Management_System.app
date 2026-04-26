@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-john',
@@ -8,12 +8,11 @@ import { Router } from '@angular/router';
   
 templateUrl: './john.html',
   styleUrls: ['./john.css']   // ← use your existing dashboard CSS file here
+  ,
+  imports: [RouterOutlet]
 })
 export class JohnComponent {
 
 constructor(private router:Router){}
-  openEndpoint(path: string) {
-   this.router.navigate([path]);
-    // You can expand this later (e.g. router navigation or dynamic component loading)
-  }
+  
 }
