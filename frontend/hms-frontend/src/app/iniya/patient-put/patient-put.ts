@@ -18,7 +18,20 @@ export class PatientPutComponent {
   constructor(private http: HttpClient) {}
 
   update() {
-    this.http.put(`http://localhost:9090/api/patients/${this.patient.ssn}`, this.patient)
-      .subscribe(res => this.data = res);
-  }
+  this.http.put(`http://localhost:9090/api/patients/${this.patient.ssn}`, this.patient)
+    .subscribe({
+      next: (res: any) => {
+        this.data = res;
+
+        alert("✅ Patient updated successfully");
+      },
+      error: (err) => {
+        console.log(err);
+
+        alert(err.error?.message || "❌ Failed to update patient");
+      }
+    });
+}
+
+ 
 }

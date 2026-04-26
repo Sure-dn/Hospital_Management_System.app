@@ -1,16 +1,30 @@
 <div class="container">
-  <h2>👤 Appointments By Patient</h2>
+  <h2>Appointments By Patient</h2>
 
-  <input [(ngModel)]="ssn" placeholder="Enter Patient SSN">
-  <button (click)="getByPatient()">Search</button>
+  <input
+    type="number"
+    [(ngModel)]="ssn"
+    placeholder="Enter Patient SSN"
+  >
+
+  <button type="button" (click)="getByPatient()">Search</button>
 
   <p class="error" *ngIf="error">{{ error }}</p>
 
   <div class="result" *ngFor="let a of appointments">
-    <p><b>ID:</b> {{ a.appointmentId }}</p>
-    <p><b>Patient:</b> {{ a.patientName }}</p>
-    <p><b>Physician:</b> {{ a.physicianName }}</p>
+    <p><b>Appointment ID:</b> {{ a.appointmentId }}</p>
+    <p><b>Patient SSN:</b> {{ a.patientSsn }}</p>
+    <p><b>Patient Name:</b> {{ a.patientName }}</p>
+    <p><b>Physician ID:</b> {{ a.physicianId }}</p>
+    <p><b>Physician Name:</b> {{ a.physicianName }}</p>
+    <p><b>Prep Nurse ID:</b> {{ a.prepNurseId }}</p>
+    <p><b>Prep Nurse Name:</b> {{ a.prepNurseName }}</p>
+    <p><b>Start Time:</b> {{ a.starttime }}</p>
+    <p><b>End Time:</b> {{ a.endtime }}</p>
     <p><b>Room:</b> {{ a.examinationRoom }}</p>
     <hr>
   </div>
+
+  <!-- temporary check -->
+  <pre>{{ appointments | json }}</pre>
 </div>

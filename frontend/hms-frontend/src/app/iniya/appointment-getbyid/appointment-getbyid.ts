@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgIf, JsonPipe } from '@angular/common';
@@ -10,13 +10,22 @@ import { NgIf, JsonPipe } from '@angular/common';
   templateUrl: './appointment-getbyid.html',
   styleUrl: './appointment-getbyid.css'
 })
-export class AppointmentGetByIdComponent {
+export class AppointmentGetByIdComponent implements OnInit {
 
   appointmentId = '';
-  data: any;
+  data: any = null;
   error = '';
 
   constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    const savedId = localStorage.getItem('appointmentId');
+
+    if (savedId) {
+      this.appointmentId = savedId;
+      this.getById();
+    }
+  }
 
   getHeaders() {
     return new HttpHeaders({
@@ -28,16 +37,33 @@ export class AppointmentGetByIdComponent {
     this.error = '';
     this.data = null;
 
+    if (!this.appointmentId) {
+      alert('❌ Please enter Appointment ID');
+      return;
+    }
+
+    localStorage.setItem('appointmentId', this.appointmentId);
+
     this.http.get(`http://localhost:9090/api/appointments/${this.appointmentId}`, {
       headers: this.getHeaders()
     }).subscribe({
-      next: (res) => {
-        this.data = res;
+      next: (res: any) => {
+        console.log('FULL RESPONSE:', res);
+        this.data = res.data ? res.data : res;
+        alert('✅ Appointment fetched successfully');
       },
       error: (err) => {
+        console.log('ERROR:', err);
         this.error = err.error?.message || '❌ Appointment not found';
         alert(this.error);
       }
     });
+  }
+
+  clear() {
+    this.appointmentId = '';
+    this.data = null;
+    this.error = '';
+    localStorage.removeItem('appointmentId');
   }
 }
