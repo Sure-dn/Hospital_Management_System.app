@@ -71,9 +71,17 @@ public class MedicationServiceImpl implements MedicationService {
         MedicationEntity existing = medicationRepository.findById(code)
                 .orElseThrow(() -> new IllegalArgumentException("Medication not found"));
 
-        existing.setName(dto.getName());
-        existing.setBrand(dto.getBrand());
-        existing.setDescription(dto.getDescription());
+        if (dto.getName() != null) {
+            existing.setName(dto.getName());
+        }
+
+        if (dto.getBrand() != null) {
+            existing.setBrand(dto.getBrand());
+        }
+
+        if (dto.getDescription() != null) {
+            existing.setDescription(dto.getDescription());
+        }
 
         return mapToDTO(medicationRepository.save(existing));
     }
