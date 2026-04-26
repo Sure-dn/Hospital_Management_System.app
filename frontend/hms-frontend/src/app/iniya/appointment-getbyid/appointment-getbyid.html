@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>🔍 Get Appointment By ID</h2>
+
+  <input [(ngModel)]="appointmentId" placeholder="Enter Appointment ID">
+  <button (click)="getById()">Search</button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <pre *ngIf="data">{{ data | json }}</pre>
+</div>

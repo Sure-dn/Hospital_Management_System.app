@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="top-bar">
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+  <h1 class="main-title">Hospital Management Application</h1>
+  <h2 class="user-title">Patient & Appointment Module</h2>
+
+  <!-- PATIENT APIs -->
+  <div class="section">
+    <div class="section-header">
+      <span>👤 Patient APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('patient-post')">
+        POST <span>/api/patients</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('patient-get')">
+        GET <span>/api/patients</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('patient-getbyssn')">
+        GET <span>/api/patients/(ssn)</span>
+      </div>
+      <div class="api-card put" (click)="openEndpoint('patient-put')">
+        PUT <span>/api/patients/(ssn)</span>
+      </div>
+      <div class="api-card delete" (click)="openEndpoint('patient-delete')">
+        DELETE <span>/api/patients/(ssn)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PCP -->
+  <div class="section">
+    <div class="section-header">
+      <span>🩺 Patient – Physician (PCP)</span>
+      <span class="count">2 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card get" (click)="openEndpoint('patient-getbyphysician')">
+        GET <span>/api/patients/(ssn)/pcp</span>
+      </div>
+      <div class="api-card put" (click)="openEndpoint('patient-putbyphysician')">
+        PUT <span>/api/patients/(ssn)/pcp/(physicianId)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPOINTMENT APIs -->
+  <div class="section">
+    <div class="section-header">
+      <span>📅 Appointment APIs</span>
+      <span class="count">5 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card post" (click)="openEndpoint('appointment-post')">
+        POST <span>/api/appointments</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('appointment-get')">
+        GET <span>/api/appointments</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyid')">
+        GET <span>/api/appointments/(appointmentId)</span>
+      </div>
+      <div class="api-card put" (click)="openEndpoint('appointment-putbyid')">
+        PUT <span>/api/appointments/(appointmentId)</span>
+      </div>
+      <div class="api-card delete" (click)="openEndpoint('appointment-deletebyid')">
+        DELETE <span>/api/appointments/(appointmentId)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPOINTMENT QUERIES -->
+  <div class="section">
+    <div class="section-header">
+      <span>🔎 Appointment Queries</span>
+      <span class="count">3 endpoints</span>
+    </div>
+
+    <div class="grid">
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyssn')">
+        GET <span>/api/patients/(ssn)/appointments</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyphysician')">
+        GET <span>/api/physicians/(employeeId)/appointments</span>
+      </div>
+      <div class="api-card get" (click)="openEndpoint('appointment-getbydate')">
+        GET <span>/api/appointments?date=YYYY-MM-DD</span>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>➕ Patient Details</h2>
+
+  <div class="form">
+
+    <input [(ngModel)]="ssn" placeholder="Enter SSN" />
+    <input [(ngModel)]="name" placeholder="Enter Name" />
+    <input [(ngModel)]="address" placeholder="Enter Address" />
+    <input [(ngModel)]="phone" placeholder="Enter Phone" />
+    <input [(ngModel)]="insuranceId" placeholder="Enter Insurance ID" />
+    <input [(ngModel)]="physicianId" placeholder="Enter PCP Physician ID" />
+
+    <button (click)="create()">Create</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <p *ngIf="success" class="success">{{ success }}</p>
+
+  <!-- RESULT -->
+  <div *ngIf="data" class="result">
+    <h3>Created Patient</h3>
+
+    <p><strong>SSN:</strong> {{ data.ssn }}</p>
+    <p><strong>Name:</strong> {{ data.name }}</p>
+    <p><strong>Address:</strong> {{ data.address }}</p>
+    <p><strong>Phone:</strong> {{ data.phone }}</p>
+    <p><strong>Insurance:</strong> {{ data.insuranceId }}</p>
+  </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

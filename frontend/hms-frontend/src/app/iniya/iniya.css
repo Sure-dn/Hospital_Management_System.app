@@ -1,0 +1,95 @@
+.container {
+  background: #0b1220;
+  min-height: 100vh;
+  padding: 30px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Titles */
+.main-title {
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.user-title {
+  text-align: center;
+  color: #9fb3d1;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+/* Section */
+.section {
+  margin-bottom: 35px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #dbeafe;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+/* Endpoint count badge */
+.count {
+  background: #111a2e;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #9fb3d1;
+}
+
+/* Grid layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+/* API Cards */
+.api-card {
+  background: #111a2e;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 5px solid transparent;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* Hover effect */
+.api-card:hover {
+  transform: translateY(-4px);
+  background: #1f2c4d;
+}
+
+/* Method Colors */
+.api-card.post {
+  border-left-color: #22c55e;
+}
+
+.api-card.get {
+  border-left-color: #3b82f6;
+}
+
+.api-card.put {
+  border-left-color: #f59e0b;
+}
+
+.api-card.delete {
+  border-left-color: #ef4444;
+}
+
+/* Text styling */
+.api-card span {
+  color: #9ca3af;
+  font-size: 13px;
+}

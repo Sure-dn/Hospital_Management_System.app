@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>📋 All Patients</h2>
+
+  <button (click)="fetchAll()">Fetch All Patients</button>
+
+  <!-- SUCCESS -->
+  <div *ngIf="success" class="alert success">
+    {{ success }}
+  </div>
+
+  <!-- ERROR -->
+  <div *ngIf="error" class="alert error">
+    {{ error }}
+  </div>
+
+  <!-- DEBUG (optional - remove later) -->
+  <!-- <pre>{{ data | json }}</pre> -->
+
+  <!-- TABLE -->
+  <table *ngIf="data && data.length > 0">
+    <thead>
+      <tr>
+        <th>SSN</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Insurance</th>
+        <th>PCP</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of data">
+        <td>{{ p.ssn }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.address }}</td>
+        <td>{{ p.phone }}</td>
+        <td>{{ p.insuranceId }}</td>
+        <td>{{ p.pcp?.employeeId || p.pcp }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- NO DATA MESSAGE -->
+  <p *ngIf="data && data.length === 0 && !error">
+    No patients available
+  </p>
+</div>

@@ -1,0 +1,9 @@
+<div class="container">
+  <h2>🗑️ Delete Appointment</h2>
+
+  <input [(ngModel)]="appointmentId" placeholder="Enter Appointment ID">
+  <button (click)="deleteAppointment()">Delete</button>
+
+  <p class="success" *ngIf="success">{{ success }}</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>👤 Appointments By Patient</h2>
+
+  <input [(ngModel)]="ssn" placeholder="Enter Patient SSN">
+  <button (click)="getByPatient()">Search</button>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="result" *ngFor="let a of appointments">
+    <p><b>ID:</b> {{ a.appointmentId }}</p>
+    <p><b>Patient:</b> {{ a.patientName }}</p>
+    <p><b>Physician:</b> {{ a.physicianName }}</p>
+    <p><b>Room:</b> {{ a.examinationRoom }}</p>
+    <hr>
+  </div>
+</div>

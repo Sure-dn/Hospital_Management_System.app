@@ -121,7 +121,7 @@ export const routes: Routes = [
   ]
   },
 
-  // JOHN MODULE
+  JOHN MODULE
 {
   path: 'john',
   component: JohnComponent,
@@ -211,7 +211,7 @@ export const routes: Routes = [
   ]
 },
 
-  //ASHMITHA MODULE
+  ASHMITHA MODULE
   {
   path: 'ashmitha',
   component: Ashmitha,
@@ -335,7 +335,7 @@ export const routes: Routes = [
   ]
   },
 
-//   // SUREKA MODULE
+  SUREKA MODULE
 {
   path: 'sureka',
   component: Sureka,
@@ -440,6 +440,118 @@ export const routes: Routes = [
       loadComponent: () =>
         import('./sureka/roomnoavail-put/roomnoavail-put')
           .then(m => m.RoomUpdateComponent)
+    }
+
+  ]
+}
+{
+  path: 'iniya',
+  component: Iniya,
+  canActivate: [authGuard],
+  data: { user: 'Iniya' },
+
+  children: [
+
+    // 🔥 DEFAULT DASHBOARD
+    {
+      path: '',
+      loadComponent: () =>
+        import('./iniya/dashboard/dashboard')
+          .then(m => m.DashboardComponent)
+    },
+
+    // ===== PATIENT =====
+    {
+      path: 'patient-get',
+      loadComponent: () =>
+        import('./iniya/patient-get/patient-get')
+          .then(m => m.PatientGetAllComponent)
+    },
+    {
+      path: 'patient-post',
+      loadComponent: () =>
+        import('./iniya/patient-post/patient-post')
+          .then(m => m.PatientPostComponent)
+    },
+    {
+      path: 'patient-put',
+      loadComponent: () =>
+        import('./iniya/patient-put/patient-put')
+          .then(m => m.PatientPutComponent)
+    },
+    {
+      path: 'patient-getbyssn',
+      loadComponent: () =>
+        import('./iniya/patient-getbyssn/patient-getbyssn')
+          .then(m => m.PatientGetBySsnComponent)
+    },
+    {
+      path: 'patient-delete',
+      loadComponent: () =>
+        import('./iniya/patient-delete/patient-delete')
+          .then(m => m.PatientDeleteComponent)
+    },
+    {
+      path: 'patient-getbyphysician',
+      loadComponent: () =>
+        import('./iniya/patient-getbyphysician/patient-getbyphysician')
+          .then(m => m.PatientGetPcpComponent)
+    },
+    {
+      path: 'patient-putbyphysician',
+      loadComponent: () =>
+        import('./iniya/patient-putbyphysician/patient-putbyphysician')
+          .then(m => m.PatientPutPcpComponent)
+    },
+
+    // ===== APPOINTMENT =====
+    {
+      path: 'appointment-post',
+      loadComponent: () =>
+        import('./iniya/appointment-post/appointment-post')
+          .then(m => m.AppointmentPostComponent)
+    },
+    {
+      path: 'appointment-get',
+      loadComponent: () =>
+        import('./iniya/appointment-get/appointment-get')
+          .then(m => m.AppointmentGetAllComponent)
+    },
+    {
+      path: 'appointment-getbyid',
+      loadComponent: () =>
+        import('./iniya/appointment-getbyid/appointment-getbyid')
+          .then(m => m.AppointmentGetByIdComponent)
+    },
+    {
+      path: 'appointment-getbydate',
+      loadComponent: () =>
+        import('./iniya/appointment-getbydate/appointment-getbydate')
+          .then(m => m.AppointmentGetByDateComponent)
+    },
+    {
+      path: 'appointment-putbyid',
+      loadComponent: () =>
+        import('./iniya/appointment-putbyid/appointment-putbyid')
+          .then(m => m.AppointmentPutComponent)
+    },
+    {
+      path: 'appointment-deletebyid',
+      loadComponent: () =>
+        import('./iniya/appointment-deletebyid/appointment-deletebyid')
+          .then(m => m.AppointmentDeleteComponent)
+    },
+    {
+      path: 'appointment-getbyssn',
+      loadComponent: () =>
+        import('./iniya/appointment-getbyssn/appointment-getbyssn')
+          .then(m => m.AppointmentGetByPatientComponent)
+    },
+    {
+      path: 'appointment-getbyphysicianid',
+      loadComponent: () =>
+        import('./iniya/appointment-getbyphysicianid/appointment-getbyphysicianid')
+          .then(m => m.AppointmentGetByPhysicianComponent)
     }
 
   ]
