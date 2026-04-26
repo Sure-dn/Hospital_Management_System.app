@@ -1,7 +1,16 @@
-<div class="page-box">
-  <h2>All Appointments</h2>
+<div class="container">
+  <h2>📋 All Appointments</h2>
 
-  <button (click)="load()">Load</button>
+  <button (click)="getAll()">Get All</button>
 
-  <pre>{{data | json}}</pre>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="card" *ngFor="let a of data">
+    <p><b>ID:</b> {{ a.appointmentId }}</p>
+    <p><b>Patient:</b> {{ a.patientName }} - {{ a.patientSsn }}</p>
+    <p><b>Physician:</b> {{ a.physicianName }} - {{ a.physicianId }}</p>
+    <p><b>Room:</b> {{ a.examinationRoom }}</p>
+    <p><b>Start:</b> {{ a.starttime }}</p>
+    <p><b>End:</b> {{ a.endtime }}</p>
+  </div>
 </div>

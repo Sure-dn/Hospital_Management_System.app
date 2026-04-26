@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Get Valid Trainings</h2>
+
+  <label>Employee ID</label>
+  <input type="number" [(ngModel)]="employeeId" placeholder="Enter Employee ID" />
+
+  <button (click)="fetchValidTrainings()"> Fetch </button>
+
+  <div class="result" *ngIf="result">
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>

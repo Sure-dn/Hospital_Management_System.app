@@ -1,24 +1,43 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { NgIf, JsonPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-appointment-getbyid',
+  selector: 'app-appointment-get-by-id',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule, NgIf, JsonPipe],
   templateUrl: './appointment-getbyid.html',
-  styleUrls: ['./appointment-getbyid.css']
+  styleUrl: './appointment-getbyid.css'
 })
 export class AppointmentGetByIdComponent {
 
-  id: number = 0;
+  appointmentId = '';
   data: any;
+  error = '';
 
   constructor(private http: HttpClient) {}
 
-  load() {
-    this.http.get(`http://localhost:8080/api/appointments/${this.id}`)
-      .subscribe(res => this.data = res);
+  getHeaders() {
+    return new HttpHeaders({
+      'Authorization': 'Basic ' + btoa('admin:123')
+    });
+  }
+
+  getById() {
+    this.error = '';
+    this.data = null;
+
+    this.http.get(`http://localhost:9090/api/appointments/${this.appointmentId}`, {
+      headers: this.getHeaders()
+    }).subscribe({
+      next: (res) => {
+        this.data = res;
+      },
+      error: (err) => {
+        this.error = err.error?.message || '❌ Appointment not found';
+        alert(this.error);
+      }
+    });
   }
 }

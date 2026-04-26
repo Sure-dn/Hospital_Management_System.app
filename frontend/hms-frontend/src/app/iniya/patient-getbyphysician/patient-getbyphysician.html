@@ -1,10 +1,15 @@
 <div class="page-box">
   <h2>Get Patient PCP</h2>
-<form>
-  <input [(ngModel)]="ssn" placeholder="SSN">
+
+  <!-- ❌ removed form (important) -->
+  <input [(ngModel)]="ssn" placeholder="Enter SSN">
 
   <button (click)="load()">Get PCP</button>
 
-  <p>{{ data }}</p>
-  </form>
+  <!-- Better display -->
+  <div *ngIf="data">
+    <p><strong>PCP ID:</strong> {{ data.employeeId }}</p>
+    <p><strong>Name:</strong> {{ data.name }}</p>
+    <p><strong>Position:</strong> {{ data.position }}</p>
+  </div>
 </div>

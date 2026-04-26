@@ -18,7 +18,7 @@ export class PatientPutComponent {
   constructor(private http: HttpClient) {}
 
   update() {
-    this.http.put(`http://localhost:8080/api/patients/${this.patient.ssn}`, this.patient)
+    this.http.put(`http://localhost:9090/api/patients/${this.patient.ssn}`, this.patient)
       .subscribe(res => this.data = res);
   }
 }

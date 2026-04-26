@@ -1,9 +1,10 @@
-<div class="page-box">
-  <h2>Get Appointment by ID</h2>
+<div class="container">
+  <h2>🔍 Get Appointment By ID</h2>
 
-  <input [(ngModel)]="id" placeholder="Appointment ID">
+  <input [(ngModel)]="appointmentId" placeholder="Enter Appointment ID">
+  <button (click)="getById()">Search</button>
 
-  <button (click)="load()">Fetch</button>
+  <p class="error" *ngIf="error">{{ error }}</p>
 
-  <pre>{{data | json}}</pre>
+  <pre *ngIf="data">{{ data | json }}</pre>
 </div>

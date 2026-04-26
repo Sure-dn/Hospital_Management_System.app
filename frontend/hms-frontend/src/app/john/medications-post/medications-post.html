@@ -1,0 +1,10 @@
+<h2>Create Medication</h2>
+
+<input [(ngModel)]="data.code" placeholder="Code">
+<input [(ngModel)]="data.name" placeholder="Name">
+<input [(ngModel)]="data.brand" placeholder="Brand">
+<input [(ngModel)]="data.description" placeholder="Description">
+
+<button (click)="create()">Create</button>
+
+<pre>{{ response | json }}</pre>

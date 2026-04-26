@@ -1,16 +1,25 @@
-<div class="page-box">
-  <h2>Create Appointment</h2>
+<h2>➕ Create Appointment</h2>
 
-  <form>
-    <input [(ngModel)]="appointment.appointmentId" name="appointmentId" placeholder="Appointment ID">
-    <input [(ngModel)]="appointment.patientSsn" name="patientSsn" placeholder="Patient SSN">
-    <input [(ngModel)]="appointment.physicianId" name="physicianId" placeholder="Physician ID">
-    <input [(ngModel)]="appointment.examinationRoom" name="room" placeholder="Room">
-    <input [(ngModel)]="appointment.starttime" name="start" placeholder="Start Time (YYYY-MM-DDTHH:mm:ss)">
-    <input [(ngModel)]="appointment.endtime" name="end" placeholder="End Time">
+<input type="number" [(ngModel)]="appointmentId" placeholder="Appointment ID">
 
-    <button type="button" (click)="submit()">Submit</button>
-  </form>
+<input type="number" [(ngModel)]="patientSsn" placeholder="Patient SSN">
 
-  <pre>{{data | json}}</pre>
-</div>
+<input type="number" [(ngModel)]="prepNurseId" placeholder="Prep Nurse ID">
+
+<input type="number" [(ngModel)]="physicianId" placeholder="Physician ID">
+
+<!-- ISO format input -->
+<label>Start Time</label>
+<input type="text" [(ngModel)]="starttime" placeholder="YYYY-MM-DDTHH:mm">
+
+<label>End Time</label>
+<input type="text" [(ngModel)]="endtime" placeholder="YYYY-MM-DDTHH:mm">
+
+<input type="text" [(ngModel)]="examinationRoom" placeholder="Examination Room (A101)">
+
+<button (click)="create()">Create</button>
+
+<p *ngIf="success" style="color: green;">{{ success }}</p>
+<p *ngIf="error" style="color: red;">{{ error }}</p>
+
+<pre *ngIf="response">{{ response | json }}</pre>

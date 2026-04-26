@@ -1,0 +1,66 @@
+<div class="container">
+  <h2>✏️ Update Nurse</h2>
+
+  <form class="form">
+
+    <!-- Employee ID -->
+    <input 
+      type="number" 
+      [(ngModel)]="id" 
+      name="employeeId"
+      placeholder="Employee ID"
+    />
+
+    <!-- Name -->
+    <input 
+      type="text"
+      [(ngModel)]="nurse.name" 
+      name="name"
+      placeholder="Enter Name"
+    />
+
+    <!-- Position -->
+    <input 
+      type="text"
+      [(ngModel)]="nurse.position" 
+      name="position"
+      placeholder="Enter Position"
+    />
+
+    <!-- Registered -->
+    <label>
+      <input 
+        type="checkbox" 
+        [(ngModel)]="nurse.registered"
+        name="registered"
+      />
+      Registered
+    </label>
+
+    <!-- SSN -->
+    <input 
+      type="number" 
+      [(ngModel)]="nurse.ssn" 
+      name="ssn"
+      placeholder="Enter SSN"
+    />
+
+    <!-- Button -->
+    <button type="button" (click)="update()">Update</button>
+
+  </form>
+
+  <!-- RESULT -->
+  <div *ngIf="data" class="result">
+    <h3>✅ Nurse Updated</h3>
+
+    <div class="card">
+      <p><strong>ID:</strong> {{ data.data?.employeeId }}</p>
+      <p><strong>Name:</strong> {{ data.data?.name }}</p>
+      <p><strong>Position:</strong> {{ data.data?.position }}</p>
+      <p><strong>Registered:</strong> {{ data.data?.registered }}</p>
+      <p><strong>SSN:</strong> {{ data.data?.ssn }}</p>
+    </div>
+  </div>
+
+</div>

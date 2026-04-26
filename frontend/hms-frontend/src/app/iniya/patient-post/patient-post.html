@@ -1,19 +1,32 @@
-<div class="page-box">
-  <h2>Patient Details</h2>
+<div class="container">
+  <h2>➕ Patient Details</h2>
 
-  <form>
-    <input type="number" placeholder="SSN" [(ngModel)]="patient.ssn" name="ssn">
+  <div class="form">
 
-    <input type="text" placeholder="Name" [(ngModel)]="patient.name" name="name">
+    <input [(ngModel)]="ssn" placeholder="Enter SSN" />
+    <input [(ngModel)]="name" placeholder="Enter Name" />
+    <input [(ngModel)]="address" placeholder="Enter Address" />
+    <input [(ngModel)]="phone" placeholder="Enter Phone" />
+    <input [(ngModel)]="insuranceId" placeholder="Enter Insurance ID" />
+    <input [(ngModel)]="physicianId" placeholder="Enter PCP Physician ID" />
 
-    <input type="text" placeholder="Address" [(ngModel)]="patient.address" name="address">
+    <button (click)="create()">Create</button>
+  </div>
 
-    <input type="text" placeholder="Phone" [(ngModel)]="patient.phone" name="phone">
+  <!-- SUCCESS -->
+  <p *ngIf="success" class="success">{{ success }}</p>
 
-    <input type="number" placeholder="Insurance ID" [(ngModel)]="patient.insuranceId" name="insuranceId">
+  <!-- RESULT -->
+  <div *ngIf="data" class="result">
+    <h3>Created Patient</h3>
 
-    <input type="number" placeholder="PCP (Physician ID)" [(ngModel)]="patient.pcp" name="pcp">
+    <p><strong>SSN:</strong> {{ data.ssn }}</p>
+    <p><strong>Name:</strong> {{ data.name }}</p>
+    <p><strong>Address:</strong> {{ data.address }}</p>
+    <p><strong>Phone:</strong> {{ data.phone }}</p>
+    <p><strong>Insurance:</strong> {{ data.insuranceId }}</p>
+  </div>
 
-    <button type="button" (click)="submit()">Submit</button>
-  </form>
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
 </div>

@@ -6,12 +6,6 @@
   color: white;
   width: 350px;
 }
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
 input {
   width: 100%;
   margin-bottom: 12px;

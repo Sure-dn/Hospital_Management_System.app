@@ -28,11 +28,42 @@
     <!-- Dependencies -->
     <dependencies>
 
-        <!-- Spring Boot Web (REST APIs + Tomcat) -->
-        <dependency>
+     <!--Spring Boot Web (REST APIs + Tomcat)-->
+    <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        
+        <dependency>
+    <groupId>jakarta.persistence</groupId>
+    <artifactId>jakarta.persistence-api</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>jakarta.validation</groupId>
+    <artifactId>jakarta.validation-api</artifactId>
+</dependency>
+        
+<!--        &lt;!&ndash;dependency for security &ndash;&gt;-->
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-api</artifactId>
+		    <version>0.11.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-impl</artifactId>
+		    <version>0.11.5</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-jackson</artifactId>
+		    <version>0.11.5</version>
+		    <scope>runtime</scope>
+		</dependency>
 
         <!-- Spring Boot JPA (Database ORM) -->
         <dependency>
@@ -52,6 +83,12 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
+        <dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <scope>provided</scope>
+</dependency>
 
         <!-- Testing -->
         <dependency>
@@ -60,12 +97,12 @@
             <scope>test</scope>
         </dependency>
         <!-- Lombok dependency-->
-        <dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.32</version>
-    <scope>provided</scope>
-    </dependency>
+<!--        <dependency>-->
+<!--    <groupId>org.projectlombok</groupId>-->
+<!--    <artifactId>lombok</artifactId>-->
+<!--    <version>1.18.32</version>-->
+<!--    <scope>provided</scope>-->
+<!--    </dependency>-->
 
         <dependency>
             <groupId>org.springdoc</groupId>

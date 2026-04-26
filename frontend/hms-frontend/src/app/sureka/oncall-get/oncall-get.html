@@ -1,0 +1,8 @@
+<p>oncall-get works!</p>
+<h2>Get On-Call by Nurse</h2>
+
+<input type="number" [(ngModel)]="employeeId" placeholder="Employee ID"><br><br>
+
+<button (click)="getByNurse()">Get</button>
+
+<pre>{{ data | json }}</pre>

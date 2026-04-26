@@ -3,8 +3,7 @@ package com.sprint.project.nurseoncallroom.service.implementation;
 import com.sprint.project.nurseoncallroom.dto.request.NurseRequestDTO;
 import com.sprint.project.nurseoncallroom.dto.response.NurseResponseDTO;
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
-import com.sprint.project.nurseoncallroom.exception.BlockDuplicateResourceException;
-import com.sprint.project.nurseoncallroom.exception.OnCallNotFoundException;
+import com.sprint.project.nurseoncallroom.exception.*;
 import com.sprint.project.nurseoncallroom.repository.NurseRepository;
 import com.sprint.project.nurseoncallroom.service.NurseService;
 
@@ -27,6 +26,7 @@ public class NurseServiceImpl implements NurseService {
         e.setPosition(dto.getPosition());
         e.setRegistered(dto.getRegistered());
         e.setSsn(dto.getSsn());
+
         return e;
     }
 
@@ -40,33 +40,48 @@ public class NurseServiceImpl implements NurseService {
         return dto;
     }
 
+    // ✅ CREATE
     @Override
+
     public NurseResponseDTO createNurse(NurseRequestDTO request) {
-        if (nurseRepository.existsById(request.getEmployeeId()))
-            throw new BlockDuplicateResourceException("Nurse already exists");
+
+        // 🔥 Check duplicate SSN (correct validation)
+        if (nurseRepository.existsBySsn(request.getSsn())) {
+            throw new NurseAlreadyAssignedException(request.getSsn());
+        }
+
         return toDTO(nurseRepository.save(toEntity(request)));
     }
 
+    // ✅ GET ALL
     @Override
     public List<NurseResponseDTO> getAllNurses() {
-        return nurseRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        return nurseRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
+    // ✅ GET BY ID
     @Override
     public NurseResponseDTO getNurseById(Integer employeeId) {
         return toDTO(nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found")));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId))); // changed
     }
 
+    // ✅ UPDATE
     @Override
+
     public NurseResponseDTO updateNurse(Integer employeeId, NurseRequestDTO request) {
+
         NurseEntity existing = nurseRepository.findById(employeeId)
-                .orElseThrow(() -> new OnCallNotFoundException("Nurse not found"));
+                .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
         existing.setName(request.getName());
         existing.setPosition(request.getPosition());
         existing.setRegistered(request.getRegistered());
+        existing.setSsn(request.getSsn()); // 🔥 ADD THIS
 
         return toDTO(nurseRepository.save(existing));
     }
-}
+    }

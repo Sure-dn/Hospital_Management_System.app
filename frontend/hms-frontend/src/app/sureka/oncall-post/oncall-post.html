@@ -1,0 +1,14 @@
+<p>oncall-post works!</p>
+<h2>Assign On-Call</h2>
+
+<input type="number" [(ngModel)]="employeeId" placeholder="Employee ID"><br>
+
+<input type="number" [(ngModel)]="oncall.blockFloor" placeholder="Floor"><br>
+<input type="number" [(ngModel)]="oncall.blockCode" placeholder="Code"><br>
+
+<input type="datetime-local" [(ngModel)]="oncall.onCallStart"><br>
+<input type="datetime-local" [(ngModel)]="oncall.onCallEnd"><br>
+
+<button (click)="assign()">Assign</button>
+
+<pre>{{ data | json }}</pre>

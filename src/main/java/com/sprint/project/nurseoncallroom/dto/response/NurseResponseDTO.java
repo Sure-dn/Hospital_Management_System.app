@@ -2,7 +2,7 @@ package com.sprint.project.nurseoncallroom.dto.response;
 
 public class NurseResponseDTO {
 
-    private Integer employeeId;
+    private Integer EmployeeId;
     private String name;
     private String position;
     private Boolean registered;
@@ -10,17 +10,18 @@ public class NurseResponseDTO {
 
     public NurseResponseDTO() {}
 
-    public NurseResponseDTO(Integer employeeId, String name, String position,
-                             Boolean registered, Integer ssn) {
-        this.employeeId = employeeId;
+    public NurseResponseDTO(Integer EmployeeId, String name, String position,
+                            Boolean registered, Integer ssn) {
+        this.EmployeeId = EmployeeId;
         this.name = name;
         this.position = position;
         this.registered = registered;
         this.ssn = ssn;
     }
 
-    public Integer getEmployeeId() { return employeeId; }
-    public void setEmployeeId(Integer employeeId) { this.employeeId = employeeId; }
+    // Getters & Setters
+    public Integer getEmployeeId() { return EmployeeId; }
+    public void setEmployeeId(Integer employeeId) { this.EmployeeId = employeeId; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }

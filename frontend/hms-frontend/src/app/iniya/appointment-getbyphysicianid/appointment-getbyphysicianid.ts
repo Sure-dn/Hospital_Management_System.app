@@ -1,27 +1,47 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-appointment-getbyphysicianid',
+  selector: 'app-appointment-get-by-physician',
   standalone: true,
-  imports: [FormsModule,JsonPipe],
+  imports: [FormsModule,NgFor,NgIf],
   templateUrl: './appointment-getbyphysicianid.html',
-  styleUrls: ['./appointment-getbyphysicianid.css']
+  styleUrl: './appointment-getbyphysicianid.css'
 })
 export class AppointmentGetByPhysicianComponent {
 
-  physicianId: number = 0;
-  data: any;
+  employeeId = '';
+  appointments: any[] = [];
+  error = '';
 
   constructor(private http: HttpClient) {}
 
-  load() {
-    this.http.get(`http://localhost:8080/api/appointments/physician/${this.physicianId}`)
-      .subscribe({
-        next: res => this.data = res,
-        error: err => console.error(err)
-      });
+  getHeaders() {
+    return new HttpHeaders({
+      'Authorization': 'Basic ' + btoa('username:123')
+    });
+  }
+
+  getByPhysician() {
+    this.error = '';
+    this.appointments = [];
+
+    this.http.get<any[]>(`http://localhost:9090/api/physicians/${this.employeeId}/appointments`, {
+      headers: this.getHeaders()
+    }).subscribe({
+      next: (res) => {
+        this.appointments = res;
+        alert('✅ Physician appointments loaded');
+      },
+      error: (err) => {
+        console.error(err);
+        this.error = err.status === 401
+          ? '❌ Unauthorized'
+          : err.error?.message || '❌ Failed to load physician appointments';
+        alert(this.error);
+      }
+    });
   }
 }

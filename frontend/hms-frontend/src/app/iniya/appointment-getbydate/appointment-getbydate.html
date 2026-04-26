@@ -1,9 +1,16 @@
-<div class="page-box">
-  <h2>Get Appointments by Date</h2>
+<div class="container">
+  <h2>📅 Appointments By Date</h2>
 
-  <input [(ngModel)]="date" placeholder="YYYY-MM-DD">
+  <input type="date" [(ngModel)]="date">
+  <button (click)="getByDate()">Search</button>
 
-  <button (click)="load()">Fetch</button>
+  <p class="error" *ngIf="error">{{ error }}</p>
 
-  <pre>{{ data | json }}</pre>
+  <div class="result" *ngFor="let a of appointments">
+    <p><b>ID:</b> {{ a.appointmentId }}</p>
+    <p><b>Patient:</b> {{ a.patientName }}</p>
+    <p><b>Physician:</b> {{ a.physicianName }}</p>
+    <p><b>Room:</b> {{ a.examinationRoom }}</p>
+    <hr>
+  </div>
 </div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Create Training</h2>
+
+  <label>Employee ID</label>
+  <input type="number" [(ngModel)]="employeeId" placeholder="Enter Employee ID" />
+
+  <label>Treatment Code</label>
+  <input type="number" [(ngModel)]="treatmentCode" placeholder="Enter Treatment Code" />
+
+  <label>Certification Expiry</label>
+  <input type="date" [(ngModel)]="certificationExpiry" />
+
+  <button (click)="createTraining()">Submit</button>
+
+  <div class="result" *ngIf="result">
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>

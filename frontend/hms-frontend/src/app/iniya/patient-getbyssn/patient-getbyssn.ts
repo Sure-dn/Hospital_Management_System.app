@@ -18,7 +18,7 @@ export class PatientGetBySsnComponent {
   constructor(private http: HttpClient) {}
 
   load() {
-    this.http.get(`http://localhost:8080/api/patients/${this.ssn}`)
+    this.http.get(`http://localhost:9090/api/patients/${this.ssn}`)
       .subscribe(res => this.data = res);
   }
 }

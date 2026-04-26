@@ -1,0 +1,28 @@
+.page-box {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+pre {
+  text-align: left;
+  margin-top: 15px;
+  background: #f5f5f5;
+  padding: 10px;
+}
+
+h2{
+  color: antiquewhite;
+}
+
+label{
+  color:antiquewhite
+}

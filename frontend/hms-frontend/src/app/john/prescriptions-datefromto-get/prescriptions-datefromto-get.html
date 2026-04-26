@@ -1,0 +1,8 @@
+<h2>Prescriptions by Date Range</h2>
+
+<input [(ngModel)]="from" placeholder="From (YYYY-MM-DDTHH:mm:ss)">
+<input [(ngModel)]="to" placeholder="To (YYYY-MM-DDTHH:mm:ss)">
+
+<button (click)="load()">Fetch</button>
+
+<pre>{{ data | json }}</pre>

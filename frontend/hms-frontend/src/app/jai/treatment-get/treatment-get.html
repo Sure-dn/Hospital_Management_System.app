@@ -1,1 +1,40 @@
-<p>treatment-get works!</p>
+<div class="container">
+
+  <h2>All Treatments</h2>
+
+  <button (click)="load()">Load Treatments</button>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- TABLE -->
+  <table *ngIf="treatments.length > 0">
+    <thead>
+      <tr>
+        <th>Patient ID</th>
+        <th>Procedure ID</th>
+        <th>Stay ID</th>
+        <th>Date</th>
+        <th>Physician ID</th>
+        <th>Nurse ID</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let t of treatments">
+        <td>{{ t.patientId }}</td>
+        <td>{{ t.procedureId }}</td>
+        <td>{{ t.stayId }}</td>
+        <td>{{ t.dateUndergoes }}</td>
+        <td>{{ t.physicianId }}</td>
+        <td>{{ t.nurseId }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EMPTY -->
+  <p *ngIf="treatments.length === 0 && !error">
+    No treatments found
+  </p>
+
+</div>

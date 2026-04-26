@@ -13,19 +13,19 @@
     </div>
 
     <div class="grid">
-      <div class="api-card post" (click)="openEndpoint('/patient-post')">
+      <div class="api-card post" (click)="openEndpoint('patient-post')">
         POST <span>/api/patients</span>
       </div>
-      <div class="api-card get" (click)="openEndpoint('/patient-get')">
+      <div class="api-card get" (click)="openEndpoint('patient-get')">
         GET <span>/api/patients</span>
       </div>
-      <div class="api-card get" (click)="openEndpoint('/patient-getbyssn')">
+      <div class="api-card get" (click)="openEndpoint('patient-getbyssn')">
         GET <span>/api/patients/(ssn)</span>
       </div>
-      <div class="api-card put" (click)="openEndpoint('/patient-put')">
+      <div class="api-card put" (click)="openEndpoint('patient-put')">
         PUT <span>/api/patients/(ssn)</span>
       </div>
-      <div class="api-card delete" (click)="openEndpoint('/patient-delete')">
+      <div class="api-card delete" (click)="openEndpoint('patient-delete')">
         DELETE <span>/api/patients/(ssn)</span>
       </div>
     </div>
@@ -39,10 +39,10 @@
     </div>
 
     <div class="grid">
-      <div class="api-card get" (click)="openEndpoint('/patient-getbyphysician')">
+      <div class="api-card get" (click)="openEndpoint('patient-getbyphysician')">
         GET <span>/api/patients/(ssn)/pcp</span>
       </div>
-      <div class="api-card put" (click)="openEndpoint('/patient-putbyphysician')">
+      <div class="api-card put" (click)="openEndpoint('patient-putbyphysician')">
         PUT <span>/api/patients/(ssn)/pcp/(physicianId)</span>
       </div>
     </div>
@@ -56,19 +56,19 @@
     </div>
 
     <div class="grid">
-      <div class="api-card post" (click)="openEndpoint('/appointment-post')">
+      <div class="api-card post" (click)="openEndpoint('appointment-post')">
         POST <span>/api/appointments</span>
       </div>
-      <div class="api-card get" (click)="openEndpoint('/appointment-get')">
+      <div class="api-card get" (click)="openEndpoint('appointment-get')">
         GET <span>/api/appointments</span>
       </div>
-      <div class="api-card get" (click)="openEndpoint('/appointment-getbyid')">
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyid')">
         GET <span>/api/appointments/(appointmentId)</span>
       </div>
-      <div class="api-card put" (click)="openEndpoint('/appointment-putbyid')">
+      <div class="api-card put" (click)="openEndpoint('appointment-putbyid')">
         PUT <span>/api/appointments/(appointmentId)</span>
       </div>
-      <div class="api-card delete" (click)="openEndpoint('/appointment-deletebyid')">
+      <div class="api-card delete" (click)="openEndpoint('appointment-deletebyid')">
         DELETE <span>/api/appointments/(appointmentId)</span>
       </div>
     </div>
@@ -82,10 +82,10 @@
     </div>
 
     <div class="grid">
-      <div class="api-card get" (click)="openEndpoint('/appointment-getbyssn')">
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyssn')">
         GET <span>/api/patients/(ssn)/appointments</span>
       </div>
-      <div class="api-card get" (click)="openEndpoint('/appointment-getbyphysician')">
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyphysician')">
         GET <span>/api/physicians/(employeeId)/appointments</span>
       </div>
       <div class="api-card get" (click)="openEndpoint('appointment-getbydate')">

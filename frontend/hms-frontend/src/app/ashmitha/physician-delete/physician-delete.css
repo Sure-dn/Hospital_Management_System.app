@@ -1,0 +1,23 @@
+.page-box {
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+input {
+  width: 90%;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+button {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+h2{
+  color: antiquewhite;
+}

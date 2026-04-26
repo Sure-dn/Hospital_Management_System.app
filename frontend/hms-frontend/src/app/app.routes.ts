@@ -121,329 +121,329 @@ export const routes: Routes = [
   ]
   },
 
-  // JOHN MODULE
-// {
-//   path: 'john',
-//   component: JohnComponent,
-//   canActivate: [authGuard],
-//   data: { user: 'John' },
+  JOHN MODULE
+{
+  path: 'john',
+  component: JohnComponent,
+  canActivate: [authGuard],
+  data: { user: 'John' },
 
-//   children: [
+  children: [
 
-//     // 🔥 DEFAULT DASHBOARD
-//     {
-//       path: '',
-//       loadComponent: () =>
-//         import('./john/dashboard/dashboard')
-//           .then(m => m.DashboardComponent)
-//     },
+    // 🔥 DEFAULT DASHBOARD
+    {
+      path: '',
+      loadComponent: () =>
+        import('./john/dashboard/dashboard')
+          .then(m => m.DashboardComponent)
+    },
 
-//     // ===== MEDICATIONS =====
-//     {
-//       path: 'medications-post',
-//       loadComponent: () =>
-//         import('./john/medications-post/medications-post')
-//           .then(m => m.CreateMedicationComponent)
-//     },
-//     {
-//       path: 'medications-get',
-//       loadComponent: () =>
-//         import('./john/medications-get/medications-get')
-//           .then(m => m.GetAllMedicationsComponent)
-//     },
-//     {
-//       path: 'medications-get-by-code',
-//       loadComponent: () =>
-//         import('./john/medicationscode-get/medicationscode-get')
-//           .then(m => m.GetMedicationComponent)
-//     },
-//     {
-//       path: 'medications-put',
-//       loadComponent: () =>
-//         import('./john/medicationscode-put/medicationscode-put')
-//           .then(m => m.UpdateMedicationComponent)
-//     },
-//     {
-//       path: 'medications-delete',
-//       loadComponent: () =>
-//         import('./john/medicationscode-delete/medicationscode-delete')
-//           .then(m => m.DeleteMedicationComponent)
-//     },
+    // ===== MEDICATIONS =====
+    {
+      path: 'medications-post',
+      loadComponent: () =>
+        import('./john/medications-post/medications-post')
+          .then(m => m.CreateMedicationComponent)
+    },
+    {
+      path: 'medications-get',
+      loadComponent: () =>
+        import('./john/medications-get/medications-get')
+          .then(m => m.GetAllMedicationsComponent)
+    },
+    {
+      path: 'medications-get-by-code',
+      loadComponent: () =>
+        import('./john/medicationscode-get/medicationscode-get')
+          .then(m => m.GetMedicationComponent)
+    },
+    {
+      path: 'medications-put',
+      loadComponent: () =>
+        import('./john/medicationscode-put/medicationscode-put')
+          .then(m => m.UpdateMedicationComponent)
+    },
+    {
+      path: 'medications-delete',
+      loadComponent: () =>
+        import('./john/medicationscode-delete/medicationscode-delete')
+          .then(m => m.DeleteMedicationComponent)
+    },
 
-//     // ===== PRESCRIPTIONS =====
-//     {
-//       path: 'prescriptions-post',
-//       loadComponent: () =>
-//         import('./john/prescriptions-post/prescriptions-post')
-//           .then(m => m.CreatePrescriptionComponent)
-//     },
-//     {
-//       path: 'prescriptions-get',
-//       loadComponent: () =>
-//         import('./john/prescriptions-get/prescriptions-get')
-//           .then(m => m.GetAllPrescriptionsComponent)
-//     },
-//     {
-//       path: 'prescriptions-get-date-range',
-//       loadComponent: () =>
-//         import('./john/prescriptions-datefromto-get/prescriptions-datefromto-get')
-//           .then(m => m.GetByDateComponent)
-//     },
-//     {
-//       path: 'prescriptions-get-patient',
-//       loadComponent: () =>
-//         import('./john/prescriptions-patientssn-get/prescriptions-patientssn-get')
-//           .then(m => m.GetByPatientComponent)
-//     },
-//     {
-//       path: 'prescriptions-get-physician',
-//       loadComponent: () =>
-//         import('./john/prescriptions-physicianempid-get/prescriptions-physicianempid-get')
-//           .then(m => m.GetByPhysicianComponent)
-//     },
-//     {
-//       path: 'prescriptions-get-medication',
-//       loadComponent: () =>
-//         import('./john/prescriptionscode-medication-get/prescriptionscode-medication-get')
-//           .then(m => m.GetByMedicationComponent)
-//     }
+    // ===== PRESCRIPTIONS =====
+    {
+      path: 'prescriptions-post',
+      loadComponent: () =>
+        import('./john/prescriptions-post/prescriptions-post')
+          .then(m => m.CreatePrescriptionComponent)
+    },
+    {
+      path: 'prescriptions-get',
+      loadComponent: () =>
+        import('./john/prescriptions-get/prescriptions-get')
+          .then(m => m.GetAllPrescriptionsComponent)
+    },
+    {
+      path: 'prescriptions-get-date-range',
+      loadComponent: () =>
+        import('./john/prescriptions-datefromto-get/prescriptions-datefromto-get')
+          .then(m => m.GetByDateComponent)
+    },
+    {
+      path: 'prescriptions-get-patient',
+      loadComponent: () =>
+        import('./john/prescriptions-patientssn-get/prescriptions-patientssn-get')
+          .then(m => m.GetByPatientComponent)
+    },
+    {
+      path: 'prescriptions-get-physician',
+      loadComponent: () =>
+        import('./john/prescriptions-physicianempid-get/prescriptions-physicianempid-get')
+          .then(m => m.GetByPhysicianComponent)
+    },
+    {
+      path: 'prescriptions-get-medication',
+      loadComponent: () =>
+        import('./john/prescriptionscode-medication-get/prescriptionscode-medication-get')
+          .then(m => m.GetByMedicationComponent)
+    }
 
-//   ]
-// },
+  ]
+},
 
-  //ASHMITHA MODULE
-//   {
-//   path: 'ashmitha',
-//   component: Ashmitha,
-//   canActivate: [authGuard],
-//   data: { user: 'Ashmitha' },
+  ASHMITHA MODULE
+  {
+  path: 'ashmitha',
+  component: Ashmitha,
+  canActivate: [authGuard],
+  data: { user: 'Ashmitha' },
 
-//   children: [
+  children: [
 
-//     // 🔥 DEFAULT DASHBOARD
-//     {
-//       path: '',
-//       loadComponent: () =>
-//         import('./ashmitha/dashboard/dashboard')
-//           .then(m => m.DashboardComponent)
-//     },
+    // 🔥 DEFAULT DASHBOARD
+    {
+      path: '',
+      loadComponent: () =>
+        import('./ashmitha/dashboard/dashboard')
+          .then(m => m.DashboardComponent)
+    },
 
-//     // ===== PHYSICIAN =====
-//     {
-//       path: 'physician-post',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-post/physician-post')
-//           .then(m => m.PhysicianPost)
-//     },
-//     {
-//       path: 'physician-get',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-get/physician-get')
-//           .then(m => m.PhysicianGet)
-//     },
-//     {
-//       path: 'physician-getbyid',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-getbyid/physician-getbyid')
-//           .then(m => m.PhysicianGetbyId)
-//     },
-//     {
-//       path: 'physician-update',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-update/physician-update')
-//           .then(m => m.PhysicianUpdate)
-//     },
-//     {
-//       path: 'physician-delete',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-delete/physician-delete')
-//           .then(m => m.PhysicianDelete)
-//     },
+    // ===== PHYSICIAN =====
+    {
+      path: 'physician-post',
+      loadComponent: () =>
+        import('./ashmitha/physician-post/physician-post')
+          .then(m => m.PhysicianPost)
+    },
+    {
+      path: 'physician-get',
+      loadComponent: () =>
+        import('./ashmitha/physician-get/physician-get')
+          .then(m => m.PhysicianGet)
+    },
+    {
+      path: 'physician-getbyid',
+      loadComponent: () =>
+        import('./ashmitha/physician-getbyid/physician-getbyid')
+          .then(m => m.PhysicianGetbyId)
+    },
+    {
+      path: 'physician-update',
+      loadComponent: () =>
+        import('./ashmitha/physician-update/physician-update')
+          .then(m => m.PhysicianUpdate)
+    },
+    {
+      path: 'physician-delete',
+      loadComponent: () =>
+        import('./ashmitha/physician-delete/physician-delete')
+          .then(m => m.PhysicianDelete)
+    },
 
-//     // ===== DEPARTMENT =====
-//     {
-//       path: 'department-post',
-//       loadComponent: () =>
-//         import('./ashmitha/department-post/department-post')
-//           .then(m => m.DepartmentPost)
-//     },
-//     {
-//       path: 'department-getall',
-//       loadComponent: () =>
-//         import('./ashmitha/department-getall/department-getall')
-//           .then(m => m.DepartmentGetall)
-//     },
-//     {
-//       path: 'department-getbyid',
-//       loadComponent: () =>
-//         import('./ashmitha/department-getbyid/department-getbyid')
-//           .then(m => m.DepartmentGetbyID)
-//     },
-//     {
-//       path: 'department-update',
-//       loadComponent: () =>
-//         import('./ashmitha/department-update/department-update')
-//           .then(m => m.DepartmentUpdate)
-//     },
-//     {
-//       path: 'department-gethead',
-//       loadComponent: () =>
-//         import('./ashmitha/department-gethead/department-gethead')
-//           .then(m => m.DepartmentGethead)
-//     },
+    // ===== DEPARTMENT =====
+    {
+      path: 'department-post',
+      loadComponent: () =>
+        import('./ashmitha/department-post/department-post')
+          .then(m => m.DepartmentPost)
+    },
+    {
+      path: 'department-getall',
+      loadComponent: () =>
+        import('./ashmitha/department-getall/department-getall')
+          .then(m => m.DepartmentGetall)
+    },
+    {
+      path: 'department-getbyid',
+      loadComponent: () =>
+        import('./ashmitha/department-getbyid/department-getbyid')
+          .then(m => m.DepartmentGetbyID)
+    },
+    {
+      path: 'department-update',
+      loadComponent: () =>
+        import('./ashmitha/department-update/department-update')
+          .then(m => m.DepartmentUpdate)
+    },
+    {
+      path: 'department-gethead',
+      loadComponent: () =>
+        import('./ashmitha/department-gethead/department-gethead')
+          .then(m => m.DepartmentGethead)
+    },
 
-//     // ===== AFFILIATION =====
-//     {
-//       path: 'affiliation-post',
-//       loadComponent: () =>
-//         import('./ashmitha/affiliation-post/affiliation-post')
-//           .then(m => m.AffiliationPost)
-//     },
-//     {
-//       path: 'affiliation-getbyphysician',
-//       loadComponent: () =>
-//         import('./ashmitha/affiliation-getbyphysician/affiliation-getbyphysician')
-//           .then(m => m.AffiliationGetbyphysician)
-//     },
-//     {
-//       path: 'affiliation-getbydepartment',
-//       loadComponent: () =>
-//         import('./ashmitha/affiliation-getbydepartment/affiliation-getbydepartment')
-//           .then(m => m.AffiliationGetbydepartment)
-//     },
+    // ===== AFFILIATION =====
+    {
+      path: 'affiliation-post',
+      loadComponent: () =>
+        import('./ashmitha/affiliation-post/affiliation-post')
+          .then(m => m.AffiliationPost)
+    },
+    {
+      path: 'affiliation-getbyphysician',
+      loadComponent: () =>
+        import('./ashmitha/affiliation-getbyphysician/affiliation-getbyphysician')
+          .then(m => m.AffiliationGetbyphysician)
+    },
+    {
+      path: 'affiliation-getbydepartment',
+      loadComponent: () =>
+        import('./ashmitha/affiliation-getbydepartment/affiliation-getbydepartment')
+          .then(m => m.AffiliationGetbydepartment)
+    },
 
-//     // ===== TRAINING =====
-//     {
-//       path: 'training-post',
-//       loadComponent: () =>
-//         import('./ashmitha/training-post/training-post')
-//           .then(m => m.TrainingPost)
-//     },
-//     {
-//       path: 'training-getall',
-//       loadComponent: () =>
-//         import('./ashmitha/training-getall/training-getall')
-//           .then(m => m.TrainingGetall)
-//     },
-//     {
-//       path: 'training-valid',
-//       loadComponent: () =>
-//         import('./ashmitha/training-valid/training-valid')
-//           .then(m => m.TrainingValid)
-//     }
+    // ===== TRAINING =====
+    {
+      path: 'training-post',
+      loadComponent: () =>
+        import('./ashmitha/training-post/training-post')
+          .then(m => m.TrainingPost)
+    },
+    {
+      path: 'training-getall',
+      loadComponent: () =>
+        import('./ashmitha/training-getall/training-getall')
+          .then(m => m.TrainingGetall)
+    },
+    {
+      path: 'training-valid',
+      loadComponent: () =>
+        import('./ashmitha/training-valid/training-valid')
+          .then(m => m.TrainingValid)
+    }
 
-//   ]
-//   },
+  ]
+  },
 
-  // SUREKA MODULE
-// {
-//   path: 'sureka',
-//   component: Sureka,
-//   canActivate: [authGuard],
-//   data: { user: 'Sureka' },
+  SUREKA MODULE
+{
+  path: 'sureka',
+  component: Sureka,
+  canActivate: [authGuard],
+  data: { user: 'Sureka' },
 
-//   children: [
+  children: [
 
-//     // 🔥 DEFAULT DASHBOARD
-//     {
-//       path: '',
-//       loadComponent: () =>
-//         import('./sureka/dashboard/dashboard')
-//           .then(m => m.DashboardComponent)
-//     },
+    // 🔥 DEFAULT DASHBOARD
+    {
+      path: '',
+      loadComponent: () =>
+        import('./sureka/dashboard/dashboard')
+          .then(m => m.DashboardComponent)
+    },
 
-//     // ===== NURSE =====
-//     {
-//       path: 'nurse-post',
-//       loadComponent: () =>
-//         import('./sureka/nurse-post/nurse-post')
-//           .then(m => m.CreateNurseComponent)
-//     },
-//     {
-//       path: 'nurse-get',
-//       loadComponent: () =>
-//         import('./sureka/nurse-get/nurse-get')
-//           .then(m => m.GetAllNursesComponent)
-//     },
+    // ===== NURSE =====
+    {
+      path: 'nurse-post',
+      loadComponent: () =>
+        import('./sureka/nurse-post/nurse-post')
+          .then(m => m.CreateNurseComponent)
+    },
+    {
+      path: 'nurse-get',
+      loadComponent: () =>
+        import('./sureka/nurse-get/nurse-get')
+          .then(m => m.GetAllNursesComponent)
+    },
 
-//     // ===== EMPLOYEE =====
-//     {
-//       path: 'employee-get',
-//       loadComponent: () =>
-//         import('./sureka/employeeid-get/employeeid-get')
-//           .then(m => m.GetNurseByIdComponent)
-//     },
-//     {
-//       path: 'employee-update',
-//       loadComponent: () =>
-//         import('./sureka/employeeid-put/employeeid-put')
-//           .then(m => m.UpdateNurseComponent)
-//     },
+    // ===== EMPLOYEE =====
+    {
+      path: 'employee-get',
+      loadComponent: () =>
+        import('./sureka/employeeid-get/employeeid-get')
+          .then(m => m.GetNurseByIdComponent)
+    },
+    {
+      path: 'employee-update',
+      loadComponent: () =>
+        import('./sureka/employeeid-put/employeeid-put')
+          .then(m => m.UpdateNurseComponent)
+    },
 
-//     // ===== ONCALL =====
-//     {
-//       path: 'oncall-post',
-//       loadComponent: () =>
-//         import('./sureka/oncall-post/oncall-post')
-//           .then(m => m.OnCallPostComponent)
-//     },
-//     {
-//       path: 'oncall-get',
-//       loadComponent: () =>
-//         import('./sureka/oncall-get/oncall-get')
-//           .then(m => m.OnCallGetComponent)
-//     },
-//     {
-//       path: 'oncall-delete',
-//       loadComponent: () =>
-//         import('./sureka/oncall-delete/oncall-delete')
-//           .then(m => m.OnCallDeleteComponent)
-//     },
+    // ===== ONCALL =====
+    {
+      path: 'oncall-post',
+      loadComponent: () =>
+        import('./sureka/oncall-post/oncall-post')
+          .then(m => m.OnCallPostComponent)
+    },
+    {
+      path: 'oncall-get',
+      loadComponent: () =>
+        import('./sureka/oncall-get/oncall-get')
+          .then(m => m.OnCallGetComponent)
+    },
+    {
+      path: 'oncall-delete',
+      loadComponent: () =>
+        import('./sureka/oncall-delete/oncall-delete')
+          .then(m => m.OnCallDeleteComponent)
+    },
 
-//     // ===== BLOCKS =====
-//     {
-//       path: 'blocks-get',
-//       loadComponent: () =>
-//         import('./sureka/blocks-get/blocks-get')
-//           .then(m => m.BlocksGetComponent)
-//     },
+    // ===== BLOCKS =====
+    {
+      path: 'blocks-get',
+      loadComponent: () =>
+        import('./sureka/blocks-get/blocks-get')
+          .then(m => m.BlocksGetComponent)
+    },
 
-//     // ===== FLOOR / ROOM COMBO =====
-//     {
-//       path: 'floor-get',
-//       loadComponent: () =>
-//         import('./sureka/floorcode-get/floorcode-get')
-//           .then(m => m.OnCallFloorComponent)
-//     },
-//     {
-//       path: 'floor-room-get',
-//       loadComponent: () =>
-//         import('./sureka/floorcoderoom-get/floorcoderoom-get')
-//           .then(m => m.BlockRoomsComponent)
-//     },
+    // ===== FLOOR / ROOM COMBO =====
+    {
+      path: 'floor-get',
+      loadComponent: () =>
+        import('./sureka/floorcode-get/floorcode-get')
+          .then(m => m.OnCallFloorComponent)
+    },
+    {
+      path: 'floor-room-get',
+      loadComponent: () =>
+        import('./sureka/floorcoderoom-get/floorcoderoom-get')
+          .then(m => m.BlockRoomsComponent)
+    },
 
-//     // ===== ROOMS =====
-//     {
-//       path: 'rooms-get',
-//       loadComponent: () =>
-//         import('./sureka/rooms-get/rooms-get')
-//           .then(m => m.RoomsGetComponent)
-//     },
-//     {
-//       path: 'room-get',
-//       loadComponent: () =>
-//         import('./sureka/roomno-get/roomno-get')
-//           .then(m => m.RoomGetComponent)
-//     },
-//     {
-//       path: 'room-update',
-//       loadComponent: () =>
-//         import('./sureka/roomnoavail-put/roomnoavail-put')
-//           .then(m => m.RoomUpdateComponent)
-//     }
+    // ===== ROOMS =====
+    {
+      path: 'rooms-get',
+      loadComponent: () =>
+        import('./sureka/rooms-get/rooms-get')
+          .then(m => m.RoomsGetComponent)
+    },
+    {
+      path: 'room-get',
+      loadComponent: () =>
+        import('./sureka/roomno-get/roomno-get')
+          .then(m => m.RoomGetComponent)
+    },
+    {
+      path: 'room-update',
+      loadComponent: () =>
+        import('./sureka/roomnoavail-put/roomnoavail-put')
+          .then(m => m.RoomUpdateComponent)
+    }
 
-//   ]
-// }
+  ]
+}
 {
   path: 'iniya',
   component: Iniya,
@@ -465,7 +465,7 @@ export const routes: Routes = [
       path: 'patient-get',
       loadComponent: () =>
         import('./iniya/patient-get/patient-get')
-          .then(m => m.PatientGet)
+          .then(m => m.PatientGetAllComponent)
     },
     {
       path: 'patient-post',
@@ -515,7 +515,7 @@ export const routes: Routes = [
       path: 'appointment-get',
       loadComponent: () =>
         import('./iniya/appointment-get/appointment-get')
-          .then(m => m.AppointmentGetComponent)
+          .then(m => m.AppointmentGetAllComponent)
     },
     {
       path: 'appointment-getbyid',
@@ -545,7 +545,7 @@ export const routes: Routes = [
       path: 'appointment-getbyssn',
       loadComponent: () =>
         import('./iniya/appointment-getbyssn/appointment-getbyssn')
-          .then(m => m.AppointmentGetBySsnComponent)
+          .then(m => m.AppointmentGetByPatientComponent)
     },
     {
       path: 'appointment-getbyphysicianid',
