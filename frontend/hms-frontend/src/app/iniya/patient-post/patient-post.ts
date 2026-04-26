@@ -30,7 +30,7 @@ export class PatientPostComponent {
     this.error = '';
     this.data = null;
 
-    // ✅ FIXED PAYLOAD
+    
     const payload = {
       ssn: Number(this.ssn),
       name: this.name,
@@ -48,12 +48,14 @@ export class PatientPostComponent {
           console.log("SUCCESS:", res);
           this.data = res.data || res;
           this.success = "✅ Patient created successfully";
+          alert("✅ Patient created successfully");
         },
         error: (err) => {
           console.log("FULL ERROR:", err);
           console.log("BACKEND ERROR:", err.error);
 
           this.error = err.error?.message || "❌ Failed to create patient details";
+          alert(this.error);
         }
       });
   }

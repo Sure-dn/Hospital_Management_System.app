@@ -8,14 +8,13 @@
 
 <input type="number" [(ngModel)]="physicianId" placeholder="Physician ID">
 
-<!-- ISO format input -->
 <label>Start Time</label>
-<input type="text" [(ngModel)]="starttime" placeholder="YYYY-MM-DDTHH:mm">
+<input type="datetime-local" [(ngModel)]="starttime">
 
 <label>End Time</label>
-<input type="text" [(ngModel)]="endtime" placeholder="YYYY-MM-DDTHH:mm">
+<input type="datetime-local" [(ngModel)]="endtime">
 
-<input type="text" [(ngModel)]="examinationRoom" placeholder="Examination Room (A101)">
+<input type="text" [(ngModel)]="examinationRoom" placeholder="Room (A101)">
 
 <button (click)="create()">Create</button>
 

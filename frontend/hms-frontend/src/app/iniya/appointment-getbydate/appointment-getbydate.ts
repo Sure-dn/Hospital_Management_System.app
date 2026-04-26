@@ -6,7 +6,7 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-appointment-get-by-date',
   standalone: true,
-  imports: [FormsModule, NgFor,NgIf],
+  imports: [FormsModule, NgFor, NgIf],
   templateUrl: './appointment-getbydate.html',
   styleUrl: './appointment-getbydate.css'
 })
@@ -15,6 +15,7 @@ export class AppointmentGetByDateComponent {
   date = '';
   appointments: any[] = [];
   error = '';
+  searched = false;
 
   constructor(private http: HttpClient) {}
 
@@ -27,19 +28,27 @@ export class AppointmentGetByDateComponent {
   getByDate() {
     this.error = '';
     this.appointments = [];
+    this.searched = true;
 
-    this.http.get<any[]>(`http://localhost:9090/api/appointments/by-date?date=${this.date}`, {
+    if (!this.date) {
+      alert('❌ Please select a date');
+      return;
+    }
+
+    this.http.get<any>(`http://localhost:9090/api/appointments/by-date?date=${this.date}`, {
       headers: this.getHeaders()
     }).subscribe({
-      next: (res) => {
-        this.appointments = res;
+      next: (res: any) => {
+        console.log("FULL RESPONSE:", res);
+
+        // 🔥 IMPORTANT FIX
+        this.appointments = res.data ? res.data : res;
+
         alert('✅ Appointments loaded by date');
       },
       error: (err) => {
         console.error(err);
-        this.error = err.status === 401
-          ? '❌ Unauthorized'
-          : err.error?.message || '❌ Failed to load appointments by date';
+        this.error = err.error?.message || '❌ Failed to load appointments';
         alert(this.error);
       }
     });
