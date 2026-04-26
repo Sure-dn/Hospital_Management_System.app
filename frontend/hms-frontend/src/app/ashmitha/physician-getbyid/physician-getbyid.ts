@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './physician-getbyid.html',
   styleUrl: './physician-getbyid.css',
 })
-export class PhysicianGetbyid {
+export class PhysicianGetbyid  {
   employeeId: string = '';
   result: any;
 

@@ -211,131 +211,131 @@ export const routes: Routes = [
   ]
 },
 
-//   //ASHMITHA MODULE
-//   {
-//   path: 'ashmitha',
-//   component: Ashmitha,
-//   canActivate: [authGuard],
-//   data: { user: 'Ashmitha' },
+  //ASHMITHA MODULE
+  {
+  path: 'ashmitha',
+  component: Ashmitha,
+  canActivate: [authGuard],
+  data: { user: 'Ashmitha' },
 
-//   children: [
+  children: [
 
-//     // 🔥 DEFAULT DASHBOARD
-//     {
-//       path: '',
-//       loadComponent: () =>
-//         import('./ashmitha/dashboard/dashboard')
-//           .then(m => m.DashboardComponent)
-//     },
+    // 🔥 DEFAULT DASHBOARD
+    {
+      path: '',
+      loadComponent: () =>
+        import('./ashmitha/dashboard/dashboard')
+          .then(m => m.DashboardComponent)
+    },
 
-//     // ===== PHYSICIAN =====
-//     {
-//       path: 'physician-post',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-post/physician-post')
-//           .then(m => m.PhysicianPost)
-//     },
-//     {
-//       path: 'physician-get',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-get/physician-get')
-//           .then(m => m.PhysicianGet)
-//     },
-//     {
-//       path: 'physician-getbyid',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-getbyid/physician-getbyid')
-//           .then(m => m.PhysicianGetbyId)
-//     },
-//     {
-//       path: 'physician-update',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-update/physician-update')
-//           .then(m => m.PhysicianUpdate)
-//     },
-//     {
-//       path: 'physician-delete',
-//       loadComponent: () =>
-//         import('./ashmitha/physician-delete/physician-delete')
-//           .then(m => m.PhysicianDelete)
-//     },
+    // ===== PHYSICIAN =====
+    {
+      path: 'physician-post',
+      loadComponent: () =>
+        import('./ashmitha/physician-post/physician-post')
+          .then(m => m.PhysicianPost)
+    },
+    {
+      path: 'physician-get',
+      loadComponent: () =>
+        import('./ashmitha/physician-get/physician-get')
+          .then(m => m.PhysicianGet)
+    },
+    {
+      path: 'physician-getbyid',
+      loadComponent: () =>
+        import('./ashmitha/physician-getbyid/physician-getbyid')
+          .then(m => m.PhysicianGetbyId)
+    },
+    {
+      path: 'physician-update',
+      loadComponent: () =>
+        import('./ashmitha/physician-update/physician-update')
+          .then(m => m.PhysicianUpdate)
+    },
+    {
+      path: 'physician-delete',
+      loadComponent: () =>
+        import('./ashmitha/physician-delete/physician-delete')
+          .then(m => m.PhysicianDelete)
+    },
 
-//     // ===== DEPARTMENT =====
-//     {
-//       path: 'department-post',
-//       loadComponent: () =>
-//         import('./ashmitha/department-post/department-post')
-//           .then(m => m.DepartmentPost)
-//     },
-//     {
-//       path: 'department-getall',
-//       loadComponent: () =>
-//         import('./ashmitha/department-getall/department-getall')
-//           .then(m => m.DepartmentGetall)
-//     },
-//     {
-//       path: 'department-getbyid',
-//       loadComponent: () =>
-//         import('./ashmitha/department-getbyid/department-getbyid')
-//           .then(m => m.DepartmentGetbyID)
-//     },
-//     {
-//       path: 'department-update',
-//       loadComponent: () =>
-//         import('./ashmitha/department-update/department-update')
-//           .then(m => m.DepartmentUpdate)
-//     },
-//     {
-//       path: 'department-gethead',
-//       loadComponent: () =>
-//         import('./ashmitha/department-gethead/department-gethead')
-//           .then(m => m.DepartmentGethead)
-//     },
+    // ===== DEPARTMENT =====
+    {
+      path: 'department-post',
+      loadComponent: () =>
+        import('./ashmitha/department-post/department-post')
+          .then(m => m.DepartmentPost)
+    },
+    {
+      path: 'department-getall',
+      loadComponent: () =>
+        import('./ashmitha/department-getall/department-getall')
+          .then(m => m.DepartmentGetall)
+    },
+    {
+      path: 'department-getbyid',
+      loadComponent: () =>
+        import('./ashmitha/department-getbyid/department-getbyid')
+          .then(m => m.DepartmentGetbyID)
+    },
+    {
+      path: 'department-update',
+      loadComponent: () =>
+        import('./ashmitha/department-update/department-update')
+          .then(m => m.DepartmentUpdate)
+    },
+    {
+      path: 'department-gethead',
+      loadComponent: () =>
+        import('./ashmitha/department-gethead/department-gethead')
+          .then(m => m.DepartmentGethead)
+    },
 
-//     // ===== AFFILIATION =====
-//     {
-//       path: 'affiliation-post',
-//       loadComponent: () =>
-//         import('./ashmitha/affiliation-post/affiliation-post')
-//           .then(m => m.AffiliationPost)
-//     },
-//     {
-//       path: 'affiliation-getbyphysician',
-//       loadComponent: () =>
-//         import('./ashmitha/affiliation-getbyphysician/affiliation-getbyphysician')
-//           .then(m => m.AffiliationGetbyphysician)
-//     },
-//     {
-//       path: 'affiliation-getbydepartment',
-//       loadComponent: () =>
-//         import('./ashmitha/affiliation-getbydepartment/affiliation-getbydepartment')
-//           .then(m => m.AffiliationGetbydepartment)
-//     },
+    // ===== AFFILIATION =====
+    {
+      path: 'affiliation-post',
+      loadComponent: () =>
+        import('./ashmitha/affiliation-post/affiliation-post')
+          .then(m => m.AffiliationPost)
+    },
+    {
+      path: 'affiliation-getbyphysician',
+      loadComponent: () =>
+        import('./ashmitha/affiliation-getbyphysician/affiliation-getbyphysician')
+          .then(m => m.AffiliationGetbyphysician)
+    },
+    {
+      path: 'affiliation-getbydepartment',
+      loadComponent: () =>
+        import('./ashmitha/affiliation-getbydepartment/affiliation-getbydepartment')
+          .then(m => m.AffiliationGetbydepartment)
+    },
 
-//     // ===== TRAINING =====
-//     {
-//       path: 'training-post',
-//       loadComponent: () =>
-//         import('./ashmitha/training-post/training-post')
-//           .then(m => m.TrainingPost)
-//     },
-//     {
-//       path: 'training-getall',
-//       loadComponent: () =>
-//         import('./ashmitha/training-getall/training-getall')
-//           .then(m => m.TrainingGetall)
-//     },
-//     {
-//       path: 'training-valid',
-//       loadComponent: () =>
-//         import('./ashmitha/training-valid/training-valid')
-//           .then(m => m.TrainingValid)
-//     }
+    // ===== TRAINING =====
+    {
+      path: 'training-post',
+      loadComponent: () =>
+        import('./ashmitha/training-post/training-post')
+          .then(m => m.TrainingPost)
+    },
+    {
+      path: 'training-getall',
+      loadComponent: () =>
+        import('./ashmitha/training-getall/training-getall')
+          .then(m => m.TrainingGetall)
+    },
+    {
+      path: 'training-valid',
+      loadComponent: () =>
+        import('./ashmitha/training-valid/training-valid')
+          .then(m => m.TrainingValid)
+    }
 
-//   ]
-//   },
+  ]
+  },
 
-  // SUREKA MODULE
+//   // SUREKA MODULE
 {
   path: 'sureka',
   component: Sureka,
