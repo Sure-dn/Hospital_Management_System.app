@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.AffiliatedWithRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.AffiliatedWithResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Service.AffiliatedWithService;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.AffiliatedWithRequestDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.AffiliatedWithResponseDto;
+import com.sprint.project.physicianDepartmentManagement.service.AffiliatedWithService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

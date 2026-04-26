@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.TrainedInRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.TrainedInResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Service.Implementation.TrainedInServiceImpl;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.TrainedInRequestDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.TrainedInResponseDto;
+import com.sprint.project.physicianDepartmentManagement.service.implementation.TrainedInServiceImpl;
 
 
 
@@ -27,7 +27,7 @@ public class TrainedInController {
             @PathVariable Integer employeeId,
             @RequestBody TrainedInRequestDto requestDTO) {
 
-        // inject physicianId into DTO (important fix)
+        // inject physicianId into dto (important fix)
         requestDTO.setPhysicianId(employeeId);
 
         return ResponseEntity.ok(trainedInService.createTraining(requestDTO));

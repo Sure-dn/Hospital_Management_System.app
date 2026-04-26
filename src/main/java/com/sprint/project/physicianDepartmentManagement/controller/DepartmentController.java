@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.DepartmentRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.DepartmentResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Service.DepartmentService;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.DepartmentRequestDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.DepartmentResponseDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.PhysicianResponseDto;
+import com.sprint.project.physicianDepartmentManagement.service.DepartmentService;
 
 import java.util.*;
 

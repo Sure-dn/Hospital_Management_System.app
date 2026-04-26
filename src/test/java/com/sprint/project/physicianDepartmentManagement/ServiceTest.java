@@ -10,16 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sprint.project.exception.DuplicateResourceException;
-import com.sprint.project.exception.ResourceNotFoundException;
 import com.sprint.project.exception.ValidationException;
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.*;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.*;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.*;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.*;
 import com.sprint.project.physicianDepartmentManagement.entity.*;
-import com.sprint.project.physicianDepartmentManagement.repository.*;
 import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
 import com.sprint.project.treatmentprostayy.repositories.ProceduresRepository;
-import com.sprint.project.physicianDepartmentManagement.Service.*;
+import com.sprint.project.physicianDepartmentManagement.service.*;
 
 import jakarta.transaction.Transactional;
 

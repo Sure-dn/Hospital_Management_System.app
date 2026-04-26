@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.physicianDepartmentManagement.Dto.RequestDto.PhysicianRequestDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.PhysicianResponseDto;
-import com.sprint.project.physicianDepartmentManagement.Dto.ResponseDto.ResponseStructure;
-import com.sprint.project.physicianDepartmentManagement.Service.PhysicianService;
+import com.sprint.project.physicianDepartmentManagement.dto.requestdto.PhysicianRequestDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.PhysicianResponseDto;
+import com.sprint.project.physicianDepartmentManagement.dto.responsedto.ResponseStructure;
+import com.sprint.project.physicianDepartmentManagement.service.PhysicianService;
 
 import jakarta.validation.Valid;
 

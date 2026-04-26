@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.treatmentprostayy.DTO.ResponseStructure;
-import com.sprint.project.treatmentprostayy.DTO.StayRequestDTO;
-import com.sprint.project.treatmentprostayy.DTO.StayResponseDTO;
+import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
+import com.sprint.project.treatmentprostayy.dto.StayRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.StayResponseDTO;
 import com.sprint.project.treatmentprostayy.entities.StayEntity;
 import com.sprint.project.treatmentprostayy.services.StayService;
 

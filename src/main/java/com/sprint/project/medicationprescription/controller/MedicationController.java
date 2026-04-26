@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.medicationprescription.DTO.RequestDTO.MedicationRequestDTO;
-import com.sprint.project.medicationprescription.DTO.ResponseDTO.MedicationResponseDTO;
-import com.sprint.project.medicationprescription.Service.MedicationService;
+import com.sprint.project.medicationprescription.dto.requestdto.MedicationRequestDTO;
+import com.sprint.project.medicationprescription.dto.responsedto.MedicationResponseDTO;
+import com.sprint.project.medicationprescription.service.MedicationService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +21,7 @@ public class MedicationController {
 
     @PostMapping
     public ResponseEntity<MedicationResponseDTO> createMedication(
-            @Valid @RequestBody MedicationRequestDTO dto) {     // ← Fixed: now using RequestDTO
+            @Valid @RequestBody MedicationRequestDTO dto) {     // ← Fixed: now using requestdto
 
         MedicationRequestDTO entity = new MedicationRequestDTO(
                 dto.getCode(), dto.getName(), dto.getBrand(), dto.getDescription());

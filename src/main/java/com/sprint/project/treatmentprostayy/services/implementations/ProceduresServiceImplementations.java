@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sprint.project.treatmentprostayy.DTO.ProceduresRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.ProceduresRequestDTO;
 import com.sprint.project.treatmentprostayy.entities.ProceduresEntity;
 import com.sprint.project.treatmentprostayy.exception.InvalidProcedureException;
 import com.sprint.project.treatmentprostayy.exception.ProcedureAlreadyExistsException;
@@ -20,7 +20,7 @@ public class ProceduresServiceImplementations implements ProceduresService {
     @Autowired
     private ProceduresRepository proceduresRepository;
 
-    // 🔁 DTO → ENTITY
+    // 🔁 dto → ENTITY
     private ProceduresEntity mapToEntity(ProceduresRequestDTO dto) {
         ProceduresEntity entity = new ProceduresEntity();
         entity.setCode(dto.getCode());
@@ -29,7 +29,7 @@ public class ProceduresServiceImplementations implements ProceduresService {
         return entity;
     }
 
-    // 🔁 ENTITY → DTO
+    // 🔁 ENTITY → dto
     private ProceduresRequestDTO mapToDTO(ProceduresEntity entity) {
         ProceduresRequestDTO dto = new ProceduresRequestDTO();
         dto.setCode(entity.getCode());

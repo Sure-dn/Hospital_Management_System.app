@@ -1,8 +1,8 @@
 package com.sprint.project.patientAppointment.controller;
 
-import com.sprint.project.patientAppointment.DTO.RequestDTO.PatientRequestDTO;
-import com.sprint.project.patientAppointment.DTO.ResponseDTO.PatientResponseDTO;
-import com.sprint.project.patientAppointment.Service.PatientService;
+import com.sprint.project.patientAppointment.dto.requestdto.PatientRequestDTO;
+import com.sprint.project.patientAppointment.dto.responsedto.PatientResponseDTO;
+import com.sprint.project.patientAppointment.service.PatientService;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

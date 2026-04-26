@@ -1,0 +1,64 @@
+package com.sprint.project.physicianDepartmentManagement.dto.responsedto;
+
+public class AffiliatedWithResponseDto {
+	private Integer physicianId;
+    private String physicianName;
+    private Integer departmentId;
+    private String departmentName;
+    private Boolean primaryAffiliation;
+    public AffiliatedWithResponseDto() {
+    	
+    }
+	public AffiliatedWithResponseDto(Integer physicianId, String physicianName,
+             Integer departmentId, String departmentName,
+             Boolean primaryAffiliation) {
+this.physicianId = physicianId;
+this.physicianName = physicianName;
+this.departmentId = departmentId;
+this.departmentName = departmentName;
+this.primaryAffiliation = primaryAffiliation;
+}
+
+// Getters and Setters
+
+public Integer getPhysicianId() {
+return physicianId;
+}
+
+public void setPhysicianId(Integer physicianId) {
+this.physicianId = physicianId;
+}
+
+public String getPhysicianName() {
+return physicianName;
+}
+
+public void setPhysicianName(String physicianName) {
+this.physicianName = physicianName;
+}
+
+public Integer getDepartmentId() {
+return departmentId;
+}
+
+public void setDepartmentId(Integer departmentId) {
+this.departmentId = departmentId;
+}
+
+public String getDepartmentName() {
+return departmentName;
+}
+
+public void setDepartmentName(String departmentName) {
+this.departmentName = departmentName;
+}
+
+public Boolean getPrimaryAffiliation() {
+return primaryAffiliation;
+}
+
+public void setPrimaryAffiliation(Boolean primaryAffiliation) {
+this.primaryAffiliation = primaryAffiliation;
+}
+
+}

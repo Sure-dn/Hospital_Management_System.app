@@ -2,7 +2,7 @@ package com.sprint.project.treatmentprostayy.services;
 
 import java.util.List;
 
-import com.sprint.project.treatmentprostayy.DTO.UndergoesRequestDTO;
+import com.sprint.project.treatmentprostayy.dto.UndergoesRequestDTO;
 import com.sprint.project.treatmentprostayy.entities.UndergoesId;
 
 public interface UndergoesService {
