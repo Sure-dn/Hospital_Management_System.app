@@ -1,8 +1,18 @@
-package com.sprint.project.treatmentprostayy.exception;
+package com.sprint.project.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.sprint.project.treatmentprostayy.exception.InvalidProcedureException;
+import com.sprint.project.treatmentprostayy.exception.InvalidStayException;
+import com.sprint.project.treatmentprostayy.exception.InvalidTreatmentException;
+import com.sprint.project.treatmentprostayy.exception.ProcedureAlreadyExistsException;
+import com.sprint.project.treatmentprostayy.exception.ProcedureNotFoundException;
+import com.sprint.project.treatmentprostayy.exception.StayAlreadyExistsException;
+import com.sprint.project.treatmentprostayy.exception.StayNotFoundException;
+import com.sprint.project.treatmentprostayy.exception.TreatmentAlreadyExistsException;
+import com.sprint.project.treatmentprostayy.exception.TreatmentNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

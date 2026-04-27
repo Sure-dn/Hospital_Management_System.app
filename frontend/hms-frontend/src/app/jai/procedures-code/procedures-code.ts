@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -16,44 +16,68 @@ export class ProceduresCodeComponent {
   procedure: any = null;
   error: string = '';
   loading = false;
+  hasSearched = false; // 🔥 ADD THIS
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
   fetch() {
 
-  // RESET STATE FIRST 🔥
-  this.procedure = null;
-  this.error = '';
-  this.loading = true;
+    // 🔥 RESET STATE
+    this.procedure = null;
+    this.error = '';
+    this.loading = true;
+    this.hasSearched = true;
 
-  const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
-  this.http.get<any>(
-    `http://localhost:9090/api/procedures/${this.code}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
+    this.http.get<any>(
+      `http://localhost:9090/api/procedures/${this.code}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
-    }
-  ).subscribe({
-    next: (res) => {
-      console.log("RESPONSE:", res);
+    ).subscribe({
+      next: (res) => {
+        console.log("RESPONSE:", res);
 
-      // Force new reference (VERY IMPORTANT)
-      this.procedure = { ...res.data };
+        // 🔥 NEW REFERENCE
+        this.procedure = { ...res.data };
 
-      this.loading = false;
-    },
-   error: (err) => {
-  console.log(err);
+        this.loading = false;
+        this.cd.detectChanges(); // 🔥 FIX LOADING ISSUE
+      },
+      error: (err) => {
+        console.log(err);
 
-  const message = err.error || err.message || "Something went wrong";
+        let message = "Something went wrong";
 
-  alert(message); // ✅ popup alert
+        if (typeof err.error === 'string') {
+          message = err.error;
+        } else if (err.error?.message) {
+          message = err.error.message;
+        }
 
-  this.procedure = null;
-  this.loading = false;
+        alert(message);
+
+        this.error = message;
+        this.procedure = null;
+        this.loading = false;
+
+        this.cd.detectChanges(); // 🔥 IMPORTANT
+      }
+    });
   }
-  });
-}
+
+  // 🔥 SAME PATTERN AS OTHER COMPONENTS
+  onCodeChange() {
+    if (this.hasSearched) {
+      this.procedure = null;
+      this.error = '';
+      this.loading = false;
+      this.hasSearched = false;
+
+      this.cd.detectChanges();
+    }
+  }
 }

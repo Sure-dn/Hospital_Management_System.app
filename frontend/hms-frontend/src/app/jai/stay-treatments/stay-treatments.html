@@ -3,7 +3,12 @@
   <h2>Stay Treatments</h2>
 
   <div class="input-box">
-    <input [(ngModel)]="stayId" placeholder="Enter Stay ID">
+    <input 
+  type="number"
+  [(ngModel)]="stayId"
+  (ngModelChange)="onIdChange()"
+  placeholder="Enter Stay ID"
+/>
     <button (click)="load()">Fetch</button>
   </div>
 

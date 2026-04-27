@@ -4,10 +4,11 @@
   <!-- INPUT -->
   <div class="form">
     <input 
-      type="number"
-      [(ngModel)]="patientId" 
-      placeholder="Enter Patient ID"
-    />
+  type="number"
+  [(ngModel)]="patientId"
+  (ngModelChange)="onIdChange()"
+  placeholder="Enter Patient ID"
+/>
 
     <button (click)="fetch()">Fetch</button>
   </div>

@@ -112,42 +112,28 @@ public class UndergoesServiceImplementations implements UndergoesService {
 
     @Override
     public List<UndergoesRequestDTO> getAllTreatments() {
-        List<UndergoesRequestDTO> list = undergoesRepository.findAll()
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new TreatmentNotFoundException("No treatments found");
-        }
-        return list;
+        return undergoesRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<UndergoesRequestDTO> getTreatmentByPatient(Integer patientId) {
-        List<UndergoesRequestDTO> list = undergoesRepository.findAll()
+        return undergoesRepository.findAll()
                 .stream()
                 .filter(u -> u.getPatient().getSsn().equals(patientId))
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new TreatmentNotFoundException("No treatments found for this patient");
-        }
-        return list;
     }
-
 
     @Override
     public List<UndergoesRequestDTO> getTreatmentByStay(Integer stayId) {
-        List<UndergoesRequestDTO> list = undergoesRepository.findAll()
+        return undergoesRepository.findAll()
                 .stream()
                 .filter(u -> u.getStay().getStayId().equals(stayId))
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new TreatmentNotFoundException("No treatments found for this stay");
-        }
-        return list;
     }
 
     @Override
@@ -160,5 +146,4 @@ public class UndergoesServiceImplementations implements UndergoesService {
 
         return mapToDTO(existing);
     }
-    
 }
