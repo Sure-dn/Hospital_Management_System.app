@@ -54,13 +54,10 @@ public class ProceduresServiceImplementations implements ProceduresService {
 
     @Override
     public List<ProceduresRequestDTO> getAllProcedures() {
-        List<ProceduresRequestDTO> list = proceduresRepository.findAll()
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new ProcedureNotFoundException("No procedures found");
-        }
-        return list;
+        return proceduresRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -97,47 +94,33 @@ public class ProceduresServiceImplementations implements ProceduresService {
 
     @Override
     public List<ProceduresRequestDTO> searchByName(String name) {
-        List<ProceduresRequestDTO> list = proceduresRepository
-                .findByNameContainingIgnoreCase(name)
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new ProcedureNotFoundException("No procedures found with name: " + name);
-        }
-        return list;
+        return proceduresRepository.findByNameContainingIgnoreCase(name)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<ProceduresRequestDTO> getByCostRange(Double min, Double max) {
-        List<ProceduresRequestDTO> list = proceduresRepository.findByCostBetween(min, max)
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new ProcedureNotFoundException("No procedures found in this cost range");
-        }
-        return list;
+        return proceduresRepository.findByCostBetween(min, max)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<ProceduresRequestDTO> getExpensiveProcedures(Double cost) {
-        List<ProceduresRequestDTO> list = proceduresRepository.getExpensiveProcedures(cost)
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new ProcedureNotFoundException("No expensive procedures found above cost: " + cost);
-        }
-        return list;
+        return proceduresRepository.getExpensiveProcedures(cost)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
-
 
     @Override
     public List<ProceduresRequestDTO> sortByCost() {
-        List<ProceduresRequestDTO> list = proceduresRepository.findAllByOrderByCostAsc()
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new ProcedureNotFoundException("No procedures available to sort");
-        }
-        return list;
+        return proceduresRepository.findAllByOrderByCostAsc()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor ,DatePipe} from '@angular/common';
@@ -17,7 +17,7 @@ export class PhysicianProceduresComponent {
   error: string = '';
   hasSearched = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
   loading = false;
 
@@ -25,6 +25,9 @@ fetch() {
   this.hasSearched = true;
   this.error = '';
   this.loading = true;
+
+  // 🔥 RESET OLD DATA
+  this.procedures = [];
 
   const token = localStorage.getItem('token');
 
@@ -37,15 +40,44 @@ fetch() {
     }
   ).subscribe({
     next: (res) => {
-      console.log("DATA:", res);
-      this.procedures = res;
-      this.loading = false;
-    },
+  console.log("DATA:", res);
+
+  this.procedures = [...res];
+  this.loading = false;
+
+  if (this.procedures.length === 0) {
+    this.error = 'No procedures found';
+  } else {
+    this.error = '';
+  }
+
+  this.cd.detectChanges(); // 🔥 VERY IMPORTANT
+},
     error: (err) => {
-      console.error(err);
-      this.error = err.error?.message || 'Unauthorized ❌';
-      this.loading = false;
-    }
+  console.error(err);
+
+  let msg = "Something went wrong";
+
+  if (typeof err.error === 'string') {
+    msg = err.error;
+  } else if (err.error?.message) {
+    msg = err.error.message;
+  }
+
+  this.error = msg;
+  this.loading = false;
+  this.procedures = [];
+
+  this.cd.detectChanges(); // 🔥 VERY IMPORTANT
+}
   });
+}
+onIdChange() {
+  if (this.hasSearched) {
+    this.procedures = [];
+    this.error = '';
+    this.hasSearched = false;
+    this.loading = false;
+  }
 }
 }

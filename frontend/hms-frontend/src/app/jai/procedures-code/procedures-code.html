@@ -2,7 +2,12 @@
 
   <h2>Get Procedure By Code</h2>
 
-  <input type="number" [(ngModel)]="code" placeholder="Enter Procedure Code">
+  <input 
+  type="number"
+  [(ngModel)]="code"
+  (ngModelChange)="onCodeChange()"
+  placeholder="Enter Procedure Code"
+/>
 
   <button (click)="fetch()">Fetch</button>
 
