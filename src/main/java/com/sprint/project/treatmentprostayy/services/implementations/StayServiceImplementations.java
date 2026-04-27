@@ -71,14 +71,24 @@ public class StayServiceImplementations implements StayService {
 
     @Override
     public List<StayEntity> getAllStays() {
-        return stayRepository.findAll();
+        List<StayEntity> list = stayRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new StayNotFoundException("No stays found");
+        }
+        return list;
     }
+
     
     @Override
     public List<StayEntity> getStaysByPatient(Integer ssn) {
-        return stayRepository.findByPatient_Ssn(ssn);
-    }
+        List<StayEntity> list = stayRepository.findByPatient_Ssn(ssn);
 
+        if (list.isEmpty()) {
+            throw new StayNotFoundException("No stays found for this patient");
+        }
+        return list;
+    }
     @Override
     public StayEntity dischargePatient(Integer stayId) {
         StayEntity stay = getStayById(stayId);

@@ -44,12 +44,16 @@ export class ProceduresCodeComponent {
 
       this.loading = false;
     },
-    error: (err) => {
-      console.error(err);
-      this.error = "Failed to fetch ❌";
-      this.procedure = null;
-      this.loading = false;
-    }
+   error: (err) => {
+  console.log(err);
+
+  const message = err.error || err.message || "Something went wrong";
+
+  alert(message); // ✅ popup alert
+
+  this.procedure = null;
+  this.loading = false;
+  }
   });
 }
 }
