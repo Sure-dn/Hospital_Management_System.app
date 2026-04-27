@@ -7,14 +7,18 @@ import com.sprint.project.medicationprescription.dto.requestdto.PrescriptionRequ
 import com.sprint.project.medicationprescription.entity.PrescribesEntity;
 
 public interface PrescribesService {
-	// PrescribesService.java
 
-	    PrescribesEntity createPrescription(PrescriptionRequestDTO dto);
-	    PrescribesEntity createPrescription(PrescribesEntity prescription);
-	    
-	    List<PrescribesEntity> getAllPrescriptions();
-	    List<PrescribesEntity> getPrescriptionsByPatient(Integer ssn);
-	    List<PrescribesEntity> getPrescriptionsByPhysician(Integer employeeId);
-	    List<PrescribesEntity> getPrescriptionsByDateRange(LocalDateTime from, LocalDateTime to);
-	    List<PrescribesEntity> getPrescriptionsByMedication(Integer code);
-	}
+    PrescribesEntity createPrescription(PrescriptionRequestDTO dto);
+
+    PrescribesEntity createPrescription(PrescribesEntity prescription);
+
+    List<PrescribesEntity> getAllPrescriptions();
+
+    List<PrescribesEntity> getPrescriptionsByPatient(Integer ssn);
+
+    List<PrescribesEntity> getPrescriptionsByPhysician(Integer employeeId);
+
+    List<PrescribesEntity> getPrescriptionsByDateRange(LocalDateTime from, LocalDateTime to);
+
+    List<PrescribesEntity> getPrescriptionsByMedication(Integer code);
+}

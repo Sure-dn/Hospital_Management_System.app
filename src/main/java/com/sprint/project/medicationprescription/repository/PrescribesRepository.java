@@ -14,7 +14,7 @@ public interface PrescribesRepository extends JpaRepository<PrescribesEntity, Pr
 
     // Custom Query 1: Prescriptions by Patient SSN
     @Query("SELECT p FROM PrescribesEntity p WHERE p.patient.ssn = :ssn")
-    List<PrescribesEntity> findByPatientSsn(@Param("ssn") Integer ssn);
+    List<PrescribesEntity> findByPatientSSN(@Param("ssn") Integer ssn);
 
     // Custom Query 2: Prescriptions by Physician EmployeeID
     @Query("SELECT p FROM PrescribesEntity p WHERE p.physician.employeeId = :employeeId")
