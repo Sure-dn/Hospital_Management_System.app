@@ -2,9 +2,16 @@
   <h2>Get Affiliations By Physician</h2>
 
   <label>Employee ID</label>
-  <input type="number" [(ngModel)]="employeeId" placeholder="Enter Employee ID" />
+  <input
+    type="number"
+    [(ngModel)]="employeeId"
+    name="employeeId"
+    placeholder="Enter Employee ID"
+  >
 
-  <button (click)="fetchAffiliations()">Fetch</button>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <button type="button" (click)="fetchAffiliations()">Fetch</button>
 
   <div class="result" *ngIf="result">
     <h3>Response</h3>
