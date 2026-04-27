@@ -1,14 +1,11 @@
 <div class="page-box">
-  <h2>Update Patient</h2>
-
-  <input [(ngModel)]="patient.ssn" placeholder="SSN" name="ssn">
-  <input [(ngModel)]="patient.name" placeholder="Name" name="name">
-  <input [(ngModel)]="patient.address" placeholder="Address" name="address">
-  <input [(ngModel)]="patient.phone" placeholder="Phone" name="phone">
-  <input [(ngModel)]="patient.insuranceId" placeholder="Insurance ID" name="insuranceId">
-  <input [(ngModel)]="patient.pcp" placeholder="PCP" name="pcp">
-
-  <button (click)="update()">Update</button>
-
-  <pre>{{ data | json }}</pre>
-</div>
+   <h2>Update Patient</h2>
+    <input [(ngModel)]="patient.ssn" placeholder="SSN" name="ssn"> 
+    <input [(ngModel)]="patient.name" placeholder="Name" name="name"> 
+    <input [(ngModel)]="patient.address" placeholder="Address" name="address">
+     <input [(ngModel)]="patient.phone" placeholder="Phone" name="phone"> 
+     <input [(ngModel)]="patient.insuranceId" placeholder="Insurance ID" name="insuranceId"> 
+     <input [(ngModel)]="patient.pcp" placeholder="PCP" name="pcp"> 
+     <button (click)="update()">Update</button>
+      <pre>{{ data | json }}</pre>
+     </div>

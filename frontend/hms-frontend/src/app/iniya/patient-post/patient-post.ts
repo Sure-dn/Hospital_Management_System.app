@@ -1,61 +1,84 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-patient-post',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [CommonModule, FormsModule],
   templateUrl: './patient-post.html',
   styleUrl: './patient-post.css'
 })
 export class PatientPostComponent {
 
-  ssn: any;
-  name: any;
-  address: any;
-  phone: any;
-  insuranceId: any;
-  physicianId: any;
+  patient = {
+    ssn: '',
+    name: '',
+    address: '',
+    phone: '',
+    insuranceId: '',
+    physicianId: ''
+  };
 
-  data: any;
+  errors: any = {};
   success = '';
-  error = '';
+  backendError = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private cd: ChangeDetectorRef
+  ) {}
 
-  create() {
+  submit() {
+    this.errors = {};
     this.success = '';
-    this.error = '';
-    this.data = null;
+    this.backendError = '';
 
-    
     const payload = {
-      ssn: Number(this.ssn),
-      name: this.name,
-      address: this.address,
-      phone: this.phone,
-      insuranceId: Number(this.insuranceId),
-      pcp: Number(this.physicianId) 
+      ssn: Number(this.patient.ssn),
+      name: this.patient.name,
+      address: this.patient.address,
+      phone: this.patient.phone,
+      insuranceId: Number(this.patient.insuranceId),
+      pcp: Number(this.patient.physicianId)
     };
-
-    console.log("PAYLOAD:", payload);
 
     this.http.post('http://localhost:9090/api/patients', payload)
       .subscribe({
         next: (res: any) => {
-          console.log("SUCCESS:", res);
-          this.data = res.data || res;
-          this.success = "✅ Patient created successfully";
-          alert("✅ Patient created successfully");
-        },
-        error: (err) => {
-          console.log("FULL ERROR:", err);
-          console.log("BACKEND ERROR:", err.error);
+          this.success = '✅ Patient Added Successfully';
 
-          this.error = err.error?.message || "❌ Failed to create patient details";
-          alert(this.error);
+          this.patient = {
+            ssn: '',
+            name: '',
+            address: '',
+            phone: '',
+            insuranceId: '',
+            physicianId: ''
+          };
+
+          setTimeout(() => alert(this.success), 0);
+        },
+
+        error: (err) => {
+          console.log('ERROR:', err);
+
+          // ✅ VALIDATION ERRORS (object with fields)
+          if (err.status === 400 && typeof err.error === 'object') {
+            this.errors = err.error;
+          }
+          // ✅ OTHER ERRORS
+          else if (err.error?.message) {
+            this.backendError = err.error.message;
+          }
+          // else {
+          //   this.backendError = 'Something went wrong';
+          // }
+
+          setTimeout(() => {
+            alert(this.backendError || 'Validation error occurred');
+          }, 0);
         }
       });
   }
