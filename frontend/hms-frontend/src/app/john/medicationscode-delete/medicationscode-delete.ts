@@ -15,9 +15,16 @@ export class DeleteMedicationComponent {
   message: string = '';
 
   constructor(private http: HttpClient) {}
-
-  delete() {
-    this.http.delete(`http://localhost:9090/api/medications/${this.code}`)
-      .subscribe(() => this.message = 'Deleted successfully');
-  }
+delete() {
+  this.http.delete(`http://localhost:9090/api/medications/${this.code}`)
+    .subscribe({
+      next: () => {
+        this.message = 'Deleted successfully';
+      },
+      error: (err) => {
+        console.error(err);
+        this.message = 'Delete failed';
+      }
+    });
+}
 }
