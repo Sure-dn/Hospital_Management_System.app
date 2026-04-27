@@ -19,19 +19,30 @@ export class StayTreatmentsComponent {
   constructor(private http: HttpClient) {}
 
   load() {
-    this.error = '';
-    this.treatments = [];
+  this.error = '';
+  this.treatments = [];
 
-    this.http.get<any>(`http://localhost:9090/api/stays/${this.stayId}/treatments`)
-      .subscribe({
-        next: (res) => {
-          // If your backend wraps response → use res.data
-          this.treatments = res.data || res;
-        },
-        error: (err) => {
-          console.error(err);
-          this.error = 'Failed to fetch treatments ❌';
-        }
-      });
-  }
+  const token = localStorage.getItem('token');
+
+  this.http.get<any>(
+    `http://localhost:9090/api/treatments/stay/${this.stayId}`,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+  ).subscribe({
+    next: (res) => {
+      console.log(res);
+
+      // ✅ correct mapping
+      this.treatments = res.data || [];
+
+    },
+    error: (err) => {
+      console.error(err);
+      this.error = 'Failed to fetch treatments ❌';
+    }
+  });
+}
 }

@@ -72,14 +72,22 @@ public class StayController {
     }
  // GET stays by patient
     @GetMapping("/patient/{ssn}")
-    public ResponseEntity<ResponseStructure<List<StayEntity>>> getByPatient(@PathVariable Integer ssn) {
+    public ResponseEntity<ResponseStructure<List<StayResponseDTO>>> getByPatient(@PathVariable Integer ssn) {
 
-        List<StayEntity> stays = stayService.getAllStays()
-                .stream()
-                .filter(s -> s.getPatient().getSsn().equals(ssn))
+        List<StayEntity> stays = stayService.getStaysByPatient(ssn);
+
+        List<StayResponseDTO> response = stays.stream()
+                .map(s -> new StayResponseDTO(
+                        s.getStayId(),
+                        s.getPatient().getSsn(),
+                        s.getRoom().getRoomNumber(),
+                        s.getStayStart(),
+                        s.getStayEnd()
+                ))
                 .toList();
 
         return ResponseEntity.ok(
-                new ResponseStructure<>(true, "Patient stays", stays));
+                new ResponseStructure<>(true, "Patient stays", response));
     }
+    	
 }
