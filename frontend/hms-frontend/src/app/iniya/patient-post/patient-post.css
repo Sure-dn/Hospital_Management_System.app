@@ -37,3 +37,8 @@ button {
 button:hover {
   background: #16a34a;
 }
+.error {
+  color: #ef4444;
+  margin-top: 15px;
+  font-weight: 700;
+}
