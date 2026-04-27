@@ -46,7 +46,7 @@ export class ProcedurePatientsComponent {
     const token = localStorage.getItem('token');
 
     this.http.get<any[]>(
-      `http://localhost:9090/api/reports/procedure/${procedureCode}/patients`,
+  `http://localhost:9090/api/reports/procedure/${procedureCode}/patients`,
       {
         headers: {
           Authorization: 'Bearer ' + token
@@ -71,15 +71,25 @@ export class ProcedurePatientsComponent {
         }
       },
       error: (err) => {
-        // Only show error if this is still the current request
-        if (this.currentRequestCode === procedureCode) {
-          console.error(err);
-          this.error = 'Failed to fetch patients ❌';
-          this.loading = false;
-          this.data = [];
-          this.cd.detectChanges();
-        }
-      }
+  if (this.currentRequestCode === procedureCode) {
+    console.error("FULL ERROR:", err);
+
+    let message = "Something went wrong";
+
+    if (typeof err.error === 'string') {
+      message = err.error; // ✅ backend message
+    } else if (err.error?.message) {
+      message = err.error.message;
+    }
+
+    alert(message); // ✅ popup alert
+
+    this.error = message; // optional (if you still want UI text)
+    this.loading = false;
+    this.data = [];
+    this.cd.detectChanges();
+  }
+}
     });
   }
   
