@@ -1,16 +1,25 @@
 <div class="container">
   <h2>🩺 Appointments By Physician</h2>
 
-  <input [(ngModel)]="employeeId" placeholder="Enter Physician Employee ID">
-  <button (click)="getByPhysician()">Search</button>
+  <input
+    type="number"
+    [(ngModel)]="employeeId"
+    (ngModelChange)="onIdChange()"
+    placeholder="Enter Physician Employee ID"
+  >
 
+  <button type="button" (click)="getByPhysician()">Search</button>
+  <button type="button" class="clear-btn" (click)="clear()">Clear</button>
+
+  <p class="loading" *ngIf="loading">Loading...</p>
   <p class="error" *ngIf="error">{{ error }}</p>
 
   <div class="result" *ngFor="let a of appointments">
     <p><b>ID:</b> {{ a.appointmentId }}</p>
-    <p><b>Patient:</b> {{ a.patientName }}</p>
-    <p><b>Physician:</b> {{ a.physicianName }}</p>
+    <p><b>Patient:</b> {{ a.patientName }} - {{ a.patientSsn }}</p>
+    <p><b>Physician:</b> {{ a.physicianName }} - {{ a.physicianId }}</p>
     <p><b>Room:</b> {{ a.examinationRoom }}</p>
-    <hr>
+    <p><b>Start:</b> {{ a.starttime }}</p>
+    <p><b>End:</b> {{ a.endtime }}</p>
   </div>
 </div>

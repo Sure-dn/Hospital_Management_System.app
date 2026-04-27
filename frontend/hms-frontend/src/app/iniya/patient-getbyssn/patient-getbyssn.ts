@@ -12,7 +12,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class PatientGetBySsnComponent {
 
-  ssn: number = 0;
+  ssn!: number;
   data: any;
 
   constructor(private http: HttpClient) {}

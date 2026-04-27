@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 
@@ -15,42 +15,86 @@ export class AppointmentGetByDateComponent {
   date = '';
   appointments: any[] = [];
   error = '';
-  searched = false;
+  loading = false;
+  hasSearched = false;
 
-  constructor(private http: HttpClient) {}
+  private currentRequestDate: string | null = null;
 
-  getHeaders() {
-    return new HttpHeaders({
-      'Authorization': 'Basic ' + btoa('username:123')
-    });
-  }
+  constructor(
+    private http: HttpClient,
+    private cd: ChangeDetectorRef
+  ) {}
 
   getByDate() {
     this.error = '';
     this.appointments = [];
-    this.searched = true;
+    this.loading = true;
+    this.hasSearched = true;
 
     if (!this.date) {
-      alert('❌ Please select a date');
+      this.error = 'Please select a date';
+      this.loading = false;
+      this.hasSearched = false;
+      this.cd.detectChanges();
       return;
     }
 
-    this.http.get<any>(`http://localhost:9090/api/appointments/by-date?date=${this.date}`, {
-      headers: this.getHeaders()
-    }).subscribe({
+    this.currentRequestDate = this.date;
+
+    const token = localStorage.getItem('token');
+
+    this.http.get<any>(
+      `http://localhost:9090/api/appointments/by-date?date=${this.date}`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }
+    ).subscribe({
       next: (res: any) => {
-        console.log("FULL RESPONSE:", res);
+        if (this.currentRequestDate === this.date) {
+          console.log('FULL RESPONSE:', res);
 
-        // 🔥 IMPORTANT FIX
-        this.appointments = res.data ? res.data : res;
+          this.appointments = res.data ? res.data : res;
+          this.loading = false;
 
-        alert('✅ Appointments loaded by date');
+          if (this.appointments.length === 0) {
+            this.error = 'No appointments found for this date';
+          }
+
+          this.cd.detectChanges();
+        }
       },
       error: (err) => {
-        console.error(err);
-        this.error = err.error?.message || '❌ Failed to load appointments';
-        alert(this.error);
+        if (this.currentRequestDate === this.date) {
+          console.error(err);
+
+          this.error = err.error?.message || 'Failed to load appointments ❌';
+          this.appointments = [];
+          this.loading = false;
+
+          this.cd.detectChanges();
+        }
       }
     });
+  }
+
+  onDateChange() {
+    if (this.hasSearched) {
+      this.appointments = [];
+      this.error = '';
+      this.loading = false;
+      this.hasSearched = false;
+      this.cd.detectChanges();
+    }
+  }
+
+  clear() {
+    this.date = '';
+    this.appointments = [];
+    this.error = '';
+    this.loading = false;
+    this.hasSearched = false;
+    this.currentRequestDate = null;
   }
 }
