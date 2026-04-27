@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.sprint.project.treatmentprostayy.DTO.UndergoesResponseDTO;
+import com.sprint.project.treatmentprostayy.dto.UndergoesResponseDTO;
 import com.sprint.project.treatmentprostayy.entities.UndergoesEntity;
 import com.sprint.project.treatmentprostayy.repositories.UndergoesRepository;
 
