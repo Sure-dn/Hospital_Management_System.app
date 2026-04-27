@@ -12,21 +12,44 @@ import { CommonModule } from '@angular/common';
 })
 export class ProceduresCodeComponent {
 
-  code: any;
-  procedure: any;
+  code: string = '';
+  procedure: any = null;
+  error: string = '';
+  loading = false;
 
   constructor(private http: HttpClient) {}
 
   fetch() {
-    this.http.get<any>(`http://localhost:9090/api/procedures/${this.code}`)
-      .subscribe({
-        next: (res) => {
-          this.procedure = res.data; // ⚠ based on your backend response
-        },
-        error: () => {
-          alert("Procedure not found ❌");
-          this.procedure = null;
-        }
-      });
-  }
+
+  // RESET STATE FIRST 🔥
+  this.procedure = null;
+  this.error = '';
+  this.loading = true;
+
+  const token = localStorage.getItem('token');
+
+  this.http.get<any>(
+    `http://localhost:9090/api/procedures/${this.code}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  ).subscribe({
+    next: (res) => {
+      console.log("RESPONSE:", res);
+
+      // Force new reference (VERY IMPORTANT)
+      this.procedure = { ...res.data };
+
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      this.error = "Failed to fetch ❌";
+      this.procedure = null;
+      this.loading = false;
+    }
+  });
+}
 }

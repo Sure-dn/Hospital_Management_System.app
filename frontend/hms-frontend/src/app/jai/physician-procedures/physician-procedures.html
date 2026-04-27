@@ -1,32 +1,39 @@
 <div class="container">
-  <h2>🧑‍⚕️ Physician Procedures</h2>
+
+  <h2>👨‍⚕️ Physician Procedures</h2>
 
   <div class="form">
     <input 
       type="number"
-      [(ngModel)]="physicianId" 
+      [(ngModel)]="physicianId"
       placeholder="Enter Physician ID"
     />
-
     <button (click)="fetch()">Fetch</button>
   </div>
 
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- LOADING -->
+  <p *ngIf="loading">Loading...</p>
+
   <!-- RESULTS -->
-  <div *ngIf="procedures && procedures.length > 0" class="result">
-    <h3>Procedures List</h3>
+  <div *ngIf="!loading && procedures.length > 0" class="result">
+    <h3>Procedure Details</h3>
 
     <div class="card" *ngFor="let p of procedures">
-      <p><strong>Procedure Code:</strong> {{ p.code }}</p>
-      <p><strong>Name:</strong> {{ p.name }}</p>
-      <p><strong>Cost:</strong> ₹ {{ p.cost }}</p>
+      <p><strong>Patient ID:</strong> {{ p.patientId }}</p>
+      <p><strong>Procedure ID:</strong> {{ p.procedureId }}</p>
+      <p><strong>Stay ID:</strong> {{ p.stayId }}</p>
+      <p><strong>Physician ID:</strong> {{ p.physicianId }}</p>
+      <p><strong>Nurse ID:</strong> {{ p.nurseId }}</p>
+      <p><strong>Date:</strong> {{ p.dateUndergoes | date:'dd-MM-yyyy' }}</p>
     </div>
   </div>
 
   <!-- NO DATA -->
-  <p class="error" *ngIf="hasSearched && procedures.length === 0">
+  <p class="error" *ngIf="!loading && hasSearched && procedures.length === 0 && !error">
     ⚠️ No procedures found
   </p>
 
-  <!-- ERROR -->
-  <p class="error" *ngIf="error">{{ error }}</p>
 </div>

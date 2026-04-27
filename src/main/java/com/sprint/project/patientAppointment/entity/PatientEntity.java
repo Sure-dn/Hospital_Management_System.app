@@ -17,27 +17,26 @@ public class PatientEntity {
 
     @Id
     @NotNull
-    @Column(name = "SSN")
     private Integer ssn;
 
     @NotBlank(message = "Name cannot be empty")
-    @Column(name = "Name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
     @NotBlank(message = "Address cannot be empty")
-    @Column(name = "Address", nullable = false, length = 200)
+    @Column(name = "address", nullable = false, length = 200)
     private String address;
 
     @NotBlank(message = "Phone cannot be empty")
-    @Column(name = "Phone", nullable = false, length = 20)
+    @Column(name = "phone", nullable = false, length = 20)
     private String phone;
 
     @NotNull(message = "Insurance ID is required")
-    @Column(name = "InsuranceID", nullable = false)
+    @Column(name = "insuranceID", nullable = false)
     private Integer insuranceId;
 
     @NotNull(message = "PCP (Primary Care Physician) is required")
-    @Column(name = "PCP", nullable = false)
+    @Column(name = "pcp", nullable = false)
     private Integer pcp;
 
     @OneToMany(mappedBy = "patient")

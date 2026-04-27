@@ -2,12 +2,18 @@
 
   <h2>Get Procedure By Code</h2>
 
-  <input [(ngModel)]="code" placeholder="Enter Procedure Code">
+  <input type="number" [(ngModel)]="code" placeholder="Enter Procedure Code">
 
   <button (click)="fetch()">Fetch</button>
 
-  <!-- Result -->
-  <div class="result" *ngIf="procedure">
+  <!-- LOADING -->
+  <p *ngIf="loading">Loading...</p>   
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <!-- RESULT -->
+  <div class="result" *ngIf="!loading && procedure">
     <p><b>Code:</b> {{ procedure.code }}</p>
     <p><b>Name:</b> {{ procedure.name }}</p>
     <p><b>Cost:</b> {{ procedure.cost }}</p>

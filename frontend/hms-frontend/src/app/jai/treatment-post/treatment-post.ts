@@ -34,7 +34,7 @@ export class TreatmentPostComponent {
       patientId: Number(this.treatment.patientId),
       procedureId: Number(this.treatment.procedureId),
       stayId: Number(this.treatment.stayId),
-      dateUndergoes: this.treatment.dateUndergoes,
+      dateUndergoes: new Date(this.treatment.dateUndergoes).toISOString(),
       physicianId: Number(this.treatment.physicianId),
       nurseId: Number(this.treatment.nurseId)
     }).subscribe({

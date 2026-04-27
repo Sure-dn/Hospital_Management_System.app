@@ -30,6 +30,11 @@ public class StayServiceImplementations implements StayService {
 
     @Override
     public StayEntity admitPatient(StayRequestDTO dto) {
+    	
+    	System.out.println("DB check: " + patientRepository.findAll());
+    	System.out.println("DTO patientId: " + dto.getPatientId());
+    	System.out.println("DTO stayStart: " + dto.getStayStart());
+    	System.out.println("Found patient: " + patientRepository.findBySsn(dto.getPatientId()));
 
     	if (dto.getStayStart().isAfter(LocalDateTime.now())) {
     	    throw new InvalidStayException("Stay start cannot be in future");
@@ -44,13 +49,13 @@ public class StayServiceImplementations implements StayService {
         stay.setStayId(dto.getStayId());
 
         stay.setPatient(
-                patientRepository.findById(dto.getPatientId())
-                .orElseThrow(() -> new StayNotFoundException("Stay not found")) 
-        );
+        	    patientRepository.findPatientNative(dto.getPatientId())
+        	        .orElseThrow(() -> new RuntimeException("Patient NOT FOUND: " + dto.getPatientId()))
+        	);
 
         stay.setRoom(
                 roomRepository.findById(dto.getRoomId())
-                .orElseThrow(() -> new StayNotFoundException("Stay not found with id: "))
+                .orElseThrow(() -> new ResourceNotFoundException("Room not found with id: " + dto.getRoomId()))
         );
 
         stay.setStayStart(dto.getStayStart());
@@ -67,6 +72,11 @@ public class StayServiceImplementations implements StayService {
     @Override
     public List<StayEntity> getAllStays() {
         return stayRepository.findAll();
+    }
+    
+    @Override
+    public List<StayEntity> getStaysByPatient(Integer ssn) {
+        return stayRepository.findByPatient_Ssn(ssn);
     }
 
     @Override
