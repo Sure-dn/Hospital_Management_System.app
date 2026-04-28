@@ -1,12 +1,14 @@
 package com.sprint.project.exception;
 
 import com.sprint.project.nurseoncallroom.exception.*;
+import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
+import com.sprint.project.treatmentprostayy.exception.*;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
-import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,36 +16,46 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	 @ExceptionHandler(ResourceNotFoundException.class)
-	    public ResponseEntity<?> handleNotFound(ResourceNotFoundException ex) {
-	        return ResponseEntity.status(404)
-	                .body(new ResponseStructure<>(false, ex.getMessage(), null));
-	    }
-    @ExceptionHandler(DuplicateResourceException.class)
-    public ResponseEntity<String> handleDuplicate(DuplicateResourceException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> handleBadRequest(BadRequestException ex) {
-        return ResponseEntity.status(400)
+    // 🔴 404 - NOT FOUND
+    @ExceptionHandler({
+            ProcedureNotFoundException.class,
+            StayNotFoundException.class,
+            TreatmentNotFoundException.class,
+            BlockNotAvailableException.class
+    })
+    public ResponseEntity<ResponseStructure<?>> handleNotFound(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGlobal(Exception ex) {
-        return new ResponseEntity<>("Something went wrong: " + ex.getMessage(),
-                HttpStatus.INTERNAL_SERVER_ERROR);
+    // 🟡 409 - ALREADY EXISTS
+    @ExceptionHandler({
+            ProcedureAlreadyExistsException.class,
+            StayAlreadyExistsException.class,
+            TreatmentAlreadyExistsException.class,
+            NurseAlreadyAssignedException.class
+    })
+    public ResponseEntity<ResponseStructure<?>> handleAlreadyExists(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
-    @ExceptionHandler(InvalidRequestException.class)
-    public ResponseEntity<String> handleInvalid(InvalidRequestException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+    // 🔵 400 - CUSTOM INVALID
+    @ExceptionHandler({
+            InvalidProcedureException.class,
+            InvalidStayException.class,
+            InvalidTreatmentException.class,
+            InvalidShiftTimeException.class,
+            OnCallScheduleConflictException.class
+    })
+    public ResponseEntity<ResponseStructure<?>> handleInvalid(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
-
+    // ✅ DTO VALIDATION (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
 
         Map<String, String> errors = new HashMap<>();
 
@@ -51,21 +63,37 @@ public class GlobalExceptionHandler {
             errors.put(error.getField(), error.getDefaultMessage());
         });
 
-        return ResponseEntity.badRequest().body(errors);
-    }
-    @ExceptionHandler(BlockNotAvailableException.class)
-    public ResponseEntity<?> handleBlockNotFound(BlockNotAvailableException ex) {
-        return ResponseEntity.status(404).body(
-                Map.of("message", ex.getMessage())
-        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
+    // ✅ PARAM / PATH VALIDATION
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<ResponseStructure<?>> handleBindException(BindException ex) {
 
+        String message = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(err -> err.getDefaultMessage())
+                .findFirst()
+                .orElse("Invalid input");
 
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ResponseStructure<>(false, message, null));
+    }
 
+    // ✅ JSON PARSE ERROR
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<ResponseStructure<?>> handleNotReadable(Exception ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ResponseStructure<>(false, "Invalid request body", null));
+    }
 
+    // ⚫ GENERAL ERROR
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ResponseStructure<?>> handleGeneral(Exception ex) {
+        ex.printStackTrace();
 
-
-
-
-} 
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ResponseStructure<>(false, "Something went wrong", null));
+    }
+}

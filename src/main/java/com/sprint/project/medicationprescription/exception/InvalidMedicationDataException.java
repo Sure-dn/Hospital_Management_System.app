@@ -5,4 +5,8 @@ public class InvalidMedicationDataException extends RuntimeException {
     public InvalidMedicationDataException(String message) {
         super(message);
     }
+
+     public InvalidMedicationDataException() {
+        super();
+    }
 }

@@ -4,15 +4,39 @@
   padding: 20px;
   border-radius: 12px;
   color: white;
+  width: 350px;
 }
+
 
 input {
   display: block;
   width: 300px;
-  margin-bottom: 12px;
+  margin-bottom: 5px; /* reduced for error spacing */
   padding: 10px;
   border-radius: 8px;
   border: none;
+  outline: none;
+}
+
+
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+
+.success {
+  color: #22c55e;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
+.backend-error {
+  color: #ff6b6b;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 button {
@@ -22,8 +46,15 @@ button {
   background: #2563eb;
   color: white;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-h2{
+button:hover {
+  background: #1e4ed8;
+}
+
+
+h2 {
   color: antiquewhite;
+  margin-bottom: 15px;
 }

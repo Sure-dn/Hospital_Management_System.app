@@ -10,9 +10,9 @@
 
     <input [(ngModel)]="stay.roomId" placeholder="Room ID">
 
-    <input type="date" [(ngModel)]="stay.stayStart">
+    <input type="datetime-local" [(ngModel)]="stay.stayStart">
 
-    <input type="date" [(ngModel)]="stay.stayEnd">
+    <input type="datetime-local" [(ngModel)]="stay.stayEnd">
 
     <button (click)="submit()">Submit</button>
 

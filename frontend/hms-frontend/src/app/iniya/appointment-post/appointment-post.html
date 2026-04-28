@@ -1,25 +1,60 @@
-<h2>➕ Create Appointment</h2>
+<div class="container">
+  <h2>➕ Create Appointment</h2>
 
-<input type="number" [(ngModel)]="appointmentId" placeholder="Appointment ID">
+  <form (submit)="$event.preventDefault()">
 
-<input type="number" [(ngModel)]="patientSsn" placeholder="Patient SSN">
+    <input type="number"
+           [(ngModel)]="appointment.appointmentId"
+           name="appointmentId"
+           placeholder="Appointment ID">
+    <p class="error" *ngIf="errors.appointmentId">{{ errors.appointmentId }}</p>
 
-<input type="number" [(ngModel)]="prepNurseId" placeholder="Prep Nurse ID">
+    <input type="number"
+           [(ngModel)]="appointment.patientSsn"
+           name="patientSsn"
+           placeholder="Patient SSN">
+    <p class="error" *ngIf="errors.patientSsn">{{ errors.patientSsn }}</p>
 
-<input type="number" [(ngModel)]="physicianId" placeholder="Physician ID">
+    <input type="number"
+           [(ngModel)]="appointment.prepNurseId"
+           name="prepNurseId"
+           placeholder="Prep Nurse ID">
 
-<!-- ISO format input -->
-<label>Start Time</label>
-<input type="text" [(ngModel)]="starttime" placeholder="YYYY-MM-DDTHH:mm">
+    <input type="number"
+           [(ngModel)]="appointment.physicianId"
+           name="physicianId"
+           placeholder="Physician ID">
+    <p class="error" *ngIf="errors.physicianId">{{ errors.physicianId }}</p>
 
-<label>End Time</label>
-<input type="text" [(ngModel)]="endtime" placeholder="YYYY-MM-DDTHH:mm">
+    <label>Start Time</label>
+    <input type="datetime-local"
+           [(ngModel)]="appointment.starttime"
+           name="starttime">
 
-<input type="text" [(ngModel)]="examinationRoom" placeholder="Examination Room (A101)">
+    <label>End Time</label>
+    <input type="datetime-local"
+           [(ngModel)]="appointment.endtime"
+           name="endtime">
 
-<button (click)="create()">Create</button>
+    <input type="text"
+           [(ngModel)]="appointment.examinationRoom"
+           name="examinationRoom"
+           placeholder="Room (A101)">
+    <p class="error" *ngIf="errors.examinationRoom">{{ errors.examinationRoom }}</p>
 
-<p *ngIf="success" style="color: green;">{{ success }}</p>
-<p *ngIf="error" style="color: red;">{{ error }}</p>
+    <!-- Backend Error -->
+    <p class="backend-error" *ngIf="backendError">
+      {{ backendError }}
+    </p>
 
-<pre *ngIf="response">{{ response | json }}</pre>
+    <!-- Success -->
+    <p class="success" *ngIf="success">
+      {{ success }}
+    </p>
+
+    <button type="button" (click)="create()">Create</button>
+
+  </form>
+
+  <pre *ngIf="response">{{ response | json }}</pre>
+</div>

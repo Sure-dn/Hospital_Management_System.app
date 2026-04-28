@@ -3,10 +3,11 @@
 
   <div class="form">
     <input 
-      type="number"
-      [(ngModel)]="stayId" 
-      placeholder="Enter Stay ID"
-    />
+  type="number"
+  [(ngModel)]="stayId"
+  (ngModelChange)="onIdChange()"
+  placeholder="Enter Stay ID"
+/>
 
     <button (click)="fetch()">Fetch</button>
   </div>

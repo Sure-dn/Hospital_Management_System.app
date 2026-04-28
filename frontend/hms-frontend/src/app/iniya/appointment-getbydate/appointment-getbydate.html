@@ -1,16 +1,23 @@
 <div class="container">
   <h2>📅 Appointments By Date</h2>
 
-  <input type="date" [(ngModel)]="date">
-  <button (click)="getByDate()">Search</button>
+  <input
+    type="date"
+    [(ngModel)]="date"
+    (ngModelChange)="onDateChange()"
+  >
+
+  <button type="button" (click)="getByDate()">Search</button>
+  
 
   <p class="error" *ngIf="error">{{ error }}</p>
 
   <div class="result" *ngFor="let a of appointments">
     <p><b>ID:</b> {{ a.appointmentId }}</p>
-    <p><b>Patient:</b> {{ a.patientName }}</p>
-    <p><b>Physician:</b> {{ a.physicianName }}</p>
+    <p><b>Patient:</b> {{ a.patientName }} - {{ a.patientSsn }}</p>
+    <p><b>Physician:</b> {{ a.physicianName }} - {{ a.physicianId }}</p>
     <p><b>Room:</b> {{ a.examinationRoom }}</p>
-    <hr>
+    <p><b>Start:</b> {{ a.starttime }}</p>
+    <p><b>End:</b> {{ a.endtime }}</p>
   </div>
 </div>

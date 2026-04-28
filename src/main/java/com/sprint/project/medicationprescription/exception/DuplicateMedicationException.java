@@ -1,9 +1,14 @@
 package com.sprint.project.medicationprescription.exception;
 
-public class DuplicateMedicationException {
+public class DuplicateMedicationException extends RuntimeException {
 
-	public DuplicateMedicationException() {
-		// TODO Auto-generated constructor stub
-	}
+    // Constructor with message
+    public DuplicateMedicationException(String message) {
+        super(message);
+    }
 
+    // Optional: default constructor
+    public DuplicateMedicationException() {
+        super();
+    }
 }

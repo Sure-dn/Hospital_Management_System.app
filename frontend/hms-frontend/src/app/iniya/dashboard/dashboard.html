@@ -71,6 +71,7 @@
       <div class="api-card delete" (click)="openEndpoint('appointment-deletebyid')">
         DELETE <span>/api/appointments/(appointmentId)</span>
       </div>
+      
     </div>
   </div>
 
@@ -85,7 +86,7 @@
       <div class="api-card get" (click)="openEndpoint('appointment-getbyssn')">
         GET <span>/api/patients/(ssn)/appointments</span>
       </div>
-      <div class="api-card get" (click)="openEndpoint('appointment-getbyphysician')">
+      <div class="api-card get" (click)="openEndpoint('appointment-getbyphysicianid')">
         GET <span>/api/physicians/(employeeId)/appointments</span>
       </div>
       <div class="api-card get" (click)="openEndpoint('appointment-getbydate')">

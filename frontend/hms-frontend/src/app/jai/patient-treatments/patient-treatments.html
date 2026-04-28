@@ -1,34 +1,45 @@
 <div class="container">
   <h2>💉 Patient Treatments</h2>
 
+  <!-- INPUT -->
   <div class="form">
     <input 
-      type="number"
-      [(ngModel)]="patientId" 
-      placeholder="Enter Patient ID"
-    />
+  type="number"
+  [(ngModel)]="patientId"
+  (ngModelChange)="onIdChange()"
+  placeholder="Enter Patient ID"
+/>
 
     <button (click)="fetch()">Fetch</button>
   </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
 
   <!-- RESULTS -->
   <div *ngIf="treatments && treatments.length > 0" class="result">
     <h3>Treatment Details</h3>
 
     <div class="card" *ngFor="let t of treatments">
+      
+      <p><strong>Patient ID:</strong> {{ t.patientId }}</p>
       <p><strong>Procedure ID:</strong> {{ t.procedureId }}</p>
       <p><strong>Stay ID:</strong> {{ t.stayId }}</p>
       <p><strong>Physician ID:</strong> {{ t.physicianId }}</p>
       <p><strong>Nurse ID:</strong> {{ t.nurseId }}</p>
-      <p><strong>Date:</strong> {{ t.dateUndergoes }}</p>
+
+      <!-- ✅ FIXED DATE FORMAT -->
+      <p>
+        <strong>Date:</strong> 
+        {{ t.dateUndergoes | date:'dd-MM-yyyy' }}
+      </p>
+
     </div>
   </div>
 
   <!-- NO DATA -->
-  <p class="error" *ngIf="hasSearched && treatments.length === 0">
-  ⚠️ No treatments found
-</p>
+  <p class="error"*ngIf="hasSearched && treatments.length === 0">
+    ⚠️ No treatments found
+  </p>
 
-  <!-- ERROR -->
-  <p class="error" *ngIf="error">{{ error }}</p>
 </div>

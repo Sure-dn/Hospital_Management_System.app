@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
+import { NgIf, NgFor ,DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-physician-procedures',
   standalone: true,
-  imports: [FormsModule, NgIf, NgFor],
+  imports: [FormsModule, NgIf, NgFor, DatePipe],
   templateUrl: './physician-procedures.html',
   styleUrl: './physician-procedures.css'
 })
@@ -17,21 +17,67 @@ export class PhysicianProceduresComponent {
   error: string = '';
   hasSearched = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
-  fetch() {
-    this.hasSearched = true;
+  loading = false;
+
+fetch() {
+  this.hasSearched = true;
+  this.error = '';
+  this.loading = true;
+
+  // 🔥 RESET OLD DATA
+  this.procedures = [];
+
+  const token = localStorage.getItem('token');
+
+  this.http.get<any[]>(
+    `http://localhost:9090/api/reports/physician/${this.physicianId}/procedures`,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+  ).subscribe({
+    next: (res) => {
+  console.log("DATA:", res);
+
+  this.procedures = [...res];
+  this.loading = false;
+
+  if (this.procedures.length === 0) {
+    this.error = 'No procedures found';
+  } else {
     this.error = '';
-    this.procedures = [];
-
-    this.http.get(`http://localhost:9090/api/physicians/${this.physicianId}/procedures`)
-      .subscribe({
-        next: (res: any) => {
-          this.procedures = res.data || res;
-        },
-        error: () => {
-          this.error = "❌ Failed to fetch procedures";
-        }
-      });
   }
+
+  this.cd.detectChanges(); // 🔥 VERY IMPORTANT
+},
+    error: (err) => {
+  console.error(err);
+
+  let msg = "Something went wrong";
+
+  if (typeof err.error === 'string') {
+    msg = err.error;
+  } else if (err.error?.message) {
+    msg = err.error.message;
+  }
+
+  this.error = msg;
+  this.loading = false;
+  this.procedures = [];
+
+  this.cd.detectChanges(); // 🔥 VERY IMPORTANT
+}
+  });
+}
+onIdChange() {
+  if (this.hasSearched) {
+    this.procedures = [];
+    this.error = '';
+    this.hasSearched = false;
+    this.loading = false;
+  }
+}
 }

@@ -1,32 +1,32 @@
 <div class="container">
-  <h2>➕ Patient Details</h2>
+  <h2>Patient Details</h2>
 
-  <div class="form">
+  <form (submit)="$event.preventDefault()">
 
-    <input [(ngModel)]="ssn" placeholder="Enter SSN" />
-    <input [(ngModel)]="name" placeholder="Enter Name" />
-    <input [(ngModel)]="address" placeholder="Enter Address" />
-    <input [(ngModel)]="phone" placeholder="Enter Phone" />
-    <input [(ngModel)]="insuranceId" placeholder="Enter Insurance ID" />
-    <input [(ngModel)]="physicianId" placeholder="Enter PCP Physician ID" />
+    <input type="number" placeholder="SSN" [(ngModel)]="patient.ssn" name="ssn">
+    <p class="error" *ngIf="errors.ssn">{{ errors.ssn }}</p>
 
-    <button (click)="create()">Create</button>
-  </div>
+    <input type="text" placeholder="Name" [(ngModel)]="patient.name" name="name">
+    <p class="error" *ngIf="errors.name">{{ errors.name }}</p>
 
-  <!-- SUCCESS -->
-  <p *ngIf="success" class="success">{{ success }}</p>
+    <input type="text" placeholder="Address" [(ngModel)]="patient.address" name="address">
+    <p class="error" *ngIf="errors.address">{{ errors.address }}</p>
 
-  <!-- RESULT -->
-  <div *ngIf="data" class="result">
-    <h3>Created Patient</h3>
+    <input type="text" placeholder="Phone" [(ngModel)]="patient.phone" name="phone">
+    <p class="error" *ngIf="errors.phone">{{ errors.phone }}</p>
 
-    <p><strong>SSN:</strong> {{ data.ssn }}</p>
-    <p><strong>Name:</strong> {{ data.name }}</p>
-    <p><strong>Address:</strong> {{ data.address }}</p>
-    <p><strong>Phone:</strong> {{ data.phone }}</p>
-    <p><strong>Insurance:</strong> {{ data.insuranceId }}</p>
-  </div>
+    <input type="number" placeholder="Insurance ID" [(ngModel)]="patient.insuranceId" name="insuranceId">
+    <p class="error" *ngIf="errors.insuranceId">{{ errors.insuranceId }}</p>
 
-  <!-- ERROR -->
-  <p class="error" *ngIf="error">{{ error }}</p>
+    <input type="number" placeholder="Physician ID" [(ngModel)]="patient.physicianId" name="physicianId">
+
+    
+    <p class="error" *ngIf="errors.pcp">{{ errors.pcp }}</p>
+
+    <p class="backend-error" *ngIf="backendError">{{ backendError }}</p>
+    <p class="success" *ngIf="success">{{ success }}</p>
+
+    <button type="button" (click)="submit()">Submit</button>
+
+  </form>
 </div>

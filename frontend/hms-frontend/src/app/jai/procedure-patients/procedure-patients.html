@@ -1,35 +1,46 @@
 <div class="container">
 
-  <h2>Patients by Procedure</h2>
+  <h2>🧑‍🤝‍🧑 Patients by Procedure</h2>
 
   <div class="input-box">
-    <input [(ngModel)]="code" placeholder="Enter Procedure Code">
+    <input 
+      type="text"  
+      [(ngModel)]="code"
+      placeholder="Enter Procedure Code"
+    />
     <button (click)="load()">Fetch</button>
   </div>
 
   <!-- ERROR -->
   <p class="error" *ngIf="error">{{ error }}</p>
 
+  <!-- LOADING -->
+  <p *ngIf="loading">Loading...</p>
+
   <!-- TABLE -->
-  <table *ngIf="data.length > 0">
+  <table *ngIf="!loading && data.length > 0">
     <thead>
       <tr>
         <th>Patient ID</th>
-        <th>Name</th>
-        <th>SSN</th>
+        <th>Procedure ID</th>
+        <th>Stay ID</th>
+        <th>Date</th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let p of data">
-        <td>{{ p.id || p.patientId }}</td>
-        <td>{{ p.name }}</td>
-        <td>{{ p.ssn }}</td>
+        <td>{{ p.patientId }}</td>
+        <td>{{ p.procedureId }}</td>
+        <td>{{ p.stayId }}</td>
+        <td>{{ p.dateUndergoes | date:'dd-MM-yyyy' }}</td>
       </tr>
     </tbody>
   </table>
 
-  <!-- EMPTY -->
-  <p *ngIf="data.length === 0 && !error">No data found</p>
+  <!-- NO DATA -->
+  <p *ngIf="!loading && hasSearched && data.length === 0 && !error">
+    ⚠️ No data found
+  </p>
 
 </div>

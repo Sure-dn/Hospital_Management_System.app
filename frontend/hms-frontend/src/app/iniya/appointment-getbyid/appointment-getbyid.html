@@ -1,10 +1,26 @@
 <div class="container">
-  <h2>🔍 Get Appointment By ID</h2>
+  <h2>Get Appointment By ID</h2>
 
-  <input [(ngModel)]="appointmentId" placeholder="Enter Appointment ID">
-  <button (click)="getById()">Search</button>
+  <input
+    type="number"
+    [(ngModel)]="appointmentId"
+    placeholder="Enter Appointment ID"
+  >
 
+  <button type="button" (click)="getById()">Search</button>
+  
   <p class="error" *ngIf="error">{{ error }}</p>
 
-  <pre *ngIf="data">{{ data | json }}</pre>
+  <div class="result-box" *ngIf="data">
+    <p><strong>Appointment ID:</strong> {{ data.appointmentId }}</p>
+    <p><strong>Patient SSN:</strong> {{ data.patientSsn }}</p>
+    <p><strong>Patient Name:</strong> {{ data.patientName }}</p>
+    <p><strong>Physician ID:</strong> {{ data.physicianId }}</p>
+    <p><strong>Physician Name:</strong> {{ data.physicianName }}</p>
+    <p><strong>Prep Nurse ID:</strong> {{ data.prepNurseId }}</p>
+    <p><strong>Prep Nurse Name:</strong> {{ data.prepNurseName }}</p>
+    <p><strong>Start Time:</strong> {{ data.starttime }}</p>
+    <p><strong>End Time:</strong> {{ data.endtime }}</p>
+    <p><strong>Room:</strong> {{ data.examinationRoom }}</p>
+  </div>
 </div>

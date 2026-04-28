@@ -26,21 +26,38 @@ export class StayPostComponent {
   constructor(private http: HttpClient) {}
 
   submit() {
-    this.message = '';
-    this.error = '';
+  this.message = '';
+  this.error = '';
 
-    this.http.post('http://localhost:9090/api/stays', this.stay)
-      .subscribe({
-        next: () => {
-          this.message = 'Stay added successfully ✅';
-          this.clearForm();
-        },
-        error: (err) => {
-          console.error(err);
-          this.error = 'Error while saving ❌';
-        }
-      });
-  }
+  const token = localStorage.getItem('token');
+
+  const body = {
+  stayId: Number(this.stay.stayId),   // ✅ ADD THIS
+  patientId: Number(this.stay.patientId),
+  roomId: Number(this.stay.roomId),
+  stayStart: new Date(this.stay.stayStart).toISOString(),
+  stayEnd: new Date(this.stay.stayEnd).toISOString()
+};
+
+console.log(body);
+
+  this.http.post('http://localhost:9090/api/stays', body, {
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  })
+  .subscribe({
+    next: () => {
+      alert('Stay added successfully ✅');
+      this.message = 'Stay added successfully ✅';
+      this.clearForm();
+    },
+    error: (err) => {
+      console.error("BACKEND ERROR:", err); // 🔥 important
+      this.error = err.error?.message || 'Error while saving ❌';
+    }
+  });
+}
 
   clearForm() {
     this.stay = {
