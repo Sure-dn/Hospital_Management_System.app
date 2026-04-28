@@ -1,71 +1,78 @@
-<div class="container">
-  <h2>👩‍⚕️ Create Nurse</h2>
+<div class="page-box">
 
-  <form class="form">
+  <h2>Create Nurse</h2>
+
+  <form (submit)="$event.preventDefault()">
 
     <!-- Employee ID -->
-    <input 
-      type="number" 
-      [(ngModel)]="nurse.employeeId" 
-      name="employeeId"
+    <input
+      type="number"
       placeholder="Employee ID"
-    />
+      [(ngModel)]="nurse.employeeId"
+      name="employeeId"
+    >
+    <p class="error" *ngIf="errors.employeeId">
+      {{ errors.employeeId }}
+    </p>
 
     <!-- Name -->
-    <input 
+    <input
       type="text"
-      [(ngModel)]="nurse.name" 
+      placeholder="Name"
+      [(ngModel)]="nurse.name"
       name="name"
-      placeholder="Enter Name"
-    />
+    >
+    <p class="error" *ngIf="errors.name">
+      {{ errors.name }}
+    </p>
 
     <!-- Position -->
-    <input 
+    <input
       type="text"
-      [(ngModel)]="nurse.position" 
+      placeholder="Position"
+      [(ngModel)]="nurse.position"
       name="position"
-      placeholder="Enter Position"
-    />
+    >
+    <p class="error" *ngIf="errors.position">
+      {{ errors.position }}
+    </p>
 
     <!-- Registered -->
     <label>
-      <input 
-        type="checkbox" 
+      <input
+        type="checkbox"
         [(ngModel)]="nurse.registered"
         name="registered"
-      />
+      >
       Registered
     </label>
+    <p class="error" *ngIf="errors.registered">
+      {{ errors.registered }}
+    </p>
 
     <!-- SSN -->
-    <input 
-      type="number" 
-      [(ngModel)]="nurse.ssn" 
+    <input
+      type="number"
+      placeholder="SSN"
+      [(ngModel)]="nurse.ssn"
       name="ssn"
-      placeholder="Enter SSN"
-    />
+    >
+    <p class="error" *ngIf="errors.ssn">
+      {{ errors.ssn }}
+    </p>
 
-    <!-- Button -->
-    <button type="button" (click)="create()">Create</button>
+    <!-- Backend General Error -->
+    <p class="backend-error" *ngIf="backendError">
+      {{ backendError }}
+    </p>
+
+    <!-- Success -->
+    <p class="success" *ngIf="success">
+      {{ success }}
+    </p>
+
+    <button type="button" (click)="create()">Submit</button>
 
   </form>
-
-  <!-- SUCCESS -->
-  <div *ngIf="data" class="result">
-    <h3>✅ Nurse Created</h3>
-
-    <div class="card">
-      <p><strong>ID:</strong> {{ data.employeeId }}</p>
-      <p><strong>Name:</strong> {{ data.name }}</p>
-      <p><strong>Position:</strong> {{ data.position }}</p>
-      <p><strong>Registered:</strong> {{ data.registered }}</p>
-      <p><strong>SSN:</strong> {{ data.ssn }}</p>
-    </div>
-  </div>
-
-  <!-- ERROR -->
-  <p class="error" *ngIf="error">
-    ⚠️ {{ error }}
-  </p>
 
 </div>

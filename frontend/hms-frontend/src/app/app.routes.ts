@@ -121,7 +121,7 @@ export const routes: Routes = [
   ]
   },
 
- // JOHN MODULE
+  //JOHN MODULE
 {
   path: 'john',
   component: JohnComponent,
@@ -212,7 +212,7 @@ export const routes: Routes = [
 },
 
   //ASHMITHA MODULE
-{
+  {
   path: 'ashmitha',
   component: Ashmitha,
   canActivate: [authGuard],
@@ -335,115 +335,113 @@ export const routes: Routes = [
   ]
   },
 
- // SUREKA MODULE
-{
-  path: 'sureka',
-  component: Sureka,
-  canActivate: [authGuard],
-  data: { user: 'Sureka' },
+ // 🔥 SUREKA MODULE (FULL FIXED)
+  {
+    path: 'sureka',
+    component: Sureka,
+    canActivate: [authGuard],
 
-  children: [
+    children: [
 
-    // 🔥 DEFAULT DASHBOARD
-    {
-      path: '',
-      loadComponent: () =>
-        import('./sureka/dashboard/dashboard')
-          .then(m => m.DashboardComponent)
-    },
+      // Dashboard
+      {
+        path: '',
+        loadComponent: () =>
+          import('./sureka/dashboard/dashboard')
+            .then(m => m.DashboardComponent)
+      },
 
-    // ===== NURSE =====
-    {
-      path: 'nurse-post',
-      loadComponent: () =>
-        import('./sureka/nurse-post/nurse-post')
-          .then(m => m.CreateNurseComponent)
-    },
-    {
-      path: 'nurse-get',
-      loadComponent: () =>
-        import('./sureka/nurse-get/nurse-get')
-          .then(m => m.GetAllNursesComponent)
-    },
+      // ===== NURSE =====
+      {
+        path: 'nurse-post',
+        loadComponent: () =>
+          import('./sureka/nurse-post/nurse-post')
+            .then(m => m.CreateNurseComponent)
+      },
+      {
+        path: 'nurse-get-all',   // ✅ FIXED
+        loadComponent: () =>
+          import('./sureka/nurse-get/nurse-get')
+            .then(m => m.GetAllNursesComponent)
+      },
+      {
+        path: 'nurse-get',
+        loadComponent: () =>
+          import('./sureka/employeeid-get/employeeid-get')
+            .then(m => m.GetNurseByIdComponent)
+      },
+      {
+        path: 'nurse-update',
+        loadComponent: () =>
+          import('./sureka/employeeid-put/employeeid-put')
+            .then(m => m.UpdateNurseComponent)
+      },
 
-    // ===== EMPLOYEE =====
-    {
-      path: 'employee-get',
-      loadComponent: () =>
-        import('./sureka/employeeid-get/employeeid-get')
-          .then(m => m.GetNurseByIdComponent)
-    },
-    {
-      path: 'employee-update',
-      loadComponent: () =>
-        import('./sureka/employeeid-put/employeeid-put')
-          .then(m => m.UpdateNurseComponent)
-    },
+      // ===== ON CALL =====
+      {
+        path: 'oncall-post',
+        loadComponent: () =>
+          import('./sureka/oncall-post/oncall-post')
+            .then(m => m.OnCallPostComponent)
+      },
+      {
+        path: 'oncall-get',
+        loadComponent: () =>
+          import('./sureka/oncall-get/oncall-get')
+            .then(m => m.OnCallGetComponent)
+      },
+      {
+        path: 'oncall-delete',
+        loadComponent: () =>
+          import('./sureka/oncall-delete/oncall-delete')
+            .then(m => m.OnCallDeleteComponent)
+      },
 
-    // ===== ONCALL =====
-    {
-      path: 'oncall-post',
-      loadComponent: () =>
-        import('./sureka/oncall-post/oncall-post')
-          .then(m => m.OnCallPostComponent)
-    },
-    {
-      path: 'oncall-get',
-      loadComponent: () =>
-        import('./sureka/oncall-get/oncall-get')
-          .then(m => m.OnCallGetComponent)
-    },
-    {
-      path: 'oncall-delete',
-      loadComponent: () =>
-        import('./sureka/oncall-delete/oncall-delete')
-          .then(m => m.OnCallDeleteComponent)
-    },
+      // ===== BLOCK =====
+      {
+        path: 'blocks',
+        loadComponent: () =>
+          import('./sureka/blocks-get/blocks-get')
+            .then(m => m.BlocksGetComponent)
+      },
 
-    // ===== BLOCKS =====
-    {
-      path: 'blocks-get',
-      loadComponent: () =>
-        import('./sureka/blocks-get/blocks-get')
-          .then(m => m.BlocksGetComponent)
-    },
+      // ===== FLOOR =====
+      {
+        path: 'oncall-floor',
+        loadComponent: () =>
+          import('./sureka/floorcode-get/floorcode-get')
+            .then(m => m.OnCallFloorComponent)
+      },
+      {
+        path: 'block-rooms',
+        loadComponent: () =>
+          import('./sureka/floorcoderoom-get/floorcoderoom-get')
+            .then(m => m.BlockRoomsComponent)
+      },
 
-    // ===== FLOOR / ROOM COMBO =====
-    {
-      path: 'floor-get',
-      loadComponent: () =>
-        import('./sureka/floorcode-get/floorcode-get')
-          .then(m => m.OnCallFloorComponent)
-    },
-    {
-      path: 'floor-room-get',
-      loadComponent: () =>
-        import('./sureka/floorcoderoom-get/floorcoderoom-get')
-          .then(m => m.BlockRoomsComponent)
-    },
+      // ===== ROOM =====
+      {
+        path: 'rooms',
+        loadComponent: () =>
+          import('./sureka/rooms-get/rooms-get')
+            .then(m => m.RoomsGetComponent)
+      },
+      {
+        path: 'room-get',
+        loadComponent: () =>
+          import('./sureka/roomno-get/roomno-get')
+            .then(m => m.RoomGetComponent)
+      },
+      {
+        path: 'room-update',
+        loadComponent: () =>
+          import('./sureka/roomnoavail-put/roomnoavail-put')
+            .then(m => m.RoomUpdateComponent)
+      }
 
-    // ===== ROOMS =====
-    {
-      path: 'rooms-get',
-      loadComponent: () =>
-        import('./sureka/rooms-get/rooms-get')
-          .then(m => m.RoomsGetComponent)
-    },
-    {
-      path: 'room-get',
-      loadComponent: () =>
-        import('./sureka/roomno-get/roomno-get')
-          .then(m => m.RoomGetComponent)
-    },
-    {
-      path: 'room-update',
-      loadComponent: () =>
-        import('./sureka/roomnoavail-put/roomnoavail-put')
-          .then(m => m.RoomUpdateComponent)
-    }
-
-  ]
-},
+    ]
+  },
+//INIYA MODULE
 {
   path: 'iniya',
   component: Iniya,
@@ -556,5 +554,6 @@ export const routes: Routes = [
 
   ]
 }
+
 
 ];

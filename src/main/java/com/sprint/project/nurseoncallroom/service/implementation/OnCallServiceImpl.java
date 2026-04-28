@@ -4,7 +4,6 @@ import com.sprint.project.nurseoncallroom.dto.request.OnCallRequestDTO;
 import com.sprint.project.nurseoncallroom.dto.response.OnCallResponseDTO;
 import com.sprint.project.nurseoncallroom.entity.NurseEntity;
 import com.sprint.project.nurseoncallroom.entity.OnCallEntity;
-
 import com.sprint.project.nurseoncallroom.exception.*;
 import com.sprint.project.nurseoncallroom.repository.NurseRepository;
 import com.sprint.project.nurseoncallroom.repository.OnCallRepository;
@@ -27,7 +26,9 @@ public class OnCallServiceImpl implements OnCallService {
     @Autowired
     private NurseRepository nurseRepository;
 
-    // ✅ Convert Entity → dto
+    // ==============================
+    // 🔹 ENTITY → DTO CONVERSION
+    // ==============================
     private OnCallResponseDTO toDTO(OnCallEntity e) {
         OnCallResponseDTO dto = new OnCallResponseDTO();
         dto.setNurseEmployeeId(e.getNurse().getEmployeeId());
@@ -39,26 +40,55 @@ public class OnCallServiceImpl implements OnCallService {
         return dto;
     }
 
-    // ✅ CREATE On-Call Shift
+    // ==============================
+    // 🚀 CREATE ON-CALL SHIFT
+    // ==============================
     @Override
     public OnCallResponseDTO assignOnCall(Integer employeeId, OnCallRequestDTO request) {
 
+        // 🔹 Fetch Nurse
         NurseEntity nurse = nurseRepository.findById(employeeId)
                 .orElseThrow(() -> new NurseNotAvailableException(employeeId));
 
-        // 🔥 SAME LOGIC, only exception changed
-        boolean isOverlapping = onCallRepository.existsOverlappingShift(
+        // 🔴 1. TIME VALIDATION
+        // 🔴 1. NULL CHECK (ADD THIS FIRST)
+        if (request.getOnCallStart() == null || request.getOnCallEnd() == null) {
+            throw new InvalidShiftTimeException("Start or End time cannot be null");
+        }
+
+// 🔴 2. TIME VALIDATION
+        if (request.getOnCallEnd().isBefore(request.getOnCallStart())) {
+            throw new InvalidShiftTimeException("End time must be after start time");
+        }
+
+        // 🔴 2. DUPLICATE CHECK
+        boolean duplicate = onCallRepository.existsByNurseAndOnCallStartAndOnCallEnd(
                 nurse,
-                request.getBlockFloor(),
-                request.getBlockCode(),
                 request.getOnCallStart(),
                 request.getOnCallEnd()
         );
 
-        if (isOverlapping) {
-            throw new OnCallScheduleConflictException();
+        if (duplicate) {
+            // ✅ matches Integer constructor
+            throw new NurseAlreadyAssignedException(employeeId);
         }
 
+        // 🔴 3. OVERLAP CHECK
+        boolean overlap = onCallRepository.existsOverlap(
+                nurse,
+                request.getOnCallStart(),
+                request.getOnCallEnd()
+        );
+
+        if (overlap) {
+            // ✅ matches String constructor
+            throw new OnCallScheduleConflictException(
+                    "Nurse already has a schedule conflict between "
+                            + request.getOnCallStart() + " and " + request.getOnCallEnd()
+            );
+        }
+
+        // 🔹 SAVE ENTITY
         OnCallEntity entity = new OnCallEntity();
         entity.setNurse(nurse);
         entity.setBlockFloor(request.getBlockFloor());
@@ -71,7 +101,9 @@ public class OnCallServiceImpl implements OnCallService {
         return toDTO(saved);
     }
 
-    // ✅ GET On-Call by Nurse
+    // ==============================
+    // ✅ GET BY NURSE
+    // ==============================
     @Override
     @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByNurse(Integer employeeId) {
@@ -81,25 +113,23 @@ public class OnCallServiceImpl implements OnCallService {
 
         List<OnCallEntity> list = onCallRepository.findByNurse(nurse);
 
-        if (list.isEmpty()) {
-            throw new OnCallScheduleConflictException();
-        }
 
         return list.stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    // ✅ GET On-Call by Block
+    // ==============================
+    // ✅ GET BY BLOCK
+    // ==============================
     @Override
     @Transactional(readOnly = true)
     public List<OnCallResponseDTO> getOnCallByBlock(Integer floor, Integer code) {
 
-        List<OnCallEntity> list = onCallRepository
-                .findByBlockFloorAndBlockCode(floor, code);
+        List<OnCallEntity> list = onCallRepository.findByBlockFloorAndBlockCode(floor, code);
 
         if (list.isEmpty()) {
-            throw new OnCallScheduleConflictException();
+            throw new BlockNotAvailableException(floor, code);
         }
 
         return list.stream()
@@ -107,7 +137,9 @@ public class OnCallServiceImpl implements OnCallService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ DELETE On-Call by Nurse
+    // ==============================
+    // ✅ DELETE
+    // ==============================
     @Override
     public void deleteOnCall(Integer employeeId) {
 

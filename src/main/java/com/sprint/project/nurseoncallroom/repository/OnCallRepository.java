@@ -16,43 +16,30 @@ import java.util.List;
 @Repository
 public interface OnCallRepository extends JpaRepository<OnCallEntity, OnCallId> {
 
-    // All shifts for a given nurse
+    // ✅ Get all shifts for a nurse
     List<OnCallEntity> findByNurse(NurseEntity nurse);
 
-    // All shifts on a given block
-    @Query("SELECT o FROM OnCallEntity o WHERE o.blockFloor = :floor AND o.blockCode = :code")
-    List<OnCallEntity> findByBlockFloorAndBlockCode(@Param("floor") Integer floor,
-                                                    @Param("code") Integer code);
+    // ✅ Get shifts by block
+    List<OnCallEntity> findByBlockFloorAndBlockCode(Integer floor, Integer code);
 
-    // All shifts within time window
-    @Query("""
-        SELECT o FROM OnCallEntity o
-        WHERE o.onCallStart >= :from AND o.onCallEnd <= :to
-    """)
-    List<OnCallEntity> findShiftsWithinWindow(@Param("from") LocalDateTime from,
-                                              @Param("to")   LocalDateTime to);
+    // ✅ Duplicate check (exact same time)
+    boolean existsByNurseAndOnCallStartAndOnCallEnd(
+            NurseEntity nurse,
+            LocalDateTime start,
+            LocalDateTime end
+    );
 
-    // Currently active shifts
+    // 🔥 CORRECT OVERLAP CHECK (MOST IMPORTANT)
     @Query("""
-        SELECT o FROM OnCallEntity o
-        WHERE o.onCallStart <= :now AND o.onCallEnd >= :now
-    """)
-    List<OnCallEntity> findCurrentlyOnCall(@Param("now") LocalDateTime now);
-
-    // Overlapping shift check
-    @Query("""
-        SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END
-        FROM OnCallEntity o
+        SELECT COUNT(o) > 0 FROM OnCallEntity o
         WHERE o.nurse = :nurse
-          AND o.blockFloor = :floor
-          AND o.blockCode  = :code
-          AND (:start < o.onCallEnd AND :end > o.onCallStart)
+        AND (:start < o.onCallEnd AND :end > o.onCallStart)
     """)
-    boolean existsOverlappingShift(@Param("nurse") NurseEntity nurse,
-                                   @Param("floor") Integer floor,
-                                   @Param("code")  Integer code,
-                                   @Param("start") LocalDateTime start,
-                                   @Param("end")   LocalDateTime end);
+    boolean existsOverlap(
+            @Param("nurse") NurseEntity nurse,
+            @Param("start") LocalDateTime start,
+            @Param("end") LocalDateTime end
+    );
 
     // Delete all shifts of nurse
     @Modifying

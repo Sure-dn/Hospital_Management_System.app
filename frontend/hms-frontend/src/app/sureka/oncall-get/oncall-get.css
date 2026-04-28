@@ -1,0 +1,73 @@
+.container {
+  padding: 20px;
+  color: white;
+}
+
+/* TITLE */
+h2 {
+  margin-bottom: 20px;
+}
+
+/* INPUT SECTION */
+.input-section {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  width: 220px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+/* BUTTON */
+button {
+  padding: 10px 20px;
+  background-color: #4c8bf5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #3a6fd8;
+}
+
+/* TABLE */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* HEADER */
+.styled-table th {
+  background-color: #2b3a55;
+  padding: 12px;
+  text-align: left;
+}
+
+/* BODY */
+.styled-table td {
+  padding: 12px;
+}
+
+/* ROW COLORS */
+.styled-table tr:nth-child(even) {
+  background-color: #1f2a40;
+}
+
+.styled-table tr:nth-child(odd) {
+  background-color: #162033;
+}
+
+/* HOVER EFFECT */
+.styled-table tr:hover {
+  background-color: #2d3e5f;
+}
