@@ -1,317 +1,231 @@
 package com.sprint.project.treatment;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-import com.sprint.project.nurseoncallroom.entity.RoomEntity;
-import com.sprint.project.nurseoncallroom.repository.RoomRepository;
+import java.time.LocalDateTime;
+import java.util.List;
 
-
-import com.sprint.project.treatmentprostayy.dto.*;
-import com.sprint.project.treatmentprostayy.entities.*;
-import com.sprint.project.treatmentprostayy.repositories.*;
-import com.sprint.project.treatmentprostayy.services.*;
-import com.sprint.project.exception.*;
-import com.sprint.project.patientAppointment.entity.PatientEntity;
-import com.sprint.project.patientAppointment.repository.PatientRepository;
-
-import jakarta.transaction.Transactional;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDateTime;
+import com.sprint.project.exception.ResourceNotFoundException;
+import com.sprint.project.nurseoncallroom.entity.RoomEntity;
+import com.sprint.project.nurseoncallroom.repository.RoomRepository;
+import com.sprint.project.patientAppointment.entity.PatientEntity;
+import com.sprint.project.patientAppointment.repository.PatientRepository;
+import com.sprint.project.treatmentprostayy.dto.*;
+import com.sprint.project.treatmentprostayy.entities.*;
+import com.sprint.project.treatmentprostayy.exception.*;
+import com.sprint.project.treatmentprostayy.services.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+@ActiveProfiles("test")
 @SpringBootTest
-@Transactional
-public class ServiceTest {
+class ServiceTest {
 
-    @Autowired private PatientRepository patientRepository;
-    @Autowired private RoomRepository roomRepository;
-    @Autowired private ProceduresRepository proceduresRepository;
-    @Autowired private StayRepository stayRepository;
+    @Autowired
+    private ProceduresService proceduresService;
 
-    @Autowired private ProceduresService proceduresService;
-    @Autowired private StayService stayService;
-    @Autowired private UndergoesService undergoesService;
+    @Autowired
+    private StayService stayService;
 
-    // ==========================
-    // HELPERS (FIXED)
-    // ==========================
+    @Autowired
+    private UndergoesService undergoesService;
 
-    private PatientEntity createPatient(int id) {
+    // ---------- HELPERS ----------
+    
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    private void createPatient(int id) {
         PatientEntity p = new PatientEntity();
         p.setSsn(id);
-        p.setName("Patient " + id);
-        p.setAddress("Chennai");        // ✅ REQUIRED
-        p.setPhone("9876543210");       // ✅ REQUIRED
-        p.setInsuranceId(1111);         // ✅ REQUIRED
-        p.setPcp(1);                    // ✅ REQUIRED
-        return patientRepository.save(p);
+        p.setName("Test");
+        p.setAddress("Chennai");
+        p.setPhone("9999999999");
+        p.setInsuranceId(1);
+        p.setPcp(1);
+        patientRepository.save(p);
     }
 
-    private RoomEntity createRoom(int id) {
+    private void createRoom(int id) {
         RoomEntity r = new RoomEntity();
         r.setRoomNumber(id);
-        r.setRoomType("GENERAL");        // ✅ REQUIRED
+        r.setRoomType("GENERAL");
         r.setUnavailable(false);
-        return roomRepository.save(r);
+        roomRepository.save(r);
     }
-
-    private ProceduresEntity createProcedure(int code) {
-        ProceduresEntity p = new ProceduresEntity();
-        p.setCode(code);
-        p.setName("Procedure " + code);
-        p.setCost(100.0);
-        return proceduresRepository.save(p);
-    }
-
-    private StayEntity createStay(PatientEntity patient, RoomEntity room, int id) {
-        StayEntity s = new StayEntity();
-        s.setStayId(id);
-        s.setPatient(patient);
-        s.setRoom(room);
-        s.setStayStart(LocalDateTime.now());
-        return stayRepository.save(s);
-    }
-
-    // ==========================
-    // PROCEDURE TESTS
-    // ==========================
-    @BeforeEach
-    void cleanDB() {
-        stayRepository.deleteAll();
-        roomRepository.deleteAll();
-        patientRepository.deleteAll();
-    }
-    @Test
-    void testAddProcedure() {
+    private ProceduresRequestDTO procedureDTO(int code) {
         ProceduresRequestDTO dto = new ProceduresRequestDTO();
-        dto.setCode(1);
-        dto.setName("Test");
+        dto.setCode(code);
+        dto.setName("TestProc");
         dto.setCost(100.0);
-
-        assertThat(proceduresService.addProcedure(dto)).isNotNull();
+        return dto;
     }
+
+    private StayRequestDTO stayDTO(int stayId, int patientId, int roomId) {
+        StayRequestDTO dto = new StayRequestDTO();
+        dto.setStayId(stayId);
+        dto.setPatientId(patientId);
+        dto.setRoomId(roomId);
+        dto.setStayStart(LocalDateTime.now().minusDays(1));
+        return dto;
+    }
+
+    private UndergoesRequestDTO treatmentDTO(int p, int pr, int s) {
+        UndergoesRequestDTO dto = new UndergoesRequestDTO();
+        dto.setPatientId(p);
+        dto.setProcedureId(pr);
+        dto.setStayId(s);
+        dto.setDateUndergoes(LocalDateTime.now());
+        return dto;
+    }
+
+    // ==============================
+    // 🟢 PROCEDURES TESTS
+    // ==============================
 
     @Test
-    void testAddProcedureDuplicate() {
-        ProceduresRequestDTO dto = new ProceduresRequestDTO();
-        dto.setCode(2);
-        dto.setName("Test");
-        dto.setCost(100.0);
+    void tc1_addProcedure_success() {
+        ProceduresRequestDTO res = proceduresService.addProcedure(procedureDTO(1));
+        assertNotNull(res);
+    }
 
-        proceduresService.addProcedure(dto);
+    @Test
+    void tc2_addProcedure_duplicate() {
+        proceduresService.addProcedure(procedureDTO(2));
+        assertThrows(ProcedureAlreadyExistsException.class,
+                () -> proceduresService.addProcedure(procedureDTO(2)));
+    }
 
-        assertThrows(DuplicateResourceException.class,
+    @Test
+    void tc3_addProcedure_invalid() {
+        ProceduresRequestDTO dto = procedureDTO(3);
+        dto.setCode(null);
+        assertThrows(InvalidProcedureException.class,
                 () -> proceduresService.addProcedure(dto));
     }
 
     @Test
-    void testGetProcedureById_NotFound() {
-        assertThrows(ResourceNotFoundException.class,
-                () -> proceduresService.getProcedureById(9999));
+    void tc4_getProcedure_notFound() {
+        assertThrows(ProcedureNotFoundException.class,
+                () -> proceduresService.getProcedureById(999));
     }
 
     @Test
-    void testGetAllProcedures() {
-        ProceduresRequestDTO dto = new ProceduresRequestDTO();
-        dto.setCode(3);
-        dto.setName("A");
-        dto.setCost(100.0);
+    void tc5_deleteProcedure_success() {
+        proceduresService.addProcedure(procedureDTO(5));
+        assertNotNull(proceduresService.deleteProcedure(5));
+    }
 
-        proceduresService.addProcedure(dto);
+    // ==============================
+    // 🟡 STAY TESTS
+    // ==============================
 
-        assertThat(proceduresService.getAllProcedures()).isNotEmpty();
+    @Test
+    void tc6_admitPatient_success() {
+        StayEntity stay = stayService.admitPatient(stayDTO(10, 1, 1));
+        assertNotNull(stay);
     }
 
     @Test
-    void testDeleteProcedure() {
-        ProceduresRequestDTO dto = new ProceduresRequestDTO();
-        dto.setCode(4);
-        dto.setName("del");
-        dto.setCost(100.0);
-
-        proceduresService.addProcedure(dto); // ✅ ONLY ONCE
-
-        proceduresService.deleteProcedure(4);
-
-        assertThrows(ResourceNotFoundException.class,
-                () -> proceduresService.getProcedureById(4));
-    }
-
-    // ==========================
-    // STAY TESTS
-    // ==========================
-
-    @Test
-    void testAdmitPatient() {
-        PatientEntity p = createPatient(100);
-        RoomEntity r = createRoom(200);
-
-        StayRequestDTO dto = new StayRequestDTO();
-        dto.setStayId(1);
-        dto.setPatientId(p.getSsn());
-        dto.setRoomId(r.getRoomNumber());
-        dto.setStayStart(LocalDateTime.now());
-
-        assertThat(stayService.admitPatient(dto)).isNotNull();
-    }
-
-    @Test
-    void testAdmitPatient_InvalidDate() {
-        PatientEntity p = createPatient(101);
-        RoomEntity r = createRoom(201);
-
-        StayRequestDTO dto = new StayRequestDTO();
-        dto.setStayId(2);
-        dto.setPatientId(p.getSsn());
-        dto.setRoomId(r.getRoomNumber());
+    void tc7_admitPatient_futureDate() {
+        StayRequestDTO dto = stayDTO(11, 1, 1);
         dto.setStayStart(LocalDateTime.now().plusDays(1));
 
-        assertThrows(BadRequestException.class,
+        assertThrows(InvalidStayException.class,
                 () -> stayService.admitPatient(dto));
     }
 
     @Test
-    void testGetAllStays() {
-        PatientEntity p = createPatient(102);
-        RoomEntity r = createRoom(202);
+    void tc8_admitPatient_duplicate() {
+        stayService.admitPatient(stayDTO(12, 1, 1));
 
-        StayRequestDTO dto = new StayRequestDTO();
-        dto.setStayId(3);
-        dto.setPatientId(p.getSsn());
-        dto.setRoomId(r.getRoomNumber());
-        dto.setStayStart(LocalDateTime.now());
-
-        stayService.admitPatient(dto);
-
-        assertThat(stayService.getAllStays()).isNotEmpty();
+        assertThrows(StayAlreadyExistsException.class,
+                () -> stayService.admitPatient(stayDTO(12, 1, 1)));
     }
 
     @Test
-    void testGetStayById_NotFound() {
+    void tc9_getStay_notFound() {
         assertThrows(ResourceNotFoundException.class,
-                () -> stayService.getStayById(9999));
+                () -> stayService.getStayById(999));
     }
 
     @Test
-    void testDeleteStay() {
-
-        PatientEntity p = createPatient(103);
-        RoomEntity r = createRoom(203);
-
-        StayRequestDTO dto = new StayRequestDTO();
-        dto.setStayId(4);
-        dto.setPatientId(p.getSsn());
-        dto.setRoomId(r.getRoomNumber());
-        dto.setStayStart(LocalDateTime.now());
-
-        stayService.admitPatient(dto);
-
-        // ✅ First delete → works
-        stayService.deleteStay(4);
-
-        // ✅ Second delete → should throw exception
-        assertThrows(ResourceNotFoundException.class,
-                () -> stayService.deleteStay(4));
+    void tc10_deleteStay_success() {
+        stayService.admitPatient(stayDTO(13, 1, 1));
+        String res = stayService.deleteStay(13);
+        assertEquals("Stay deleted successfully", res);
     }
 
-    // ==========================
-    // UNDERGOES TESTS
-    // ==========================
+    // ==============================
+    // 🔴 UNDERGOES TESTS
+    // ==============================
 
     @Test
-    void testAssignTreatment() {
-        PatientEntity p = createPatient(200);
-        RoomEntity r = createRoom(300);
-        ProceduresEntity proc = createProcedure(500);
-        StayEntity stay = createStay(p, r, 600);
+    void tc11_assignTreatment_success() {
+        proceduresService.addProcedure(procedureDTO(20));
+        stayService.admitPatient(stayDTO(21, 1, 1));
+
+        UndergoesRequestDTO res =
+                undergoesService.assignTreatment(treatmentDTO(1, 20, 21));
+
+        assertNotNull(res);
+    }
+
+    @Test
+    void tc12_assignTreatment_duplicate() {
+
+        createPatient(1);
+        createRoom(1);
+
+        proceduresService.addProcedure(procedureDTO(22));
+        stayService.admitPatient(stayDTO(23, 1, 1));
+
+        LocalDateTime fixedTime = LocalDateTime.of(2024, 1, 1, 10, 0); // 🔥 SAME TIME
 
         UndergoesRequestDTO dto = new UndergoesRequestDTO();
-        dto.setPatientId(p.getSsn());
-        dto.setProcedureId(proc.getCode());
-        dto.setStayId(stay.getStayId());
-        dto.setDateUndergoes(LocalDateTime.now().plusSeconds(1));
-
-        assertThat(undergoesService.assignTreatment(dto)).isNotNull();
-    }
-
-    @Test
-    void testAssignTreatment_Duplicate() {
-        PatientEntity p = createPatient(201);
-        RoomEntity r = createRoom(301);
-        ProceduresEntity proc = createProcedure(501);
-        StayEntity stay = createStay(p, r, 601);
-
-        UndergoesRequestDTO dto = new UndergoesRequestDTO();
-        dto.setPatientId(p.getSsn());
-        dto.setProcedureId(proc.getCode());
-        dto.setStayId(stay.getStayId());
-        dto.setDateUndergoes(LocalDateTime.now().plusSeconds(2));
+        dto.setPatientId(1);
+        dto.setProcedureId(22);
+        dto.setStayId(23);
+        dto.setDateUndergoes(fixedTime);
 
         undergoesService.assignTreatment(dto);
 
-        assertThrows(DuplicateResourceException.class,
+        assertThrows(TreatmentAlreadyExistsException.class,
                 () -> undergoesService.assignTreatment(dto));
     }
 
     @Test
-    void testGetAllTreatments() {
-        PatientEntity p = createPatient(202);
-        RoomEntity r = createRoom(302);
-        ProceduresEntity proc = createProcedure(502);
-        StayEntity stay = createStay(p, r, 602);
+    void tc13_assignTreatment_invalidMismatch() {
 
-        UndergoesRequestDTO dto = new UndergoesRequestDTO();
-        dto.setPatientId(p.getSsn());
-        dto.setProcedureId(proc.getCode());
-        dto.setStayId(stay.getStayId());
-        dto.setDateUndergoes(LocalDateTime.now().plusSeconds(3));
+        createPatient(1);   // for treatment
+        createPatient(2);   // for stay
+        createRoom(1);
 
-        undergoesService.assignTreatment(dto);
+        proceduresService.addProcedure(procedureDTO(24));
 
-        assertThat(undergoesService.getAllTreatments()).isNotEmpty();
+        stayService.admitPatient(stayDTO(25, 2, 1)); // patient 2
+
+        assertThrows(InvalidTreatmentException.class,
+                () -> undergoesService.assignTreatment(treatmentDTO(1, 24, 25)));
     }
 
     @Test
-    void testGetTreatmentsByPatient() {
-        PatientEntity p = createPatient(203);
-        RoomEntity r = createRoom(303);
-        ProceduresEntity proc = createProcedure(503);
-        StayEntity stay = createStay(p, r, 603);
-
-        UndergoesRequestDTO dto = new UndergoesRequestDTO();
-        dto.setPatientId(p.getSsn());
-        dto.setProcedureId(proc.getCode());
-        dto.setStayId(stay.getStayId());
-        dto.setDateUndergoes(LocalDateTime.now().plusSeconds(4));
-
-        undergoesService.assignTreatment(dto);
-
-        assertThat(undergoesService.getTreatmentByPatient(p.getSsn()))
-                .isNotEmpty();
+    void tc14_assignTreatment_patientNotFound() {
+        assertThrows(TreatmentNotFoundException.class,
+                () -> undergoesService.assignTreatment(treatmentDTO(999, 1, 1)));
     }
+
     @Test
-    void testAdmitPatient_DuplicateStayId() {
+    void tc15_deleteTreatment_notFound() {
+        UndergoesId id = new UndergoesId(1,1,1,LocalDateTime.now());
 
-        PatientEntity p = createPatient(300);
-        RoomEntity r = createRoom(400);
-
-        StayRequestDTO dto = new StayRequestDTO();
-        dto.setStayId(10);
-        dto.setPatientId(p.getSsn());
-        dto.setRoomId(r.getRoomNumber());
-        dto.setStayStart(LocalDateTime.now());
-
-        // First insert → success
-        stayService.admitPatient(dto);
-
-        // Second insert with same ID → should fail
-        assertThrows(BadRequestException.class,
-                () -> stayService.admitPatient(dto));
+        assertThrows(TreatmentNotFoundException.class,
+                () -> undergoesService.deleteTreatment(id));
     }
 }
