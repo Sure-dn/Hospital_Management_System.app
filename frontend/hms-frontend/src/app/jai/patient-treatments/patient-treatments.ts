@@ -63,7 +63,7 @@ export class PatientTreatmentsComponent {
           message = err.error.message;
         }
 
-        alert(message); // 🔥 popup
+        alert(err.error.message); // 🔥 popup
 
         this.error = message;
         this.loading = false;

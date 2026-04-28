@@ -48,6 +48,8 @@ load() {
       console.error(err);
       this.error = err.error?.message || 'Error ❌';
 
+      alert(err.error?.message); // 🔥 popup
+
       this.loading = false;   // ✅ ALSO HERE
     },
     complete: () => {

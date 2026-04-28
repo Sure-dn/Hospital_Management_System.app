@@ -36,7 +36,7 @@ export class ProceduresUpdateComponent {
     },
     error: (err) => {
       console.error(err);
-      alert("❌ Error updating procedure");
+      alert(err.error.message);
     }
   });
 }

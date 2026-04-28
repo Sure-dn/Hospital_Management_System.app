@@ -56,7 +56,7 @@ export class StayGetComponent {
           message = err.error.message;
         }
 
-        alert(message);
+        alert(err.error.message);
 
         this.error = message;
         this.loading = false;

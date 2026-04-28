@@ -63,6 +63,7 @@ fetch() {
   } else if (err.error?.message) {
     msg = err.error.message;
   }
+  alert(err.error.message); // ✅ popup alert
 
   this.error = msg;
   this.loading = false;
