@@ -6,13 +6,13 @@ import jakarta.validation.constraints.Positive;
 
 public class ProceduresRequestDTO {
 
-    @NotNull
+    @NotNull(message = "Procedure code is required")
     private Integer code;
 
-    @NotBlank
+    @NotBlank(message = "Procedure name is required")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Procedure cost is required")
     @Positive
     private Double cost;
 
