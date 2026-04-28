@@ -57,11 +57,7 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponseDTO getRoomByNumber(Integer roomNumber) {
 
         RoomEntity room = roomRepository.findById(roomNumber)
-                .orElse(null);
-
-        if (room == null) {
-            return null; // you can later replace with custom exception
-        }
+                .orElseThrow(() -> new RuntimeException("Room not found"));
 
         return mapToRoomDTO(room);
     }
@@ -71,13 +67,8 @@ public class RoomServiceImpl implements RoomService {
     public RoomResponseDTO updateRoomAvailability(Integer roomNumber, Boolean unavailable) {
 
         RoomEntity room = roomRepository.findById(roomNumber)
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("Room not found"));
 
-        if (room == null) {
-            return null;
-        }
-
-        // ✅ Update only if changed
         if (!room.getUnavailable().equals(unavailable)) {
             room.setUnavailable(unavailable);
             room = roomRepository.save(room);

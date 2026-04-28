@@ -1,9 +1,43 @@
-<p>floorcoderoom-get works!</p>
-<h2>Get Rooms by Block</h2>
+<div class="page-box">
 
-<input type="number" [(ngModel)]="floor" placeholder="Floor"><br>
-<input type="number" [(ngModel)]="code" placeholder="Code"><br><br>
+  <h2>Get Rooms by Block</h2>
 
-<button (click)="getRooms()">Get Rooms</button>
+  <!-- Floor -->
+  <input 
+    type="number" 
+    [(ngModel)]="floor" 
+    placeholder="Floor"
+  >
 
-<pre>{{ data | json }}</pre>
+  <!-- Code -->
+  <input 
+    type="number" 
+    [(ngModel)]="code" 
+    placeholder="Code"
+  >
+
+  <br><br>
+
+  <button (click)="getRooms()">Get Rooms</button>
+
+  <!-- ❌ ERROR MESSAGE -->
+  <p class="error" *ngIf="errorMsg">
+    {{ errorMsg }}
+  </p>
+
+  <!-- ✅ SUCCESS DATA -->
+  <div *ngIf="data?.length > 0">
+
+    <h3>Rooms</h3>
+
+    <div *ngFor="let room of data">
+      <p><b>Room No:</b> {{ room.roomNumber }}</p>
+      <p><b>Type:</b> {{ room.type }}</p>
+      <p><b>Unavailable:</b> {{ room.unavailable }}</p>
+      <p><b>Block:</b> {{ room.blockName }} ({{ room.blockFloor }} - {{ room.blockCode }})</p>
+      <hr>
+    </div>
+
+  </div>
+
+</div>

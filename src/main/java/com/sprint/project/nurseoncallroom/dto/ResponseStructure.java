@@ -14,14 +14,17 @@ public class ResponseStructure<T> {
         this.data = data;
     }
 
-    // ── Static factory helpers ────────────────────────────────────────────────
-
+    // ✅ SUCCESS
     public static <T> ResponseStructure<T> success(int statusCode, String message, T data) {
         return new ResponseStructure<>(statusCode, message, data);
     }
 
-    // ── Getters & Setters ─────────────────────────────────────────────────────
+    // 🔥 ADD THIS (IMPORTANT)
+    public static <T> ResponseStructure<T> error(int statusCode, String message) {
+        return new ResponseStructure<>(statusCode, message, null);
+    }
 
+    // getters & setters
     public int getStatusCode() { return statusCode; }
     public void setStatusCode(int statusCode) { this.statusCode = statusCode; }
 
