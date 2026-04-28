@@ -58,7 +58,7 @@ export class ProceduresCodeComponent {
           message = err.error.message;
         }
 
-        alert(message);
+        alert(err.error.message);
 
         this.error = message;
         this.procedure = null;

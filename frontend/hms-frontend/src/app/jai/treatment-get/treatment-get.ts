@@ -27,7 +27,8 @@ export class TreatmentGetComponent {
         },
         error: (err) => {
           console.error(err);
-          this.error = 'Failed to fetch treatments ❌';
+          this.error = err.error?.message || 'Failed to fetch treatments ❌';
+          alert(err.error?.message || 'Failed to fetch treatments ❌'); // 🔥 popup
         }
       });
   }

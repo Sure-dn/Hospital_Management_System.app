@@ -82,7 +82,7 @@ export class ProcedurePatientsComponent {
       message = err.error.message;
     }
 
-    alert(message); // ✅ popup alert
+    alert(err.error.message); // ✅ popup alert
 
     this.error = message; // optional (if you still want UI text)
     this.loading = false;

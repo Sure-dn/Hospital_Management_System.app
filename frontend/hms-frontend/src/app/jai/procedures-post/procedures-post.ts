@@ -26,8 +26,8 @@ export class ProceduresPostComponent {
           this.procedure = { code: '', name: '', cost: '' };
         },
         error: (err) => {
-          console.error(err);
-          alert("Error while saving ❌");
+          console.log(err);
+          alert(err.error.message);
         }
       });
   }

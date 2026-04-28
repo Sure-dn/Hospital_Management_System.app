@@ -54,6 +54,7 @@ console.log(body);
     },
     error: (err) => {
       console.error("BACKEND ERROR:", err); // 🔥 important
+      alert(err.error.message); // 🔥 popup
       this.error = err.error?.message || 'Error while saving ❌';
     }
   });
