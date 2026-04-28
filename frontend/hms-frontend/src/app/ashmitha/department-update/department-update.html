@@ -1,9 +1,32 @@
 <div class="page-box">
   <h2>Update Department</h2>
 
-  <input type="number" placeholder="Department ID" [(ngModel)]="department.departmentId">
-  <input type="text" placeholder="Department Name" [(ngModel)]="department.name">
-  <input type="number" placeholder="Head Employee ID" [(ngModel)]="department.headEmployeeId">
+  <input
+    type="number"
+    placeholder="Department ID"
+    [(ngModel)]="department.departmentId"
+    name="departmentId"
+  >
+  <p class="error" *ngIf="errors.departmentId">{{ errors.departmentId }}</p>
 
-  <button (click)="updateDepartment()">Update</button>
+  <input
+    type="text"
+    placeholder="Department Name"
+    [(ngModel)]="department.name"
+    name="name"
+  >
+  <p class="error" *ngIf="errors.name">{{ errors.name }}</p>
+
+  <input
+    type="number"
+    placeholder="Head Employee ID"
+    [(ngModel)]="department.headEmployeeId"
+    name="headEmployeeId"
+  >
+  <p class="error" *ngIf="errors.headEmployeeId">{{ errors.headEmployeeId }}</p>
+
+  <p class="backend-error" *ngIf="backendError">{{ backendError }}</p>
+  <p class="success" *ngIf="success">{{ success }}</p>
+
+  <button type="button" (click)="updateDepartment()">Update</button>
 </div>

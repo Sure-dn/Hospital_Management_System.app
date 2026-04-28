@@ -2,10 +2,19 @@
   <h2>Get Physicians By Department</h2>
 
   <label>Department ID</label>
-  <input type="number" [(ngModel)]="departmentId" placeholder="Enter Department ID" />
+  <input
+    type="number"
+    [(ngModel)]="departmentId"
+    name="departmentId"
+    placeholder="Enter Department ID"
+  >
 
-  <button (click)="fetchPhysicians()">Fetch</button>
+  <!-- validation error -->
+  <p class="error" *ngIf="error">{{ error }}</p>
 
+  <button type="button" (click)="fetchPhysicians()">Fetch</button>
+
+  <!-- result -->
   <div class="result" *ngIf="result">
     <h3>Response</h3>
     <pre>{{ result | json }}</pre>

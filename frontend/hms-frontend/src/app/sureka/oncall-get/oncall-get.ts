@@ -6,7 +6,7 @@ import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'app-oncall-get',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule,JsonPipe],
   templateUrl: './oncall-get.html'
 })
 export class OnCallGetComponent {

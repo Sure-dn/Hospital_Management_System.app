@@ -1,5 +1,9 @@
 package com.sprint.project.exception;
 
+import com.sprint.project.nurseoncallroom.exception.*;
+import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
+import com.sprint.project.treatmentprostayy.exception.*;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -17,7 +21,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             ProcedureNotFoundException.class,
             StayNotFoundException.class,
-            TreatmentNotFoundException.class
+            TreatmentNotFoundException.class,
+            BlockNotAvailableException.class
     })
     public ResponseEntity<ResponseStructure<?>> handleNotFound(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -28,7 +33,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             ProcedureAlreadyExistsException.class,
             StayAlreadyExistsException.class,
-            TreatmentAlreadyExistsException.class
+            TreatmentAlreadyExistsException.class,
+            NurseAlreadyAssignedException.class
     })
     public ResponseEntity<ResponseStructure<?>> handleAlreadyExists(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -39,7 +45,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             InvalidProcedureException.class,
             InvalidStayException.class,
-            InvalidTreatmentException.class
+            InvalidTreatmentException.class,
+            InvalidShiftTimeException.class,
+            OnCallScheduleConflictException.class
     })
     public ResponseEntity<ResponseStructure<?>> handleInvalid(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -52,22 +60,20 @@ public class GlobalExceptionHandler {
                 .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
-    // ✅ 1. DTO VALIDATION (@Valid)
+    // ✅ DTO VALIDATION (@Valid)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseStructure<?>> handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
 
-        String error = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(err -> err.getField() + " : " + err.getDefaultMessage())
-                .findFirst()
-                .orElse("Validation error");
+        Map<String, String> errors = new HashMap<>();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ResponseStructure<>(false, error, null));
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
-    // ✅ 2. PARAM / PATH VALIDATION
+    // ✅ PARAM / PATH VALIDATION
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ResponseStructure<?>> handleBindException(BindException ex) {
 
@@ -82,17 +88,17 @@ public class GlobalExceptionHandler {
                 .body(new ResponseStructure<>(false, message, null));
     }
 
-    // ✅ 3. JSON PARSE ERROR
+    // ✅ JSON PARSE ERROR
     @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
     public ResponseEntity<ResponseStructure<?>> handleNotReadable(Exception ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ResponseStructure<>(false, "Invalid request body", null));
     }
 
-    // ⚫ GENERAL ERROR (LAST)
+    // ⚫ GENERAL ERROR
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseStructure<?>> handleGeneral(Exception ex) {
-        ex.printStackTrace(); // debug
+        ex.printStackTrace();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseStructure<>(false, "Something went wrong", null));

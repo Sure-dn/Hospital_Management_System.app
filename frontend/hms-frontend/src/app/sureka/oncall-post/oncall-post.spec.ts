@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OncallPost } from './oncall-post';
+import { OnCallPostComponent } from './oncall-post';
 
 describe('OncallPost', () => {
-  let component: OncallPost;
-  let fixture: ComponentFixture<OncallPost>;
+  let component: OnCallPostComponent;
+  let fixture: ComponentFixture<OnCallPostComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OncallPost],
+      imports: [OnCallPostComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OncallPost);
+    fixture = TestBed.createComponent(OnCallPostComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -260,7 +260,7 @@ class ServiceTest {
 
         @Test
         void testGetPrescriptionsByPatient_Success() {
-            when(prescribesRepository.findByPatientSsn(100000001)).thenReturn(List.of(validEntity));
+            when(prescribesRepository.findByPatientSSN(100000001)).thenReturn(List.of(validEntity));
             List<PrescribesEntity> result = prescriptionService.getPrescriptionsByPatient(100000001);
             assertEquals(1, result.size());
         }

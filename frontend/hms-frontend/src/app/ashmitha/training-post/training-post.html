@@ -2,17 +2,20 @@
   <h2>Create Training</h2>
 
   <label>Employee ID</label>
-  <input type="number" [(ngModel)]="employeeId" placeholder="Enter Employee ID" />
+  <input type="number" [(ngModel)]="employeeId">
 
   <label>Treatment Code</label>
-  <input type="number" [(ngModel)]="treatmentCode" placeholder="Enter Treatment Code" />
+  <input type="number" [(ngModel)]="treatmentCode">
 
   <label>Certification Expiry</label>
-  <input type="date" [(ngModel)]="certificationExpiry" />
+  <input type="date" [(ngModel)]="certificationExpiry">
+
+  <!-- simple error -->
+  <p class="error" *ngIf="error">{{ error }}</p>
 
   <button (click)="createTraining()">Submit</button>
 
-  <div class="result" *ngIf="result">
+  <div *ngIf="result">
     <pre>{{ result | json }}</pre>
   </div>
 </div>
