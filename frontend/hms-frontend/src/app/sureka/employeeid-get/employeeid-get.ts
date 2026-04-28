@@ -7,7 +7,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-get-nurse-by-id',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './employeeid-get.html'
+  templateUrl: './employeeid-get.html',
+  styleUrls: ['./employeeid-get.css'] // optional
 })
 export class GetNurseByIdComponent {
 
@@ -22,7 +23,7 @@ export class GetNurseByIdComponent {
     this.errorMsg = '';
     this.data = null;
 
-    // ✅ Frontend validation
+    // ✅ Validation
     if (!this.id) {
       this.errorMsg = "Employee ID is required";
       alert("❌ " + this.errorMsg);
@@ -34,34 +35,35 @@ export class GetNurseByIdComponent {
 
         // ✅ SUCCESS
         next: (res: any) => {
-          this.data = res;
+
+          console.log("API RESPONSE 👉", res);
+
+          // 🔥 IMPORTANT FIX
+          this.data = res.data;
+
+          if (!this.data) {
+            this.errorMsg = "No nurse found";
+          }
         },
 
-        // ❌ ERROR (Backend Exception)
+        // ❌ ERROR
         error: (err) => {
 
           console.log("FULL ERROR 👉", err);
 
           let msg = '';
 
-          // 🔥 Backend exception message
           if (err.error?.message) {
             msg = err.error.message;
-          }
-
-          // 🔥 Plain string error
+          } 
           else if (typeof err.error === 'string') {
             msg = err.error;
-          }
-
-          // 🔥 Fallback
+          } 
           else {
             msg = "Nurse not found";
           }
 
           this.errorMsg = msg;
-
-          // ✅ Popup alert
           alert("❌ " + msg);
         }
       });
