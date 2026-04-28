@@ -1,9 +1,16 @@
 <div class="page-box">
   <h2>Get Department Head</h2>
 
-  <input type="number" placeholder="Enter Department ID" [(ngModel)]="departmentId">
+  <input
+    type="number"
+    placeholder="Enter Department ID"
+    [(ngModel)]="departmentId"
+    name="departmentId"
+  >
 
-  <button (click)="fetchDepartmentHead()">Fetch</button>
+  <p class="error" *ngIf="error">{{ error }}</p>
 
-  <pre>{{ result | json }}</pre>
+  <button type="button" (click)="fetchDepartmentHead()">Fetch</button>
+
+  <pre *ngIf="result">{{ result | json }}</pre>
 </div>

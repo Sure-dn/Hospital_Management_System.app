@@ -17,6 +17,8 @@ import com.sprint.project.physicianDepartmentManagement.dto.requestdto.Affiliate
 import com.sprint.project.physicianDepartmentManagement.dto.responsedto.AffiliatedWithResponseDto;
 import com.sprint.project.physicianDepartmentManagement.service.AffiliatedWithService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/affiliations")
@@ -31,8 +33,8 @@ public class AffiliatedWithController {
 	    //  CREATE AFFILIATION 
 	    @PostMapping("/physician/{physicianId}")
 	    public ResponseEntity<AffiliatedWithResponseDto> createAffiliation(
-	            @PathVariable Integer physicianId,
-	            @RequestBody AffiliatedWithRequestDto requestDto) {
+	          @PathVariable Integer physicianId,
+	          @Valid  @RequestBody AffiliatedWithRequestDto requestDto) {
 
 	        AffiliatedWithResponseDto response =
 	                affiliatedWithService.createAffiliation(physicianId, requestDto);

@@ -1,20 +1,37 @@
 <div class="container">
   <h2>Create Affiliation</h2>
-  
 
-  <label>Employee ID</label> <br>
-  <input type="number" [(ngModel)]="physicianId" placeholder="Enter Employee ID" /><br><br>
+  <label>Employee ID</label>
+  <input
+    type="number"
+    [(ngModel)]="physicianId"
+    name="physicianId"
+    placeholder="Enter Employee ID"
+  >
+  <p class="error" *ngIf="errors.physicianId">{{ errors.physicianId }}</p>
 
-  <label>Department ID</label><br>
-  <input type="number" [(ngModel)]="departmentId" placeholder="Enter Department ID" /><br><br>
+  <label>Department ID</label>
+  <input
+    type="number"
+    [(ngModel)]="departmentId"
+    name="departmentId"
+    placeholder="Enter Department ID"
+  >
+  <p class="error" *ngIf="errors.departmentId">{{ errors.departmentId }}</p>
 
-  <label class="checkbox-label"> 
-    <input type="checkbox" [(ngModel)]="primaryAffiliation" />
+  <label class="checkbox-label">
+    <input
+      type="checkbox"
+      [(ngModel)]="primaryAffiliation"
+      name="primaryAffiliation"
+    >
     Primary Affiliation
-  </label> <br><br>
+  </label>
 
-  <button (click)="createAffiliation()">Submit</button>
-  
+  <p class="backend-error" *ngIf="backendError">{{ backendError }}</p>
+  <p class="success" *ngIf="success">{{ success }}</p>
+
+  <button type="button" (click)="createAffiliation()">Submit</button>
 
   <div class="result" *ngIf="result">
     <h3>Response</h3>
