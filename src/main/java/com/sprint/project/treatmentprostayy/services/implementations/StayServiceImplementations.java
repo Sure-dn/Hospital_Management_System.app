@@ -50,7 +50,7 @@ public class StayServiceImplementations implements StayService {
 
         stay.setPatient(
         	    patientRepository.findPatientNative(dto.getPatientId())
-        	        .orElseThrow(() -> new RuntimeException("Patient NOT FOUND: " + dto.getPatientId()))
+        	    .orElseThrow(() -> new ResourceNotFoundException("Patient NOT FOUND: " + dto.getPatientId()))
         	);
 
         stay.setRoom(

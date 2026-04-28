@@ -1,6 +1,25 @@
-
 <h2>All Nurses</h2>
 
 <button (click)="getAll()">Load Nurses</button>
 
-<pre>{{ data | json }}</pre>
+<table *ngIf="data?.data?.length > 0" border="1" style="margin-top: 20px; width: 100%; text-align: left;">
+  <thead>
+    <tr>
+      <th>Employee ID</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Registered</th>
+      <th>SSN</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let nurse of data.data">
+      <td>{{ nurse.employeeId }}</td>
+      <td>{{ nurse.name }}</td>
+      <td>{{ nurse.position }}</td>
+      <td>{{ nurse.registered }}</td>
+      <td>{{ nurse.ssn }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,85 +1,71 @@
-* {
-  box-sizing: border-box;
-}
-
+/* Page background */
 :host {
   display: block;
+  background-color: #0b1320;
   min-height: 100vh;
-  background: #0b1220;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: white;
-  padding: 40px;
+  padding: 20px;
+  color: #e2e8f0;
+  font-family: Arial, sans-serif;
 }
 
+/* Heading */
 h2 {
-  text-align: center;
-  color: white;
-  margin-bottom: 30px;
-  font-size: 30px;
+  margin-top: 10px;
+  color: #ffffff;
 }
 
-form,
-.container,
-.page-box {
-  max-width: 650px;
-  margin: 0 auto;
-  background: #111a2e;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-}
-
-input {
-  width: 100%;
-  padding: 13px 15px;
-  margin-bottom: 18px;
-  border: 1px solid #334155;
-  border-radius: 8px;
-  background: #f8fafc;
-  color: #111827;
-  font-size: 15px;
-  outline: none;
-}
-
-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
-}
-
-label {
-  display: block;
-  color: #dbeafe;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
+/* Button */
 button {
-  width: 100%;
-  padding: 13px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
+  background-color: #3b82f6;
   color: white;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
   margin-top: 10px;
 }
 
 button:hover {
-  background: #1d4ed8;
+  background-color: #2563eb;
 }
 
-.success {
-  color: #22c55e;
-  text-align: center;
-  margin-top: 15px;
-  font-weight: 600;
+/* Table */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background-color: #0f172a;
+  border-radius: 12px;
+  overflow: hidden;
+  border: none; /* removes default border */
 }
 
-.error {
-  color: #ef4444;
-  text-align: center;
-  margin-top: 15px;
+/* Header */
+thead {
+  background-color: #1e293b;
+}
+
+th {
+  padding: 14px;
+  text-align: left;
+  color: #cbd5e1;
   font-weight: 600;
+  border: none;
+}
+
+/* Rows */
+td {
+  padding: 14px;
+  border-top: 1px solid #1e293b;
+}
+
+/* Alternate rows */
+tbody tr:nth-child(even) {
+  background-color: #020617;
+}
+
+/* Hover effect */
+tbody tr:hover {
+  background-color: #1e293b;
+  transition: 0.2s;
 }

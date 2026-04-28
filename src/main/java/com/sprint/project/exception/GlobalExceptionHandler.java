@@ -10,8 +10,9 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.sprint.project.patientAppointment.exception.PatientNotFoundException;
+import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
+import com.sprint.project.treatmentprostayy.exception.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -50,6 +51,12 @@ public class GlobalExceptionHandler {
     })
     public ResponseEntity<ResponseStructure<?>> handleInvalid(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ResponseStructure<>(false, ex.getMessage(), null));
+    }
+    
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ResponseStructure<?>> handlePatientNotFound(ResourceNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
