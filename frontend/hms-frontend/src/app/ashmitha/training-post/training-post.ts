@@ -5,21 +5,34 @@ import { CommonModule, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-training-post',
-  imports: [FormsModule,JsonPipe,CommonModule],
+  imports: [FormsModule, JsonPipe, CommonModule],
   templateUrl: './training-post.html',
   styleUrl: './training-post.css',
 })
 export class TrainingPost {
+
   employeeId: string = '';
   treatmentCode: string = '';
   certificationExpiry: string = '';
-  result: any;
+  result: any = null;
+
+  error = '';
 
   constructor(private http: HttpClient) {}
 
   createTraining() {
+
+    this.error = '';
+    this.result = null;
+
+    // ✅ simple validation
     if (!this.employeeId || !this.treatmentCode || !this.certificationExpiry) {
-      alert('Please enter all fields');
+      this.error = 'All fields are required';
+
+      setTimeout(() => {
+        alert(this.error);
+      }, 300);
+
       return;
     }
 
@@ -28,15 +41,16 @@ export class TrainingPost {
       certificationExpiry: this.certificationExpiry
     };
 
-    this.http.post(`http://localhost:9090/api/physicians/${this.employeeId}/trainings`, body)
-      .subscribe({
-        next: (res) => {
-          this.result = res;
-        },
-        error: (err) => {
-          alert('Error while creating training');
-          console.error(err);
-        }
-      });
+    this.http.post(
+      `http://localhost:9090/api/physicians/${this.employeeId}/trainings`,
+      body
+    ).subscribe({
+      next: (res: any) => {
+        this.result = res;
+      },
+      error: () => {
+        alert('Error while creating training');
+      }
+    });
   }
 }

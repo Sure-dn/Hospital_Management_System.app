@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-physician-update',
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './physician-update.html',
   styleUrl: './physician-update.css',
 })
@@ -17,12 +18,30 @@ export class PhysicianUpdate {
     ssn: ''
   };
 
-  constructor(private http: HttpClient) {}
+  errors: any = {};
+  backendError = '';
+  success = '';
+
+  constructor(
+    private http: HttpClient,
+    private cd: ChangeDetectorRef,
+    private zone: NgZone
+  ) {}
 
   updatePhysician() {
+    this.errors = {};
+    this.backendError = '';
+    this.success = '';
+    this.cd.detectChanges();
 
     if (!this.physician.employeeId) {
-      alert('Enter Employee ID');
+      this.errors = { employeeId: 'Employee ID is required' };
+      this.cd.detectChanges();
+
+      setTimeout(() => {
+        alert('Employee ID is required');
+      }, 500);
+
       return;
     }
 
@@ -30,12 +49,47 @@ export class PhysicianUpdate {
       `http://localhost:9090/api/physicians/${this.physician.employeeId}`,
       this.physician
     ).subscribe({
-      next: () => {
-        alert('✅ Updated Successfully');
+      next: (res: any) => {
+        this.success = res.message || 'Physician Updated Successfully';
+        this.backendError = '';
+        this.errors = {};
+
+        this.cd.detectChanges();
+
+        setTimeout(() => {
+          alert('✅ Physician Updated Successfully');
+        }, 500);
       },
+
       error: (err) => {
-        alert('❌ Update Failed');
-        console.error(err);
+        console.log('ERROR RESPONSE:', err);
+
+        let message = '';
+
+        if (typeof err.error === 'string') {
+          message = err.error;
+        }
+        else if (err.error?.message) {
+          message = err.error.message;
+        }
+        else if (err.error?.error) {
+          message = err.error.error;
+        }
+        else if (err.error) {
+          this.errors = { ...err.error };
+        }
+        else {
+          message = 'Update Failed';
+        }
+
+        this.backendError = message;
+        this.success = '';
+
+        this.cd.detectChanges();
+
+        setTimeout(() => {
+          alert(this.backendError || 'Validation error occurred');
+        }, 500);
       }
     });
   }
