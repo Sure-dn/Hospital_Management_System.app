@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
   data: any; 
   constructor(private http: HttpClient) {} 
   update() { 
-    this.http.put('http://localhost:9090/api/patients/${this.patient.ssn}', this.patient) 
+    this.http.put(`http://localhost:9090/api/patients/${this.patient.ssn}`, this.patient) 
       .subscribe({ 
         next: (res: any) => { 
           this.data = res;
@@ -28,3 +28,4 @@ import { HttpClient } from '@angular/common/http';
         });
       } 
     }
+    

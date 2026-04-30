@@ -44,7 +44,8 @@ export class TreatmentPostComponent {
       },
       error: (err) => {
         console.error(err);
-        this.error = 'Error while saving ❌';
+        this.error = err.error?.message || 'Error while saving ❌';
+        alert(this.error); // 🔥 popup
       }
     });
   }

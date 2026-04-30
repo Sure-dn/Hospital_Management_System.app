@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #0b1220;
+  padding: 40px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.form-box {
+  background: #111a2e;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #22c55e;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #16a34a;
+}
+
+/* Card */
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+}
+
+/* Status */
+.available {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.unavailable {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+/* Error */
+.error {
+  color: #ef4444;
+}

@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgIf, NgFor, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-oncall-floor',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
-  templateUrl: './floorcode-get.html'
+  imports: [FormsModule, NgIf, NgFor, DatePipe], // ✅ ADD NgFor
+  templateUrl: './floorcode-get.html',
+  styleUrl: './floorcode-get.css'
 })
 export class OnCallFloorComponent {
 
@@ -20,7 +21,10 @@ export class OnCallFloorComponent {
   getByBlock() {
     this.http.get(`http://localhost:9090/api/on-call?floor=${this.floor}&code=${this.code}`)
       .subscribe({
-        next: res => this.data = res,
+        next: res => {
+          console.log("API Response:", res); // ✅ Debug
+          this.data = res;
+        },
         error: err => console.error(err)
       });
   }

@@ -59,9 +59,7 @@ public class BlockServiceImpl implements BlockService {
         List<RoomEntity> rooms =
                 roomRepository.findByBlock_BlockFloorAndBlock_BlockCode(floor, code);
 
-        if (rooms.isEmpty()) {
-            throw new BlockCapacityFullException(floor, code);
-        }
+
 
         // 🔥 USE MAPPER METHOD
         return rooms.stream()

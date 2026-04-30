@@ -1,73 +1,102 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-nurse',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [CommonModule, FormsModule],
   templateUrl: './nurse-post.html',
-  styleUrl: './nurse-post.css'
+  styleUrl: './nurse-post.css',
 })
 export class CreateNurseComponent {
 
-  nurse = {
-    employeeId: 0,
+  nurse: any = {
+    employeeId: null,
     name: '',
     position: '',
-    registered: true,
-    ssn: 0,
+    registered: false,
+    ssn: null
   };
 
-  data: any = null;
-  error = '';
-  successMessage = '';
-  hasSubmitted = false;
-  loading = false;
+  errors: any = {};
+  success = '';
+  backendError = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private cd: ChangeDetectorRef
+  ) {}
 
   create() {
-    console.log("Sending Data 👉", this.nurse);
 
-    this.error = '';
-    this.successMessage = '';
-    this.data = null;
-    this.hasSubmitted = true;
-    this.loading = true;
+    // RESET
+    this.errors = {};
+    this.success = '';
+    this.backendError = '';
 
-    this.http.post<any>('http://localhost:9090/api/nurses', this.nurse)
+    this.http.post('http://localhost:9090/api/nurses', this.nurse)
       .subscribe({
-        next: (res) => {
-          console.log("Response 👉", res);
 
-          // ✅ SUCCESS ALERT
-          alert("✅ Nurse added successfully to database!");
+        // ✅ SUCCESS
+        next: (res: any) => {
 
-          this.data = res;
-          this.successMessage = '✅ Nurse created successfully!';
-          this.loading = false;
+          this.success = res.message || 'Nurse Added Successfully';
 
-          // reset form
           this.nurse = {
-            employeeId: 0,
+            employeeId: null,
             name: '',
             position: '',
-            registered: true,
-            ssn: 0,
+            registered: false,
+            ssn: null
           };
+
+          this.cd.detectChanges();
         },
 
+        // ❌ ERROR HANDLING
         error: (err) => {
-          console.error(err);
 
-          // ❌ ERROR ALERT
-          alert("❌ Failed to create nurse!");
+          console.log("FULL ERROR 👉", err);
 
-          this.error = err?.error?.message || '❌ Failed to create nurse';
-          this.loading = false;
+          let alertMessage = '';
+
+          // ✅ Case 1: Validation errors (Map from backend)
+          if (err.status === 400 && typeof err.error === 'object') {
+
+            this.errors = err.error;
+
+            alertMessage = Object.values(err.error).join('\n');
+          }
+
+          // ✅ Case 2: Custom backend exception
+          else if (err.error?.message) {
+
+            this.backendError = err.error.message;
+            alertMessage = this.backendError;
+          }
+
+          // ✅ Case 3: Plain string error
+          else if (typeof err.error === 'string') {
+
+            this.backendError = err.error;
+            alertMessage = this.backendError;
+          }
+
+          // ✅ Fallback
+          else {
+
+            this.backendError = "Something went wrong";
+            alertMessage = this.backendError;
+          }
+
+          this.cd.detectChanges();
+
+          // 🔥 SHOW ALERT (single place)
+          setTimeout(() => alert(alertMessage), 0);
         }
+
       });
   }
 }

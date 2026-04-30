@@ -1,6 +1,37 @@
+<div class="container">
 
-<h2>Get All Blocks</h2>
+  <h2>Get All Blocks</h2>
 
-<button (click)="getBlocks()">Load Blocks</button>
+  <button (click)="getBlocks()">Load Blocks</button>
 
-<pre>{{ data | json }}</pre>
+  <!-- TABLE -->
+  <div *ngIf="data?.data?.length > 0" class="card">
+
+    <table class="table">
+
+      <thead>
+        <tr>
+          <th>Floor</th>
+          <th>Block Code</th>
+          <th>Block Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let block of data.data">
+          <td>{{ block.blockFloor }}</td>
+          <td>{{ block.blockCode }}</td>
+          <td>{{ block.name }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- NO DATA -->
+  <div *ngIf="data && data.data?.length === 0" class="no-data">
+    No blocks found
+  </div>
+
+</div>

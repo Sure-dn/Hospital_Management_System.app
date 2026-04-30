@@ -12,60 +12,72 @@ import { NgIf } from '@angular/common';
 })
 export class StayPostComponent {
 
-  stay = {
-    stayId: '',
-    patientId: '',
-    roomId: '',
-    stayStart: '',
-    stayEnd: ''
-  };
+  stayId: any;
+  patientId: any;
+  roomId: any;
 
-  message = '';
-  error = '';
+  startDate: any;
+  endDate: any;
 
   constructor(private http: HttpClient) {}
 
   submit() {
-  this.message = '';
-  this.error = '';
 
-  const token = localStorage.getItem('token');
-
-  const body = {
-  stayId: Number(this.stay.stayId),   // ✅ ADD THIS
-  patientId: Number(this.stay.patientId),
-  roomId: Number(this.stay.roomId),
-  stayStart: new Date(this.stay.stayStart).toISOString(),
-  stayEnd: new Date(this.stay.stayEnd).toISOString()
-};
-
-console.log(body);
-
-  this.http.post('http://localhost:9090/api/stays', body, {
-    headers: {
-      Authorization: 'Bearer ' + token
+    // ✅ VALIDATION FIRST
+    if (!this.stayId || !this.patientId || !this.roomId) {
+      alert("Please fill all required fields");
+      return;
     }
-  })
-  .subscribe({
-    next: () => {
-      alert('Stay added successfully ✅');
-      this.message = 'Stay added successfully ✅';
-      this.clearForm();
-    },
-    error: (err) => {
-      console.error("BACKEND ERROR:", err); // 🔥 important
-      this.error = err.error?.message || 'Error while saving ❌';
-    }
-  });
-}
 
-  clearForm() {
-    this.stay = {
-      stayId: '',
-      patientId: '',
-      roomId: '',
-      stayStart: '',
-      stayEnd: ''
+    if (!this.startDate || !this.endDate) {
+      alert("Please select both dates");
+      return;
+    }
+
+    const start = new Date(this.startDate);
+    const end = new Date(this.endDate);
+
+    // 🔥 CRITICAL FIX
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      alert("Invalid date format");
+      return;
+    }
+
+    const body = {
+      stayId: this.stayId,
+      patientId: this.patientId,
+      roomId: this.roomId,
+      startDate: start.toISOString(),
+      endDate: end.toISOString()
     };
+
+    const token = localStorage.getItem('token');
+
+    this.http.post(
+      `http://localhost:9090/api/stays`,
+      body,
+      {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }
+    ).subscribe({
+      next: (res) => {
+        console.log("SUCCESS:", res);
+        alert("Stay added successfully ✅");
+      },
+
+      error: (err) => {
+        console.error("ERROR:", err);
+
+        const msg =
+          err?.error?.message ||
+          err?.error ||
+          err?.message ||
+          "Something went wrong";
+
+        alert(msg); // 🔥 NOW THIS WILL TRIGGER
+      }
+    });
   }
 }

@@ -2,7 +2,14 @@
   <h2>Get All Trainings</h2>
 
   <label>Employee ID</label>
-  <input type="number" [(ngModel)]="employeeId" placeholder="Enter Employee ID" />
+  <input
+    type="number"
+    [(ngModel)]="employeeId"
+    placeholder="Enter Employee ID"
+  >
+
+  <!-- simple validation -->
+  <p class="error" *ngIf="error">{{ error }}</p>
 
   <button (click)="fetchTrainings()">Fetch</button>
 

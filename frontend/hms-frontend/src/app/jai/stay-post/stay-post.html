@@ -4,24 +4,18 @@
 
   <div class="form">
 
-    <input [(ngModel)]="stay.stayId" placeholder="Stay ID">
+    <input [(ngModel)]="stayId" placeholder="Stay ID">
 
-    <input [(ngModel)]="stay.patientId" placeholder="Patient ID">
+    <input [(ngModel)]="patientId" placeholder="Patient ID">
 
-    <input [(ngModel)]="stay.roomId" placeholder="Room ID">
+    <input [(ngModel)]="roomId" placeholder="Room ID">
 
-    <input type="datetime-local" [(ngModel)]="stay.stayStart">
+    <input type="datetime-local" [(ngModel)]="startDate">
 
-    <input type="datetime-local" [(ngModel)]="stay.stayEnd">
+    <input type="datetime-local" [(ngModel)]="endDate">
 
     <button (click)="submit()">Submit</button>
 
   </div>
-
-  <!-- SUCCESS -->
-  <p class="success" *ngIf="message">{{ message }}</p>
-
-  <!-- ERROR -->
-  <p class="error" *ngIf="error">{{ error }}</p>
 
 </div>

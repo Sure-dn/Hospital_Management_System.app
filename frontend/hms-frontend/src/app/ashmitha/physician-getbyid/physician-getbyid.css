@@ -28,3 +28,9 @@ pre {
 h2{
   color: antiquewhite;
 }
+
+.error {
+  color: #ff4d4d;
+  font-size: 13px;
+  margin: 5px 0 10px;
+}

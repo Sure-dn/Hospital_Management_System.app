@@ -1,8 +1,38 @@
-<p>employeeid-get works!</p>
-<h2>Get Nurse By ID</h2>
+<div class="page-box">
 
-<input type="number" [(ngModel)]="id" placeholder="Enter Employee ID"><br><br>
+  <h2 style="color: white;">Get Nurse By ID</h2>
 
-<button (click)="getById()">Get Nurse</button>
+  <!-- INPUT -->
+  <input 
+    type="number" 
+    [(ngModel)]="id"
+    (ngModelChange)="onIdChange()"
+    placeholder="Enter Employee ID"
+  >
 
-<pre>{{ data | json }}</pre>
+  <br><br>
+
+  <button (click)="getById()">Get Nurse</button>
+
+  <!-- 🔄 LOADING -->
+  <p *ngIf="loading" style="color: white;">Loading...</p>
+
+  <!-- 🔴 ERROR -->
+  <p class="error" *ngIf="errorMsg">
+    {{ errorMsg }}
+  </p>
+
+  <!-- 🟢 DATA -->
+  <div *ngIf="!loading && data">
+
+    <h3 style="color: white;">Nurse Details</h3>
+
+    <p style="color: white;"><b>Employee ID:</b> {{ data.employeeId }}</p>
+    <p style="color: white;"><b>Name:</b> {{ data.name }}</p>
+    <p style="color: white;"><b>Position:</b> {{ data.position }}</p>
+    <p style="color: white;"><b>Registered:</b> {{ data.registered }}</p>
+    <p style="color: white;"><b>SSN:</b> {{ data.ssn }}</p>
+
+  </div>
+
+</div>

@@ -30,4 +30,7 @@ public class ResponseStructure<T> {
     public void setData(T data) { this.data = data; }
 
     public LocalDateTime getTimestamp() { return timestamp; }
+
+    public void setStatusCode(int i) {
+    }
 }

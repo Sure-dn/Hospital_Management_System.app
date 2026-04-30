@@ -17,85 +17,83 @@ export class ProcedurePatientsComponent {
   error: string = '';
   hasSearched = false;
   loading = false;
-  private currentRequestCode: number | null = null; // Track current request
+  private currentRequestCode: number | null = null;
 
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
   load() {
-    // Reset all states when starting new search
+
+    // 🔴 INPUT VALIDATION
+    const procedureCode = Number(this.code);
+
+    if (!this.code || isNaN(procedureCode) || procedureCode <= 0) {
+      alert("Please enter a valid Procedure ID");
+      return;
+    }
+
     this.error = '';
     this.data = [];
     this.hasSearched = true;
     this.loading = true;
 
-    // Validate input
-    const procedureCode = Number(this.code);
-    
-    // Don't make request if code is invalid
-    if (!this.code || isNaN(procedureCode) || procedureCode <= 0) {
-      this.error = 'Please enter a valid Procedure ID (positive number)';
-      this.loading = false;
-      this.hasSearched = false;
-      this.cd.detectChanges();
-      return;
-    }
-
-    // Store current request code to prevent race conditions
     this.currentRequestCode = procedureCode;
-    
+
     const token = localStorage.getItem('token');
 
     this.http.get<any[]>(
-  `http://localhost:9090/api/reports/procedure/${procedureCode}/patients`,
+      `http://localhost:9090/api/reports/procedure/${procedureCode}/patients`,
       {
         headers: {
           Authorization: 'Bearer ' + token
         }
       }
     ).subscribe({
+
       next: (res) => {
-        // Only update if this is still the current request
         if (this.currentRequestCode === procedureCode) {
+
           console.log("DATA:", res);
+
           this.data = [...res];
           this.loading = false;
-          
-          // Clear error if successful
+
+          // 🔥 NO DATA → ALERT ONLY
           if (this.data.length === 0) {
-            this.error = 'No patients found for this procedure';
-          } else {
-            this.error = '';
+            alert(`No patients found for procedure ID ${procedureCode}`);
+            this.error = ''; // ❌ avoid duplicate UI message
           }
-          
+
           this.cd.detectChanges();
         }
       },
+
       error: (err) => {
-  if (this.currentRequestCode === procedureCode) {
-    console.error("FULL ERROR:", err);
+        if (this.currentRequestCode === procedureCode) {
 
-    let message = "Something went wrong";
+          console.error("FULL ERROR:", err);
 
-    if (typeof err.error === 'string') {
-      message = err.error; // ✅ backend message
-    } else if (err.error?.message) {
-      message = err.error.message;
-    }
+          let message = "Something went wrong";
 
-    alert(message); // ✅ popup alert
+          if (typeof err.error === 'string') {
+            message = err.error;
+          } else if (err.error?.message) {
+            message = err.error.message;
+          }
 
-    this.error = message; // optional (if you still want UI text)
-    this.loading = false;
-    this.data = [];
-    this.cd.detectChanges();
-  }
-}
+          alert(message); // 🔥 BACKEND ERROR ALERT
+
+          this.error = message;
+          this.loading = false;
+          this.data = [];
+
+          this.cd.detectChanges();
+        }
+      }
     });
   }
-  
-  // Clear data when input changes
+
+  // 🔄 CLEAR ON INPUT CHANGE
   onCodeChange() {
-    // Clear previous results when user starts typing
     if (this.hasSearched) {
       this.data = [];
       this.error = '';

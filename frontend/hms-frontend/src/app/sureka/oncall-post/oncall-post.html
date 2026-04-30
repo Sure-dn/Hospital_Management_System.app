@@ -1,14 +1,74 @@
-<p>oncall-post works!</p>
-<h2>Assign On-Call</h2>
+<div class="page-box">
 
-<input type="number" [(ngModel)]="employeeId" placeholder="Employee ID"><br>
+  <h2 style="color: white;">On-Call Assignment</h2>
 
-<input type="number" [(ngModel)]="oncall.blockFloor" placeholder="Floor"><br>
-<input type="number" [(ngModel)]="oncall.blockCode" placeholder="Code"><br>
+  <form (submit)="$event.preventDefault()">
 
-<input type="datetime-local" [(ngModel)]="oncall.onCallStart"><br>
-<input type="datetime-local" [(ngModel)]="oncall.onCallEnd"><br>
+    <!-- Employee ID -->
+    <input
+      type="number"
+      placeholder="Employee ID"
+      [(ngModel)]="employeeId"
+      name="employeeId"
+    >
+    <p class="error" *ngIf="errors.employeeId">
+      {{ errors.employeeId }}
+    </p>
 
-<button (click)="assign()">Assign</button>
+    <!-- Block Floor -->
+    <input
+      type="number"
+      placeholder="Block Floor"
+      [(ngModel)]="oncall.blockFloor"
+      name="blockFloor"
+    >
+    <p class="error" *ngIf="errors.blockFloor">
+      {{ errors.blockFloor }}
+    </p>
 
-<pre>{{ data | json }}</pre>
+    <!-- Block Code -->
+    <input
+      type="number"
+      placeholder="Block Code"
+      [(ngModel)]="oncall.blockCode"
+      name="blockCode"
+    >
+    <p class="error" *ngIf="errors.blockCode">
+      {{ errors.blockCode }}
+    </p>
+
+    <!-- Start Time -->
+    <input
+      type="datetime-local"
+      [(ngModel)]="oncall.onCallStart"
+      name="onCallStart"
+    >
+    <p class="error" *ngIf="errors.onCallStart">
+      {{ errors.onCallStart }}
+    </p>
+
+    <!-- End Time -->
+    <input
+      type="datetime-local"
+      [(ngModel)]="oncall.onCallEnd"
+      name="onCallEnd"
+    >
+    <p class="error" *ngIf="errors.onCallEnd">
+      {{ errors.onCallEnd }}
+    </p>
+
+    <!-- Backend Error -->
+    <p class="backend-error" *ngIf="backendError">
+      {{ backendError }}
+    </p>
+
+    <!-- Success -->
+    <p class="success" *ngIf="success">
+      {{ success }}
+    </p>
+
+    <button type="button" (click)="assign()">Assign</button>
+
+  </form>
+
+</div>
