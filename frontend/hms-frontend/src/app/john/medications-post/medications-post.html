@@ -32,3 +32,5 @@
 <button (click)="create()">Create</button>
 
 <pre>{{ response | json }}</pre>
+
+<pre *ngIf="errorMsg" style="border-left-color: #ef4444; color: #fca5a5;">{{ errorMsg }}</pre>

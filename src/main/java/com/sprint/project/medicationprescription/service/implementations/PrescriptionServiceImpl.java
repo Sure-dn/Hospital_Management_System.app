@@ -1,5 +1,5 @@
 package com.sprint.project.medicationprescription.service.implementations;
-
+import org.springframework.transaction.annotation.Transactional;
 // ✅ EXCEPTIONS
 import com.sprint.project.medicationprescription.exception.*;
 
@@ -96,30 +96,35 @@ public class PrescriptionServiceImpl implements com.sprint.project.medicationpre
 
     // ✅ GET ALL
     @Override
+    @Transactional(readOnly = true)
     public List<PrescribesEntity> getAllPrescriptions() {
         return prescribesRepository.findAll();
     }
 
     // ✅ GET BY PATIENT
     @Override
+    @Transactional(readOnly = true)
     public List<PrescribesEntity> getPrescriptionsByPatient(Integer ssn) {
         return prescribesRepository.findByPatientSSN(ssn);
     }
 
     // ✅ GET BY PHYSICIAN
     @Override
+    @Transactional(readOnly = true)
     public List<PrescribesEntity> getPrescriptionsByPhysician(Integer employeeId) {
         return prescribesRepository.findByPhysicianEmployeeId(employeeId);
     }
 
     // ✅ GET BY DATE RANGE
     @Override
+    @Transactional(readOnly = true)
     public List<PrescribesEntity> getPrescriptionsByDateRange(LocalDateTime from, LocalDateTime to) {
         return prescribesRepository.findByDateBetween(from, to);
     }
 
     // ✅ GET BY MEDICATION
     @Override
+    @Transactional(readOnly = true)
     public List<PrescribesEntity> getPrescriptionsByMedication(Integer code) {
         return prescribesRepository.findByMedicationCode(code);
     }

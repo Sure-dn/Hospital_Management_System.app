@@ -30,3 +30,5 @@
 <button (click)="load()">Fetch</button>
 
 <pre>{{ data | json }}</pre>
+
+<pre *ngIf="errorMsg" style="border-left-color: #ef4444; color: #fca5a5;">{{ errorMsg }}</pre>
