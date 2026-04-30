@@ -1,8 +1,42 @@
-<p>roomno-get works!</p>
-<h2>Get Room By Number</h2>
+<div class="container">
 
-<input type="number" [(ngModel)]="roomNumber" placeholder="Room Number"><br><br>
+  <h2>Get Room By Number</h2>
 
-<button (click)="getRoom()">Get Room</button>
+  <div class="form-box">
 
-<pre>{{ data | json }}</pre>
+    <input 
+      type="number"
+      [(ngModel)]="roomNumber"
+      placeholder="Enter Room Number"
+    >
+
+    <button (click)="getRoom()">Get Room</button>
+
+  </div>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+  <!-- SUCCESS -->
+  <div *ngIf="room" class="card">
+
+    <h3>Room Details</h3>
+
+    <p><b>Room No:</b> {{ room.roomNumber }}</p>
+    <p><b>Type:</b> {{ room.type }}</p>
+
+    <p>
+      <b>Status:</b> 
+      <span [class.available]="!room.unavailable"
+            [class.unavailable]="room.unavailable">
+        {{ room.unavailable ? 'Unavailable' : 'Available' }}
+      </span>
+    </p>
+
+    <p><b>Floor:</b> {{ room.blockFloor }}</p>
+    <p><b>Block Code:</b> {{ room.blockCode }}</p>
+    <p><b>Block Name:</b> {{ room.blockName }}</p>
+
+  </div>
+
+</div>

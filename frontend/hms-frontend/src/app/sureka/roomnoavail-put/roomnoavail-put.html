@@ -1,13 +1,35 @@
-<p>roomnoavail-put works!</p>
-<h2>Update Room Availability</h2>
+<div class="container">
 
-<input type="number" [(ngModel)]="roomNumber" placeholder="Room Number"><br>
+  <h2>Update Room Availability</h2>
 
-<select [(ngModel)]="unavailable">
-  <option [value]="true">Unavailable</option>
-  <option [value]="false">Available</option>
-</select><br><br>
+  <div class="form-box">
 
-<button (click)="update()">Update</button>
+    <input type="number" [(ngModel)]="roomNumber" placeholder="Room Number">
 
-<pre>{{ data | json }}</pre>
+    <select [(ngModel)]="unavailable">
+      <option [value]="true">Unavailable</option>
+      <option [value]="false">Available</option>
+    </select>
+
+    <button (click)="update()">Update</button>
+
+  </div>
+
+  <!-- RESULT -->
+  <div *ngIf="data" class="result">
+
+    <div class="card">
+      <p><b>Message:</b> {{ data.message }}</p>
+
+      <p>
+        <b>Status:</b> 
+        <span [class.available]="!data.data?.unavailable"
+              [class.unavailable]="data.data?.unavailable">
+          {{ data.data?.unavailable ? 'Unavailable' : 'Available' }}
+        </span>
+      </p>
+    </div>
+
+  </div>
+
+</div>

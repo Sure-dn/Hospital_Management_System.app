@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe ,NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-room-update',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
-  templateUrl: './roomnoavail-put.html'
+  imports: [FormsModule, NgIf],
+  templateUrl: './roomnoavail-put.html',
+  styleUrl: './roomnoavail-put.css'
 })
 export class RoomUpdateComponent {
 

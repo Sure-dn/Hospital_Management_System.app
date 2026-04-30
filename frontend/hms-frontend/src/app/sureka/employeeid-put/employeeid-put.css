@@ -1,85 +1,75 @@
-* {
-  box-sizing: border-box;
-}
-
 :host {
   display: block;
   min-height: 100vh;
   background: #0b1220;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: white;
+  font-family: "Segoe UI", sans-serif;
   padding: 40px;
 }
 
+/* Card Container */
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Title */
 h2 {
-  text-align: center;
   color: white;
-  margin-bottom: 30px;
-  font-size: 30px;
+  margin-bottom: 20px;
+  font-size: 28px;
 }
 
-form,
-.container,
-.page-box {
-  max-width: 650px;
-  margin: 0 auto;
+/* Form Box */
+form {
   background: #111a2e;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  padding: 25px;
+  border-radius: 12px;
 }
 
+/* Inputs */
 input {
   width: 100%;
-  padding: 13px 15px;
-  margin-bottom: 18px;
-  border: 1px solid #334155;
+  padding: 12px;
+  margin-bottom: 15px;
   border-radius: 8px;
-  background: #f8fafc;
-  color: #111827;
-  font-size: 15px;
-  outline: none;
+  border: none;
+  background: #e5e7eb;
+  font-size: 14px;
 }
 
-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+/* Checkbox row */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  color: white;
 }
 
-label {
-  display: block;
-  color: #dbeafe;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
+/* Button */
 button {
   width: 100%;
-  padding: 13px;
+  padding: 12px;
+  background: #22c55e;
   border: none;
   border-radius: 8px;
-  background: #2563eb;
   color: white;
   font-size: 16px;
-  font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 button:hover {
-  background: #1d4ed8;
+  background: #16a34a;
 }
 
-.success {
-  color: #22c55e;
-  text-align: center;
-  margin-top: 15px;
-  font-weight: 600;
+/* Result Card */
+.result {
+  margin-top: 20px;
 }
 
-.error {
-  color: #ef4444;
-  text-align: center;
-  margin-top: 15px;
-  font-weight: 600;
+.card {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
 }

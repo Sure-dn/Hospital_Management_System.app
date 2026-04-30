@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #0b1220;
+  font-family: "Segoe UI", sans-serif;
+  padding: 40px;
+}
+
+/* Center container */
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Title */
+h2 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+/* Card box */
+.form-box {
+  background: #111a2e;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Input */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  font-size: 14px;
+}
+
+/* Focus */
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ef4444;
+}
+
+/* Delete button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #ef4444;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #dc2626;
+}
+
+/* Result box */
+.result {
+  margin-top: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+}
+
+/* Success / Error */
+.success {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.error {
+  color: #ef4444;
+  font-weight: bold;
+}
