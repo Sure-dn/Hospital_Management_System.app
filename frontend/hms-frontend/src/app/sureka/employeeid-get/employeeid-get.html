@@ -1,11 +1,12 @@
 <div class="page-box">
 
-  <h2>Get Nurse By ID</h2>
+  <h2 style="color: white;">Get Nurse By ID</h2>
 
-  <!-- Employee ID Input -->
+  <!-- INPUT -->
   <input 
     type="number" 
-    [(ngModel)]="id" 
+    [(ngModel)]="id"
+    (ngModelChange)="onIdChange()"
     placeholder="Enter Employee ID"
   >
 
@@ -13,21 +14,24 @@
 
   <button (click)="getById()">Get Nurse</button>
 
-  <!-- 🔴 Error Message -->
+  <!-- 🔄 LOADING -->
+  <p *ngIf="loading" style="color: white;">Loading...</p>
+
+  <!-- 🔴 ERROR -->
   <p class="error" *ngIf="errorMsg">
     {{ errorMsg }}
   </p>
 
-  <!-- 🟢 Nurse Details -->
-  <div *ngIf="data">
+  <!-- 🟢 DATA -->
+  <div *ngIf="!loading && data">
 
-    <h3>Nurse Details</h3>
+    <h3 style="color: white;">Nurse Details</h3>
 
-    <p><b>Employee ID:</b> {{ data.employeeId }}</p>
-    <p><b>Name:</b> {{ data.name }}</p>
-    <p><b>Position:</b> {{ data.position }}</p>
-    <p><b>Registered:</b> {{ data.registered }}</p>
-    <p><b>SSN:</b> {{ data.ssn }}</p>
+    <p style="color: white;"><b>Employee ID:</b> {{ data.employeeId }}</p>
+    <p style="color: white;"><b>Name:</b> {{ data.name }}</p>
+    <p style="color: white;"><b>Position:</b> {{ data.position }}</p>
+    <p style="color: white;"><b>Registered:</b> {{ data.registered }}</p>
+    <p style="color: white;"><b>SSN:</b> {{ data.ssn }}</p>
 
   </div>
 

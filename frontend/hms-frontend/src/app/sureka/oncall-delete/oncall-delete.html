@@ -1,8 +1,35 @@
-<p>oncall-delete works!</p>
-<h2>Delete On-Call by Nurse</h2>
+<div class="container">
 
-<input type="number" [(ngModel)]="employeeId" placeholder="Employee ID"><br><br>
+  <h2>Delete On-Call by Nurse</h2>
 
-<button (click)="delete()">Delete</button>
+  <div class="form-box">
 
-<pre>{{ data | json }}</pre>
+    <input 
+      type="number" 
+      [(ngModel)]="employeeId" 
+      placeholder="Enter Employee ID"
+    >
+
+    <button (click)="delete()">Delete</button>
+
+  </div>
+
+  <!-- RESULT -->
+  <div *ngIf="data" class="result">
+
+    <div class="card">
+      <p class="success">{{ data.message }}</p>
+    </div>
+
+  </div>
+
+  <!-- ERROR -->
+  <div *ngIf="errorMsg" class="result">
+
+    <div class="card">
+      <p class="error">{{ errorMsg }}</p>
+    </div>
+
+  </div>
+
+</div>

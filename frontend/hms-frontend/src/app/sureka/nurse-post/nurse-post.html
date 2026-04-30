@@ -38,13 +38,14 @@
     </p>
 
     <!-- Registered -->
+     <h3 style="color: white;">Registered</h3>
     <label>
-      <input
+      <input 
         type="checkbox"
         [(ngModel)]="nurse.registered"
         name="registered"
       >
-      Registered
+      
     </label>
     <p class="error" *ngIf="errors.registered">
       {{ errors.registered }}

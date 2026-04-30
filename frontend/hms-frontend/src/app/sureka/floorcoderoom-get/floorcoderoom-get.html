@@ -1,42 +1,48 @@
-<div class="page-box">
+<div class="container">
 
   <h2>Get Rooms by Block</h2>
 
-  <!-- Floor -->
-  <input 
-    type="number" 
-    [(ngModel)]="floor" 
-    placeholder="Floor"
-  >
+  <div class="form-box">
+    <input type="number" [(ngModel)]="floor" placeholder="Enter Floor">
+    <input type="number" [(ngModel)]="code" placeholder="Enter Block Code">
+    <button (click)="getRooms()">Get Rooms</button>
+  </div>
 
-  <!-- Code -->
-  <input 
-    type="number" 
-    [(ngModel)]="code" 
-    placeholder="Code"
-  >
+  <!-- ERROR -->
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 
-  <br><br>
+  <!-- ✅ TABLE -->
+  <div *ngIf="rooms.length > 0" class="card">
 
-  <button (click)="getRooms()">Get Rooms</button>
+    <table class="table">
 
-  <!-- ❌ ERROR MESSAGE -->
-  <p class="error" *ngIf="errorMsg">
-    {{ errorMsg }}
-  </p>
+      <thead>
+        <tr>
+          <th>Room No</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Floor</th>
+          <th>Block</th>
+        </tr>
+      </thead>
 
-  <!-- ✅ SUCCESS DATA -->
-  <div *ngIf="data?.length > 0">
+      <tbody>
+        <tr *ngFor="let room of rooms">
 
-    <h3>Rooms</h3>
+          <td>{{ room.roomNumber }}</td>
+          <td>{{ room.type }}</td>
 
-    <div *ngFor="let room of data">
-      <p><b>Room No:</b> {{ room.roomNumber }}</p>
-      <p><b>Type:</b> {{ room.type }}</p>
-      <p><b>Unavailable:</b> {{ room.unavailable }}</p>
-      <p><b>Block:</b> {{ room.blockName }} ({{ room.blockFloor }} - {{ room.blockCode }})</p>
-      <hr>
-    </div>
+          <td>
+            {{ room.unavailable ? 'Unavailable' : 'Available' }}
+          </td>
+
+          <td>{{ room.blockFloor }}</td>
+          <td>{{ room.blockCode }}</td>
+
+        </tr>
+      </tbody>
+
+    </table>
 
   </div>
 

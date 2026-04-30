@@ -1,6 +1,50 @@
-<p>rooms-get works!</p>
-<h2>Get All Rooms</h2>
+<div class="container">
 
-<button (click)="getRooms()">Load Rooms</button>
+  <h2>Get All Rooms</h2>
 
-<pre>{{ data | json }}</pre>
+  <button (click)="getRooms()">Load Rooms</button>
+
+  <!-- ERROR -->
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+  <!-- TABLE -->
+  <div *ngIf="rooms.length > 0" class="card">
+
+    <table class="table">
+
+      <thead>
+        <tr>
+          <th>Room No</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Floor</th>
+          <th>Block Code</th>
+          <th>Block Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let room of rooms">
+
+          <td>{{ room.roomNumber }}</td>
+          <td>{{ room.type }}</td>
+
+          <td>
+            <span [class.available]="!room.unavailable"
+                  [class.unavailable]="room.unavailable">
+              {{ room.unavailable ? 'Unavailable' : 'Available' }}
+            </span>
+          </td>
+
+          <td>{{ room.blockFloor }}</td>
+          <td>{{ room.blockCode }}</td>
+          <td>{{ room.blockName }}</td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

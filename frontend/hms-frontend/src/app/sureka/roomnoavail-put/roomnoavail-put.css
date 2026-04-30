@@ -1,0 +1,86 @@
+/* Page background */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #0b1220;
+  font-family: "Segoe UI", sans-serif;
+  padding: 40px;
+}
+
+/* Center container */
+.container {
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Title */
+h2 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+/* Card box */
+.form-box {
+  background: #111a2e;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Inputs */
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  font-size: 14px;
+}
+
+/* Focus effect */
+input:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #22c55e;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #22c55e;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #16a34a;
+}
+
+/* Result card */
+.result {
+  margin-top: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 10px;
+  color: white;
+}
+
+/* Status colors */
+.available {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.unavailable {
+  color: #ef4444;
+  font-weight: bold;
+}
