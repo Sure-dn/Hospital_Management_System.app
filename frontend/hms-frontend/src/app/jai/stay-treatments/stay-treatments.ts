@@ -21,6 +21,13 @@ export class StayTreatmentsComponent {
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
   load() {
+
+    // 🔴 1. EMPTY INPUT VALIDATION
+    if (!this.stayId) {
+      alert("Stay ID should not be empty");
+      return;
+    }
+
     this.error = '';
     this.treatments = [];
     this.loading = true;
@@ -36,22 +43,25 @@ export class StayTreatmentsComponent {
         }
       }
     ).subscribe({
+
       next: (res) => {
-        console.log("RESPONSE:", res);
+  console.log("RESPONSE:", res);
 
-        // 🔥 handle both wrapped & direct response
-        this.treatments = Array.isArray(res) ? res : (res.data || []);
+  // 🔥 FORCE CORRECT EXTRACTION
+  this.treatments = res?.data ? [...res.data] : [];
 
-        this.loading = false;
+  console.log("FINAL:", this.treatments);
 
-        if (this.treatments.length === 0) {
-          this.error = 'No treatments found';
-        } else {
-          this.error = '';
-        }
+  this.loading = false;
 
-        this.cd.detectChanges(); // 🔥 ensure UI updates
-      },
+  // ❌ DO NOT set error
+  if (this.treatments.length === 0) {
+    alert(`No treatments found for stay ID ${this.stayId}`);
+  }
+
+  this.cd.detectChanges(); // 🔥 REQUIRED
+},
+
       error: (err) => {
         console.error(err);
 
@@ -61,9 +71,12 @@ export class StayTreatmentsComponent {
           message = err.error;
         } else if (err.error?.message) {
           message = err.error.message;
+        } else if (err.message) {
+          message = err.message;
         }
 
-        alert(err.error.message); // 🔥 popup
+        // 🔴 3. BACKEND ERROR ALERT
+        alert(message);
 
         this.error = message;
         this.loading = false;
@@ -74,7 +87,7 @@ export class StayTreatmentsComponent {
     });
   }
 
-  // 🔥 CLEAR ON INPUT CHANGE
+  // 🔄 CLEAR ON INPUT CHANGE
   onIdChange() {
     if (this.hasSearched) {
       this.treatments = [];

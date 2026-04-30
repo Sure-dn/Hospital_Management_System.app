@@ -4,7 +4,7 @@
 
   <button (click)="load()">Load Treatments</button>
 
-  <!-- ERROR -->
+  <!-- ERROR (only backend errors) -->
   <p class="error" *ngIf="error">{{ error }}</p>
 
   <!-- TABLE -->
@@ -25,16 +25,11 @@
         <td>{{ t.patientId }}</td>
         <td>{{ t.procedureId }}</td>
         <td>{{ t.stayId }}</td>
-        <td>{{ t.dateUndergoes }}</td>
+        <td>{{ t.dateUndergoes | date:'dd-MM-yyyy' }}</td>
         <td>{{ t.physicianId }}</td>
         <td>{{ t.nurseId }}</td>
       </tr>
     </tbody>
   </table>
-
-  <!-- EMPTY -->
-  <p *ngIf="treatments.length === 0 && !error">
-    No treatments found
-  </p>
 
 </div>

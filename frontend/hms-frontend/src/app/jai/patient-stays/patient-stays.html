@@ -3,15 +3,21 @@
   <h2>Patient Stays</h2>
 
   <div class="input-box">
-    <input [(ngModel)]="ssn" placeholder="Enter Patient SSN">
+    <input 
+      type="number"
+      [(ngModel)]="ssn"
+      (ngModelChange)="onSsnChange()"
+      placeholder="Enter Patient ID"
+    >
+
     <button (click)="load()">Fetch</button>
   </div>
 
-  <!-- 🔥 ERROR -->
-  <p class="error" *ngIf="error">{{ error }}</p>
-
   <!-- 🔄 LOADING -->
   <p *ngIf="loading">Loading...</p>
+
+  <!-- ❌ ERROR -->
+  <p class="error" *ngIf="error">{{ error }}</p>
 
   <!-- ✅ TABLE -->
   <table *ngIf="!loading && stays.length > 0">
@@ -27,20 +33,11 @@
     <tbody>
       <tr *ngFor="let s of stays">
         <td>{{ s.stayId }}</td>
-
-        <!-- ✅ FIXED FIELD -->
         <td>{{ s.room?.roomNumber }}</td>
-
-        <!-- ✅ DATE FORMAT -->
         <td>{{ s.stayStart | date:'dd-MM-yyyy' }}</td>
         <td>{{ s.stayEnd | date:'dd-MM-yyyy' }}</td>
       </tr>
     </tbody>
   </table>
-
-  <!-- ❌ EMPTY -->
-  <p *ngIf="!loading && stays.length === 0 && !error">
-    No stays found
-  </p>
 
 </div>

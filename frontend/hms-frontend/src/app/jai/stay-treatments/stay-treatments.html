@@ -39,8 +39,7 @@
   </table>
 
   <!-- EMPTY -->
-  <p *ngIf="treatments.length === 0 && !error">
-    No treatments found
-  </p>
-
+ <p *ngIf="hasSearched && treatments.length === 0 && !error">
+  No treatments found
+</p>
 </div>
