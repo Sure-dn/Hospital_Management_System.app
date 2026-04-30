@@ -21,10 +21,17 @@ export class PatientTreatmentsComponent {
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) {}
 
   fetch() {
+
+    // 🔴 1. EMPTY INPUT VALIDATION
+    if (!this.patientId) {
+      alert("Patient ID should not be empty");
+      return;
+    }
+
     this.hasSearched = true;
     this.error = '';
     this.loading = true;
-    this.treatments = []; // 🔥 reset
+    this.treatments = [];
 
     const token = localStorage.getItem('token');
 
@@ -36,22 +43,23 @@ export class PatientTreatmentsComponent {
         }
       }
     ).subscribe({
+
       next: (res) => {
         console.log("FULL RESPONSE:", res);
 
-        // 🔥 handle both wrapped & direct
+        // ✅ Handle both wrapped and direct responses
         this.treatments = Array.isArray(res) ? res : (res.data || []);
 
         this.loading = false;
 
+        // 🔴 ONLY ALERT (no duplicate UI message)
         if (this.treatments.length === 0) {
-          this.error = 'No treatments found';
-        } else {
-          this.error = '';
+          alert(`No treatments found for ID ${this.patientId}`);
         }
 
-        this.cd.detectChanges(); // 🔥 ensure UI update
+        this.cd.detectChanges();
       },
+
       error: (err) => {
         console.error(err);
 
@@ -61,9 +69,11 @@ export class PatientTreatmentsComponent {
           message = err.error;
         } else if (err.error?.message) {
           message = err.error.message;
+        } else if (err.message) {
+          message = err.message;
         }
 
-        alert(err.error.message); // 🔥 popup
+        alert(message); // 🔥 backend error alert
 
         this.error = message;
         this.loading = false;

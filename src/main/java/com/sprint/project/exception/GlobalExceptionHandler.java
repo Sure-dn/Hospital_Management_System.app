@@ -104,6 +104,6 @@ public class GlobalExceptionHandler {
         ex.printStackTrace();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ResponseStructure<>(false, "Something went wrong", null));
+                .body(new ResponseStructure<>(false, ex.getMessage(), null)); // 🔥 FIX
     }
 }
