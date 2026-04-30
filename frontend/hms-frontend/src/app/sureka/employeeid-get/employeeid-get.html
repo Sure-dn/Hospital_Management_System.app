@@ -2,10 +2,9 @@
 
   <h2>Get Nurse By ID</h2>
 
-  <!-- Employee ID Input -->
   <input 
-    type="number" 
-    [(ngModel)]="id" 
+    type="text"
+    [(ngModel)]="id"
     placeholder="Enter Employee ID"
   >
 
@@ -13,22 +12,35 @@
 
   <button (click)="getById()">Get Nurse</button>
 
-  <!-- 🔴 Error Message -->
-  <p class="error" *ngIf="errorMsg">
+  <!-- 🔴 Error -->
+  <p style="color:red;" *ngIf="errorMsg">
     {{ errorMsg }}
   </p>
 
-  <!-- 🟢 Nurse Details -->
-  <div *ngIf="data">
+  <!-- 🟢 TABLE -->
+  <table *ngIf="nurse" border="1"
+         style="margin-top:20px; width:100%; text-align:center;">
 
-    <h3>Nurse Details</h3>
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Registered</th>
+        <th>SSN</th>
+      </tr>
+    </thead>
 
-    <p><b>Employee ID:</b> {{ data.employeeId }}</p>
-    <p><b>Name:</b> {{ data.name }}</p>
-    <p><b>Position:</b> {{ data.position }}</p>
-    <p><b>Registered:</b> {{ data.registered }}</p>
-    <p><b>SSN:</b> {{ data.ssn }}</p>
+    <tbody>
+      <tr>
+        <td>{{ nurse.employeeId }}</td>
+        <td>{{ nurse.name }}</td>
+        <td>{{ nurse.position }}</td>
+        <td>{{ nurse.registered }}</td>
+        <td>{{ nurse.ssn }}</td>
+      </tr>
+    </tbody>
 
-  </div>
+  </table>
 
 </div>

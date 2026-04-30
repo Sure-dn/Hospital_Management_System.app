@@ -39,13 +39,19 @@ export class AppointmentPostComponent {
     });
   }
 
+  // ✅ Convert UI format → Backend format
+  formatDateTime(value: string) {
+    if (!value) return null;
+
+    // Input: 2026-04-29T14:30 (from datetime-local)
+    return value + ':00';
+  }
+
   create() {
 
     this.errors = {};
     this.backendError = '';
     this.success = '';
-    this.response = null;
-    this.cd.detectChanges();
 
     const payload = {
       appointmentId: Number(this.appointment.appointmentId),
@@ -55,14 +61,8 @@ export class AppointmentPostComponent {
         : null,
       physicianId: Number(this.appointment.physicianId),
 
-      // ✅ Backend format
-      starttime: this.appointment.starttime
-        ? this.appointment.starttime + ':00'
-        : null,
-
-      endtime: this.appointment.endtime
-        ? this.appointment.endtime + ':00'
-        : null,
+      starttime: this.formatDateTime(this.appointment.starttime),
+      endtime: this.formatDateTime(this.appointment.endtime),
 
       examinationRoom: this.appointment.examinationRoom
     };
@@ -76,11 +76,10 @@ export class AppointmentPostComponent {
     ).subscribe({
 
       next: (res: any) => {
-
         this.response = res;
         this.success = 'Appointment Created Successfully';
 
-        // ✅ Reset form
+        // Reset form
         this.appointment = {
           appointmentId: '',
           patientSsn: '',
@@ -91,37 +90,20 @@ export class AppointmentPostComponent {
           examinationRoom: ''
         };
 
+        alert('✅ Appointment created successfully');
         this.cd.detectChanges();
-
-        setTimeout(() => {
-          alert('✅ Appointment created successfully');
-        }, 0);
       },
 
       error: (err) => {
-        console.error("FULL ERROR:", err);
+        console.error("ERROR:", err);
 
-        if (typeof err.error === 'string') {
-          this.backendError = err.error;
-        }
-        else if (err.error?.message) {
-          this.backendError = err.error.message;
-        }
-        else if (err.error?.fieldErrors) {
-          this.errors = { fieldErrors: err.error.fieldErrors };
-        }
-        else if (err.error) {
-          this.errors = { ...err.error };
-        }
-        else {
-          this.backendError = 'Error while creating appointment';
-        }
+        this.backendError =
+          err.error?.message ||
+          err.error ||
+          'Something went wrong';
 
+        alert(this.backendError);
         this.cd.detectChanges();
-
-        setTimeout(() => {
-          alert(this.backendError || 'Validation error occurred');
-        }, 0);
       }
     });
   }

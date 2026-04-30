@@ -1,8 +1,60 @@
-<p>oncall-get works!</p>
-<h2>Get On-Call by Nurse</h2>
+<div class="page-box">
 
-<input type="number" [(ngModel)]="employeeId" placeholder="Employee ID"><br><br>
+  <h2>Get On-Call by Nurse</h2>
 
-<button (click)="getByNurse()">Get</button>
+  <!-- 🔍 Input -->
+  <div class="form-group">
+    <input 
+      type="number" 
+      [(ngModel)]="employeeId" 
+      placeholder="Enter Employee ID"
+      class="input-box"
+    >
 
-<pre>{{ data | json }}</pre>
+    <button class="btn" (click)="getByNurse()">Get</button>
+  </div>
+
+  <!-- 🔴 Error Message -->
+  <p class="error-msg" *ngIf="errorMsg">
+    {{ errorMsg }}
+  </p>
+
+  <!-- 🟢 Success Message -->
+  <p class="success-msg" *ngIf="data?.message && data?.data?.length > 0">
+    {{ data.message }}
+  </p>
+
+  <!-- 🟢 TABLE -->
+  <div class="table-container" *ngIf="data?.data?.length > 0">
+
+    <table class="data-table">
+
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Block Floor</th>
+          <th>Block Code</th>
+          <th>Block Name</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of data.data">
+          <td>{{ item.nurseEmployeeId }}</td>
+          <td>{{ item.nurseName }}</td>
+          <td>{{ item.blockFloor }}</td>
+          <td>{{ item.blockCode }}</td>
+          <td>{{ item.blockName || 'N/A' }}</td>
+          <td>{{ item.onCallStart }}</td>
+          <td>{{ item.onCallEnd }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

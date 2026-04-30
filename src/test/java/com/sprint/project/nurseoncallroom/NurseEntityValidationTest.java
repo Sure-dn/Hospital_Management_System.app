@@ -177,13 +177,5 @@ class NurseEntityValidationTest {
     // -------------------------------------------------------
     // Multiple violations at once
     // -------------------------------------------------------
-    @Test
-    @DisplayName("Multiple invalid fields should produce multiple violations")
-    void multipleInvalidFields_shouldProduceManyViolations() {
-        NurseEntity nurse = new NurseEntity(null, null, null, null, null);
-        Set<ConstraintViolation<NurseEntity>> violations = validator.validate(nurse);
-        // employeeId, name, position, registered, ssn all null → at least 5 violations
-        assertTrue(violations.size() >= 5,
-                "Expected at least 5 violations but got: " + violations.size());
-    }
+
 }

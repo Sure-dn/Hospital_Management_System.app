@@ -1,6 +1,31 @@
+<div class="page-box">
 
-<h2>Get All Blocks</h2>
+  <h2>Get All Blocks</h2>
 
-<button (click)="getBlocks()">Load Blocks</button>
+  <button (click)="getBlocks()">Load Blocks</button>
 
-<pre>{{ data | json }}</pre>
+  <!-- 🔴 Error -->
+  <p *ngIf="errorMsg">{{ errorMsg }}</p>
+
+  <!-- 🟢 TABLE -->
+  <table *ngIf="blocks && blocks.length > 0">
+
+    <thead>
+      <tr>
+        <th>Block Code</th>
+        <th>Block Name</th>
+        <th>Floor</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let block of blocks">
+        <td>{{ block.blockCode }}</td>
+        <td>{{ block.blockName }}</td>
+        <td>{{ block.blockFloor }}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

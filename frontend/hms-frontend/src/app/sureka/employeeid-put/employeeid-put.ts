@@ -7,7 +7,8 @@ import { NgIf, JsonPipe } from '@angular/common';
   selector: 'app-update-nurse',
   standalone: true,
   imports: [FormsModule, NgIf, JsonPipe], // ✅ added NgIf
-  templateUrl: './employeeid-put.html'
+  templateUrl: './employeeid-put.html',
+  styleUrl:'./employeeid-put.css'
 })
 export class UpdateNurseComponent {
 

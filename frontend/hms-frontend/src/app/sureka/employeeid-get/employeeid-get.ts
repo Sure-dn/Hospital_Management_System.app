@@ -8,61 +8,39 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './employeeid-get.html',
-  styleUrls: ['./employeeid-get.css'] // optional
+  styleUrls: ['./employeeid-get.css']
 })
 export class GetNurseByIdComponent {
 
-  id!: number;
-  data: any;
-  errorMsg = '';
+  id: string = '';        // use string (avoids number input issues)
+  nurse: any = null;      // store only inner data
+  errorMsg: string = '';
 
   constructor(private http: HttpClient) {}
 
   getById() {
 
     this.errorMsg = '';
-    this.data = null;
+    this.nurse = null;
 
-    // ✅ Validation
+    // ✅ validation
     if (!this.id) {
-      this.errorMsg = "Employee ID is required";
-      alert("❌ " + this.errorMsg);
+      alert("❌ Employee ID is required");
       return;
     }
 
     this.http.get(`http://localhost:9090/api/nurses/${this.id}`)
       .subscribe({
 
-        // ✅ SUCCESS
         next: (res: any) => {
-
           console.log("API RESPONSE 👉", res);
 
-          // 🔥 IMPORTANT FIX
-          this.data = res.data;
-
-          if (!this.data) {
-            this.errorMsg = "No nurse found";
-          }
+          // 🔥 IMPORTANT: take only res.data
+          this.nurse = res.data;
         },
 
-        // ❌ ERROR
         error: (err) => {
-
-          console.log("FULL ERROR 👉", err);
-
-          let msg = '';
-
-          if (err.error?.message) {
-            msg = err.error.message;
-          } 
-          else if (typeof err.error === 'string') {
-            msg = err.error;
-          } 
-          else {
-            msg = "Nurse not found";
-          }
-
+          let msg = err.error?.message || "Something went wrong";
           this.errorMsg = msg;
           alert("❌ " + msg);
         }

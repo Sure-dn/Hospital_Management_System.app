@@ -1,6 +1,7 @@
 package com.sprint.project.exception;
 
 import com.sprint.project.nurseoncallroom.exception.*;
+import com.sprint.project.physicianDepartmentManagement.exception.PhysicianNotFoundException;
 import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
 import com.sprint.project.treatmentprostayy.exception.*;
 
@@ -25,7 +26,8 @@ public class GlobalExceptionHandler {
             ProcedureNotFoundException.class,
             StayNotFoundException.class,
             TreatmentNotFoundException.class,
-            BlockNotAvailableException.class
+            BlockNotAvailableException.class,
+            NurseNotAvailableException.class
     })
     public ResponseEntity<ResponseStructure<?>> handleNotFound(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -63,18 +65,7 @@ public class GlobalExceptionHandler {
                 .body(new ResponseStructure<>(false, ex.getMessage(), null));
     }
 
-    // ✅ DTO VALIDATION (@Valid)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
 
-        Map<String, String> errors = new HashMap<>();
-
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errors.put(error.getField(), error.getDefaultMessage());
-        });
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
-    }
 
     // ✅ PARAM / PATH VALIDATION
     @ExceptionHandler(BindException.class)
@@ -106,4 +97,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseStructure<>(false, "Something went wrong", null));
     }
+    //validation handeler
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
+
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), error.getDefaultMessage());
+        });
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
 }

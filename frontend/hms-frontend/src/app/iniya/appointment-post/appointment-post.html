@@ -1,60 +1,39 @@
 <div class="container">
-  <h2>➕ Create Appointment</h2>
 
-  <form (submit)="$event.preventDefault()">
+  <h2>📅 Create Appointment</h2>
 
-    <input type="number"
-           [(ngModel)]="appointment.appointmentId"
-           name="appointmentId"
-           placeholder="Appointment ID">
-    <p class="error" *ngIf="errors.appointmentId">{{ errors.appointmentId }}</p>
+  <input type="number" placeholder="Appointment ID"
+         [(ngModel)]="appointment.appointmentId">
 
-    <input type="number"
-           [(ngModel)]="appointment.patientSsn"
-           name="patientSsn"
-           placeholder="Patient SSN">
-    <p class="error" *ngIf="errors.patientSsn">{{ errors.patientSsn }}</p>
+  <input type="number" placeholder="Patient SSN"
+         [(ngModel)]="appointment.patientSsn">
 
-    <input type="number"
-           [(ngModel)]="appointment.prepNurseId"
-           name="prepNurseId"
-           placeholder="Prep Nurse ID">
+  <input type="number" placeholder="Prep Nurse ID"
+         [(ngModel)]="appointment.prepNurseId">
 
-    <input type="number"
-           [(ngModel)]="appointment.physicianId"
-           name="physicianId"
-           placeholder="Physician ID">
-    <p class="error" *ngIf="errors.physicianId">{{ errors.physicianId }}</p>
+  <input type="number" placeholder="Physician ID"
+         [(ngModel)]="appointment.physicianId">
 
-    <label>Start Time</label>
-    <input type="datetime-local"
-           [(ngModel)]="appointment.starttime"
-           name="starttime">
+  <label>Start Time</label>
+  <!-- ✅ No AM/PM, pure 24-hour -->
+  <input type="datetime-local"
+         [(ngModel)]="appointment.starttime">
 
-    <label>End Time</label>
-    <input type="datetime-local"
-           [(ngModel)]="appointment.endtime"
-           name="endtime">
+  <label>End Time</label>
+  <input type="datetime-local"
+         [(ngModel)]="appointment.endtime">
 
-    <input type="text"
-           [(ngModel)]="appointment.examinationRoom"
-           name="examinationRoom"
-           placeholder="Room (A,B,C)">
-    <p class="error" *ngIf="errors.examinationRoom">{{ errors.examinationRoom }}</p>
+  <input type="text" placeholder="Examination Room"
+         [(ngModel)]="appointment.examinationRoom">
 
-    <!-- Backend Error -->
-    <p class="backend-error" *ngIf="backendError">
-      {{ backendError }}
-    </p>
+  <button (click)="create()">Create</button>
 
-    <!-- Success -->
-    <p class="success" *ngIf="success">
-      {{ success }}
-    </p>
+  <p *ngIf="success" style="color: green;">
+    {{ success }}
+  </p>
 
-    <button type="button" (click)="create()">Create</button>
+  <p *ngIf="backendError" style="color: red;">
+    {{ backendError }}
+  </p>
 
-  </form>
-
-  <pre *ngIf="response">{{ response | json }}</pre>
 </div>

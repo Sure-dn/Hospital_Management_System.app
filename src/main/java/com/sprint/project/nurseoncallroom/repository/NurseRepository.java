@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface NurseRepository extends JpaRepository<NurseEntity, Integer> {
 
-    // Find by exact position
+
     List<NurseEntity> findByPosition(String position);
 
     // Find only registered nurses
