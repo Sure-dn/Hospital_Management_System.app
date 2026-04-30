@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-update-medication',
   standalone: true,
-  imports: [FormsModule, JsonPipe],
+  imports: [FormsModule, JsonPipe, NgIf],
   templateUrl: './medicationscode-put.html'
 })
 export class UpdateMedicationComponent {
@@ -14,11 +14,12 @@ export class UpdateMedicationComponent {
   code: any;
   data: any = {};
   response: any;
+  errorMsg: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
  update() {
-
+  this.errorMsg = '';
   const payload: any = {};
 
   if (this.data.name) payload.name = this.data.name;
@@ -29,11 +30,12 @@ export class UpdateMedicationComponent {
     .subscribe({
       next: (res) => {
         this.response = res;
+        this.cdr.detectChanges();
         alert("✅ Medication updated successfully!");
       },
       error: (err) => {
-        console.error(err);
-
+        this.errorMsg = (typeof err.error === 'string' && err.error.trim()) ? err.error.trim() : `Error \${err.status}: \${err.statusText || err.message}`;
+        this.cdr.detectChanges();
         if (err.status === 404) {
           alert("❌ Medication not found!");
         } else if (err.status === 400) {

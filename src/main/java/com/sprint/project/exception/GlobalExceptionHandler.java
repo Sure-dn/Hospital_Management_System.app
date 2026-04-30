@@ -13,6 +13,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import com.sprint.project.medicationprescription.exception.*;   // ← Add this
 import com.sprint.project.patientAppointment.exception.PatientNotFoundException;
 import com.sprint.project.treatmentprostayy.dto.ResponseStructure;
 import com.sprint.project.treatmentprostayy.exception.*;
@@ -20,6 +21,40 @@ import com.sprint.project.treatmentprostayy.exception.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // 🔴 NOT FOUND (404)
+    @ExceptionHandler({
+        ResourceNotFoundException.class,
+        MedicationNotFoundException.class,
+        PrescribesNotFoundException.class
+        // Add other NotFound exceptions from other modules if any
+    })
+    public ResponseEntity<String> handleNotFound(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    // 🟡 ALREADY EXISTS / DUPLICATE (409)
+    @ExceptionHandler({
+        DuplicateResourceException.class,
+        DuplicateMedicationException.class
+        // Add others if you have
+    })
+    public ResponseEntity<String> handleAlreadyExists(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
+    // 🔵 INVALID / BAD REQUEST (400)
+    @ExceptionHandler({
+        InvalidRequestException.class,
+        ValidationException.class,
+        InvalidMedicationDataException.class,
+        InvalidDoseException.class,
+        BadRequestException.class
+    })
+    public ResponseEntity<String> handleInvalid(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    // ⚫ GENERAL (500)
     // 🔴 404 - NOT FOUND
     @ExceptionHandler({
             ProcedureNotFoundException.class,
